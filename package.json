@@ -5,13 +5,13 @@
   "main": "index.js",
   "scripts": {
     "build": "webpack -p",
-    "deploy": "yarn build && git commit -a -m deployment && git push heroku master",
+    "deploy": "npm run build && git commit -a -m deployment && git push heroku master",
     "dev": "webpack-dev-server --open",
     "server": "cross-env NODE_ENV=production babel-node src/server",
     "server-dev": "nodemon src/server --exec babel-node src/server",
-    "start-dev": "concurrently \"yarn server-dev\" \"yarn dev\"",
+    "start-dev": "concurrently \"npm run server-dev\" \"npm run dev\"",
     "server-spec": "babel-node src/server/server.spec",
-    "start": "yarn server"
+    "start": "npm run server"
   },
   "keywords": [
     "react",
@@ -42,8 +42,7 @@
     "uuid": "^3.3.2"
   },
   "engines": {
-    "node": "10.15.3",
-    "yarn": "1.19.1"
+    "node": "9.2.0"
   },
   "devDependencies": {
     "@babel/core": "^7.0.0",
