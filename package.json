@@ -1,12 +1,13 @@
 {
   "name": "mongo-express-react",
   "version": "1.0.0",
-  "description": "A full stack application with React and MongoDB (Easily deployed)",
+  "description": "A full stack application with React and MongoDB",
   "main": "index.js",
   "scripts": {
     "build": "webpack -p",
     "deploy": "npm run build && git commit -a -m deployment && git push heroku master",
     "dev": "webpack-dev-server --open",
+    "initialize": "babel-node src/server/initialize-db",
     "server": "cross-env NODE_ENV=production babel-node src/server",
     "server-dev": "nodemon src/server --exec babel-node src/server",
     "start-dev": "concurrently \"npm run server-dev\" \"npm run dev\"",
@@ -28,6 +29,7 @@
     "cors": "^2.8.4",
     "express": "^4.16.3",
     "history": "^4.7.2",
+    "lodash.clonedeep": "^4.5.0",
     "md5": "^2.2.1",
     "mongodb": "^3.1.8",
     "react": "^16.4.2",
@@ -38,8 +40,8 @@
     "redux": "^4.0.0",
     "redux-logger": "^3.0.6",
     "redux-saga": "^0.16.2",
-    "webpack": "^4.17.2",
-    "uuid": "^3.3.2"
+    "uuid": "^3.3.2",
+    "webpack": "^4.17.2"
   },
   "engines": {
     "node": "9.2.0"
@@ -53,7 +55,6 @@
     "babel-loader": "^8.0.2",
     "concurrently": "^4.0.1",
     "cross-env": "^5.2.0",
-    "highground": "^1.0.3-beta",
     "jest": "^23.6.0",
     "nodemon": "^1.18.4",
     "style-loader": "^0.23.0",
