@@ -9,9 +9,6 @@ import './initialize-db';
 import { connectDB } from './connect-db'
 import { updatePredictionMatches } from './serverUtils'
 
-// import { authenticationRoute } from './authenticate'
-// import { addNewTask, updateTask } from './communicate-db';
-
 
 let port = process.env.PORT || 7777
 let app = express()
@@ -34,8 +31,6 @@ app.post('/mongo/data', async (req, res) => {
     res.send({ mongoState })
 })
 
-// authenticationRoute(app);
-
 if (process.env.NODE_ENV == `production`) {
     app.use(express.static(path.resolve(__dirname,'../../dist')));
     app.get('/*',(req,res)=>{
@@ -43,27 +38,6 @@ if (process.env.NODE_ENV == `production`) {
     });
 }
 
-// app.post('/task/new',async (req,res)=>{
-//     // let task = req.body.task;
-//     await addNewTask(req.body.task);
-//     res.status(200).send();
-// });
-
-
-
-// app.post('/task/update',async (req,res)=>{
-//     let db = await connectDB();
-//     await updateTask(req.body.task);
-//     res.status(200).send();
-// });
-
-// app.post('/comment/new',async (req,res)=>{
-//     let comment = req.body.comment;
-//     let db = await connectDB();
-//     let collection = db.collection(`comments`);
-//     await collection.insertOne(comment);
-//     res.status(200).send();
-// });
 
 export const addNewPrediction = async prediction => {
     let db = await connectDB()
