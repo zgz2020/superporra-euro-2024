@@ -1,0 +1,9 @@
+{
+    "baseUrl": "http://localhost:8080",
+    "integrationFolder": "./cypress/tests",
+    "chromeWebSecurity": false,
+    "video": false,
+    "trashAssetsBeforeRuns": false,
+    "blacklistHosts": "www.googletagmanager.com",
+    "projectId": "6o4ox7"
+}
