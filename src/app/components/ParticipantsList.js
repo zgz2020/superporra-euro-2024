@@ -17,7 +17,7 @@ const ParticipantsList = ( { users, predictions } ) => (
                 {Object.keys(users.byId).map((key, index) => {
                     if (key !== "U1") {
                         return (
-                            <tr key={index}>
+                            <tr key={index} data-automation="leaderboard-row">
                                 <td>{index}</td>
                                 <td>
                                     <Link to={`/participants/${key}`}>

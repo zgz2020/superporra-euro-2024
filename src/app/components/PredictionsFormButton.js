@@ -16,7 +16,7 @@ const PredictionsFormButton = ({ predictionType, predictionsFormNew, predictions
     return (
         <div className="text-center py-3">
             {!formTrigger(predictionType) ?
-                <button onClick={clickHandler} className="btn btn-primary">
+                <button onClick={clickHandler} className="btn btn-primary" data-automation="update-button">
                     {predictionType === 'new' ? 'PARTICIPAR' : 'ACTUALIZAR'}
                 </button>
                 :
