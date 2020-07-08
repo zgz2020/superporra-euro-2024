@@ -57,9 +57,16 @@ const PredictionsForm = ( {
         if (predictionType === 'existent' || 'results') return "Mandar Actualizaciones"
     }
 
+    const submitButton = (predictionType) => (
+        <div className="text-center py-4">
+            <button type="submit" className="btn btn-primary" data-automation="submit-button">{submitButtonLabel(predictionType)}</button>
+        </div>  
+    )
+
+
     return (
 
-        <div key="createPredictionsForm" className="card mx-auto" style={{width: "28rem"}}>
+        <div key="createPredictionsForm" className="card mx-auto" style={{width: "28rem"}} data-automation="predictions-form">
 
             <div className="card-header">
                 <h3 >{formHeader(predictionType).title}</h3>
@@ -67,26 +74,21 @@ const PredictionsForm = ( {
             </div>
 
             <form onSubmit={e => submitFormHandler(predictionType, predictionDetails(predictionType).userID, predictionDetails(predictionType).username, predictionDetails(predictionType).predictions, e)} className="card-body">
-                
-                <div className="text-center py-3">
-                    <button type="submit" className="btn btn-primary">{submitButtonLabel(predictionType)}</button>
-                </div>  
 
-                <div className="text-center py-3">
-                    <button type="button" onClick={e => cancelPredictionForm(predictionType, e)} className="btn btn-danger">Cancelar</button>
+                {submitButton(predictionType)}
+
+                <div className="text-center pb-4">
+                    <button type="button" onClick={e => cancelPredictionForm(predictionType, e)} className="btn btn-danger" data-automation="cancel-button">Cancelar</button>
                 </div> 
 
-                <div className="text-center">---------------------------------------</div>
+                <div> </div>
                 
                 {userID !== "U1" ?
                     <div>
                         <div className="form-group pt-3">
                             {"Nombre de usuario: "}
-                            <input type="text" onChange={e => setUsernameHandler(predictionType, predictionDetails(predictionType).userID, e)} value={predictionDetails(predictionType).username} className="form-control"/>
+                            <input type="text" onChange={e => setUsernameHandler(predictionType, predictionDetails(predictionType).userID, e)} value={predictionDetails(predictionType).username} className="form-control" data-automation="username-input"/>
                         </div>
-
-                        {/* ------------ */}
-                        {/* --- AQUI --- */}
                         
                         {!generatingRandomPredictions ?
                             <div className="text-center py-3">
@@ -94,6 +96,7 @@ const PredictionsForm = ( {
                                     type="button" 
                                     onClick={e => generateRandomPredictionsRequest(predictionType, predictionDetails(predictionType).userID, e)} 
                                     className="btn btn-info"
+                                    data-automation="random-predictions-button"
                                 >
                                     Generar predicciones aleatorias
                                 </button>
@@ -107,12 +110,11 @@ const PredictionsForm = ( {
                             </div>
                         }       
                         
+                        <h4>Predicciones</h4>
                     </div>
                     :
                     null
                 }
-
-                <h4>Predicciones</h4>
 
                 <div className="card">
                     <div className="form-group pt-3 d-flex flex-column card-body">
@@ -133,9 +135,7 @@ const PredictionsForm = ( {
 
                 <ConnectedEuroStage predictionType={predictionType} mode="edit" userID={predictionDetails(predictionType).userID} stageName="Final" matchType="final" changeHandler={setGoalsFinalHandler} prediction={predictionDetails(predictionType).predictions}/>
 
-                <div className="text-center pt-3">
-                    <button type="submit" className="btn btn-primary">{submitButtonLabel(predictionType)}</button>
-                </div>                  
+                {submitButton(predictionType)}               
             </form>
         </div>
     )

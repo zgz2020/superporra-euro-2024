@@ -24,7 +24,7 @@ const ParticipantsPage = ({ predictionsFormNew, showPredictionsFormNew, predicti
 
         {predictionsSubmitted ? 
             <div className="card mx-auto">
-                <div className="card-body text-center">
+                <div className="card-body text-center" data-automation="prediction-submitted-success">
                     Se han enviado tus predicciones!
                 </div>
             </div> 

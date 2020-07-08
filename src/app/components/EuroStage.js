@@ -5,7 +5,7 @@ import { ConnectedEuroMatch } from './EuroMatch'
 import { ConnectedLeagueGroupContainer } from './LeagueGroupContainer'
 
 const EuroStage = (ownProps) => (
-    <div className="card">
+    <div className="card" data-automation="euro-stage">
 
         <div className="card-header">
             {ownProps.stageName}

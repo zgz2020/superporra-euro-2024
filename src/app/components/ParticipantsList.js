@@ -5,7 +5,7 @@ import { participantTotalPoints, getStageMatchesPoints, knockOutQualifiedTeamsPo
 
 const ParticipantsList = ( { users, predictions } ) => (
     <div>
-        <table className="table table-bordered">
+        <table className="table table-bordered" data-automation="leaderboard">
             <thead>
                 <tr>
                     <th>#</th>

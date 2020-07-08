@@ -6,6 +6,7 @@
   "scripts": {
     "build": "webpack -p",
     "cy:open": "npx cypress open",
+    "cy:test": "cypress run --headless --spec=cypress/tests/*.test.js --browser chrome",
     "deploy": "npm run build && git commit -a -m deployment && git push heroku master",
     "dev": "webpack-dev-server --open",
     "initialize": "babel-node src/server/initialize-db",

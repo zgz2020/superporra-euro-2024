@@ -1,21 +1,17 @@
-import { selectors } from '../support/page-object'
+import { selectors, checkNavigationItemLabel, checkNavigationItemLink } from '../support/page-object'
 
 describe('Navigation', () => {
 
     it('Navigation labels', () => {
         cy.visit('')
-            .get(selectors.navItem).eq(0).should('contain', 'Inicio')
-            .get(selectors.navItem).eq(1).should('contain', 'Participantes')
-            .get(selectors.navItem).eq(2).should('contain', 'Resultados')
+
+        checkNavigationItemLabel(1, 'Inicio')
+        checkNavigationItemLabel(2, 'Participantes')
+        checkNavigationItemLabel(3, 'Resultados')
+
+        checkNavigationItemLink(2, 'http://localhost:8080/participants')
+        checkNavigationItemLink(3, 'http://localhost:8080/results')
+        checkNavigationItemLink(1, 'http://localhost:8080/')
     })
 
-    it('Navigation links work as expected', () => {
-        cy.visit('')
-            .get(selectors.navItem).eq(1).click()
-                .url().should('contain', 'participants')
-            .get(selectors.navItem).eq(2).click()
-                .url().should('contain', 'results')
-            .get(selectors.navItem).eq(0).click()
-                .url().should('eq', 'http://localhost:8080/')
-    })
 })
