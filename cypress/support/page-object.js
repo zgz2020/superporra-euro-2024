@@ -37,9 +37,9 @@ export const clickOnCTA = (cta) => cy.get(cta).click()
 export const checkNavigationItemLabel = (position, label) => 
     cy.get(selectors.navItem(position)).should('contain', label)
 
-export const checkNavigationItemLink = (position, url) => {
+export const checkNavigationItemLink = (position, slug) => {
     clickOnCTA(selectors.navItem(position))
-    cy.url().should('eq', url)
+    cy.url().should('eq', `${Cypress.config().baseUrl}${slug}`)
 }
 
 
