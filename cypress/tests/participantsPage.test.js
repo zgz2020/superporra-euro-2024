@@ -8,7 +8,9 @@ import {
     fillInPredictionsForm,
     checkFormIsFilledIn,
     checkLeaderboardLastParticipant,
-    selectLastParticipant
+    selectLastParticipant,
+    checkPageHeader,
+    updatePredictionsForm
 } from '../support/page-object'
 
 describe('Participants page', () => {
@@ -40,7 +42,7 @@ describe('Participants page', () => {
         }) 
     })
 
-    it('New redictions form renders', () => {
+    it('New predictions form renders', () => {
         cy.visit('/participants')
         
         clickOnCTA(selectors.updateButton)
@@ -72,7 +74,18 @@ describe('Participants page', () => {
         checkElementVisibility(selectors.predictionsSubittedMessage, 'be.visible') 
 
         checkLeaderboardLastParticipant()
+        
+
+        // Check participant's predictions page
         selectLastParticipant()
+        cy.wait(1000)
+
+        checkPageHeader('Predicciones ZZ Test Participant')
+        checkElementVisibility(selectors.resultsContainer, 'be.visible')
+
+        clickOnCTA(selectors.updateButton)
+        updatePredictionsForm()
+        // checkPredictionsFormHeader('Participa en la superporra')
     })
 
 })

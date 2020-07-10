@@ -1,1 +1,0 @@
-import { selectors } from '../support/page-object'
