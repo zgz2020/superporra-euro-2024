@@ -17,7 +17,7 @@ Cypress.io is used for integration testing.
         - To run all the tests on the terminal:
             - Run `npm run cy:test`
 - PROD
-    - Go to `./cypress.json` and set `baseUrl` to `https://test-3-jj.herokuapp.com/`
+    - Go to `./cypress.json` and set `baseUrl` to `https://feature-branch-superporra.herokuapp.com/`
         - Note that prod url will probably change in the future
     - Then follow instructions above to run the tests with either cypress UI or on the terminal.
 

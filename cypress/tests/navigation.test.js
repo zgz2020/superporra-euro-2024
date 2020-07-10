@@ -9,9 +9,9 @@ describe('Navigation', () => {
         checkNavigationItemLabel(2, 'Participantes')
         checkNavigationItemLabel(3, 'Resultados')
 
-        checkNavigationItemLink(2, 'http://localhost:8080/participants')
-        checkNavigationItemLink(3, 'http://localhost:8080/results')
-        checkNavigationItemLink(1, 'http://localhost:8080/')
+        checkNavigationItemLink(2, 'participants')
+        checkNavigationItemLink(3, 'results')
+        checkNavigationItemLink(1, '')
     })
 
 })

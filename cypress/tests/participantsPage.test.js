@@ -73,7 +73,6 @@ describe('Participants page', () => {
 
         checkLeaderboardLastParticipant()
         selectLastParticipant()
-        cy.wait(2000)
     })
 
 })
