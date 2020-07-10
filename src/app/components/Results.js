@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { ConnectedEuroStage } from './EuroStage'
 
 const Results = (ownProps) => (
-    <div key="user">
+    <div key="user" data-automation="results-container">
         <div className="card mx-auto" style={{width: "28rem"}}>
 
             <div className="card-body">

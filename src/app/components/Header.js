@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 
 const Header = ( {title } ) => (
     <div>
-        <h2>{title}</ h2>
+        <h2 data-automation="page-header">{title}</ h2>
     </div>
 )
 
