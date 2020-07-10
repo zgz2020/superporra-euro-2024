@@ -2,15 +2,15 @@ import {
     selectors, 
     clickOnCTA, 
     checkElementVisibility,
-    checkPredictionsFormHeader, 
+    checkInputFormHeader, 
     submitPredictionsNoUsername,
     checkFormIsEmpty,
-    fillInPredictionsForm,
+    fillInInputForm,
     checkFormIsFilledIn,
     checkLeaderboardLastParticipant,
     selectLastParticipant,
     checkPageHeader,
-    updatePredictionsForm
+    updateInputForm
 } from '../support/page-object'
 
 describe('Participants page', () => {
@@ -18,7 +18,7 @@ describe('Participants page', () => {
     it('Leaderboard renders', () => {
         cy.visit('/participants')
         checkElementVisibility(selectors.leaderboard, 'be.visible') 
-        checkElementVisibility(selectors.predictionsForm.form, 'not.be.visible') 
+        checkElementVisibility(selectors.inputForm.form, 'not.be.visible') 
 
         cy.url().then($url => {
 
@@ -48,29 +48,29 @@ describe('Participants page', () => {
         clickOnCTA(selectors.updateButton)
 
         checkElementVisibility(selectors.leaderboard, 'not.be.visible') 
-        checkPredictionsFormHeader('Participa en la superporra')
+        checkInputFormHeader('Participa en la superporra')
         checkFormIsEmpty()
 
         submitPredictionsNoUsername('bottom')
         submitPredictionsNoUsername('top')
 
-        fillInPredictionsForm()
+        fillInInputForm()
         checkFormIsFilledIn()
 
         clickOnCTA(selectors.navItem(1))
         clickOnCTA(selectors.navItem(2))
         checkFormIsFilledIn()
 
-        clickOnCTA(selectors.predictionsForm.cancelButton)
+        clickOnCTA(selectors.inputForm.cancelButton)
         checkElementVisibility(selectors.leaderboard, 'be.visible') 
 
         clickOnCTA(selectors.updateButton)
         checkFormIsEmpty()
 
-        fillInPredictionsForm()
-        clickOnCTA(selectors.predictionsForm.submitButton('top'))
+        fillInInputForm()
+        clickOnCTA(selectors.inputForm.submitButton('top'))
 
-        checkElementVisibility(selectors.predictionsForm.form, 'not.be.visible') 
+        checkElementVisibility(selectors.inputForm.form, 'not.be.visible') 
         checkElementVisibility(selectors.predictionsSubittedMessage, 'be.visible') 
 
         checkLeaderboardLastParticipant()
@@ -78,14 +78,15 @@ describe('Participants page', () => {
 
         // Check participant's predictions page
         selectLastParticipant()
-        cy.wait(1000)
+        cy.wait(500)
 
         checkPageHeader('Predicciones ZZ Test Participant')
         checkElementVisibility(selectors.resultsContainer, 'be.visible')
 
         clickOnCTA(selectors.updateButton)
-        updatePredictionsForm()
-        // checkPredictionsFormHeader('Participa en la superporra')
+
+        checkInputFormHeader('Actualiza tus predicciones')
+        updateInputForm()
     })
 
 })
