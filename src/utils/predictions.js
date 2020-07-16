@@ -1,8 +1,6 @@
 import React from 'react'
 import { leagueGroups, fieldLabel, goalsDropDown, teamsList, emptyPrediction } from '../config'
 
-const lodashClonedeep = require("lodash.clonedeep")
-
 const teamsMenuOptions = () => (
     teamsList().map(team => (
         <option key={team} value={team}>{team}</option>
@@ -300,11 +298,6 @@ const thirdTeamsR16Matches = (prediction) => {
     }
 }
 
-// const quarterFinalTeams = prediction => {
-//     Object.keys(prediction.r16Matches).map(r16Match => {
-//         getR16MatchWinner(prediction.r16Matches[r16Match])
-//     })
-// }
 
 export const getR16Teams = (prediction) => ({
     // Returns the teams that qualified for knock-out stages
@@ -473,49 +466,3 @@ export const getFinalTeams = (prediction) => ({
 // g) number of away wins
 // h) lower disciplinary points total (3 points for red card including for second booking, 1 point for single yellow card for a player in a match)
 // i) position in overall UEFA Nations League rankings
-
-
-// -------------------------------------
-// ---- Generate random predictions ----
-
-// Generates weighted random number of goals
-export const weightedRandomGoals = () => {
-    const spec = {0:0.3, 1:0.3, 2:0.2, 3:0.15, 4:0.03, 5:0.02}
-
-    var i, sum=0, r=Math.random();
-    for (i in spec) {
-      sum += spec[i];
-      if (r <= sum) return i;
-    }
-}
-
-export const generateRandomPredictions = () => {
-    const randomPrediction = lodashClonedeep(emptyPrediction)
-
-    Object.keys(randomPrediction.leagueMatches).map(leagueMatch => {
-        randomPrediction.leagueMatches[leagueMatch].homeGoals = weightedRandomGoals()
-        randomPrediction.leagueMatches[leagueMatch].awayGoals = weightedRandomGoals()
-    })
-
-    Object.keys(randomPrediction.r16Matches).map(r16Match => {
-        randomPrediction.r16Matches[r16Match].homeGoals = weightedRandomGoals()
-        randomPrediction.r16Matches[r16Match].awayGoals = weightedRandomGoals()
-    })
-
-    Object.keys(randomPrediction.quarterFinalMatches).map(quarterFinalMatch => {
-        randomPrediction.quarterFinalMatches[quarterFinalMatch].homeGoals = weightedRandomGoals()
-        randomPrediction.quarterFinalMatches[quarterFinalMatch].awayGoals = weightedRandomGoals()
-    })
-
-    Object.keys(randomPrediction.semiFinalMatches).map(semiFinalMatch => {
-        randomPrediction.semiFinalMatches[semiFinalMatch].homeGoals = weightedRandomGoals()
-        randomPrediction.semiFinalMatches[semiFinalMatch].awayGoals = weightedRandomGoals()
-    })
-
-    Object.keys(randomPrediction.finalMatches).map(finalMatch => {
-        randomPrediction.finalMatches[finalMatch].homeGoals = weightedRandomGoals()
-        randomPrediction.finalMatches[finalMatch].awayGoals = weightedRandomGoals()
-    })
-
-    return randomPrediction
-}

@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { generalPredictionsSelect, weightedRandomGoals } from '../../utils/predictions'
+import { generalPredictionsSelect } from '../../utils/predictions'
 import * as mutations from '../store/mutations' 
 import { ConnectedEuroStage } from './EuroStage'
 

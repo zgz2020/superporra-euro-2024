@@ -2,7 +2,8 @@ import { take, put, select, delay } from 'redux-saga/effects'
 import axios from 'axios'
 import uuid from 'uuid'
 import { normalizeDefaultStateMongo } from '../../server/defaultState'
-import { generateRandomPredictions, getR16Teams, getQuarterFinalTeams, getSemiFinalTeams, getFinalTeams } from '../../utils/predictions'
+import { getR16Teams, getQuarterFinalTeams, getSemiFinalTeams, getFinalTeams } from '../../utils/predictions'
+import { generateRandomPredictions } from '../../utils/randomPredictions'
 import * as selectors from './selectors'
 
 import * as mutations from './mutations'
@@ -103,17 +104,14 @@ export function* generateRandomPredictionsSaga() {
 
         yield put(mutations.randomPredictionsLoading())
     
-        //Generates random predictions (matches scores)
-        const randomPrediction = generateRandomPredictions()
-        // Gets teams qualified for knockout stages according to the random prediction data
-        randomPrediction.r16Matches = getR16Teams(randomPrediction)
-        randomPrediction.quarterFinalMatches = getQuarterFinalTeams(randomPrediction)
-        randomPrediction.semiFinalMatches = getSemiFinalTeams(randomPrediction)
-        randomPrediction.finalMatches = getFinalTeams(randomPrediction)
+        const randomPrediction = yield generateRandomPredictions()
         
         if(predictionType === "new") yield put(mutations.setRandomPredictionNew(randomPrediction))
         if(predictionType === "existent") yield put(mutations.updatePrediction(userID, randomPrediction))
     
+        // Wait for a second to make sure all random results have been generated and form updated
+        // and then enable 'Generate random predictions' CTA
+        yield delay(1000) 
         yield put(mutations.randomPredictionsLoaded())
     }
 }
