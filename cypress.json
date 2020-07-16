@@ -4,6 +4,5 @@
     "chromeWebSecurity": false,
     "video": false,
     "trashAssetsBeforeRuns": false,
-    "blacklistHosts": "www.googletagmanager.com",
-    "projectId": "6o4ox7"
+    "blacklistHosts": "www.googletagmanager.com"
 }

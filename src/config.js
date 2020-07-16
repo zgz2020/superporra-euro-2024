@@ -17,6 +17,33 @@ export const teamsList = () => {
     return teams.sort()
 } 
 
+export const teamsOdds = {
+    [leagueGroups["A"][0]]: 11, 
+    [leagueGroups["A"][1]]: 80, 
+    [leagueGroups["A"][2]]: 100, 
+    [leagueGroups["A"][3]]: 100, 
+    [leagueGroups["B"][0]]: 5, 
+    [leagueGroups["B"][1]]: 80, 
+    [leagueGroups["B"][2]]: 250, 
+    [leagueGroups["B"][3]]: 100, 
+    [leagueGroups["C"][0]]: 100, 
+    [leagueGroups["C"][1]]: 7, 
+    [leagueGroups["C"][2]]: 66, 
+    [leagueGroups["C"][3]]: 500, 
+    [leagueGroups["D"][0]]: 25, 
+    [leagueGroups["D"][1]]: 150, 
+    [leagueGroups["D"][2]]: 5, 
+    [leagueGroups["D"][3]]: 125, 
+    [leagueGroups["E"][0]]: 100, 
+    [leagueGroups["E"][1]]: 8, 
+    [leagueGroups["E"][2]]: 125, 
+    [leagueGroups["E"][3]]: 200,
+    [leagueGroups["F"][0]]: 5.5, 
+    [leagueGroups["F"][1]]: 7, 
+    [leagueGroups["F"][2]]:16, 
+    [leagueGroups["F"][3]]: 150
+}
+
 export const knockOutStages = ["r16Matches", "quarterFinalMatches", "semiFinalMatches", "finalMatches"]
 
 export const emptyPrediction = {
