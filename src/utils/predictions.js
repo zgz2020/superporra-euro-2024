@@ -376,10 +376,19 @@ export const getR16Teams = (prediction) => ({
     }
 })
 
+
 const getKnockOutMatchWinner = (game) => {
-    if (parseInt(game.homeGoals) - parseInt(game.awayGoals) >= 0) return game.homeTeam
-    return game.awayTeam
+    if (parseInt(game.homeGoals) - parseInt(game.awayGoals) > 0) return game.homeTeam
+    if (parseInt(game.homeGoals) - parseInt(game.awayGoals) < 0) return game.awayTeam
+    // If a draw, decide match winner randomly
+    if (parseInt(game.homeGoals) - parseInt(game.awayGoals) === 0) {
+        const randomWinner = Math.random()
+        if (randomWinner < 0.5) { 
+            return game.homeTeam
+        } else return game.awayTeam
+    }
 }
+
 
 export const getQuarterFinalTeams = (prediction) => ({
     "1": {

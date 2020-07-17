@@ -124,6 +124,9 @@ export const updateInputForm = () => {
     // Update predictions
     clickOnCTA(selectors.inputForm.randomPredictionsButton)
 
+    // Wait for 2 seconds to make sure that the new random predictions have fully loaded
+    cy.wait(2000)
+
     // Get teams that play final match
     cy.get(selectors.inputForm.finalStage).eq(0).invoke('text').then($finalMatchData => {
         // Asign final match data to a variable
