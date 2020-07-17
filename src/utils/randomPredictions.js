@@ -37,10 +37,10 @@ const lodashClonedeep = require("lodash.clonedeep")
 const weightedRandomGoals = () => {
     const spec = {0:0.3, 1:0.3, 2:0.2, 3:0.15, 4:0.03, 5:0.02}
 
-    let i, sum=0, r=Math.random();
+    let i, sum=0, r=Math.random()
     for (i in spec) {
-      sum += spec[i];
-      if (r <= sum) return i;
+      sum += spec[i]
+      if (r <= sum) return i
     }
 }
 
