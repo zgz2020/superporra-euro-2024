@@ -1,5 +1,5 @@
 import React from 'react'
-import { leagueGroups, fieldLabel, goalsDropDown, teamsList, emptyPrediction } from '../config'
+import { leagueGroups, fieldLabel, goalsDropDown, teamsList, emptyPrediction } from './config'
 
 const teamsMenuOptions = () => (
     teamsList().map(team => (

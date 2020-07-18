@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { emptyPrediction } from '../../config'
+import { emptyPrediction } from '../../utils/config'
 import { ConnectedEuroMatch } from './EuroMatch'
 import { ConnectedGroupTable } from './GroupTable'
 

@@ -27,22 +27,43 @@
 
 // ------------------------------------------------------------------
 
-import { emptyPrediction, teamsList, teamsOdds } from '../config'
+import { emptyPrediction, teamsOdds, randomSpecs } from './config'
 import { getR16Teams, getQuarterFinalTeams, getSemiFinalTeams, getFinalTeams } from './predictions'
 
 const lodashClonedeep = require("lodash.clonedeep")
 
 
-// Generates weighted random number of goals
-const weightedRandomGoals = () => {
-    const spec = {0:0.3, 1:0.3, 2:0.2, 3:0.15, 4:0.03, 5:0.02}
-
+//+++++++++ AQUI +++++++++
+//     - ‘weightedRandomGoals’ and ‘weightedRamdonMatchWinner’ should be same method
+const getRandomData = (spec) => {
     let i, sum=0, r=Math.random()
     for (i in spec) {
       sum += spec[i]
       if (r <= sum) return i
     }
 }
+// ++++++++++++++++++++++++++++++++++++++++++++++
+
+// const weightedRamdonMatchWinner = (homeTeam, awayTeam) => {
+//     const spec = weightedMatchOdds(homeTeam, awayTeam)
+
+//     let i, sum=0, r=Math.random(), result
+//     for (i in spec) {
+//       sum += spec[i];
+//       if (r <= sum) return i;
+//     }
+// }
+
+// Generates weighted random number of goals
+// const weightedRandomGoals = () => {
+//     const spec = {0:0.3, 1:0.3, 2:0.2, 3:0.15, 4:0.03, 5:0.02}
+
+//     let i, sum=0, r=Math.random()
+//     for (i in spec) {
+//       sum += spec[i]
+//       if (r <= sum) return i
+//     }
+// }
 
 
 // Generates a team's odds for winning or drawing a match depending on the oponent
@@ -105,23 +126,24 @@ const weightedMatchOdds = (homeTeam, awayTeam) => {
 
 
 // Generates a random match winner given each team's odds to win the tournament
-const weightedRamdonMatchWinner = (homeTeam, awayTeam) => {
-    const spec = weightedMatchOdds(homeTeam, awayTeam)
+// const weightedRamdonMatchWinner = (homeTeam, awayTeam) => {
+//     const spec = weightedMatchOdds(homeTeam, awayTeam)
 
-    let i, sum=0, r=Math.random(), result
-    for (i in spec) {
-      sum += spec[i];
-      if (r <= sum) return i;
-    }
-}
+//     let i, sum=0, r=Math.random(), result
+//     for (i in spec) {
+//       sum += spec[i];
+//       if (r <= sum) return i;
+//     }
+// }
 
 
 // Generates a random score matching a given winner (or draw)
 const randomMatchScore = (homeTeam, awayTeam) => {
-    const winner = weightedRamdonMatchWinner(homeTeam, awayTeam)
+    //const winner = weightedRamdonMatchWinner(homeTeam, awayTeam)
+    const winner = getRandomData( weightedMatchOdds(homeTeam, awayTeam) )
 
-    let homeGoals=weightedRandomGoals()
-    let awayGoals=weightedRandomGoals()
+    let homeGoals=getRandomData(randomSpecs.goals)
+    let awayGoals=getRandomData(randomSpecs.goals)
 
     // Time condition to try to avoid random crashes +++++ 
     let startTime = Date.now();
@@ -129,8 +151,8 @@ const randomMatchScore = (homeTeam, awayTeam) => {
         (Math.sign(homeGoals - awayGoals) != winner)
         && (Date.now() - startTime < 500)
     ) {
-        homeGoals=weightedRandomGoals()
-        awayGoals=weightedRandomGoals()
+        homeGoals=getRandomData(randomSpecs.goals)
+        awayGoals=getRandomData(randomSpecs.goals)
     }
 
     return {homeGoals, awayGoals}

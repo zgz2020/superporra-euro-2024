@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { emptyPrediction, groupsList } from '../../config'
+import { emptyPrediction, groupsList } from '../../utils/config'
 import { ConnectedEuroMatch } from './EuroMatch'
 import { ConnectedLeagueGroupContainer } from './LeagueGroupContainer'
 
