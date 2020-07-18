@@ -1,4 +1,4 @@
-import { knockOutStages, pointsPerQualifiedTeam, emptyPrediction } from '../config'
+import { knockOutStages, pointsPerQualifiedTeam, emptyPrediction } from './config'
 
 // Scoring rules can be found here: https://raftwc.wixsite.com/raftworldcup/scoring-rules
 

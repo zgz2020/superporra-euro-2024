@@ -1,4 +1,4 @@
-import { emptyPrediction } from '../config'
+import { emptyPrediction } from '../utils/config'
 
 export const defaultState = {
     session: {

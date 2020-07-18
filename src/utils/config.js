@@ -488,3 +488,14 @@ export const pointsPerQualifiedTeam = (stage) => {
             return 0
     }
 }
+
+export const randomSpecs = {
+    goals: {
+        0: 0.3,
+        1: 0.3,
+        2: 0.2,
+        3: 0.15,
+        4: 0.03,
+        5: 0.02
+    }
+}

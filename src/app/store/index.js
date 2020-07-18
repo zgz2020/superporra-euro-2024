@@ -5,7 +5,7 @@ import * as sagas from './sagas'
 import * as mutations from './mutations'
 
 import { defaultState } from '../../server/defaultState'
-import { emptyPrediction } from '../../config'
+import { emptyPrediction } from '../../utils/config'
 
 const sagaMiddleware = createSagaMiddleware()
  
