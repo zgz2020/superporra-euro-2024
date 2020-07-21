@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { participantTotalPoints, getStageMatchesPoints, knockOutQualifiedTeamsPoints } from '../../utils/leaderboard'
+import { participantTotalPoints } from '../../utils/leaderboard'
 
 const ParticipantsList = ( { users, predictions } ) => (
     <div>

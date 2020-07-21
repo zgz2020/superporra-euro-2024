@@ -1,8 +1,8 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { generalPredictionsSelect } from '../../utils/predictions'
 import * as mutations from '../store/mutations' 
 import { ConnectedEuroStage } from './EuroStage'
+import { ConnectedGeneralPrediction } from './generalPrediction'
 
 
 const PredictionsForm = ( { 
@@ -116,15 +116,6 @@ const PredictionsForm = ( {
                     null
                 }
 
-                <div className="card">
-                    <div className="form-group pt-3 d-flex flex-column card-body">
-                        {generalPredictionsSelect(predictionType, predictionDetails(predictionType).userID, "winner", setPredictionFieldHandler, predictionDetails(predictionType).predictions)}
-                        {generalPredictionsSelect(predictionType, predictionDetails(predictionType).userID, "finalist", setPredictionFieldHandler, predictionDetails(predictionType).predictions)}
-                        {generalPredictionsSelect(predictionType, predictionDetails(predictionType).userID, "topScorer", setPredictionFieldHandler, predictionDetails(predictionType).predictions)}
-                        {generalPredictionsSelect(predictionType, predictionDetails(predictionType).userID, "leastConceded", setPredictionFieldHandler, predictionDetails(predictionType).predictions)}
-                    </div>
-                </div>
-
                 <ConnectedEuroStage predictionType={predictionType} mode="edit" userID={predictionDetails(predictionType).userID} stageName="Fase de grupos" matchType="league" changeHandler={setGoalsLeagueHandler} prediction={predictionDetails(predictionType).predictions}/>
 
                 <ConnectedEuroStage predictionType={predictionType} mode="edit" userID={predictionDetails(predictionType).userID} stageName="Dieciseisavos de final" matchType="r16" changeHandler={setGoalsR16Handler} prediction={predictionDetails(predictionType).predictions}/>
@@ -134,6 +125,12 @@ const PredictionsForm = ( {
                 <ConnectedEuroStage predictionType={predictionType} mode="edit" userID={predictionDetails(predictionType).userID} stageName="Semifinales" matchType="semiFinal" changeHandler={setGoalsSemiFinalHandler} prediction={predictionDetails(predictionType).predictions}/>
 
                 <ConnectedEuroStage predictionType={predictionType} mode="edit" userID={predictionDetails(predictionType).userID} stageName="Final" matchType="final" changeHandler={setGoalsFinalHandler} prediction={predictionDetails(predictionType).predictions}/>
+
+                <ConnectedGeneralPrediction title="Campeón" predictionName="winner" predictionType={predictionType} userID={predictionDetails(predictionType).userID} />
+
+                <ConnectedGeneralPrediction title="Equipo(s) máximo goleador" predictionName="topScorer" predictionType={predictionType} userID={predictionDetails(predictionType).userID} />
+
+                <ConnectedGeneralPrediction title="Equipo(s) menos goleado" predictionName="leastConceded" predictionType={predictionType} userID={predictionDetails(predictionType).userID} />
 
                 {submitButton(predictionType)}               
             </form>

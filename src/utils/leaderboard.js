@@ -49,7 +49,7 @@ const getLeagueMatchPoints = (stage, match, results) =>
     + getLeagueMatchWinnerPoints(match, results)
     
 
-export const getMatchesPoints = (prediction, results) => 
+const getMatchesPoints = (prediction, results) => 
     Object.keys(prediction.leagueMatches).reduce(function(leaguePoints, leagueMatch) {
         return leaguePoints + getLeagueMatchPoints("leagueMatches", prediction.leagueMatches[leagueMatch], results)
         }, 0)
@@ -98,7 +98,7 @@ const getMatchQualifedTeamsPoints = (stage, match, results) =>
 
 
 // SCORING RULE - e. Groups - Winner and Runner-up - 10 or 5 points
-export const knockOutQualifiedTeamsPoints = (prediction, results) => 
+const knockOutQualifiedTeamsPoints = (prediction, results) => 
     knockOutStages.reduce(function(qualifiedTeamsPoints, stage) {
         return qualifiedTeamsPoints 
             + Object.keys(prediction[stage]).reduce(function(stagePoints, stageMatch) {

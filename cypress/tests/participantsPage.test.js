@@ -55,6 +55,7 @@ describe('Participants page', () => {
         submitPredictionsNoUsername('top')
 
         fillInInputForm()
+        cy.wait(500)
         checkFormIsFilledIn()
 
         clickOnCTA(selectors.navItem(1))

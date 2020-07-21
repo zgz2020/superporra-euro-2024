@@ -27,6 +27,7 @@ export const selectors = {
         euroStageFirstScore: stage => `${automationSelector("euro-stage")}:nth(${stage}) select:nth(0)`,
         finalStage: `${automationSelector("euro-stage")}:nth(4)`,
         finalStageTeams: `${automationSelector("euro-stage")}:nth(4) ${automationSelector("score-team")}`,
+        generalPredictions: automationSelector("general-prediction")
     },
 
     predictionsSubittedMessage: automationSelector("prediction-submitted-success"),
@@ -75,18 +76,35 @@ export const submitPredictionsNoUsername = (ctaLocation) => {
 
 const checkInputElementValue = (selector, have, value) => cy.get(selector).should(`${have}.value`, `${value}`)
 
+const checkMatchStagesValues = (have) => {
+    cy.get(selectors.inputForm.euroStage).then($stages => {
+        for(let i = 0; i < $stages.length; i++) {
+            checkInputElementValue(selectors.inputForm.euroStageFirstScore(i), have, ' ')
+        }
+    })
+}
+
+const checkGeneralPredictionsValue = (contain) => {
+    cy.get(selectors.inputForm.generalPredictions).then($generalPredictions => {
+        for(let i = 0; i < $generalPredictions.length; i++) {
+            cy.get(selectors.inputForm.generalPredictions).eq(i).should(contain, '???')
+        }
+    })
+}
+
+
 export const checkFormIsEmpty = () => {
     // Username
     checkInputElementValue(selectors.inputForm.usernameInput, 'have', '')
 
     // Home-team score of each stage's first match
-    cy.get(selectors.inputForm.euroStage).then($stages => {
-        for(let i =0; i < $stages.length; i++) {
-            checkInputElementValue(selectors.inputForm.euroStageFirstScore(i), 'have', ' ')
-        }
-    })
+    checkMatchStagesValues('have')
 
+    // Final teams
     cy.get(selectors.inputForm.finalStage).should('contain', 'Ganador')
+
+    // General predictions (Euro Winner, Top Scorer...)
+    checkGeneralPredictionsValue('contain')
 }
 
 export const fillInInputForm = () => {
@@ -99,14 +117,13 @@ export const checkFormIsFilledIn = () => {
     checkInputElementValue(selectors.inputForm.usernameInput, 'not.have', '')
 
     // Home-team's score of each stage's first match
-    cy.get(selectors.inputForm.euroStage).then($stages => {
-        for(let i =0; i < $stages.length; i++) {
-            checkInputElementValue(selectors.inputForm.euroStageFirstScore(i), 'not.have', ' ')
-        }
-    })
+    checkMatchStagesValues('not.have')
 
     // Final teams
     cy.get(selectors.inputForm.finalStage).should('not.contain', 'Ganador')
+
+    // General predictions (Euro Winner, Top Scorer...)
+    checkGeneralPredictionsValue('not.contain')
 }
 
 
