@@ -28,13 +28,18 @@
 // ------------------------------------------------------------------
 
 import { emptyPrediction, teamsOdds, randomSpecs } from './config'
-import { getR16Teams, getQuarterFinalTeams, getSemiFinalTeams, getFinalTeams } from './predictions'
+import { 
+    getR16Teams, 
+    getQuarterFinalTeams, 
+    getSemiFinalTeams, 
+    getFinalTeams, 
+    getEuroWinner, 
+    getTopScorer, 
+    getLeastConceded
+} from './predictions'
 
 const lodashClonedeep = require("lodash.clonedeep")
 
-
-//+++++++++ AQUI +++++++++
-//     - ‘weightedRandomGoals’ and ‘weightedRamdonMatchWinner’ should be same method
 const getRandomData = (spec) => {
     let i, sum=0, r=Math.random()
     for (i in spec) {
@@ -42,28 +47,6 @@ const getRandomData = (spec) => {
       if (r <= sum) return i
     }
 }
-// ++++++++++++++++++++++++++++++++++++++++++++++
-
-// const weightedRamdonMatchWinner = (homeTeam, awayTeam) => {
-//     const spec = weightedMatchOdds(homeTeam, awayTeam)
-
-//     let i, sum=0, r=Math.random(), result
-//     for (i in spec) {
-//       sum += spec[i];
-//       if (r <= sum) return i;
-//     }
-// }
-
-// Generates weighted random number of goals
-// const weightedRandomGoals = () => {
-//     const spec = {0:0.3, 1:0.3, 2:0.2, 3:0.15, 4:0.03, 5:0.02}
-
-//     let i, sum=0, r=Math.random()
-//     for (i in spec) {
-//       sum += spec[i]
-//       if (r <= sum) return i
-//     }
-// }
 
 
 // Generates a team's odds for winning or drawing a match depending on the oponent
@@ -125,21 +108,8 @@ const weightedMatchOdds = (homeTeam, awayTeam) => {
 }
 
 
-// Generates a random match winner given each team's odds to win the tournament
-// const weightedRamdonMatchWinner = (homeTeam, awayTeam) => {
-//     const spec = weightedMatchOdds(homeTeam, awayTeam)
-
-//     let i, sum=0, r=Math.random(), result
-//     for (i in spec) {
-//       sum += spec[i];
-//       if (r <= sum) return i;
-//     }
-// }
-
-
 // Generates a random score matching a given winner (or draw)
 const randomMatchScore = (homeTeam, awayTeam) => {
-    //const winner = weightedRamdonMatchWinner(homeTeam, awayTeam)
     const winner = getRandomData( weightedMatchOdds(homeTeam, awayTeam) )
 
     let homeGoals=getRandomData(randomSpecs.goals)
@@ -195,6 +165,12 @@ export const generateRandomPredictions = () => {
 
     randomPrediction.finalMatches = getFinalTeams(randomPrediction)
     generateRandomPredictionsStage(randomPrediction, "finalMatches")
+
+    randomPrediction.winner = getEuroWinner(randomPrediction)
+
+    randomPrediction.topScorer = getTopScorer(randomPrediction)
     
+    randomPrediction.leastConceded = getLeastConceded(randomPrediction)
+
     return randomPrediction
 }

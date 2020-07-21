@@ -35,8 +35,12 @@ export const UPDATED_SF_TEAMS_NEW_PREDICTION = 'UPDATED_SF_TEAMS_NEW_PREDICTION'
 
 export const SET_GOALS_NEW_PREDICTION_SF = 'SET_GOALS_NEW_PREDICTION_SF'
 export const SET_FINAL_TEAMS_NEW_PREDICTION = 'SET_FINAL_TEAMS_NEW_PREDICTION'
+export const UPDATED_FINAL_TEAMS_NEW_PREDICTION = 'UPDATED_FINAL_TEAMS_NEW_PREDICTION'
 
 export const SET_GOALS_NEW_PREDICTION_FINAL = 'SET_GOALS_NEW_PREDICTION_FINAL'
+export const SET_EURO_WINNER_TEAM_NEW_PREDICTION = 'SET_EURO_WINNER_TEAM_NEW_PREDICTION'
+export const SET_TOP_SCORER_TEAM_NEW_PREDICTION = 'SET_TOP_SCORER_TEAM_NEW_PREDICTION'
+export const SET_LEAST_CONCEDED_TEAM_NEW_PREDICTION = 'SET_LEAST_CONCEDED_TEAM_NEW_PREDICTION'
 
 export const SET_PREDICTION_FIELD_NEW_PREDICTION = 'SET_PREDICTION_FIELD_NEW_PREDICTION'
 
@@ -59,8 +63,12 @@ export const UPDATED_SF_TEAMS = 'UPDATED_SF_TEAMS'
 
 export const SET_GOALS_SF = 'SET_GOALS_SF'
 export const SET_FINAL_TEAMS = 'SET_FINAL_TEAMS'
+export const UPDATED_FINAL_TEAMS = 'UPDATED_FINAL_TEAMS'
 
 export const SET_GOALS_FINAL = 'SET_GOALS_FINAL'
+export const SET_EURO_WINNER_TEAM = 'SET_EURO_WINNER_TEAM'
+export const SET_TOP_SCORER_TEAM = 'SET_TOP_SCORER_TEAM'
+export const SET_LEAST_CONCEDED_TEAM = 'SET_LEAST_CONCEDED_TEAM'
 
 export const SET_PREDICTION_FIELD = 'SET_PREDICTION_FIELD'
 
@@ -240,12 +248,31 @@ export const setFinalTeamsNewPrediction = (finalTeams) => ({
     finalTeams
 })
 
+export const updatedFinalTeamsNewPrediction = () => ({
+    type: UPDATED_FINAL_TEAMS_NEW_PREDICTION
+})
+
 
 export const setGoalsNewPredictionFinal = (matchKey, team, goals) => ({
     type: SET_GOALS_NEW_PREDICTION_FINAL,
     matchKey,
     team,
     goals
+})
+
+export const setEuroWinnerTeamNewPrediction = (euroWinnerTeam) => ({
+    type: SET_EURO_WINNER_TEAM_NEW_PREDICTION,
+    euroWinnerTeam
+})
+
+export const setTopScorerTeamNewPrediction = (topScorerTeam) => ({
+    type: SET_TOP_SCORER_TEAM_NEW_PREDICTION,
+    topScorerTeam
+})
+
+export const setLeastConcededTeamNewPrediction = (leastConcededTeam) => ({
+    type: SET_LEAST_CONCEDED_TEAM_NEW_PREDICTION,
+    leastConcededTeam
 })
 
 
@@ -340,6 +367,11 @@ export const setFinalTeams = (predictionID, finalTeams) => ({
     predictionID
 })
 
+export const updatedFinalTeams = (predictionID) => ({
+    type: UPDATED_FINAL_TEAMS,
+    predictionID
+})
+
 
 export const setGoalsFinal = (predictionID, finalMatchKey, team, goals) => ({
     type: SET_GOALS_FINAL,
@@ -347,6 +379,24 @@ export const setGoalsFinal = (predictionID, finalMatchKey, team, goals) => ({
     finalMatchKey,
     team,
     goals
+})
+
+export const setEuroWinnerTeam = (predictionID, euroWinnerTeam) => ({
+    type: SET_EURO_WINNER_TEAM,
+    predictionID,
+    euroWinnerTeam
+})
+
+export const setTopScorerTeam = (predictionID, topScorerTeam) => ({
+    type: SET_TOP_SCORER_TEAM,
+    predictionID,
+    topScorerTeam
+})
+
+export const setLeastConcededTeam = (predictionID, leastConcededTeam) => ({
+    type: SET_LEAST_CONCEDED_TEAM,
+    predictionID,
+    leastConcededTeam
 })
 
 

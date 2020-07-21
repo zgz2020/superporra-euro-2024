@@ -73,7 +73,10 @@ export const store = createStore(
                         r16Matches: action.randomPrediction.r16Matches,
                         quarterFinalMatches: action.randomPrediction.quarterFinalMatches,
                         semiFinalMatches: action.randomPrediction.semiFinalMatches,
-                        finalMatches: action.randomPrediction.finalMatches
+                        finalMatches: action.randomPrediction.finalMatches,
+                        winner: action.randomPrediction.winner,
+                        topScorer: action.randomPrediction.topScorer,
+                        leastConceded: action.randomPrediction.leastConceded
                     }
                 case mutations.SET_GOALS_NEW_PREDICTION_LEAGUE:
                     return { 
@@ -108,8 +111,12 @@ export const store = createStore(
                         ...newPrediction, 
                         finalMatches: { ...newPrediction.finalMatches, [action.matchKey]: { ...newPrediction.finalMatches[action.matchKey], [action.team]: action.goals}}
                     }
-                case mutations.SET_PREDICTION_FIELD_NEW_PREDICTION:
-                    return { ...newPrediction, [action.field]: action.prediction }
+                case mutations.SET_EURO_WINNER_TEAM_NEW_PREDICTION:
+                    return { ...newPrediction, winner: action.euroWinnerTeam }
+                case mutations.SET_TOP_SCORER_TEAM_NEW_PREDICTION:
+                    return { ...newPrediction, topScorer: action.topScorerTeam }
+                case mutations.SET_LEAST_CONCEDED_TEAM_NEW_PREDICTION:
+                    return { ...newPrediction, leastConceded: action.leastConcededTeam }
                 case mutations.RESET_PREDICTION_CREATION_FORM:
                     return emptyPrediction
                 default:
@@ -196,8 +203,12 @@ export const store = createStore(
                     return { ...predictions, byId: { ...predictions.byId, [action.predictionID]: { ...predictions.byId[action.predictionID], finalMatches: action.finalTeams }}}
                 case mutations.SET_GOALS_FINAL:
                     return { ...predictions, byId: { ...predictions.byId, [action.predictionID]: { ...predictions.byId[action.predictionID], finalMatches: { ...predictions.byId[action.predictionID].finalMatches, [action.finalMatchKey]: { ...predictions.byId[action.predictionID].finalMatches[action.finalMatchKey], [action.team]: action.goals}}}}}
-                case mutations.SET_PREDICTION_FIELD:
-                    return { ...predictions, byId: { ...predictions.byId, [action.predictionID]: { ...predictions.byId[action.predictionID], [action.field]: action.prediction }}}
+                case mutations.SET_EURO_WINNER_TEAM:
+                    return { ...predictions, byId: { ...predictions.byId, [action.predictionID]: { ...predictions.byId[action.predictionID], winner: action.euroWinnerTeam }}}
+                case mutations.SET_TOP_SCORER_TEAM:
+                    return { ...predictions, byId: { ...predictions.byId, [action.predictionID]: { ...predictions.byId[action.predictionID], topScorer: action.topScorerTeam }}}
+                case mutations.SET_LEAST_CONCEDED_TEAM:
+                    return { ...predictions, byId: { ...predictions.byId, [action.predictionID]: { ...predictions.byId[action.predictionID], leastConceded: action.leastConcededTeam }}}
                 default:
                     return predictions
             } 

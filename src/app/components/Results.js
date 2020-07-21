@@ -1,22 +1,13 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { ConnectedEuroStage } from './EuroStage'
+import { ConnectedGeneralPrediction } from './generalPrediction'
 
 const Results = (ownProps) => (
     <div key="user" data-automation="results-container">
         <div className="card mx-auto" style={{width: "28rem"}}>
 
             <div className="card-body">
-
-                {"Ganador: "}{ownProps.prediction.winner}
-                <br />
-                {"Finalista: "}{ownProps.prediction.finalist}
-                <br />
-                {"Máximo goleador: "}{ownProps.prediction.topScorer}
-                <br />
-                {"Menos goleado: "}{ownProps.prediction.leastConceded}
-                <br />
-                <br />
 
                 <ConnectedEuroStage { ...ownProps } mode="show" stageName="Fase de grupos" matchType="league" />
 
@@ -28,6 +19,11 @@ const Results = (ownProps) => (
 
                 <ConnectedEuroStage { ...ownProps } mode="show" stageName="Final" matchType="final" />
 
+                <ConnectedGeneralPrediction { ...ownProps } title="Campeón" predictionName="winner" />
+
+                <ConnectedGeneralPrediction { ...ownProps } title="Equipo(s) máximo goleador" predictionName="topScorer" />
+
+                <ConnectedGeneralPrediction { ...ownProps } title="Equipo(s) menos goleado" predictionName="leastConceded" />
             </div>
 
         </div>

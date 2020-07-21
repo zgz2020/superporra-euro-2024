@@ -30,21 +30,6 @@ const TeamScore = ( { predictionType, userID, mode, matchType, matchID, team, ch
                 }
             </div>
 
-
-
-            {/* {mode === "show" ?
-                <div className="p-1">
-                    {teamScorePrediction[`${matchType}Matches`][matchID][`${team}Goals`]}
-                </div>
-                :
-                <div className="p-1">
-                    <select onChange={e => changeHandler(predictionType, userID, matchID, `${team}Goals`, e)} value={teamScorePrediction[`${matchType}Matches`][matchID][`${team}Goals`]} >
-                        <option key="default" value=" ">{" "}</option>
-                        {goalsMenuOptions()}
-                    </select>
-                </div>
-            } */}
-
             {team === "away" ? 
                 <div className="p-1" data-automation="score-team">
                     {teamScorePrediction[`${matchType}Matches`][matchID][`${team}Team`]}

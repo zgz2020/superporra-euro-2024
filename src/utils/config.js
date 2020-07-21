@@ -46,12 +46,15 @@ export const teamsOdds = {
 
 export const knockOutStages = ["r16Matches", "quarterFinalMatches", "semiFinalMatches", "finalMatches"]
 
+export const allMatchStages = ["leagueMatches", ...knockOutStages]
+
+
 export const emptyPrediction = {
     owner: " ",
-    winner: " ",
+    winner: "???",
     finalist: " ",
-    topScorer: " ",
-    leastConceded: " ",
+    topScorer: "???",
+    leastConceded: "???",
     leagueMatches: {
         "1": {
             id: "1",
@@ -457,20 +460,6 @@ export const emptyPrediction = {
     }
 }
 
-export const fieldLabel = field => {
-    switch(field) {
-        case "winner":
-            return "Ganador"
-        case "finalist":
-                return "Finalista"
-        case "topScorer":
-            return "Máximo goleador"
-        case "leastConceded":
-            return "Menos goleado"
-        default: 
-            return "Wrong field!"
-    }
-}
 
 export const goalsDropDown = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
 

@@ -1,24 +1,12 @@
 import React from 'react'
-import { leagueGroups, fieldLabel, goalsDropDown, teamsList, emptyPrediction } from './config'
+import { 
+    leagueGroups,
+    goalsDropDown,
+    teamsList,
+    emptyPrediction,
+    allMatchStages
+} from './config'
 
-const teamsMenuOptions = () => (
-    teamsList().map(team => (
-        <option key={team} value={team}>{team}</option>
-    ))
-)
-
-export const generalPredictionsSelect = (predictionType, userID, field, changeHandler, prediction) => (
-    <div className="p-1">
-
-        {`${fieldLabel(field)}: `}
-
-        <select onChange={e => changeHandler(predictionType, userID, field, e)} value={prediction[field]} >
-            <option key="default" value=" ">{" "}</option>
-            {teamsMenuOptions()}
-        </select>
-
-    </div>
-)
 
 export const goalsMenuOptions = () => (
     goalsDropDown.map(goalValue => (
@@ -38,27 +26,39 @@ const teamLeagueMatchesPlayed = (prediction, team) => {
     ).length
 }
 
-const teamLeagueGoalsScored = (prediction, team) => {
-    return Object.keys(prediction.leagueMatches).reduce(function(counter, curr){
-        if(prediction.leagueMatches[curr].homeTeam === team && prediction.leagueMatches[curr].homeGoals !== " "){
-            return counter + parseInt(prediction.leagueMatches[curr].homeGoals)
-        } else if(prediction.leagueMatches[curr].awayTeam === team && prediction.leagueMatches[curr].awayGoals !== " ") {
-            return counter + parseInt(prediction.leagueMatches[curr].awayGoals)
+const getTeamGoalsScoredStage = (prediction, stage, team) => {
+    return Object.keys(prediction[stage]).reduce(function(counter, match){
+        if(prediction[stage][match].homeTeam === team && prediction[stage][match].homeGoals !== " "){
+            return counter + parseInt(prediction[stage][match].homeGoals)
+        } else if (prediction[stage][match].awayTeam === team && prediction[stage][match].awayGoals !== " "){
+            return counter + parseInt(prediction[stage][match].awayGoals)
         } else {
             return counter
         }
     }, 0)
 }
 
-const teamLeagueGoalsConceded = (prediction, team) => {
-    return Object.keys(prediction.leagueMatches).reduce(function(counter, curr){
-        if(prediction.leagueMatches[curr].homeTeam === team && prediction.leagueMatches[curr].awayGoals !== " "){
-            return counter + parseInt(prediction.leagueMatches[curr].awayGoals)
-        } else if(prediction.leagueMatches[curr].awayTeam === team && prediction.leagueMatches[curr].homeGoals !== " ") {
-            return counter + parseInt(prediction.leagueMatches[curr].homeGoals)
+const geatTeamGoalsScoredAllStages = (prediction, team) => {
+    return allMatchStages.reduce(function(counter, stage){
+        return counter + getTeamGoalsScoredStage(prediction, stage, team)
+    }, 0)
+}
+
+const getTeamGoalsConcededStage = (prediction, stage, team) => {
+    return Object.keys(prediction[stage]).reduce(function(counter, match){
+        if(prediction[stage][match].homeTeam === team && prediction[stage][match].awayGoals !== " "){
+            return counter + parseInt(prediction[stage][match].awayGoals)
+        } else if (prediction[stage][match].awayTeam === team && prediction[stage][match].homeGoals !== " "){
+            return counter + parseInt(prediction[stage][match].homeGoals)
         } else {
             return counter
         }
+    }, 0)
+}
+
+const geatTeamGoalsConcededAllStages = (prediction, team) => {
+    return allMatchStages.reduce(function(counter, stage){
+        return counter + getTeamGoalsConcededStage(prediction, stage, team)
     }, 0)
 }
 
@@ -122,8 +122,8 @@ export const getLeagueGroupTable = (prediction, group) => {
         teamStats.name = team
         teamStats.points = teamLeaguePoints(prediction, team)
         teamStats.gamesPlayed = teamLeagueMatchesPlayed(prediction, team)
-        teamStats.goalsScored = teamLeagueGoalsScored(prediction, team)
-        teamStats.goalsConceded = teamLeagueGoalsConceded(prediction, team)
+        teamStats.goalsScored = getTeamGoalsScoredStage(prediction, "leagueMatches", team) // teamLeagueGoalsScored(prediction, team)
+        teamStats.goalsConceded = getTeamGoalsConcededStage(prediction, "leagueMatches", team) // teamLeagueGoalsConceded(prediction, team)
         groupTeamsStats.push(teamStats)
     })
     return groupTeamsStats.sort(compareTeamStats)
@@ -463,6 +463,48 @@ export const getFinalTeams = (prediction) => ({
             : getKnockOutMatchWinner(prediction.semiFinalMatches["2"])
     }
 })
+
+export const getEuroWinner = (prediction) => 
+    prediction.finalMatches["1"].homeGoals === " " || prediction.finalMatches["1"].awayGoals === " " ?
+        emptyPrediction.winner
+        :
+        getKnockOutMatchWinner(prediction.finalMatches["1"])
+
+export const getTopScorer = (prediction) => {
+    let teamsGoalsScored = []
+
+    teamsList().map(team => {
+        let teamGoalsScored = {}
+        teamGoalsScored.team = team
+        teamGoalsScored.goals = geatTeamGoalsScoredAllStages(prediction, team)
+        teamsGoalsScored.push(teamGoalsScored)
+    })
+
+    const maxGoals = Math.max(...teamsGoalsScored.map(team => team.goals), 0)
+
+    const topScorerTeams = teamsGoalsScored.filter(team => team.goals === maxGoals)
+
+    return topScorerTeams
+}
+
+export const getLeastConceded = (prediction) => {
+    let teamsGoalsConceded = []
+
+    teamsList().map(team => {
+        let teamGoalsConceded = {}
+        teamGoalsConceded.team = team
+        teamGoalsConceded.goals = geatTeamGoalsConcededAllStages(prediction, team)
+        teamsGoalsConceded.push(teamGoalsConceded)
+    })
+
+    const minGoals = Math.min(...teamsGoalsConceded.map(team => team.goals), 20)
+
+    const leastConcededTeams = teamsGoalsConceded.filter(team => team.goals === minGoals)
+
+    return leastConcededTeams
+}
+
+
 
 // --------- QUALIFYING NOTES ------------
 // https://www.uefa.com/uefaeuro-2020/news/0255-0d9929d9bae9-c143d7348369-1000--finals-draw-all-the-details/

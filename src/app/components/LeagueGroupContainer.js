@@ -10,7 +10,7 @@ const LeagueGroupContainer = (ownprops) => (
                         
         <div className="card">
             <div className="card-header">
-                {"GROUP "}{ownprops.leagueGroup}
+                {"GRUPO "}{ownprops.leagueGroup}
             </div>
             <div className="card-body">
                 {Object.keys(emptyPrediction.leagueMatches).map(leagueMatch => (

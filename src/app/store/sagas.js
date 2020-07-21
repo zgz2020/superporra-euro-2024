@@ -2,7 +2,15 @@ import { take, put, select, delay } from 'redux-saga/effects'
 import axios from 'axios'
 import uuid from 'uuid'
 import { normalizeDefaultStateMongo } from '../../server/defaultState'
-import { getR16Teams, getQuarterFinalTeams, getSemiFinalTeams, getFinalTeams } from '../../utils/predictions'
+import {
+    getR16Teams,
+    getQuarterFinalTeams,
+    getSemiFinalTeams,
+    getFinalTeams,
+    getEuroWinner,
+    getTopScorer,
+    getLeastConceded
+} from '../../utils/predictions'
 import { generateRandomPredictions } from '../../utils/randomPredictions'
 import * as selectors from './selectors'
 
@@ -178,10 +186,60 @@ export function* getFinalTeamsNewPredictionSaga() {
         
         // Gets newPrediction state from store
         const prediction = yield select(selectors.getNewPrediction)
-        // Gets the Semi Final teams according to the prediction data
+        // Gets the Final teams according to the prediction data
         const finalTeams = getFinalTeams(prediction)
         // Updates newPrediction state with finalTeams
         yield put(mutations.setFinalTeamsNewPrediction(finalTeams))
+        // Triggers action to update Euro Winner team, Top Scorer or Least Conceded teams if needed
+        yield put(mutations.updatedFinalTeamsNewPrediction())
+    }
+}
+
+export function* getEuroWinnerNewPredictionSaga() {
+    while (true) {
+        yield take([ 
+            mutations.SET_GOALS_NEW_PREDICTION_FINAL,
+            mutations.UPDATED_FINAL_TEAMS_NEW_PREDICTION
+        ])
+        
+        // Gets newPrediction state from store
+        const prediction = yield select(selectors.getNewPrediction)
+        // Gets Euro Winner team according to the prediction data
+        const euroWinnerTeam = getEuroWinner(prediction)
+        // Updates newPrediction state with Euro Winner team
+        yield put(mutations.setEuroWinnerTeamNewPrediction(euroWinnerTeam))
+    }
+}
+
+export function* getTopScorerNewPredictionSaga() {
+    while (true) {
+        yield take([ 
+            mutations.SET_GOALS_NEW_PREDICTION_FINAL,
+            mutations.UPDATED_FINAL_TEAMS_NEW_PREDICTION
+        ])
+        
+        // Gets newPrediction state from store
+        const prediction = yield select(selectors.getNewPrediction)
+        // Gets Top Scorer team according to the prediction data
+        const topScorerTeam = getTopScorer(prediction)
+        // Updates newPrediction state with Top Scorer team
+        yield put(mutations.setTopScorerTeamNewPrediction(topScorerTeam))
+    }
+}
+
+export function* getLeastConcededNewPredictionSaga() {
+    while (true) {
+        yield take([ 
+            mutations.SET_GOALS_NEW_PREDICTION_FINAL,
+            mutations.UPDATED_FINAL_TEAMS_NEW_PREDICTION
+        ])
+        
+        // Gets newPrediction state from store
+        const prediction = yield select(selectors.getNewPrediction)
+        // Gets Top Scorer team according to the prediction data
+        const leastConcededTeam = getLeastConceded(prediction)
+        // Updates newPrediction state with Top Scorer team
+        yield put(mutations.setLeastConcededTeamNewPrediction(leastConcededTeam))
     }
 }
 
@@ -260,5 +318,61 @@ export function* getFinalTeamsSaga() {
         const finalTeams = getFinalTeams(userPrediction)
         // Updates newPrediction state with Final teams
         yield put(mutations.setFinalTeams(predictionID, finalTeams))
+        // Triggers action to update Euro Winner team, Top Scorer or Least Conceded teams if needed
+        yield put(mutations.updatedFinalTeams(predictionID))
+    }
+}
+
+export function* getEuroWinnerSaga() {
+    while (true) {
+        const { predictionID } = yield take([ 
+            mutations.SET_GOALS_FINAL,
+            mutations.UPDATED_FINAL_TEAMS
+        ])
+        
+        // Gets predictions state from store
+        const predictions = yield select(selectors.getPredictions)
+        // User's prediction
+        const userPrediction = predictions.byId[predictionID]
+        // Gets Euro Winner team according to the prediction data
+        const euroWinnerTeam = getEuroWinner(userPrediction)
+        // Updates newPrediction state with Euro Winner team
+        yield put(mutations.setEuroWinnerTeam(predictionID, euroWinnerTeam))
+    }
+}
+
+export function* getTopScorerSaga() {
+    while (true) {
+        yield take([ 
+            mutations.SET_GOALS_FINAL,
+            mutations.UPDATED_FINAL_TEAMS
+        ])
+        
+        // Gets prediction state from store
+        const predictions = yield select(selectors.getPredictions)
+        // User's prediction
+        const userPrediction = predictions.byId[predictionID]
+        // Gets Top Scorer team according to the prediction data
+        const topScorerTeam = getTopScorer(userPrediction)
+        // Updates prediction state with Top Scorer team
+        yield put(mutations.setTopScorerTeam(topScorerTeam))
+    }
+}
+
+export function* getLeastConcededSaga() {
+    while (true) {
+        yield take([ 
+            mutations.SET_GOALS_FINAL,
+            mutations.UPDATED_FINAL_TEAMS
+        ])
+        
+        // Gets prediction state from store
+        const predictions = yield select(selectors.getPredictions)
+        // User's prediction
+        const userPrediction = predictions.byId[predictionID]
+        // Gets Top Scorer team according to the prediction data
+        const leastConcededTeam = getLeastConceded(userPrediction)
+        // Updates prediction state with Top Scorer team
+        yield put(mutations.setLeastConcededTeam(leastConcededTeam))
     }
 }
