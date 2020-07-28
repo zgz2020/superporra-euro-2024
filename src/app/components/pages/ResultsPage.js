@@ -9,9 +9,7 @@ import { ConnectedPredictionsFormButton } from '../PredictionsFormButton'
  
 const ResultsPage = ({ predictionsFormResults, showPredictionsFormResults }) => (
     <div>
-        <h2 className="jumbotron">
-            <ConnectedHeader title="Resultados oficiales"/>
-        </h2>
+        <ConnectedHeader title="Resultados oficiales" />
 
         {!predictionsFormResults ?
             <div>

@@ -6,25 +6,18 @@ import { ConnectedGroupTable } from './GroupTable'
 
 
 const LeagueGroupContainer = (ownprops) => (
-    <div key={ownprops.leagueGroup}>
-                        
-        <div className="card">
-            <div className="card-header">
-                {"GRUPO "}{ownprops.leagueGroup}
+    <div key={ownprops.leagueGroup} >
+        <strong>{"GRUPO "}{ownprops.leagueGroup}</strong>
+        {Object.keys(emptyPrediction.leagueMatches).map(leagueMatch => (
+            <div key={leagueMatch}>
+                {emptyPrediction.leagueMatches[leagueMatch].group === ownprops.leagueGroup ? 
+                    <ConnectedEuroMatch { ...ownprops } matchID={leagueMatch} />
+                    : null
+                }
             </div>
-            <div className="card-body">
-                {Object.keys(emptyPrediction.leagueMatches).map(leagueMatch => (
-                    <div key={leagueMatch}>
-                        {emptyPrediction.leagueMatches[leagueMatch].group === ownprops.leagueGroup ? 
-                            <ConnectedEuroMatch { ...ownprops } matchID={leagueMatch} />
-                            : null
-                        }
-                    </div>
-                ))}
-            </div>
-            <ConnectedGroupTable { ...ownprops } group={ownprops.leagueGroup}/>
-        </div>
-    
+        ))}
+        <ConnectedGroupTable { ...ownprops } group={ownprops.leagueGroup}/>
+        <hr />
     </div>
 )
 

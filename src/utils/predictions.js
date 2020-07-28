@@ -504,7 +504,22 @@ export const getLeastConceded = (prediction) => {
     return leastConcededTeams
 }
 
+export const topScorerCountriesNamesList = (prediction) => {
+    let topScorersNames = []
+    const topScorersFullDetails = getTopScorer(prediction)
+    Object.keys(topScorersFullDetails).map(team => topScorersNames.push(topScorersFullDetails[team].team))
 
+    return topScorersNames
+}
+
+export const leastConcededCountriesNamesList = (prediction) => {
+    let leastConcededNames = []
+    const leastConcededFullDetails = getLeastConceded(prediction)
+    Object.keys(leastConcededFullDetails).map(team => leastConcededNames.push(leastConcededFullDetails[team].team))
+
+    return leastConcededNames
+}
+    
 
 // --------- QUALIFYING NOTES ------------
 // https://www.uefa.com/uefaeuro-2020/news/0255-0d9929d9bae9-c143d7348369-1000--finals-draw-all-the-details/

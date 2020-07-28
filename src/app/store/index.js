@@ -165,7 +165,6 @@ export const store = createStore(
                             [action.predictionID]: {
                                 owner: action.predictionID,
                                 winner: action.prediction.winner,
-                                finalist: action.prediction.finalist,
                                 topScorer: action.prediction.topScorer,
                                 leastConceded: action.prediction.leastConceded,
                                 leagueMatches: action.prediction.leagueMatches,

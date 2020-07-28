@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-const generalPrediction = ( { title, predictionName, predictionType, userPrediction, newPrediction } ) => {
+const GeneralPrediction = ( { title, predictionName, predictionType, userPrediction, newPrediction } ) => {
 
     let prediction = predictionType === "new" ? newPrediction : userPrediction
 
@@ -45,4 +45,4 @@ const mapStateToProps = (state, ownProps) => {
     }
 }
 
-export const ConnectedGeneralPrediction = connect(mapStateToProps)(generalPrediction)
+export const ConnectedGeneralPrediction = connect(mapStateToProps)(GeneralPrediction)

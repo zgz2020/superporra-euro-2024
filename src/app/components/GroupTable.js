@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { getLeagueGroupTable } from '../../utils/predictions'
+import { countryShortNames } from '../../utils/config'
 
 const groupTable = ( { group, prediction } ) => (
     <div>
@@ -17,7 +18,7 @@ const groupTable = ( { group, prediction } ) => (
             <tbody>
                 {Object.keys(getLeagueGroupTable(prediction, group)).map(team => (
                     <tr key={team}>
-                        <td>{getLeagueGroupTable(prediction, group)[team].name}</td>
+                        <td>{countryShortNames[getLeagueGroupTable(prediction, group)[team].name]}</td>
                         <td>{getLeagueGroupTable(prediction, group)[team].points}</td>
                         <td>{getLeagueGroupTable(prediction, group)[team].gamesPlayed}</td>
                         <td>{getLeagueGroupTable(prediction, group)[team].goalsScored}</td>

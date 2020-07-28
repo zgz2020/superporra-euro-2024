@@ -8,9 +8,7 @@ import { ConnectedPredictionsForm } from '../PredictionsForm'
 
 const ParticipantsPage = ({ predictionsFormNew, showPredictionsFormNew, predictionsSubmitted }) => (
     <div>
-        <h2 className="jumbotron">
-            <ConnectedHeader title="Participantes de la superporra"/>
-        </h2>
+        <ConnectedHeader title="Participantes de la superporra" />
 
         {predictionsFormNew ? 
             <ConnectedPredictionsForm predictionType="new" userID="" /> 

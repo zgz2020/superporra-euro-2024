@@ -10,9 +10,7 @@ const ParticipantPredictionsPage = ({ user, predictionsFormExistent, showPredict
     <div>
         {user ? 
             <div>
-                <h2 className="jumbotron">
-                    <ConnectedHeader title={`Predicciones ${user.username}`}/>
-                </h2>
+                <ConnectedHeader title={`Predicciones ${user.username}`} />
 
                 {!predictionsFormExistent ?
                     <div>

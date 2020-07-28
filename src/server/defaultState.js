@@ -17,10 +17,9 @@ export const defaultState = {
         byId: {
             "U1": {
                 owner: " ",
-                winner: " ",
-                finalist: " ",
-                topScorer: " ",
-                leastConceded: " ",
+                winner: "???",
+                topScorer: "???",
+                leastConceded: "???",
                 leagueMatches: emptyPrediction.leagueMatches,
                 r16Matches: emptyPrediction.r16Matches,
                 quarterFinalMatches: emptyPrediction.quarterFinalMatches,
@@ -100,7 +99,6 @@ export const normalizeDefaultStateMongo = (defaultStateMongo) => {
                     [prediction.owner]: {
                         owner: prediction.owner,
                         winner: prediction.winner,
-                        finalist: prediction.finalist,
                         topScorer: prediction.topScorer,
                         leastConceded: prediction.leastConceded,
                         leagueMatches: prediction.leagueMatches,
