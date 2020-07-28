@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import * as mutations from '../store/mutations' 
 import { ConnectedEuroStage } from './EuroStage'
-import { ConnectedGeneralPrediction } from './generalPrediction'
+import { ConnectedGeneralPrediction } from './GeneralPrediction'
 
 
 const PredictionsForm = ( { 

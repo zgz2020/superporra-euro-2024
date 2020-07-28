@@ -55,7 +55,6 @@ export function* predictionCreationSaga() {
             prediction: {
                 owner: userID,
                 winner: prediction.winner,
-                finalist: prediction.finalist,
                 topScorer: prediction.topScorer,
                 leastConceded: prediction.leastConceded,
                 leagueMatches: prediction.leagueMatches,
@@ -90,7 +89,6 @@ export function* predictionUpdateSaga() {
             prediction: {
                 owner: userID,
                 winner: prediction.winner,
-                finalist: prediction.finalist,
                 topScorer: prediction.topScorer,
                 leastConceded: prediction.leastConceded,
                 leagueMatches: prediction.leagueMatches,
@@ -343,7 +341,7 @@ export function* getEuroWinnerSaga() {
 
 export function* getTopScorerSaga() {
     while (true) {
-        yield take([ 
+        const { predictionID } = yield take([ 
             mutations.SET_GOALS_FINAL,
             mutations.UPDATED_FINAL_TEAMS
         ])
@@ -355,13 +353,13 @@ export function* getTopScorerSaga() {
         // Gets Top Scorer team according to the prediction data
         const topScorerTeam = getTopScorer(userPrediction)
         // Updates prediction state with Top Scorer team
-        yield put(mutations.setTopScorerTeam(topScorerTeam))
+        yield put(mutations.setTopScorerTeam(predictionID, topScorerTeam))
     }
 }
 
 export function* getLeastConcededSaga() {
     while (true) {
-        yield take([ 
+        const { predictionID }  = yield take([ 
             mutations.SET_GOALS_FINAL,
             mutations.UPDATED_FINAL_TEAMS
         ])
@@ -373,6 +371,6 @@ export function* getLeastConcededSaga() {
         // Gets Top Scorer team according to the prediction data
         const leastConcededTeam = getLeastConceded(userPrediction)
         // Updates prediction state with Top Scorer team
-        yield put(mutations.setLeastConcededTeam(leastConcededTeam))
+        yield put(mutations.setLeastConcededTeam(predictionID, leastConcededTeam))
     }
 }

@@ -35,7 +35,9 @@ import {
     getFinalTeams, 
     getEuroWinner, 
     getTopScorer, 
-    getLeastConceded
+    getLeastConceded,
+    topScorerCountriesNamesList,
+    leastConcededCountriesNamesList
 } from './predictions'
 
 const lodashClonedeep = require("lodash.clonedeep")
@@ -171,6 +173,6 @@ export const generateRandomPredictions = () => {
     randomPrediction.topScorer = getTopScorer(randomPrediction)
     
     randomPrediction.leastConceded = getLeastConceded(randomPrediction)
-
+    
     return randomPrediction
 }

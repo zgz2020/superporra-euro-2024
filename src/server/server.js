@@ -46,14 +46,12 @@ export const addNewPrediction = async prediction => {
 }
 
 export const updatePredictionDOS = async prediction => {
-    let { owner, winner, finalist, topScorer, leastConceded, leagueMatches, r16Matches, quarterFinalMatches, semiFinalMatches, finalMatches } = prediction
+    let { owner, winner, topScorer, leastConceded, leagueMatches, r16Matches, quarterFinalMatches, semiFinalMatches, finalMatches } = prediction
 
     let db =await connectDB()
     let collection = db.collection('predictions')
 
     if ( winner ) await collection.updateOne( { owner }, { $set: { winner } })
-
-    if ( finalist ) await collection.updateOne( { owner }, { $set: { finalist } })
 
     if ( topScorer ) await collection.updateOne( { owner }, { $set: { topScorer } })
 
@@ -84,14 +82,12 @@ export const updatePredictionDOS = async prediction => {
 }
 
 export const updatePrediction = async prediction => {
-    let { owner, winner, finalist, topScorer, leastConceded, leagueMatches, r16Matches, quarterFinalMatches, semiFinalMatches, finalMatches } = prediction
+    let { owner, winner, topScorer, leastConceded, leagueMatches, r16Matches, quarterFinalMatches, semiFinalMatches, finalMatches } = prediction
 
     let db = await connectDB()
     let collection = db.collection('predictions')
 
     if ( winner ) await collection.updateOne( { owner }, { $set: { winner } })
-
-    if ( finalist ) await collection.updateOne( { owner }, { $set: { finalist } })
 
     if ( topScorer ) await collection.updateOne( { owner }, { $set: { topScorer } })
 

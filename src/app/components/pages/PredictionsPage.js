@@ -5,9 +5,8 @@ import { ConnectedHeader } from '../Header'
 
 const PredictionsPage = ({ predictions, users }) => (
     <div>
-        <h2 className="jumbotron">
-            <ConnectedHeader title="Predicciones"/>
-        </h2>
+        <ConnectedHeader title="Predicciones" />
+
         {Object.keys(predictions.byId).map(key => {
             if (key !== "U1") {
                 return (
@@ -17,7 +16,7 @@ const PredictionsPage = ({ predictions, users }) => (
                                 {"Participante: "}{users.byId[key].username}
                             </div>
                         </div>
-                        <ConnectedResults user={key}/>
+                        <ConnectedResults user={key} />
                         <br />
                     </div>
                 )

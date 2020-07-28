@@ -25,7 +25,9 @@ const ParticipantsList = ( { users, predictions } ) => (
                                     </Link>
                                 </td>
                                 <td>
-                                    {participantTotalPoints(predictions.byId[key], predictions.byId["U1"])}
+                                    <Link to={`/participants/score/${key}`}>
+                                        {participantTotalPoints(predictions.byId[key], predictions.byId["U1"])}
+                                    </ Link>
                                 </td>
                             </tr>
                         )

@@ -11,7 +11,7 @@ const EuroStage = (ownProps) => (
             {ownProps.stageName}
         </div>
 
-        <div className="card-body form-gorup pt-3">
+        <div className="card-body pt-3">
 
             {ownProps.matchType === "league" ?
 
@@ -25,9 +25,9 @@ const EuroStage = (ownProps) => (
 
                 :
                                 
-                <div key={ownProps.matchType}>
+                <div key={ownProps.matchType} className="pb-4">
                     {Object.keys(emptyPrediction[`${ownProps.matchType}Matches`]).map(match => (
-                        <div key={match} className="pt-2 d-flex flex-row">
+                        <div key={match} className="pt-2 pb-2 d-flex flex-row">
                             <ConnectedEuroMatch { ...ownProps } matchID={match} />
                         </div>
                     ))}

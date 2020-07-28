@@ -2,9 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 
 const Header = ( {title } ) => (
-    <div>
-        <h2 data-automation="page-header">{title}</ h2>
-    </div>
+    <h2 data-automation="page-header" className="jumbotron">{title} </h2>
 )
 
 const mapStateToProps = (state, ownProps) => {

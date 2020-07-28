@@ -9,6 +9,71 @@ export const leagueGroups = {
 
 export const groupsList = Object.keys(leagueGroups)
 
+// https://en.wikipedia.org/wiki/List_of_FIFA_country_codes
+export const countryShortNames = {
+    [leagueGroups["A"][0]]: "ITA", 
+    [leagueGroups["A"][1]]: "SUI", 
+    [leagueGroups["A"][2]]: "TUR", 
+    [leagueGroups["A"][3]]: "WAL", 
+    [leagueGroups["B"][0]]: "BEL", 
+    [leagueGroups["B"][1]]: "DEN", 
+    [leagueGroups["B"][2]]: "FIN", 
+    [leagueGroups["B"][3]]: "RUS", 
+    [leagueGroups["C"][0]]: "AUT", 
+    [leagueGroups["C"][1]]: "NED", 
+    [leagueGroups["C"][2]]: "UKR", 
+    [leagueGroups["C"][3]]: "POD", 
+    [leagueGroups["D"][0]]: "CRO", 
+    [leagueGroups["D"][1]]: "CZE", 
+    [leagueGroups["D"][2]]: "ENG", 
+    [leagueGroups["D"][3]]: "POC", 
+    [leagueGroups["E"][0]]: "POL", 
+    [leagueGroups["E"][1]]: "ESP", 
+    [leagueGroups["E"][2]]: "SWE", 
+    [leagueGroups["E"][3]]: "POB",
+    [leagueGroups["F"][0]]: "FRA", 
+    [leagueGroups["F"][1]]: "GER", 
+    [leagueGroups["F"][2]]:"POR", 
+    [leagueGroups["F"][3]]: "POA"
+}
+
+const leagueGroupFirstAndLastMatches = {
+    "A": {
+        firstMatch: 1,
+        lastMatch: 6
+    },
+    "B": {
+        firstMatch: 7,
+        lastMatch: 12
+    },
+    "C": {
+        firstMatch: 13,
+        lastMatch: 18
+    },
+    "D": {
+        firstMatch: 19,
+        lastMatch: 24
+    },
+    "E": {
+        firstMatch: 25,
+        lastMatch: 30
+    },
+    "F": {
+        firstMatch: 31,
+        lastMatch: 36
+    }
+}
+
+export const groupMatches = (group, predictions) => {
+    const groupMatchesList = {}
+
+    for(let i = leagueGroupFirstAndLastMatches[group].firstMatch; i < leagueGroupFirstAndLastMatches[group].lastMatch+1; i++){
+        groupMatchesList[i] = predictions.leagueMatches[i]
+    }
+    
+    return groupMatchesList
+}
+
 export const teamsList = () => {
     let teams = []
     Object.keys(leagueGroups).map(group => {
@@ -44,15 +109,9 @@ export const teamsOdds = {
     [leagueGroups["F"][3]]: 150
 }
 
-export const knockOutStages = ["r16Matches", "quarterFinalMatches", "semiFinalMatches", "finalMatches"]
-
-export const allMatchStages = ["leagueMatches", ...knockOutStages]
-
-
 export const emptyPrediction = {
     owner: " ",
     winner: "???",
-    finalist: " ",
     topScorer: "???",
     leastConceded: "???",
     leagueMatches: {
@@ -460,6 +519,17 @@ export const emptyPrediction = {
     }
 }
 
+export const allMatchStages = Object.keys(emptyPrediction).filter(stage => stage.includes('Match'))
+
+export const knockOutStages = allMatchStages.slice(1)
+
+export const matchStagesTitles = {
+    [allMatchStages[0]]: "Fase de grupos",
+    [allMatchStages[1]]: "Dieciseisavos de final",
+    [allMatchStages[2]]: "Cuartos de final",
+    [allMatchStages[3]]: "Semifinales",
+    [allMatchStages[4]]: "Final"
+}
 
 export const goalsDropDown = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
 
