@@ -8,6 +8,8 @@ export const Navigation = () => (
         <Link to="/participants" data-automation="nav-item">Participantes</Link> 
         {" | "}
         <Link to="/results" data-automation="nav-item">Resultados</Link> 
+        {" | "}
+        <Link to="/scoring-rules" data-automation="nav-item">Scoring Rules</Link> 
         {/* {" | "}
         <Link to="/login">Iniciar sesión</Link>  */}
     </div>
