@@ -1,6 +1,8 @@
 const automationSelector = name => `[data-automation="${name}"]`
 
 export const selectors = {
+    languagePicker: automationSelector("language-picker"),
+
     navItem: position => `${automationSelector("nav-item")}:nth(${position-1})`,
 
     pageHeader: automationSelector("page-header"),
@@ -40,6 +42,11 @@ export const selectors = {
 export const clickOnCTA = (cta) => cy.get(cta).click()
 
 
+// LANGUAGE PICKER
+export const selectLanguage = (language) =>
+    cy.get(selectors.languagePicker).select(language)
+
+
 // NAVIGATION
 export const checkNavigationItemLabel = (position, label) => 
     cy.get(selectors.navItem(position)).should('contain', label)
@@ -70,7 +77,7 @@ export const submitPredictionsNoUsername = (ctaLocation) => {
     cy.on('window:alert', stub)
 
     clickOnCTA(selectors.inputForm.submitButton(ctaLocation)).then(() => {
-        expect(stub).to.be.calledWith('Introduce un nombre de usuario')
+        expect(stub).to.be.calledWith("Fill in the 'Username' field")
     })
 }
 
@@ -110,6 +117,7 @@ export const checkFormIsEmpty = () => {
 export const fillInInputForm = () => {
     cy.get(selectors.inputForm.usernameInput).type('ZZ Test Participant')
     clickOnCTA(selectors.inputForm.randomPredictionsButton)
+    cy.wait(1000)
 }
 
 export const checkFormIsFilledIn = () => {

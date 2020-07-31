@@ -1,14 +1,23 @@
 import React from 'react'
+import { connect } from 'react-redux'
 import { ConnectedHeader } from '../Header'
 
-export const HomePage = () => (
+const HomePage = ({ translations }) => (
     <div>
-        <ConnectedHeader title="Superporra 2021" />
+        <ConnectedHeader title={translations.homepage.title} />
 
         <div className="card mx-auto" style={{width: "16rem"}}>
             <div className="card-header text-center">
-                EN CONSTRUCCIÓN
+                {translations.placeholders.underConstruction}
             </div>
         </div>
     </div>
 )
+
+const mapStateToProps = (state) => {
+    let { translations } = state
+
+    return { translations }
+}
+
+export const ConnectedHomePage = connect(mapStateToProps)(HomePage)

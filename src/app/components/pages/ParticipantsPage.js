@@ -6,9 +6,14 @@ import { ConnectedParticipantsList } from '../ParticipantsList'
 import { ConnectedPredictionsFormButton } from '../PredictionsFormButton'
 import { ConnectedPredictionsForm } from '../PredictionsForm'
 
-const ParticipantsPage = ({ predictionsFormNew, showPredictionsFormNew, predictionsSubmitted }) => (
+const ParticipantsPage = ({ 
+    predictionsFormNew,
+    showPredictionsFormNew,
+    predictionsSubmitted,
+    translations
+}) => (
     <div>
-        <ConnectedHeader title="Participantes de la superporra" />
+        <ConnectedHeader title={translations.participantsPage.title} />
 
         {predictionsFormNew ? 
             <ConnectedPredictionsForm predictionType="new" userID="" /> 
@@ -23,7 +28,7 @@ const ParticipantsPage = ({ predictionsFormNew, showPredictionsFormNew, predicti
         {predictionsSubmitted ? 
             <div className="card mx-auto">
                 <div className="card-body text-center" data-automation="prediction-submitted-success">
-                    Se han enviado tus predicciones!
+                    {translations.common.predictionsSubmitted}
                 </div>
             </div> 
             : null
@@ -32,10 +37,11 @@ const ParticipantsPage = ({ predictionsFormNew, showPredictionsFormNew, predicti
 )
 
 const mapStateToProps = (state) => {
-    const { predictionsFormNew, predictionsSubmitted } = state
+    const { predictionsFormNew, predictionsSubmitted, translations } = state
     return {
         predictionsFormNew,
-        predictionsSubmitted
+        predictionsSubmitted,
+        translations
     }
 }
 

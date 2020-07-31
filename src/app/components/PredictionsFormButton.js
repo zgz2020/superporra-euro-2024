@@ -1,7 +1,14 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-const PredictionsFormButton = ({ predictionType, predictionsFormNew, predictionsFormExistent, predictionsFormResults, clickHandler }) => {
+const PredictionsFormButton = ({ 
+    predictionType,
+    predictionsFormNew,
+    predictionsFormExistent,
+    predictionsFormResults,
+    clickHandler,
+    translations
+}) => {
     
     let formTrigger = (predictionType) => {
         switch (predictionType) {
@@ -17,7 +24,7 @@ const PredictionsFormButton = ({ predictionType, predictionsFormNew, predictions
         <div className="text-center py-3">
             {!formTrigger(predictionType) ?
                 <button onClick={clickHandler} className="btn btn-primary" data-automation="update-button">
-                    {predictionType === 'new' ? 'PARTICIPAR' : 'ACTUALIZAR'}
+                    {predictionType === 'new' ? translations.common.join : translations.common.update}
                 </button>
                 :
                 null
@@ -27,14 +34,15 @@ const PredictionsFormButton = ({ predictionType, predictionsFormNew, predictions
 }
 
 const mapStateToProps = (state, ownProps) => {
-    const { predictionsFormNew, predictionsFormExistent, predictionsFormResults } = state
+    const { predictionsFormNew, predictionsFormExistent, predictionsFormResults, translations } = state
     const { predictionType, clickHandler } = ownProps
     return {
         predictionsFormNew, 
         predictionsFormExistent, 
         predictionsFormResults,
         predictionType,
-        clickHandler
+        clickHandler,
+        translations
     }
 }
 

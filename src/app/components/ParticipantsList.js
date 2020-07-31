@@ -3,14 +3,14 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { participantTotalPoints } from '../../utils/leaderboard'
 
-const ParticipantsList = ( { users, predictions } ) => (
+const ParticipantsList = ( { users, predictions, translations } ) => (
     <div>
         <table className="table table-bordered" data-automation="leaderboard">
             <thead>
                 <tr>
                     <th>#</th>
-                    <th>Nombre</th>
-                    <th>Puntuación</th>
+                    <th>{translations.leaderboard.name}</th>
+                    <th>{translations.leaderboard.score}</th>
                 </tr>
             </thead>
             <tbody>
@@ -39,10 +39,11 @@ const ParticipantsList = ( { users, predictions } ) => (
 )
 
 const mapStateToProps = (state) => {
-    let { users, predictions } = state
+    let { users, predictions, translations } = state
     return {
         users,
-        predictions
+        predictions,
+        translations
     }
 }
 

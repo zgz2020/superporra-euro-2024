@@ -22,7 +22,9 @@ const PredictionsForm = ( {
     setGoalsSemiFinalHandler,
     setGoalsFinalHandler,
     submitFormHandler,
-    cancelPredictionForm } ) => { 
+    cancelPredictionForm,
+    translations
+} ) => { 
 
     const predictionDetails = (predictionType) => {
         if (predictionType === 'new') return { 
@@ -39,22 +41,22 @@ const PredictionsForm = ( {
 
     const formHeader = (predictionType) => {
         if (predictionType === 'new') return { 
-            title: "Participa en la superporra mandando tus prediccions",
-            description: "Haz click en el botón 'Mandar Predicciones' cuando hayas acabado."
+            title: translations.predictionsForm.title.new,
+            description: translations.predictionsForm.description.new
         }
         if (predictionType === 'existent') return {
-            title: "Actualiza tus predicciones",
-            description: "Haz click en el botón 'Mandar Actualizaciones' cuando hayas acabado."
+            title: translations.predictionsForm.title.existent,
+            description: translations.predictionsForm.description.existent
         }
         if (predictionType === 'results') return {
-            title: "Actualiza los resultados oficiales",
-            description: "Haz click en el botón 'Mandar Actualizaciones' cuando hayas acabado."
+            title: translations.predictionsForm.title.results,
+            description: translations.predictionsForm.description.results
         }
     }
 
     const submitButtonLabel = (predictionType) => {
-        if (predictionType === 'new') return "Mandar Predicciones"
-        if (predictionType === 'existent' || 'results') return "Mandar Actualizaciones"
+        if (predictionType === 'new') return translations.common.submitPredictions
+        if (predictionType === 'existent' || 'results') return translations.common.submitUpdates
     }
 
     const submitButton = (predictionType) => (
@@ -73,12 +75,12 @@ const PredictionsForm = ( {
                 <h5>{formHeader(predictionType).description}</h5>
             </div>
 
-            <form onSubmit={e => submitFormHandler(predictionType, predictionDetails(predictionType).userID, predictionDetails(predictionType).username, predictionDetails(predictionType).predictions, e)} className="card-body">
+            <form onSubmit={e => submitFormHandler(predictionType, predictionDetails(predictionType).userID, predictionDetails(predictionType).username, predictionDetails(predictionType).predictions, translations, e)} className="card-body">
 
                 {submitButton(predictionType)}
 
                 <div className="text-center pb-4">
-                    <button type="button" onClick={e => cancelPredictionForm(predictionType, e)} className="btn btn-danger" data-automation="cancel-button">Cancelar</button>
+                    <button type="button" onClick={e => cancelPredictionForm(predictionType, e)} className="btn btn-danger" data-automation="cancel-button">{translations.common.cancel}</button>
                 </div> 
 
                 <div> </div>
@@ -86,7 +88,7 @@ const PredictionsForm = ( {
                 {userID !== "U1" ?
                     <div>
                         <div className="form-group pt-3">
-                            {"Nombre de usuario: "}
+                            {`${translations.predictionsForm.username}: `}
                             <input type="text" onChange={e => setUsernameHandler(predictionType, predictionDetails(predictionType).userID, e)} value={predictionDetails(predictionType).username} className="form-control" data-automation="username-input"/>
                         </div>
                         
@@ -98,39 +100,39 @@ const PredictionsForm = ( {
                                     className="btn btn-info"
                                     data-automation="random-predictions-button"
                                 >
-                                    Generar predicciones aleatorias
+                                    {translations.common.generateRandomPredictions}
                                 </button>
                             </div>  
                             :
                             <div className="text-center py-3">
                                 <button className="btn btn-info" type="button" disabled>
                                     <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-                                    {'  Cargando...'}
+                                    {`  ${translations.placeholders.loading}...`}
                                 </button>
                             </div>
                         }       
                         
-                        <h4>Predicciones</h4>
+                    <h4>{translations.predictionsForm.predictions}</h4>
                     </div>
                     :
                     null
                 }
 
-                <ConnectedEuroStage predictionType={predictionType} mode="edit" userID={predictionDetails(predictionType).userID} stageName="Fase de grupos" matchType="league" changeHandler={setGoalsLeagueHandler} prediction={predictionDetails(predictionType).predictions}/>
+                <ConnectedEuroStage predictionType={predictionType} mode="edit" userID={predictionDetails(predictionType).userID} stageName={translations.stages.groupStage} matchType="league" changeHandler={setGoalsLeagueHandler} prediction={predictionDetails(predictionType).predictions}/>
 
-                <ConnectedEuroStage predictionType={predictionType} mode="edit" userID={predictionDetails(predictionType).userID} stageName="Dieciseisavos de final" matchType="r16" changeHandler={setGoalsR16Handler} prediction={predictionDetails(predictionType).predictions}/>
+                <ConnectedEuroStage predictionType={predictionType} mode="edit" userID={predictionDetails(predictionType).userID} stageName={translations.stages.r16} matchType="r16" changeHandler={setGoalsR16Handler} prediction={predictionDetails(predictionType).predictions}/>
 
-                <ConnectedEuroStage predictionType={predictionType} mode="edit" userID={predictionDetails(predictionType).userID} stageName="Cuartos de final" matchType="quarterFinal" changeHandler={setGoalsQuarterFinalHandler} prediction={predictionDetails(predictionType).predictions}/>
+                <ConnectedEuroStage predictionType={predictionType} mode="edit" userID={predictionDetails(predictionType).userID} stageName={translations.stages.quarterFinals} matchType="quarterFinal" changeHandler={setGoalsQuarterFinalHandler} prediction={predictionDetails(predictionType).predictions}/>
 
-                <ConnectedEuroStage predictionType={predictionType} mode="edit" userID={predictionDetails(predictionType).userID} stageName="Semifinales" matchType="semiFinal" changeHandler={setGoalsSemiFinalHandler} prediction={predictionDetails(predictionType).predictions}/>
+                <ConnectedEuroStage predictionType={predictionType} mode="edit" userID={predictionDetails(predictionType).userID} stageName={translations.stages.semiFinals} matchType="semiFinal" changeHandler={setGoalsSemiFinalHandler} prediction={predictionDetails(predictionType).predictions}/>
 
-                <ConnectedEuroStage predictionType={predictionType} mode="edit" userID={predictionDetails(predictionType).userID} stageName="Final" matchType="final" changeHandler={setGoalsFinalHandler} prediction={predictionDetails(predictionType).predictions}/>
+                <ConnectedEuroStage predictionType={predictionType} mode="edit" userID={predictionDetails(predictionType).userID} stageName={translations.stages.final} matchType="final" changeHandler={setGoalsFinalHandler} prediction={predictionDetails(predictionType).predictions}/>
 
-                <ConnectedGeneralPrediction title="Campeón" predictionName="winner" predictionType={predictionType} userID={predictionDetails(predictionType).userID} />
+                <ConnectedGeneralPrediction title={translations.predictionsForm.euroWinner} predictionName="winner" predictionType={predictionType} userID={predictionDetails(predictionType).userID} />
 
-                <ConnectedGeneralPrediction title="Equipo(s) máximo goleador" predictionName="topScorer" predictionType={predictionType} userID={predictionDetails(predictionType).userID} />
+                <ConnectedGeneralPrediction title={translations.predictionsForm.topScorer} predictionName="topScorer" predictionType={predictionType} userID={predictionDetails(predictionType).userID} />
 
-                <ConnectedGeneralPrediction title="Equipo(s) menos goleado" predictionName="leastConceded" predictionType={predictionType} userID={predictionDetails(predictionType).userID} />
+                <ConnectedGeneralPrediction title={translations.predictionsForm.leastConceded} predictionName="leastConceded" predictionType={predictionType} userID={predictionDetails(predictionType).userID} />
 
                 {submitButton(predictionType)}               
             </form>
@@ -139,8 +141,15 @@ const PredictionsForm = ( {
 }
 
 const mapStateToProps = (state, ownProps) => {
-    const { newPrediction, newPredictionUsername, generatingRandomPredictions, predictions, users } = state
+    const { newPrediction,
+        newPredictionUsername,
+        generatingRandomPredictions,
+        predictions,
+        users,
+        translations
+    } = state
     const { predictionType, userID } = ownProps
+
     return {
         newPrediction,
         newPredictionUsername,
@@ -148,7 +157,8 @@ const mapStateToProps = (state, ownProps) => {
         predictions, 
         users,
         predictionType,
-        userID
+        userID,
+        translations
     }
 }
 
@@ -199,10 +209,10 @@ const mapDispatchToProps = (dispatch) => {
         generateRandomPredictionsRequest(predictionType, userID, event){
                 dispatch(mutations.generateRandomPredictionsRequest(predictionType, userID))
         },
-        submitFormHandler(predictionType, userID, username, prediction, event) {
+        submitFormHandler(predictionType, userID, username, prediction, translations, event) {
             event.preventDefault()
             if(!username)
-                return alert("Introduce un nombre de usuario")
+                return alert(translations.predictionsForm.noUsernameAlert)
             else {
                 if (predictionType === 'new') {
                     dispatch(mutations.requestPredictionCreation(username, prediction))

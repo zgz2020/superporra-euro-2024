@@ -7,9 +7,9 @@ import { ConnectedHeader } from '../Header'
 import { ConnectedPredictionsForm } from '../PredictionsForm'
 import { ConnectedPredictionsFormButton } from '../PredictionsFormButton'
  
-const ResultsPage = ({ predictionsFormResults, showPredictionsFormResults }) => (
+const ResultsPage = ({ predictionsFormResults, showPredictionsFormResults, translations }) => (
     <div>
-        <ConnectedHeader title="Resultados oficiales" />
+        <ConnectedHeader title={translations.resultsPage.title}/>
 
         {!predictionsFormResults ?
             <div>
@@ -26,9 +26,10 @@ const ResultsPage = ({ predictionsFormResults, showPredictionsFormResults }) => 
 )
 
 const mapStateToProps = (state) => {
-    const { predictionsFormResults } = state
+    const { predictionsFormResults, translations } = state
     return {
-        predictionsFormResults
+        predictionsFormResults,
+        translations
     }
 }
 

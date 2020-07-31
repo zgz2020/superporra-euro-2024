@@ -1,16 +1,27 @@
 import React from 'react'
+import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
+import { ConnectedLanguagePicker } from './LanguagePicker'
 
-export const Navigation = () => (
+const Navigation = ({ translations }) => (
     <div className="navbar">
-        <Link to="/" data-automation="nav-item">Inicio</Link> 
+        <ConnectedLanguagePicker />
         {" | "}
-        <Link to="/participants" data-automation="nav-item">Participantes</Link> 
+        <Link to="/" data-automation="nav-item">{translations.navigation.home}</Link> 
         {" | "}
-        <Link to="/results" data-automation="nav-item">Resultados</Link> 
+        <Link to="/participants" data-automation="nav-item">{translations.navigation.participants}</Link> 
         {" | "}
-        <Link to="/scoring-rules" data-automation="nav-item">Scoring Rules</Link> 
+        <Link to="/results" data-automation="nav-item">{translations.navigation.results}</Link> 
+        {" | "}
+        <Link to="/scoring-rules" data-automation="nav-item">{translations.navigation.scoringRules}</Link> 
         {/* {" | "}
         <Link to="/login">Iniciar sesión</Link>  */}
     </div>
 )
+
+const mapStateToProps = (state) => {
+    let { translations } = state
+    return { translations }
+}
+
+export const ConnectedNavigation = connect(mapStateToProps)(Navigation)

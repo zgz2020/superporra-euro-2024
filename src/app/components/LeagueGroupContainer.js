@@ -7,7 +7,7 @@ import { ConnectedGroupTable } from './GroupTable'
 
 const LeagueGroupContainer = (ownprops) => (
     <div key={ownprops.leagueGroup} >
-        <strong>{"GRUPO "}{ownprops.leagueGroup}</strong>
+        <strong>{`${ownprops.translations.predictionsForm.group} ${ownprops.leagueGroup}`}</strong>
         {Object.keys(emptyPrediction.leagueMatches).map(leagueMatch => (
             <div key={leagueMatch}>
                 {emptyPrediction.leagueMatches[leagueMatch].group === ownprops.leagueGroup ? 
@@ -21,6 +21,12 @@ const LeagueGroupContainer = (ownprops) => (
     </div>
 )
 
-const mapStateToProps = (state, ownProps) => ownProps
+const mapStateToProps = (state, ownProps) => {
+    let { translations } = state
+    return {
+        ...ownProps,
+        translations
+    }
+}
 
 export const ConnectedLeagueGroupContainer = connect(mapStateToProps)(LeagueGroupContainer)

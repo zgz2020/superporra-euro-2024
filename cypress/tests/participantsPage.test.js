@@ -48,7 +48,7 @@ describe('Participants page', () => {
         clickOnCTA(selectors.updateButton)
 
         checkElementVisibility(selectors.leaderboard, 'not.be.visible') 
-        checkInputFormHeader('Participa en la superporra')
+        checkInputFormHeader('Join the Superporra')
         checkFormIsEmpty()
 
         submitPredictionsNoUsername('bottom')
@@ -81,12 +81,12 @@ describe('Participants page', () => {
         selectLastParticipant()
         cy.wait(500)
 
-        checkPageHeader('Predicciones ZZ Test Participant')
+        checkPageHeader('Predictions: ZZ Test Participant')
         checkElementVisibility(selectors.resultsContainer, 'be.visible')
 
         clickOnCTA(selectors.updateButton)
 
-        checkInputFormHeader('Actualiza tus predicciones')
+        checkInputFormHeader('Update your predictions')
         updateInputForm()
     })
 

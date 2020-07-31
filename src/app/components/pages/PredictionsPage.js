@@ -1,35 +1,37 @@
-import React from 'react'
-import { connect } from 'react-redux' 
-import { ConnectedResults } from '../Results'
-import { ConnectedHeader } from '../Header'
+// ++++ NOT USED at the moment ++++
 
-const PredictionsPage = ({ predictions, users }) => (
-    <div>
-        <ConnectedHeader title="Predicciones" />
+// import React from 'react'
+// import { connect } from 'react-redux' 
+// import { ConnectedResults } from '../Results'
+// import { ConnectedHeader } from '../Header'
 
-        {Object.keys(predictions.byId).map(key => {
-            if (key !== "U1") {
-                return (
-                    <div key={key}>
-                        <div className="card mx-auto" style={{width: "28rem"}}>
-                            <div className="card-header">
-                                {"Participante: "}{users.byId[key].username}
-                            </div>
-                        </div>
-                        <ConnectedResults user={key} />
-                        <br />
-                    </div>
-                )
-            }
-        })}
-    </div>
-)
+// const PredictionsPage = ({ predictions, users }) => (
+//     <div>
+//         <ConnectedHeader title="Predicciones" />
 
-const mapStateToProps = (state) => {
-    return { 
-        predictions: state.predictions,
-        users: state.users
-    }
-}
+//         {Object.keys(predictions.byId).map(key => {
+//             if (key !== "U1") {
+//                 return (
+//                     <div key={key}>
+//                         <div className="card mx-auto" style={{width: "28rem"}}>
+//                             <div className="card-header">
+//                                 {"Participante: "}{users.byId[key].username}
+//                             </div>
+//                         </div>
+//                         <ConnectedResults user={key} />
+//                         <br />
+//                     </div>
+//                 )
+//             }
+//         })}
+//     </div>
+// )
 
-export const ConnectedPredictionsPage = connect(mapStateToProps)(PredictionsPage)
+// const mapStateToProps = (state) => {
+//     return { 
+//         predictions: state.predictions,
+//         users: state.users
+//     }
+// }
+
+// export const ConnectedPredictionsPage = connect(mapStateToProps)(PredictionsPage)
