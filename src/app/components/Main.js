@@ -5,8 +5,8 @@ import { Router, Route } from 'react-router-dom'
 import { history } from '../store/history'
 import { getMongoData } from '../store/mutations'
 
-import { Navigation } from './Navigation'
-import { HomePage } from './pages/HomePage'
+import { ConnectedNavigation } from './Navigation'
+import { ConnectedHomePage } from './pages/HomePage'
 import { ConnectedResultsPage } from './pages/ResultsPage'
 import { ConnectedParticipantsPage } from './pages/ParticipantsPage'
 import { ConnectedParticipantPredictionsPage } from './pages/ParticipantPredictionsPage'
@@ -33,8 +33,8 @@ export const Main = () => (
     <Router history={history}>
         <Provider store={store}>
             <div>
-                <Navigation />
-                <Route exact path="/" render={() => (<HomePage />)} />
+                <ConnectedNavigation />
+                <Route exact path="/" render={() => (<ConnectedHomePage />)} />
                 <Route path="/results" render={() => (<ConnectedResultsPage />)} />
                 <Route exact path="/participants" render={() => (<ConnectedParticipantsPage />)} />
                 <Route exact path="/participants/:id" render={({ match }) => (<ConnectedParticipantPredictionsPage match={match} />)} />

@@ -91,6 +91,10 @@ export const HIDE_PREDICTIONS_SUBMITTED = 'HIDE_PREDICTIONS_SUBMITTED'
 export const GET_MONGO_DATA = 'GET_MONGO_DATA'
 export const SET_STATE = 'SET_STATE'
 
+export const SET_LANGUAGE = 'SET_LANGUAGE'
+export const SET_TRANSLATIONS = 'SET_TRANSLATIONS'
+
+
 // ----- NOT USED AT THE MOMENT ------
 
 export const REQUEST_AUTHENTICATE_USER = 'REQUEST_AUTHENTICATE_USER'
@@ -437,6 +441,17 @@ export const showPredictionsSubmitted = () => ({
 })
 export const hidePredictionsSubmitted = () => ({
     type: HIDE_PREDICTIONS_SUBMITTED
+})
+
+
+export const setLanguage = (language) => ({
+    type: SET_LANGUAGE,
+    language
+})
+
+export const setTranslations = (language) => ({
+    type: SET_TRANSLATIONS,
+    language
 })
 
 

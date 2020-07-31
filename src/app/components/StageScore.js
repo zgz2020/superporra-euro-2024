@@ -22,22 +22,22 @@ import {
 const tableMatches = (userPredictions, stage, group) => 
     stage === "leagueMatches" ? groupMatches(group, userPredictions) : userPredictions[stage]
 
-const matchesTableScore = (results, userPredictions, stage, group) => (
+const matchesTableScore = (translations, results, userPredictions, stage, group) => (
     <div key={stage === "leagueMatches" ? group : stage} className="pt-1">
         <table className="table table-bordered table-sm text-center">
             <thead>
                 <tr>
-                    <th>{stage === "leagueMatches" ? `Gr ${group}` : ""}</th>
-                    <th>GC</th>
-                    <th>GF</th>
-                    <th>{stage === "leagueMatches" ? "1X2" : "GB"}</th>
-                    <th>Total</th>
+                    <th>{stage === "leagueMatches" ? `${translations.participantScores.groupShort} ${group}` : ""}</th>
+                    <th>{translations.participantScores.homeGoalsShort}</th>
+                    <th>{translations.participantScores.awayGoalsShort}</th>
+                    <th>{stage === "leagueMatches" ? `${translations.participantScores.matchWinnerShort}` : `${translations.participantScores.goalsBonus}`}</th>
+                    <th>{translations.participantScores.total}</th>
                 </tr>
             </thead>
             <tbody>
                 {Object.keys(tableMatches(userPredictions, stage, group)).map((match, index) => (
                     <tr key={index}>
-                        <th>{`P${index+1}`}</th>
+                        <th>{`${translations.participantScores.matchShort}${index+1}`}</th>
                         <td>{getMatchTeamGoalsPoints(stage, userPredictions[stage][match], "home", results)}</td>
                         <td>{getMatchTeamGoalsPoints(stage, userPredictions[stage][match], "away", results)}</td>
                         <td>
@@ -59,7 +59,7 @@ const matchesTableScore = (results, userPredictions, stage, group) => (
                 {stage === "leagueMatches" || stage === "r16Matches" ?
                     <tr>
                         <th colSpan="4">
-                            { stage === "leagueMatches" ? `TOTAL Grupo ${group}` : "TOTAL" }
+                            { stage === "leagueMatches" ? `${translations.participantScores.groupTotal} ${group}` : `${translations.participantScores.total}`}
                         </th>
                         <th colSpan="2">
                             { stage === "leagueMatches" ?
@@ -78,15 +78,15 @@ const matchesTableScore = (results, userPredictions, stage, group) => (
     </div>
 )
 
-const stageQualifiedTeams = (results, userPredictions, stage) => (
+const stageQualifiedTeams = (translations, results, userPredictions, stage) => (
     <div>
         <strong>
-            {`Equipos clasificados: ${stageQualifiedTeamsPoints(userPredictions, stage, results)} puntos`}
+            {`${translations.participantScores.qualifiedTeams}: ${stageQualifiedTeamsPoints(userPredictions, stage, results)} ${translations.participantScores.points}`}
         </strong>
 
         <div>
             <small>
-                {stage === "r16Matches" ? 'Sin bonus: ' : null}
+                {stage === "r16Matches" ? `${translations.participantScores.withBonus}: ` : null}
                 {getStageQualifiedTeams(userPredictions, stage, results).length < 1 && stage !== "r16Matches" ? 
                     <div className="pb-3"></div>
                     :
@@ -98,7 +98,7 @@ const stageQualifiedTeams = (results, userPredictions, stage) => (
         {stage === "r16Matches" ?
             <div className="pb-5">
                 <small>
-                    {'Con bonus: '}
+                    {`${translations.participantScores.noBonus}: `}
                     {qualifiedTeamsShortNames(getR16BonusQualifiedTeams(userPredictions, results)).join(', ')}
                 </small>
             </div>
@@ -110,12 +110,12 @@ const stageQualifiedTeams = (results, userPredictions, stage) => (
 )
 
 
-const StageScore = ({ stage, userPredictions, results }) => (
+const StageScore = ({ stage, userPredictions, results, translations }) => (
     <div>
         <div className="card" data-automation="stage-score">
 
             <div className="card-header">
-                {matchStagesTitles[stage]}
+                {matchStagesTitles(translations)[stage]}
             </div>
 
             <div className="card-body">
@@ -123,7 +123,7 @@ const StageScore = ({ stage, userPredictions, results }) => (
                 {stage === "leagueMatches" ?
                     Object.keys(leagueGroups).map(group => (
                         <div key={group} className="pb-5">
-                            {matchesTableScore(results, userPredictions, stage, group)}
+                            {matchesTableScore(translations, results, userPredictions, stage, group)}
                             <div className="pb-5"></div>
                             <div className="pb-5"></div>
                             <div className="pb-5"></div>
@@ -134,8 +134,8 @@ const StageScore = ({ stage, userPredictions, results }) => (
                     ))
                     :
                     <div>
-                        {matchesTableScore(results, userPredictions, stage)}
-                        {stageQualifiedTeams(results, userPredictions, stage)}
+                        {matchesTableScore(translations, results, userPredictions, stage)}
+                        {stageQualifiedTeams(translations, results, userPredictions, stage)}
                     </div>
                 }
 
@@ -146,9 +146,11 @@ const StageScore = ({ stage, userPredictions, results }) => (
 )
 
 const mapStateToProps = (state, ownProps) => {
+    let { translations } = state
     let { stage, userPredictions, results } = ownProps
 
     return {
+        translations,
         stage,
         userPredictions,
         results

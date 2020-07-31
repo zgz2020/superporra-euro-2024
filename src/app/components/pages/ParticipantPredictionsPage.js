@@ -6,11 +6,16 @@ import { ConnectedHeader } from '../Header'
 import { ConnectedPredictionsFormButton } from '../PredictionsFormButton'
 import { ConnectedPredictionsForm } from '../PredictionsForm'
  
-const ParticipantPredictionsPage = ({ user, predictionsFormExistent, showPredictionsFormExistent }) => (
+const ParticipantPredictionsPage = ({
+    user,
+    predictionsFormExistent,
+    showPredictionsFormExistent,
+    translations
+}) => (
     <div>
         {user ? 
             <div>
-                <ConnectedHeader title={`Predicciones ${user.username}`} />
+                <ConnectedHeader title={`${translations.participantPredictionsPage.title}: ${user.username}`} />
 
                 {!predictionsFormExistent ?
                     <div>
@@ -25,18 +30,19 @@ const ParticipantPredictionsPage = ({ user, predictionsFormExistent, showPredict
                 }
             </div>
             :
-            <div>Cargando</div>
+            <div>{translations.placeholders.loading}</div>
         }
     </div>
 )
 
 const mapStateToProps = (state, ownProps) => {
-    const { predictionsFormExistent } = state
+    const { predictionsFormExistent, translations } = state
     let userID = ownProps.match.params.id
     let user = state.users.byId[userID]
     return { 
         user,
-        predictionsFormExistent
+        predictionsFormExistent,
+        translations
     }
 }
 

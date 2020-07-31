@@ -7,6 +7,9 @@ import * as mutations from './mutations'
 import { defaultState } from '../../server/defaultState'
 import { emptyPrediction } from '../../utils/config'
 
+import { englishTranslations } from '../../locate/en/translate'
+import { spanishTranslations } from '../../locate/es/translate'
+
 const sagaMiddleware = createSagaMiddleware()
  
 export const store = createStore(
@@ -22,6 +25,22 @@ export const store = createStore(
                     return { ...userSession, authenticated: action.authenticated }
             }
             return userSession
+        },
+
+        language(language = "english", action) {
+            switch (action.type) {
+                case mutations.SET_LANGUAGE:
+                    return action.language
+            }
+            return language
+        },
+
+        translations(translations = englishTranslations, action) {
+            switch (action.type) {
+                case mutations.SET_TRANSLATIONS:
+                    return action.language === "english" ? englishTranslations : spanishTranslations
+            }
+            return translations
         },
 
         predictionsFormNew(predictionsFormNew = false, action) {

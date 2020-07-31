@@ -3,16 +3,16 @@ import { connect } from 'react-redux'
 import { getLeagueGroupTable } from '../../utils/predictions'
 import { countryShortNames } from '../../utils/config'
 
-const groupTable = ( { group, prediction } ) => (
+const groupTable = ( { group, prediction, translations } ) => (
     <div>
         <table className="table table-bordered">
             <thead>
                 <tr>
-                    <th>EQUIPO</th>
-                    <th>PT</th>
-                    <th>PJ</th>
-                    <th>GF</th>
-                    <th>GC</th>
+                    <th>{translations.predictionsForm.team}</th>
+                    <th>{translations.predictionsForm.pointsShort}</th>
+                    <th>{translations.predictionsForm.matchesPlayedShort}</th>
+                    <th>{translations.predictionsForm.goalsScoredShort}</th>
+                    <th>{translations.predictionsForm.goalsConcededShort}</th>
                 </tr>
             </thead>
             <tbody>
@@ -31,10 +31,12 @@ const groupTable = ( { group, prediction } ) => (
 )
 
 const stateMapToProps = (state, ownProps) => {
-    const { group, prediction } = ownProps
+    let { translations } = state
+    let { group, prediction } = ownProps
     return {
         group,
-        prediction
+        prediction,
+        translations
     }
 }
 

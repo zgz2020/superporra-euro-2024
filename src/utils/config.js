@@ -523,12 +523,14 @@ export const allMatchStages = Object.keys(emptyPrediction).filter(stage => stage
 
 export const knockOutStages = allMatchStages.slice(1)
 
-export const matchStagesTitles = {
-    [allMatchStages[0]]: "Fase de grupos",
-    [allMatchStages[1]]: "Dieciseisavos de final",
-    [allMatchStages[2]]: "Cuartos de final",
-    [allMatchStages[3]]: "Semifinales",
-    [allMatchStages[4]]: "Final"
+export const matchStagesTitles = (translations) => {
+    return {
+        [allMatchStages[0]]: translations.stages.groupStage,
+        [allMatchStages[1]]: translations.stages.r16,
+        [allMatchStages[2]]: translations.stages.quarterFinals,
+        [allMatchStages[3]]: translations.stages.semiFinals,
+        [allMatchStages[4]]: translations.stages.final
+    }
 }
 
 export const goalsDropDown = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]

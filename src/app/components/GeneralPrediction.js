@@ -1,7 +1,14 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-const GeneralPrediction = ( { title, predictionName, predictionType, userPrediction, newPrediction } ) => {
+const GeneralPrediction = ({ 
+    title,
+    predictionName,
+    predictionType,
+    userPrediction,
+    newPrediction,
+    translations
+}) => {
 
     let prediction = predictionType === "new" ? newPrediction : userPrediction
 
@@ -22,7 +29,8 @@ const GeneralPrediction = ( { title, predictionName, predictionType, userPredict
                                 {prediction[predictionName][team].team}
                                 {" - "}
                                 {prediction[predictionName][team].goals}
-                                {prediction[predictionName][team].goals === 1 ? " goal" : " goals"}
+                                {prediction[predictionName][team].goals === 1 ? 
+                                    ` ${translations.predictionsForm.goal}` : ` ${translations.predictionsForm.goals}`}
                             </div>
                         ))}
                     </div>
@@ -33,7 +41,7 @@ const GeneralPrediction = ( { title, predictionName, predictionType, userPredict
 }
 
 const mapStateToProps = (state, ownProps) => {
-    const { newPrediction } = state
+    const { newPrediction, translations } = state
     const { title, predictionName, predictionType, userID } = ownProps
     const userPrediction = state.predictions.byId[userID]
     return {
@@ -41,7 +49,8 @@ const mapStateToProps = (state, ownProps) => {
         predictionName, // NOTE: 'predictionName' accepted values: "winner" / "topScorer" / "leastConceded"
         predictionType, 
         userPrediction,
-        newPrediction
+        newPrediction,
+        translations
     }
 }
 

@@ -4,39 +4,42 @@ import { ConnectedHeader } from '../Header'
 import { ConnectedResults } from '../Results'
 import { ConnectedParticipantScoreDetailed } from '../ParticipantScoreDetailed'
 
-const ParticipantScoreDetailedPage = ({ user }) => (
+const ParticipantScoreDetailedPage = ({ user, translations }) => (
     <div>
         {user ?
             <div>
-                <ConnectedHeader title={`Puntuaciones ${user.username}`} /> 
+                <ConnectedHeader title={`${translations.participantScoreDetailedPage.title}: ${user.username}`} /> 
 
                 <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gridGap: 2 }}>
                     <div>
-                        <h4>Predicciones</h4>
+                        <h4>{translations.predictionsForm.predictions}</h4>
                         <ConnectedResults predictionType="existent" userID={user.id} />
                     </div>
                     <div>
-                        <h4>Resultados oficiales</h4>
+                        <h4>{translations.resultsPage.title}</h4>
                         <ConnectedResults predictionType="results" userID="U1"  />
                     </div>
                     <div>
-                        <h4>{`Puntos ${user.username}`}</h4>
+                        <h4>{`${translations.participantScoreDetailedPage.title}: ${user.username}`}</h4>
                         <ConnectedParticipantScoreDetailed userID={user.id} />
                     </div>
                 </div>
 
             </div>
             :
-            <div>Cargando</div>
+            <div>{translations.placeholders.loading}</div>
         }
     </div>
 )
 
 const mapSatateToProps = (state, ownProps) => {
+    let { translations } = state 
     let userID = ownProps.match.params.id
     let user = state.users.byId[userID]
+
     return {
-        user
+        user,
+        translations
     }
 }
 
