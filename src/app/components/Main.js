@@ -11,7 +11,7 @@ import { ConnectedResultsPage } from './pages/ResultsPage'
 import { ConnectedParticipantsPage } from './pages/ParticipantsPage'
 import { ConnectedParticipantPredictionsPage } from './pages/ParticipantPredictionsPage'
 import { ConnectedParticipantScoreDetailedPage } from './pages/ParticipantScoreDetailedPage'
-import { ScoringRulesPage } from './pages/ScoringRulesPage'
+import { ConnectedScoringRulesPage } from './pages/ScoringRulesPage'
 
 // import { ConnectedLoginPage } from './pages/LoginPage'
 // import { Redirect } from 'react-router'  --> It would be used when adding AUTHENTICATION
@@ -39,7 +39,7 @@ export const Main = () => (
                 <Route exact path="/participants" render={() => (<ConnectedParticipantsPage />)} />
                 <Route exact path="/participants/:id" render={({ match }) => (<ConnectedParticipantPredictionsPage match={match} />)} />
                 <Route exact path="/participants/score/:id" render={({ match }) => (<ConnectedParticipantScoreDetailedPage match={match} />)} />
-                <Route path="/scoring-rules" render={() => (<ScoringRulesPage />)} />
+                <Route path="/scoring-rules" render={() => (<ConnectedScoringRulesPage />)} />
 
                 {/* <Route exact path="/login" render={() => (<ConnectedLoginPage />)} /> */}
                 {/* <Route exact path="/participants/:id" render={RouteGuard(ConnectedParticipantPredictionsPage)} />  
