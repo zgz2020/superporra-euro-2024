@@ -1,12 +1,22 @@
 import React from 'react'
+import { connect } from 'react-redux'
 import { ConnectedHeader } from '../Header'
 import { ConnectedScoringRuleCategory } from '../ScoringRuleCategory'
-import { teamRules, individualsRules } from '../../../utils/scoringRules'
 
-export const ScoringRulesPage = () => (
+const ScoringRulesPage = ({ translations }) => (
     <div>
-        <ConnectedHeader title="Scoring Rules" />
-        <ConnectedScoringRuleCategory ruleCategory={teamRules} />
-        <ConnectedScoringRuleCategory ruleCategory={individualsRules} />
+        <ConnectedHeader title={translations.scoringRulesPage.title} />
+        <ConnectedScoringRuleCategory ruleCategory="teamRules" />
+        <ConnectedScoringRuleCategory ruleCategory="individualsRules" />
     </div>
 )
+
+const mapStateToProps = (state) => {
+    let { translations } = state
+
+    return {
+        translations
+    }
+}
+
+export const ConnectedScoringRulesPage = connect(mapStateToProps)(ScoringRulesPage)
