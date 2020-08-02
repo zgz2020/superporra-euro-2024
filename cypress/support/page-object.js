@@ -4,6 +4,7 @@ export const selectors = {
     languagePicker: automationSelector("language-picker"),
 
     navItem: position => `${automationSelector("nav-item")}:nth(${position-1})`,
+    mobileNavToggleButton: automationSelector("mobile-nav-toggle-button"),
 
     pageHeader: automationSelector("page-header"),
 
@@ -51,7 +52,9 @@ export const selectLanguage = (language) =>
 export const checkNavigationItemLabel = (position, label) => 
     cy.get(selectors.navItem(position)).should('contain', label)
 
-export const checkNavigationItemLink = (position, slug) => {
+export const checkNavigationItemLink = (viewport, position, slug) => {
+    if (viewport === "mobile") clickOnCTA(selectors.mobileNavToggleButton)
+
     clickOnCTA(selectors.navItem(position))
     cy.url().should('eq', `${Cypress.config().baseUrl}${slug}`)
 }
