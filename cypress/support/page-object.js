@@ -56,6 +56,7 @@ export const checkNavigationItemLink = (viewport, position, slug) => {
     if (viewport === "mobile") clickOnCTA(selectors.mobileNavToggleButton)
 
     clickOnCTA(selectors.navItem(position))
+    cy.wait(500)
     cy.url().should('eq', `${Cypress.config().baseUrl}${slug}`)
 }
 
