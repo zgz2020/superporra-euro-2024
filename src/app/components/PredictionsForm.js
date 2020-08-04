@@ -68,14 +68,14 @@ const PredictionsForm = ( {
 
     return (
 
-        <div key="createPredictionsForm" className="card mx-auto" style={{width: "28rem"}} data-automation="predictions-form">
+        <div key="createPredictionsForm" className="card mx-auto"  data-automation="predictions-form" style={{width: "22rem"}}>
 
             <div className="card-header">
                 <h3 >{formHeader(predictionType).title}</h3>
                 <h5>{formHeader(predictionType).description}</h5>
             </div>
 
-            <form onSubmit={e => submitFormHandler(predictionType, predictionDetails(predictionType).userID, predictionDetails(predictionType).username, predictionDetails(predictionType).predictions, translations, e)} className="card-body">
+            <form onSubmit={e => submitFormHandler(predictionType, predictionDetails(predictionType).userID, predictionDetails(predictionType).username, predictionDetails(predictionType).predictions, translations, e)} >
 
                 {submitButton(predictionType)}
 
@@ -87,7 +87,7 @@ const PredictionsForm = ( {
                 
                 {userID !== "U1" ?
                     <div>
-                        <div className="form-group pt-3">
+                        <div className="form-group pt-3 px-2">
                             {`${translations.predictionsForm.username}: `}
                             <input type="text" onChange={e => setUsernameHandler(predictionType, predictionDetails(predictionType).userID, e)} value={predictionDetails(predictionType).username} className="form-control" data-automation="username-input"/>
                         </div>
@@ -112,7 +112,7 @@ const PredictionsForm = ( {
                             </div>
                         }       
                         
-                    <h4>{translations.predictionsForm.predictions}</h4>
+                    <h4 className="pt-2 pl-2">{translations.predictionsForm.predictions}</h4>
                     </div>
                     :
                     null
