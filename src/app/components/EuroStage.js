@@ -17,20 +17,23 @@ const EuroStage = (ownProps) => (
 
                 <div key={ownProps.matchType}>
                     {groupsList.map(leagueGroup => (
-                        <div key={leagueGroup}>
+                        <div key={leagueGroup} className="pt-2">
                             <ConnectedLeagueGroupContainer { ...ownProps} leagueGroup={leagueGroup} />
                         </div>
                     ))}
                 </div>
 
                 :
-                                
-                <div key={ownProps.matchType} className="pb-4">
-                    {Object.keys(emptyPrediction[`${ownProps.matchType}Matches`]).map(match => (
-                        <div key={match} className="pt-2 pb-2 d-flex flex-row">
-                            <ConnectedEuroMatch { ...ownProps } matchID={match} />
-                        </div>
-                    ))}
+                <div className="container">  
+                    <div className="row justify-content-center">              
+                    <div key={ownProps.matchType} className="pb-4">
+                        {Object.keys(emptyPrediction[`${ownProps.matchType}Matches`]).map(match => (
+                            <div key={match} className="pt-2 pb-2 d-flex flex-row">
+                                <ConnectedEuroMatch { ...ownProps } matchID={match} />
+                            </div>
+                        ))}
+                    </div>
+                    </div>
                 </div>
             }
 

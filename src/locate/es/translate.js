@@ -69,9 +69,12 @@ export const spanishTranslations = {
     },
     stages: {
         groupStage: "Fase de grupos",
-        r16: "Dieciseisavos",
+        r16: "Octavos",
+        r16Short: "OF",
         quarterFinals: "Cuartos de final",
+        quarterFinalsShort: "CF",
         semiFinals: "Semifinales",
+        semiFinalsShort: "SF",
         final: "Final"
     },
     common: {
@@ -137,8 +140,8 @@ export const spanishTranslations = {
                 points: 5
             },
             e: {
-                title: "Dieciseisavos - Equipos clasificados",
-                description: "Aquellos participantes que acierten los equipos que pasan a los dieciseisavos se llevarán puntos por cada equipo acertado.",
+                title: "Octavos - Equipos clasificados",
+                description: "Aquellos participantes que acierten los equipos que pasan a los octavos se llevarán puntos por cada equipo acertado.",
                 notes: {
                     1: "10 puntos por cada equipo acertado para el que también se acierte su posición final en la fase de grupos.",
                     2: "5 puntos por cada equipo acertado para el que NO se acierte su posición final en la fase de grupos."

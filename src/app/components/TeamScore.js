@@ -2,6 +2,8 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { goalsMenuOptions } from '../../utils/predictions'
 
+const editFontSize = (mode) => mode === "show" ? {fontSize: "1rem"} : {fontSize: "0.9rem"}
+
 const TeamScore = ( { predictionType, userID, mode, matchType, matchID, team, changeHandler, userPrediction, newPrediction } ) => {
 
     let teamScorePrediction = predictionType === "new" ? newPrediction : userPrediction 
@@ -9,7 +11,7 @@ const TeamScore = ( { predictionType, userID, mode, matchType, matchID, team, ch
     return (
         <div className="d-flex flex-row p-0">
             {team === "home" ? 
-                <div className="p-1" data-automation="score-team">
+                <div className="p-1" data-automation="score-team" style={ editFontSize(mode)}>
                     {teamScorePrediction[`${matchType}Matches`][matchID][`${team}Team`]}
                 </div>
                 :
@@ -22,7 +24,7 @@ const TeamScore = ( { predictionType, userID, mode, matchType, matchID, team, ch
                         {teamScorePrediction[`${matchType}Matches`][matchID][`${team}Goals`]}
                     </div>
                     :
-                    <select onChange={e => changeHandler(predictionType, userID, matchID, `${team}Goals`, e)} value={teamScorePrediction[`${matchType}Matches`][matchID][`${team}Goals`]} >
+                    <select onChange={e => changeHandler(predictionType, userID, matchID, `${team}Goals`, e)} value={teamScorePrediction[`${matchType}Matches`][matchID][`${team}Goals`]} style={ editFontSize(mode)} >
                         <option key="default" value=" ">{" "}</option>
                         {goalsMenuOptions()}
                     </select>
@@ -31,7 +33,7 @@ const TeamScore = ( { predictionType, userID, mode, matchType, matchID, team, ch
             </div>
 
             {team === "away" ? 
-                <div className="p-1" data-automation="score-team">
+                <div className="p-1" data-automation="score-team" style={ editFontSize(mode)}>
                     {teamScorePrediction[`${matchType}Matches`][matchID][`${team}Team`]}
                 </div>
                 : 

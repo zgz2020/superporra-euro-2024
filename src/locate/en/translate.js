@@ -70,8 +70,11 @@ export const englishTranslations = {
     stages: {
         groupStage: "Group Stage",
         r16: "Round of 16",
+        r16Short: "R16",
         quarterFinals: "Quarter-finals",
+        quarterFinalsShort: "QF",
         semiFinals: "Semi-finals",
+        semiFinalsShort: "SF",
         final: "Final"
     },
     common: {
