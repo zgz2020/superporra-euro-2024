@@ -54,6 +54,7 @@ export const englishTranslations = {
         goals: "goals"
     },
     participantScores: {
+        result: "Result",
         groupShort: "Gr",
         homeGoalsShort: "GH",
         awayGoalsShort: "GA",
@@ -65,13 +66,18 @@ export const englishTranslations = {
         qualifiedTeams: "Qualified Teams",
         points: "points",
         withBonus: "With bonus",
-        noBonus: "No bonus"
+        noBonus: "No bonus",
+        goalsScored: "Goals scored",
+        goalsConceded: "Goals conceded"
     },
     stages: {
         groupStage: "Group Stage",
         r16: "Round of 16",
+        r16Short: "R16",
         quarterFinals: "Quarter-finals",
+        quarterFinalsShort: "QF",
         semiFinals: "Semi-finals",
+        semiFinalsShort: "SF",
         final: "Final"
     },
     common: {

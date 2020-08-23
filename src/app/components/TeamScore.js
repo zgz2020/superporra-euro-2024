@@ -2,14 +2,16 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { goalsMenuOptions } from '../../utils/predictions'
 
-const TeamScore = ( { predictionType, userID, mode, matchType, matchID, team, changeHandler, userPrediction, newPrediction } ) => {
+const editFontSize = (mode) => mode === "show" ? {fontSize: "1rem"} : {fontSize: "0.9rem"}
 
-    let teamScorePrediction = predictionType === "new" ? newPrediction : userPrediction 
+const TeamScore = ( { predictionType, userID, mode, matchType, matchID, team, changeHandler, userPredictions, newPrediction } ) => {
+
+    let teamScorePrediction = predictionType === "new" ? newPrediction : userPredictions 
 
     return (
         <div className="d-flex flex-row p-0">
             {team === "home" ? 
-                <div className="p-1" data-automation="score-team">
+                <div className="p-1" data-automation="score-team" style={ editFontSize(mode)}>
                     {teamScorePrediction[`${matchType}Matches`][matchID][`${team}Team`]}
                 </div>
                 :
@@ -22,7 +24,7 @@ const TeamScore = ( { predictionType, userID, mode, matchType, matchID, team, ch
                         {teamScorePrediction[`${matchType}Matches`][matchID][`${team}Goals`]}
                     </div>
                     :
-                    <select onChange={e => changeHandler(predictionType, userID, matchID, `${team}Goals`, e)} value={teamScorePrediction[`${matchType}Matches`][matchID][`${team}Goals`]} >
+                    <select onChange={e => changeHandler(predictionType, userID, matchID, `${team}Goals`, e)} value={teamScorePrediction[`${matchType}Matches`][matchID][`${team}Goals`]} style={ editFontSize(mode)} >
                         <option key="default" value=" ">{" "}</option>
                         {goalsMenuOptions()}
                     </select>
@@ -31,7 +33,7 @@ const TeamScore = ( { predictionType, userID, mode, matchType, matchID, team, ch
             </div>
 
             {team === "away" ? 
-                <div className="p-1" data-automation="score-team">
+                <div className="p-1" data-automation="score-team" style={ editFontSize(mode)}>
                     {teamScorePrediction[`${matchType}Matches`][matchID][`${team}Team`]}
                 </div>
                 : 
@@ -43,7 +45,7 @@ const TeamScore = ( { predictionType, userID, mode, matchType, matchID, team, ch
 const mapStateToProps = (state, ownProps) => {
     const { newPrediction } = state
     const { predictionType, mode, userID, matchType, matchID, team, changeHandler } = ownProps
-    const userPrediction = state.predictions.byId[userID]
+    const userPredictions = state.predictions.byId[userID]
     return {
         predictionType,
         userID,
@@ -52,7 +54,7 @@ const mapStateToProps = (state, ownProps) => {
         matchID,
         team,
         changeHandler,
-        userPrediction,
+        userPredictions,
         newPrediction
     }
 }

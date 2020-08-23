@@ -12,10 +12,10 @@ const Navigation = ({ translations }) => (
         </button>
         <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div className="navbar-nav">        
-                <Link className="nav-item nav-link" to="/" data-automation="nav-item">{translations.navigation.home}</Link>
-                <Link className="nav-item nav-link" to="/participants" data-automation="nav-item">{translations.navigation.participants}</Link> 
-                <Link className="nav-item nav-link" to="/results" data-automation="nav-item">{translations.navigation.results}</Link> 
-                <Link className="nav-item nav-link" to="/scoring-rules" data-automation="nav-item">{translations.navigation.scoringRules}</Link> 
+                <Link className="nav-item nav-link mr-3" to="/" data-automation="nav-item">{translations.navigation.home}</Link>
+                <Link className="nav-item nav-link mr-3" to="/participants" data-automation="nav-item">{translations.navigation.participants}</Link> 
+                <Link className="nav-item nav-link mr-3" to="/results" data-automation="nav-item">{translations.navigation.results}</Link> 
+                <Link className="nav-item nav-link mr-3" to="/scoring-rules" data-automation="nav-item">{translations.navigation.scoringRules}</Link> 
                 {/* <Link className="nav-item nav-link" to="/login" data-automation="nav-item">Iniciar sesión</Link> */}
             </div>
         </div>

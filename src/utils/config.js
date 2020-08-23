@@ -467,29 +467,29 @@ export const emptyPrediction = {
             id: "1",
             homeGoals: " ",
             awayGoals: " ",
-            homeTeam: "Ganador R16-6",
-            awayTeam: "Ganador R16-5"
+            homeTeam: "R16-6",
+            awayTeam: "R16-5"
         },
         "2": {
             id: "2",
             homeGoals: " ",
             awayGoals: " ",
-            homeTeam: "Ganador R16-4",
-            awayTeam: "Ganador R16-2"
+            homeTeam: "R16-4",
+            awayTeam: "R16-2"
         },
         "3": {
             id: "3",
             homeGoals: " ",
             awayGoals: " ",
-            homeTeam: "Ganador R16-3",
-            awayTeam: "Ganador R16-1"
+            homeTeam: "R16-3",
+            awayTeam: "R16-1"
         },
         "4": {
             id: "4",
             homeGoals: " ",
             awayGoals: " ",
-            homeTeam: "Ganador R16-8",
-            awayTeam: "Ganador R16-7"
+            homeTeam: "R16-8",
+            awayTeam: "R16-7"
         }
     },
     semiFinalMatches: {
@@ -497,15 +497,15 @@ export const emptyPrediction = {
             id: "1",
             homeGoals: " ",
             awayGoals: " ",
-            homeTeam: "Ganador QF-2",
-            awayTeam: "Ganador QF-1"
+            homeTeam: "QF-2",
+            awayTeam: "QF-1"
         },
         "2": {
             id: "2",
             homeGoals: " ",
             awayGoals: " ",
-            homeTeam: "Ganador QF-4",
-            awayTeam: "Ganador QF-3"
+            homeTeam: "QF-4",
+            awayTeam: "QF-3"
         }
     },
     finalMatches: {
@@ -513,8 +513,8 @@ export const emptyPrediction = {
             id: "1",
             homeGoals: " ",
             awayGoals: " ",
-            homeTeam: "Ganador SF-1",
-            awayTeam: "Ganador SF-2"
+            homeTeam: "SF-1",
+            awayTeam: "SF-2"
         }
     }
 }

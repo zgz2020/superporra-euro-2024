@@ -30,7 +30,7 @@ export function* getMongoDataSaga() {
 
             yield put(mutations.setState(state))   
         } catch (e) {
-            console.log('NO VA? - ', e.message)
+            console.log('Not working? - ', e.message)
         }
     }
 }

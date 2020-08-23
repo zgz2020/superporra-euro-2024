@@ -4,7 +4,7 @@ import { ConnectedEuroStage } from './EuroStage'
 import { ConnectedGeneralPrediction } from './GeneralPrediction'
 
 const Results = (ownProps) => (
-    <div key="user" data-automation="results-container" className="card mx-auto" style={{width: "22rem"}}>
+    <div key="user" data-automation="results-container" className="card mx-auto">
         <ConnectedEuroStage { ...ownProps } mode="show" stageName={ownProps.translations.stages.groupStage} matchType="league" />
 
         <ConnectedEuroStage { ...ownProps } mode="show" stageName={ownProps.translations.stages.r16} matchType="r16" />

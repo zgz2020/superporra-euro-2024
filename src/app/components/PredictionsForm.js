@@ -68,7 +68,7 @@ const PredictionsForm = ( {
 
     return (
 
-        <div key="createPredictionsForm" className="card mx-auto"  data-automation="predictions-form" style={{width: "22rem"}}>
+        <div key="createPredictionsForm" className="card mx-auto"  data-automation="predictions-form">
 
             <div className="card-header">
                 <h3 >{formHeader(predictionType).title}</h3>
@@ -87,11 +87,11 @@ const PredictionsForm = ( {
                 
                 {userID !== "U1" ?
                     <div>
-                        <div className="form-group pt-3 px-2">
+                        <div className="form-group pt-3 px-2 col-md-6 offset-md-3">
                             {`${translations.predictionsForm.username}: `}
                             <input type="text" onChange={e => setUsernameHandler(predictionType, predictionDetails(predictionType).userID, e)} value={predictionDetails(predictionType).username} className="form-control" data-automation="username-input"/>
                         </div>
-                        
+
                         {!generatingRandomPredictions ?
                             <div className="text-center py-3">
                                 <button 

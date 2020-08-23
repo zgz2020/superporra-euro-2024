@@ -112,7 +112,7 @@ export const checkFormIsEmpty = () => {
     checkMatchStagesValues('have')
 
     // Final teams
-    cy.get(selectors.inputForm.finalStage).should('contain', 'Ganador')
+    cy.get(selectors.inputForm.finalStage).should('contain', 'SF-1')
 
     // General predictions (Euro Winner, Top Scorer...)
     checkGeneralPredictionsValue('contain')
