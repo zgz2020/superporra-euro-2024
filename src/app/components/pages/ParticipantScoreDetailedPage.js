@@ -1,44 +1,48 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { ConnectedHeader } from '../Header'
-import { ConnectedResults } from '../Results'
-import { ConnectedParticipantScoreDetailed } from '../ParticipantScoreDetailed'
+import { ConnectedStagePoints } from '../StagePoints'
+import { ConnectedGeneralPredictionScore } from '../GeneralPredictionScore'
 
-const ParticipantScoreDetailedPage = ({ user, translations }) => (
+const ParticipantScoreDetailedPage = (ownProps) => (
     <div>
-        {user ?
+        {ownProps.user ?
             <div>
-                <ConnectedHeader title={`${translations.participantScoreDetailedPage.title}: ${user.username}`} /> 
+                <ConnectedHeader title={`${ownProps.translations.participantScoreDetailedPage.title}: ${ownProps.user.username}`} /> 
 
-                <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gridGap: 2 }}>
-                    <div>
-                        <h4>{translations.predictionsForm.predictions}</h4>
-                        <ConnectedResults predictionType="existent" userID={user.id} />
-                    </div>
-                    <div>
-                        <h4>{translations.resultsPage.title}</h4>
-                        <ConnectedResults predictionType="results" userID="U1"  />
-                    </div>
-                    <div>
-                        <h4>{`${translations.participantScoreDetailedPage.title}: ${user.username}`}</h4>
-                        <ConnectedParticipantScoreDetailed userID={user.id} />
-                    </div>
-                </div>
+                <ConnectedStagePoints {...ownProps} stage="leagueMatches" matchType="league" />
 
+                <ConnectedStagePoints {...ownProps} stage="r16Matches" matchType="r16" />
+
+                <ConnectedStagePoints {...ownProps} stage="quarterFinalMatches" matchType="quarterFinal" />
+
+                <ConnectedStagePoints {...ownProps} stage="semiFinalMatches" matchType="semiFinal" />
+
+                <ConnectedStagePoints {...ownProps} stage="finalMatches" matchType="final" />
+
+                <ConnectedGeneralPredictionScore {...ownProps} title={ownProps.translations.predictionsForm.euroWinner} predictionName="winner" />
+                <ConnectedGeneralPredictionScore {...ownProps} title={ownProps.translations.predictionsForm.topScorer} predictionName="topScorer" />
+                <ConnectedGeneralPredictionScore {...ownProps} title={ownProps.translations.predictionsForm.leastConceded} predictionName="leastConceded" />
             </div>
             :
-            <div>{translations.placeholders.loading}</div>
+            <div>{ownProps.translations.placeholders.loading}</div>
         }
     </div>
 )
 
 const mapSatateToProps = (state, ownProps) => {
-    let { translations } = state 
+    let { translations, predictions } = state 
     let userID = ownProps.match.params.id
     let user = state.users.byId[userID]
+    let userPredictions = predictions.byId[userID]
+    let results = predictions.byId["U1"]
 
     return {
+        ...ownProps,
         user,
+        userID,
+        userPredictions,
+        results,
         translations
     }
 }

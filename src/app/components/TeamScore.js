@@ -4,9 +4,9 @@ import { goalsMenuOptions } from '../../utils/predictions'
 
 const editFontSize = (mode) => mode === "show" ? {fontSize: "1rem"} : {fontSize: "0.9rem"}
 
-const TeamScore = ( { predictionType, userID, mode, matchType, matchID, team, changeHandler, userPrediction, newPrediction } ) => {
+const TeamScore = ( { predictionType, userID, mode, matchType, matchID, team, changeHandler, userPredictions, newPrediction } ) => {
 
-    let teamScorePrediction = predictionType === "new" ? newPrediction : userPrediction 
+    let teamScorePrediction = predictionType === "new" ? newPrediction : userPredictions 
 
     return (
         <div className="d-flex flex-row p-0">
@@ -45,7 +45,7 @@ const TeamScore = ( { predictionType, userID, mode, matchType, matchID, team, ch
 const mapStateToProps = (state, ownProps) => {
     const { newPrediction } = state
     const { predictionType, mode, userID, matchType, matchID, team, changeHandler } = ownProps
-    const userPrediction = state.predictions.byId[userID]
+    const userPredictions = state.predictions.byId[userID]
     return {
         predictionType,
         userID,
@@ -54,7 +54,7 @@ const mapStateToProps = (state, ownProps) => {
         matchID,
         team,
         changeHandler,
-        userPrediction,
+        userPredictions,
         newPrediction
     }
 }

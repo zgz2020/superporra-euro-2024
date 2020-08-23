@@ -10,7 +10,7 @@ import { connectDB } from './connect-db'
 //         for (let collectionName in defaultState) {
 //             let collection = db.collection(collectionName);
 //             await collection.insertMany(defaultState[collectionName]);
-//             console.log("INICIA DB: ", collectionName)
+//             console.log("Initiate DB: ", collectionName)
 //         }
 //     }
 // })();

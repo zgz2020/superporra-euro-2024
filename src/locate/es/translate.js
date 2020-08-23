@@ -54,6 +54,7 @@ export const spanishTranslations = {
         goals: "goles"
     },
     participantScores: {
+        result: "Res",
         groupShort: "Gr",
         homeGoalsShort: "GA",
         awayGoalsShort: "GV",
@@ -65,7 +66,9 @@ export const spanishTranslations = {
         qualifiedTeams: "Equipos clasificados",
         points: "puntos",
         withBonus: "Con bonus",
-        noBonus: "Sin bonus"
+        noBonus: "Sin bonus",
+        goalsScored: "Goles marcados",
+        goalsConceded: "Goles encajados"
     },
     stages: {
         groupStage: "Fase de grupos",
