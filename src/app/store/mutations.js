@@ -103,6 +103,23 @@ export const AUTHENTICATING = 'AUTHENTICATING'
 export const AUTHENTICATED = 'AUTHENTICATED'
 export const NOT_AUTHENTICATED = 'NOT_AUTHENTICATED'
 
+
+// ------- LOGIN - https://auth0.com/blog/beyond-create-react-app-react-router-redux-saga-and-more/
+export const USER_PROFILE_LOADED = 'USER_PROFILE_LOADED'
+export const HANDLE_AUTHENTICATION_CALLBACK = 'HANDLE_AUTHENTICATION_CALLBACK'
+
+// export function handleAuthenticationCallback() {
+//   return {
+//     type: HANDLE_AUTHENTICATION_CALLBACK
+//   };
+// }
+
+export const handleAuthenticationCallback = () => ({
+    type: HANDLE_AUTHENTICATION_CALLBACK
+})
+
+// ------------- LOGIN END --------------------------------
+
 // ------------------------------------
 
 

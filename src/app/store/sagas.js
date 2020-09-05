@@ -19,6 +19,39 @@ import * as mutations from './mutations'
 const url = process.env.NODE_ENV === 'production' ? '' : 'http://localhost:7777'
 
 
+
+
+// -----------------------------------------------------
+// ---- LOGIN - https://auth0.com/blog/beyond-create-react-app-react-router-redux-saga-and-more/
+
+import { takeLatest } from 'redux-saga/effects';
+// import { HANDLE_AUTHENTICATION_CALLBACK, USER_PROFILE_LOADED } from './mutations';
+import { handleAuthentication } from '../../Auth/Auth';
+
+
+export function* parseHash() {
+    const user = yield call(handleAuthentication)
+    yield put({ type: mutations.USER_PROFILE_LOADED, user })
+}   
+
+export function* handleAuthenticationCallback() {
+    yield takeLatest(mutations.HANDLE_AUTHENTICATION_CALLBACK, parseHash);
+}
+
+// replace the current rootSaga generator  !!!!!!! - I don't have this thing
+// export default function* rootSaga() {
+//     yield all([loadToDoList(), handleAuthenticationCallback()])
+// }
+  
+
+
+// ---- LOGIN END --------------------------------------
+// -----------------------------------------------------
+
+
+
+
+
 // ------ GET DATA FROM MONGO DATABASE -----
 
 export function* getMongoDataSaga() {

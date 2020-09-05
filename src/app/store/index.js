@@ -10,6 +10,8 @@ import { emptyPrediction } from '../../utils/config'
 import { englishTranslations } from '../../locate/en/translate'
 import { spanishTranslations } from '../../locate/es/translate'
 
+
+
 const sagaMiddleware = createSagaMiddleware()
  
 export const store = createStore(

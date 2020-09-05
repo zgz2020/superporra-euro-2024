@@ -13,6 +13,8 @@ import { ConnectedParticipantPredictionsPage } from './pages/ParticipantPredicti
 import { ConnectedParticipantScoreDetailedPage } from './pages/ParticipantScoreDetailedPage'
 import { ConnectedScoringRulesPage } from './pages/ScoringRulesPage'
 
+import Callback from './pages/CallbackPage'
+
 // import { ConnectedLoginPage } from './pages/LoginPage'
 // import { Redirect } from 'react-router'  --> It would be used when adding AUTHENTICATION
 
@@ -44,6 +46,9 @@ export const Main = () => (
                 {/* <Route exact path="/login" render={() => (<ConnectedLoginPage />)} /> */}
                 {/* <Route exact path="/participants/:id" render={RouteGuard(ConnectedParticipantPredictionsPage)} />  
                         THIS LINE ABOVE would be to add authentication to participant page */}
+                
+                <Route patch="/callback" render={props => <Callback auth={this.auth} {...props} />}/>
+
             </div>
         </Provider>
     </Router>
