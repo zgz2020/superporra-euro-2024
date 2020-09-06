@@ -15,6 +15,7 @@ const HomePage = ({ translations }) => (
 )
 
 const mapStateToProps = (state) => {
+    console.log('Homepage - STATE: ', state)
     let { translations } = state
 
     return { translations }

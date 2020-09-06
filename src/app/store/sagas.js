@@ -24,7 +24,7 @@ const url = process.env.NODE_ENV === 'production' ? '' : 'http://localhost:7777'
 // -----------------------------------------------------
 // ---- LOGIN - https://auth0.com/blog/beyond-create-react-app-react-router-redux-saga-and-more/
 
-import { takeLatest } from 'redux-saga/effects';
+import { call, takeLatest } from 'redux-saga/effects';
 // import { HANDLE_AUTHENTICATION_CALLBACK, USER_PROFILE_LOADED } from './mutations';
 import { handleAuthentication } from '../../Auth/Auth';
 

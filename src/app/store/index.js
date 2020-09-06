@@ -17,16 +17,24 @@ const sagaMiddleware = createSagaMiddleware()
 export const store = createStore(
     combineReducers({
 
-        session( userSession = defaultState.session || {}, action ){
+        // session( userSession = defaultState.session || {}, action ){
+        //     switch (action.type) {
+        //         case mutations.SET_STATE:
+        //             return action.state.session
+        //         case mutations.REQUEST_AUTHENTICATE_USER:
+        //             return { ...userSession, authenticated: mutations.AUTHENTICATING }
+        //         case mutations.PROCESSING_AUTHENTICATE_USER:
+        //             return { ...userSession, authenticated: action.authenticated }
+        //     }
+        //     return userSession
+        // },
+
+        loggedUser(loggedUser = {}, action) {
             switch (action.type) {
-                case mutations.SET_STATE:
-                    return action.state.session
-                case mutations.REQUEST_AUTHENTICATE_USER:
-                    return { ...userSession, authenticated: mutations.AUTHENTICATING }
-                case mutations.PROCESSING_AUTHENTICATE_USER:
-                    return { ...userSession, authenticated: action.authenticated }
+                case mutations.USER_PROFILE_LOADED:
+                    return action.user 
             }
-            return userSession
+            return loggedUser
         },
 
         language(language = "english", action) {
