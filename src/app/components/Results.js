@@ -24,12 +24,22 @@ const Results = (ownProps) => (
 )
 
 const mapStateToProps = (state, ownProps) => {
-    let { translations } = state
-    let { userID } = ownProps
-    let prediction = state.predictions.byId[userID]
+    let { translations, newPrediction, results } = state
+    let { userID, predictionType } = ownProps
+
+    let predictionsOrResults = {}
+    switch(predictionType) {
+        case "new":   
+            predictionsOrResults = newPrediction
+        case "existent":   
+            predictionsOrResults = state.predictions.byId[userID]
+        case "results":   
+            predictionsOrResults = results
+    }
+
     return {
         ...ownProps,
-        prediction,
+        predictionsOrResults,
         translations
     }
 }

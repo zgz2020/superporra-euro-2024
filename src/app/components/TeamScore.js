@@ -4,15 +4,37 @@ import { goalsMenuOptions } from '../../utils/predictions'
 
 const editFontSize = (mode) => mode === "show" ? {fontSize: "1rem"} : {fontSize: "0.9rem"}
 
-const TeamScore = ( { predictionType, userID, mode, matchType, matchID, team, changeHandler, userPredictions, newPrediction } ) => {
+const TeamScore = ( { predictionsOrResults, predictionType, userID, mode, matchType, matchID, team, changeHandler } ) => {
 
-    let teamScorePrediction = predictionType === "new" ? newPrediction : userPredictions 
+   // let teamScoreData = predictionType === "new" ? newPrediction : userPredictions 
+
+    // let teamScoreData = {}
+    // switch(predictionType) {
+    //     case "new":   
+    //         teamScoreData = newPrediction
+    //     case "existent":   
+    //         teamScoreData = userPredictions
+    //     case "results":   
+    //         teamScoreData = results
+    // }
+    // let teamScoreData = predictionType => {
+    //     switch(predictionType) {
+    //         case "new":
+    //             return newPrediction
+    //         case "existent":
+    //             return userPredictions
+    //         case "results":
+    //             return results
+    //     }
+    // }
+        
 
     return (
         <div className="d-flex flex-row p-0">
             {team === "home" ? 
                 <div className="p-1" data-automation="score-team" style={ editFontSize(mode)}>
-                    {teamScorePrediction[`${matchType}Matches`][matchID][`${team}Team`]}
+                    {/* {teamScoreData[`${matchType}Matches`][matchID][`${team}Team`]} */}
+                    {predictionsOrResults[`${matchType}Matches`][matchID][`${team}Team`]}
                 </div>
                 :
                 null
@@ -21,10 +43,12 @@ const TeamScore = ( { predictionType, userID, mode, matchType, matchID, team, ch
             <div className="p-1" data-automation="score-goals">
                 {mode === "show" ?
                     <div>
-                        {teamScorePrediction[`${matchType}Matches`][matchID][`${team}Goals`]}
+                        {/* {teamScoreData[`${matchType}Matches`][matchID][`${team}Goals`]} */}
+                        {predictionsOrResults[`${matchType}Matches`][matchID][`${team}Goals`]}
                     </div>
                     :
-                    <select onChange={e => changeHandler(predictionType, userID, matchID, `${team}Goals`, e)} value={teamScorePrediction[`${matchType}Matches`][matchID][`${team}Goals`]} style={ editFontSize(mode)} >
+                    // <select onChange={e => changeHandler(predictionType, userID, matchID, `${team}Goals`, e)} value={teamScoreData[`${matchType}Matches`][matchID][`${team}Goals`]} style={ editFontSize(mode)} >
+                    <select onChange={e => changeHandler(predictionType, userID, matchID, `${team}Goals`, e)} value={predictionsOrResults[`${matchType}Matches`][matchID][`${team}Goals`]} style={ editFontSize(mode)} >
                         <option key="default" value=" ">{" "}</option>
                         {goalsMenuOptions()}
                     </select>
@@ -34,7 +58,8 @@ const TeamScore = ( { predictionType, userID, mode, matchType, matchID, team, ch
 
             {team === "away" ? 
                 <div className="p-1" data-automation="score-team" style={ editFontSize(mode)}>
-                    {teamScorePrediction[`${matchType}Matches`][matchID][`${team}Team`]}
+                    {/* {teamScoreData[`${matchType}Matches`][matchID][`${team}Team`]} */}
+                    {predictionsOrResults[`${matchType}Matches`][matchID][`${team}Team`]}
                 </div>
                 : 
                 null
@@ -43,9 +68,10 @@ const TeamScore = ( { predictionType, userID, mode, matchType, matchID, team, ch
 )}
 
 const mapStateToProps = (state, ownProps) => {
-    const { newPrediction } = state
-    const { predictionType, mode, userID, matchType, matchID, team, changeHandler } = ownProps
-    const userPredictions = state.predictions.byId[userID]
+    // const { newPrediction, results } = state
+    const { predictionType, mode, userID, matchType, matchID, team, changeHandler, predictionsOrResults } = ownProps
+    //const userPredictions = state.predictions.byId[userID]
+
     return {
         predictionType,
         userID,
@@ -54,8 +80,10 @@ const mapStateToProps = (state, ownProps) => {
         matchID,
         team,
         changeHandler,
-        userPredictions,
-        newPrediction
+        // userPredictions,
+        // newPrediction,
+        // results,
+        predictionsOrResults
     }
 }
 

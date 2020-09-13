@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { participantTotalPoints } from '../../utils/leaderboard'
 
-const ParticipantsList = ( { users, predictions, translations } ) => (
+const ParticipantsList = ( { predictions, translations } ) => (
     <div className="container">
         <div className="row justify-content-center">
             <table className="table table-bordered col-sm-7 col-md-7 col-lg-5 col-xl-4" data-automation="leaderboard">
@@ -15,14 +15,14 @@ const ParticipantsList = ( { users, predictions, translations } ) => (
                     </tr>
                 </thead>
                 <tbody>
-                    {Object.keys(users.byId).map((key, index) => {
+                    {Object.keys(predictions.byId).map((key, index) => {
                         if (key !== "U1") {
                             return (
                                 <tr key={index} data-automation="leaderboard-row">
                                     <td>{index}</td>
                                     <td>
                                         <Link to={`/participants/${key}`}>
-                                            {users.byId[key].username}
+                                            {predictions.byId[key].username}
                                         </Link>
                                     </td>
                                     <td>
@@ -41,9 +41,8 @@ const ParticipantsList = ( { users, predictions, translations } ) => (
 )
 
 const mapStateToProps = (state) => {
-    let { users, predictions, translations } = state
+    let { predictions, translations } = state
     return {
-        users,
         predictions,
         translations
     }

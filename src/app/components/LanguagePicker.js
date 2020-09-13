@@ -2,15 +2,19 @@ import React from 'react'
 import * as mutations from '../store/mutations'
 import { connect } from 'react-redux'
 
-const LanguagePicker = ({ languageChangeHandler }) => (
-    <select onChange={languageChangeHandler} data-automation="language-picker">
+const LanguagePicker = ({ language, languageChangeHandler }) => (
+    <select onChange={languageChangeHandler} data-automation="language-picker" value={language}>
         <option key="english" value="english">English</option>
         <option key="spanish" value="spanish">Español</option>
     </select>
 )
 
-const mapStateToProps = (state, props) => {
-    return state
+const mapStateToProps = (state) => {
+    let { language } = state
+
+    return {
+        language
+    }
 }
 
 const mapDispatchToProps = (dispatch) => {

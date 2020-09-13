@@ -1,8 +1,9 @@
 // ----- CREATE PREDICTION -----
 
+export const REQUEST_USER_CREATION = 'REQUEST_USER_CREATION'
+export const CREATE_USER = 'CREATE_USER'
 export const REQUEST_PREDICTION_CREATION = 'REQUEST_PREDICTION_CREATION'
 export const CREATE_PREDICTION = 'CREATE_PREDICTION'
-export const CREATE_USER = 'CREATE_USER'
 export const RESET_PREDICTION_CREATION_FORM = 'RESET_PREDICTION_CREATION_FORM'
 
 
@@ -90,32 +91,32 @@ export const HIDE_PREDICTIONS_SUBMITTED = 'HIDE_PREDICTIONS_SUBMITTED'
 
 export const GET_MONGO_DATA = 'GET_MONGO_DATA'
 export const SET_STATE = 'SET_STATE'
+export const MONGO_DATA_LOADED = 'MONGO_DATA_LOADED'
 
+export const GET_LOCAL_STORAGE_LANGUAGE = 'GET_LOCAL_STORAGE_LANGUAGE'
 export const SET_LANGUAGE = 'SET_LANGUAGE'
 export const SET_TRANSLATIONS = 'SET_TRANSLATIONS'
-
-
-// ----- NOT USED AT THE MOMENT ------
-
-export const REQUEST_AUTHENTICATE_USER = 'REQUEST_AUTHENTICATE_USER'
-export const PROCESSING_AUTHENTICATE_USER = 'PROCESSING_AUTHENTICATE_USER'
-export const AUTHENTICATING = 'AUTHENTICATING'
-export const AUTHENTICATED = 'AUTHENTICATED'
-export const NOT_AUTHENTICATED = 'NOT_AUTHENTICATED'
 
 
 // ------- LOGIN - https://auth0.com/blog/beyond-create-react-app-react-router-redux-saga-and-more/
 export const USER_PROFILE_LOADED = 'USER_PROFILE_LOADED'
 export const HANDLE_AUTHENTICATION_CALLBACK = 'HANDLE_AUTHENTICATION_CALLBACK'
+export const GET_LOGGED_USER = 'GET_LOGGED_USER'
+
+export const userProfileLoaded = ( idToken, expiresAt, userID ) => ({
+    type: USER_PROFILE_LOADED,
+    idToken,
+    expiresAt,
+    userID
+})
 
 export const handleAuthenticationCallback = () => ({
     type: HANDLE_AUTHENTICATION_CALLBACK
 })
 
-// ------------- LOGIN END --------------------------------
-
-// ------------------------------------
-
+export const getLoggedUser = () => ({
+    type: GET_LOGGED_USER
+})
 
 
 // ----- GET DATA FROM MONGO DATABASE -----
@@ -130,26 +131,39 @@ export const setState = ( state = {} ) => ({
     state
 })
 
+export const mongoDataLoaded = () => ({
+    type: MONGO_DATA_LOADED
+})
+
 
 
 // ----- CREATE PREDICTION -----
 
-export const requestPredictionCreation = (username, prediction) => ({
+export const requestUserCreation = (emailHash, email) => ({
+    type: REQUEST_USER_CREATION,
+    emailHash,
+    email
+})
+
+export const createUser = (userID, email) => ({
+    type: CREATE_USER,
+    userID,
+    email
+})
+
+export const requestPredictionCreation = (userID, username, prediction) => ({
     type: REQUEST_PREDICTION_CREATION,
+    userID,
     username,
     prediction
 })
 
-export const createPrediction = (predictionID, prediction) => ({
+export const createPrediction = (predictionID, userID, username, prediction) => ({
     type: CREATE_PREDICTION,
     predictionID,
-    prediction
-})
-
-export const createUser = (userID, username) => ({
-    type: CREATE_USER,
     userID,
-    username
+    username,
+    prediction
 })
 
 export const resetPredictionCreationForm = () => ({
@@ -158,9 +172,9 @@ export const resetPredictionCreationForm = () => ({
 
 // ----- UPDATE PREDICTION -----
 
-export const requestPredictionUpdate = (userID, username, prediction) => ({
+export const requestPredictionUpdate = (predictionID, username, prediction) => ({
     type: REQUEST_PREDICTION_UPDATE,
-    userID,
+    predictionID,
     username,
     prediction
 })
@@ -301,10 +315,10 @@ export const setPredictionFieldNewPrediction = (field, prediction) => ({
 
 // ----- UPDATE PREDICTION -----
 
-export const setUsername = (username, userID) => ({
+export const setUsername = (username, predictionID) => ({
     type: SET_USERNAME,
     username,
-    userID
+    predictionID
 })
 
 
@@ -455,6 +469,10 @@ export const hidePredictionsSubmitted = () => ({
 })
 
 
+export const getLocalStorageLanguage = () => ({
+    type: GET_LOCAL_STORAGE_LANGUAGE
+})
+
 export const setLanguage = (language) => ({
     type: SET_LANGUAGE,
     language
@@ -464,18 +482,3 @@ export const setTranslations = (language) => ({
     type: SET_TRANSLATIONS,
     language
 })
-
-
-// --- code below this line CURRENTLY NOT IN USE ---
-
-// export const requestAuthenticateUser = (username, password) => ({
-//     type: REQUEST_AUTHENTICATE_USER,
-//     username,
-//     password
-// })
-
-// export const processAuthenticateUser = (status = AUTHENTICATING, session = null) => ({
-//     type: PROCESSING_AUTHENTICATE_USER,
-//     session,
-//     authenticated: status
-// })

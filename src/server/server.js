@@ -25,8 +25,9 @@ app.post('/mongo/data', async (req, res) => {
     let db = await connectDB()
     let users = await db.collection('users').find().toArray()
     let predictions = await db.collection('predictions').find().toArray()
+    let results = await db.collection('results').find().toArray()
 
-    let mongoState = { users, predictions }
+    let mongoState = { users, predictions, results }
 
     res.send({ mongoState })
 })
@@ -46,62 +47,67 @@ export const addNewPrediction = async prediction => {
 }
 
 export const updatePredictionDOS = async prediction => {
-    let { owner, winner, topScorer, leastConceded, leagueMatches, r16Matches, quarterFinalMatches, semiFinalMatches, finalMatches } = prediction
+    // !!!!!!!!!!!!!!!!!!!!!!!!
+    // --- TO BE FIXED --> Now the predictionID won't be the same as the userID, 
+    // ------------------- since a user can create many predictions
+    // ------------------- sReview and fix everything related to create, update and render predictions
+    // !!!!!!!!!!!!!!!!!!!!!!!!
+    let { id, winner, topScorer, leastConceded, leagueMatches, r16Matches, quarterFinalMatches, semiFinalMatches, finalMatches } = prediction
 
     let db =await connectDB()
     let collection = db.collection('predictions')
 
-    if ( winner ) await collection.updateOne( { owner }, { $set: { winner } })
+    if ( winner ) await collection.updateOne( { id }, { $set: { winner } })
 
-    if ( topScorer ) await collection.updateOne( { owner }, { $set: { topScorer } })
+    if ( topScorer ) await collection.updateOne( { id }, { $set: { topScorer } })
 
-    if ( leastConceded ) await collection.updateOne( { owner }, { $set: { leastConceded } })
+    if ( leastConceded ) await collection.updateOne( { id }, { $set: { leastConceded } })
     
     if ( leagueMatches ) await collection.updateOne( 
-        { owner }, 
+        { id }, 
         { $set: { leagueMatches, r16Matches, quarterFinalMatches, semiFinalMatches, finalMatches } }
     )
 
     if ( r16Matches ) await collection.updateOne( 
-        { owner }, 
+        { id }, 
         { $set: { r16Matches, quarterFinalMatches, semiFinalMatches, finalMatches } }
     )
 
     if ( quarterFinalMatches ) await collection.updateOne( 
-        { owner }, 
+        { id }, 
         { $set: { quarterFinalMatches, semiFinalMatches, finalMatches } }
     )
 
     if ( semiFinalMatches ) await collection.updateOne( 
-        { owner }, 
+        { id }, 
         { $set: { semiFinalMatches, finalMatches } }
     )
 
-    if ( finalMatches ) await collection.updateOne( { owner }, { $set: { finalMatches } }
+    if ( finalMatches ) await collection.updateOne( { id }, { $set: { finalMatches } }
     )
 }
 
 export const updatePrediction = async prediction => {
-    let { owner, winner, topScorer, leastConceded, leagueMatches, r16Matches, quarterFinalMatches, semiFinalMatches, finalMatches } = prediction
+    let { id, winner, topScorer, leastConceded, leagueMatches, r16Matches, quarterFinalMatches, semiFinalMatches, finalMatches } = prediction
 
     let db = await connectDB()
     let collection = db.collection('predictions')
 
-    if ( winner ) await collection.updateOne( { owner }, { $set: { winner } })
+    if ( winner ) await collection.updateOne( { id }, { $set: { winner } })
 
-    if ( topScorer ) await collection.updateOne( { owner }, { $set: { topScorer } })
+    if ( topScorer ) await collection.updateOne( { id }, { $set: { topScorer } })
 
-    if ( leastConceded ) await collection.updateOne( { owner }, { $set: { leastConceded } })
+    if ( leastConceded ) await collection.updateOne( { id }, { $set: { leastConceded } })
 
-    if ( leagueMatches ) updatePredictionMatches(collection, owner, prediction, "leagueMatches")        
+    if ( leagueMatches ) updatePredictionMatches(collection, id, prediction, "leagueMatches")        
 
-    if ( r16Matches ) updatePredictionMatches(collection, owner, prediction, "r16Matches")        
+    if ( r16Matches ) updatePredictionMatches(collection, id, prediction, "r16Matches")        
     
-    if ( quarterFinalMatches ) updatePredictionMatches(collection, owner, prediction, "quarterFinalMatches")
+    if ( quarterFinalMatches ) updatePredictionMatches(collection, id, prediction, "quarterFinalMatches")
 
-    if ( semiFinalMatches ) updatePredictionMatches(collection, owner, prediction, "semiFinalMatches")
+    if ( semiFinalMatches ) updatePredictionMatches(collection, id, prediction, "semiFinalMatches")
 
-    if ( finalMatches ) updatePredictionMatches(collection, owner, prediction, "finalMatches")
+    if ( finalMatches ) updatePredictionMatches(collection, id, prediction, "finalMatches")
 }
 
 export const addNewUser = async user => {

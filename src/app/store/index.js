@@ -10,29 +10,20 @@ import { emptyPrediction } from '../../utils/config'
 import { englishTranslations } from '../../locate/en/translate'
 import { spanishTranslations } from '../../locate/es/translate'
 
-
-
 const sagaMiddleware = createSagaMiddleware()
  
 export const store = createStore(
     combineReducers({
 
-        // session( userSession = defaultState.session || {}, action ){
-        //     switch (action.type) {
-        //         case mutations.SET_STATE:
-        //             return action.state.session
-        //         case mutations.REQUEST_AUTHENTICATE_USER:
-        //             return { ...userSession, authenticated: mutations.AUTHENTICATING }
-        //         case mutations.PROCESSING_AUTHENTICATE_USER:
-        //             return { ...userSession, authenticated: action.authenticated }
-        //     }
-        //     return userSession
-        // },
-
         loggedUser(loggedUser = {}, action) {
             switch (action.type) {
                 case mutations.USER_PROFILE_LOADED:
-                    return action.user 
+                    return { 
+                        ...loggedUser, 
+                        userID: action.userID,
+                        expiresAt: action.expiresAt,
+                        idToken: action.idToken
+                    }
             }
             return loggedUser
         },
@@ -192,7 +183,9 @@ export const store = createStore(
                         byId: { 
                             ...predictions.byId, 
                             [action.predictionID]: {
-                                owner: action.predictionID,
+                                id: action.predictionID,
+                                owner: action.userID,
+                                username: action.username,
                                 winner: action.prediction.winner,
                                 topScorer: action.prediction.topScorer,
                                 leastConceded: action.prediction.leastConceded,
@@ -213,6 +206,8 @@ export const store = createStore(
                             [action.predictionID]: action.prediction
                         }
                     }
+                case mutations.SET_USERNAME:
+                    return { ...pedictions, byId: { ...pedictions.byId, [action.predictionID]: { ...pedictions.byId[action.predictionID], username: action.username } } }
                 case mutations.SET_GOALS_LEAGUE:
                     return { ...predictions, byId: { ...predictions.byId, [action.predictionID]: { ...predictions.byId[action.predictionID], leagueMatches: { ...predictions.byId[action.predictionID].leagueMatches, [action.leagueMatchKey]: { ...predictions.byId[action.predictionID].leagueMatches[action.leagueMatchKey], [action.team]: action.goals}}}}}
                 case mutations.SET_R16_TEAMS:
@@ -241,6 +236,21 @@ export const store = createStore(
                     return predictions
             } 
         },
+        results(results = defaultState.results ,action) {
+            switch(action.type) {
+                case mutations.SET_STATE:
+                    return action.state.results
+                case mutations.UPDATE_PREDICTION:
+                    return {
+                        ...predictions,
+                        byId: {
+                            ...predictions.byId,
+                            [action.predictionID]: action.prediction
+                        }
+                    }
+            }
+            return results
+        },
         users(users = defaultState.users, action) {
             switch(action.type) {
                 case mutations.SET_STATE:
@@ -252,26 +262,15 @@ export const store = createStore(
                             ...users.byId,
                             [action.userID]: {
                                 id: action.userID,
-                                username: action.username
+                                email: action.email,
                             }
                         },
                         allIds: [ ...users.allIds, action.userID]
                     }
-                case mutations.SET_USERNAME:
-                    return { 
-                        ...users,
-                        byId: {
-                            ...users.byId,
-                            [action.userID]: {
-                                ...users.byId[action.userID],
-                                username: action.username
-                            }
-                        }
-                    }
                 default:
                     return users
             }
-        },
+        }
 
     }),
     applyMiddleware(createLogger(), sagaMiddleware)

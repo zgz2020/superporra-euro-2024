@@ -19,7 +19,7 @@ const ParticipantsPage = ({
             <ConnectedPredictionsForm predictionType="new" userID="" /> 
             : 
             <div>
-                <ConnectedParticipantsList />
+                {/* <ConnectedParticipantsList /> */}
 
                 <ConnectedPredictionsFormButton predictionType="new" clickHandler={showPredictionsFormNew} />
             </div>

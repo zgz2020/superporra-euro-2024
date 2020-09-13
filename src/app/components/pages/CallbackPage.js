@@ -1,32 +1,16 @@
-// import React from "react"
-// import { connect } from 'react-redux'
-// import { Redirect } from 'react-router'
-// import { handleAuthenticationCallback } from '../../store/mutations'
-
-
-  
-// const Callback = ({ dispatch, user }) => {
-//     if (user) return <Redirect to="/" />
-
-//     dispatch(handleAuthenticationCallback())
-
-//     return <div className="text-center">Loading user profile.</div>
-// }
-
-// const mapStateToProps = state => {
-//     return {
-//         user: state.user
-//     }
-// }
-
-// export const ConectedCallback = connect(mapStateToProps)(Callback)
-  
-
-
 import React from 'react'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router'
-import { handleAuthenticationCallback } from '../../store/mutations'
+import * as mutations from '../../store/mutations'
+
+
+let Callback = ({ loggedUser, handleAuthenticationCallback }) => { 
+  if (loggedUser.userID) return <Redirect to={`/account`} />
+
+  handleAuthenticationCallback()
+
+  return <div className="text-center">Loading user profile.</div>
+}
 
 const mapStateToProps = state => {
   return {
@@ -34,13 +18,12 @@ const mapStateToProps = state => {
   }
 }
 
-let Callback = ({ dispatch, loggedUser }) => {
-  if (loggedUser.profile) return <Redirect to="/auth-login" />
-  dispatch(handleAuthenticationCallback())
-
-  return <div className="text-center">Loading user profile.</div>
+const mapDispatchToProps = dispatch => {
+  return {
+    handleAuthenticationCallback() {
+      dispatch(mutations.handleAuthenticationCallback())
+    }
+  }
 }
 
-Callback = connect(mapStateToProps)(Callback)
-
-export default Callback
+export const ConnectedCallback = connect(mapStateToProps, mapDispatchToProps)(Callback)

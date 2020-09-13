@@ -3,7 +3,10 @@ export const englishTranslations = {
         home: "Home",
         participants: "Participants",
         results: "Results",
-        scoringRules: "Scoring Rules"
+        scoringRules: "Scoring Rules",
+        account: "Account",
+        login: "Sign In",
+        logout: "Sign Out"
     },
     homepage: {
         title: "Superporra Euro 2021"
@@ -22,6 +25,15 @@ export const englishTranslations = {
     },
     resultsPage: {
         title: "Official Results"
+    },
+    accountPage: {
+        title: "My Account",
+        notSignedIn: {
+            title: "Not Signed In",
+            description: "You need to sign in to access to the Account page. To sign in, please click on the 'Sign In' option of the navigation menu."
+        },
+        myBets: "My Bets",
+        noBets: "You don't have any bets yet. Click on 'JOIN' button to create a bet and join the competition."
     },
     leaderboard: {
         name: "Name",
@@ -89,7 +101,7 @@ export const englishTranslations = {
         generateRandomPredictions: "Generate Random Predictions",
         predictionsSubmitted: "Predictions submitted!",
         note: "Note",
-        or: "or"     
+        or: "or"
     },
     placeholders: {
         underConstruction: "Under Construction",

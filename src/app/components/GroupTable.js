@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { getLeagueGroupTable } from '../../utils/predictions'
 import { countryShortNames } from '../../utils/config'
 
-const groupTable = ( { group, prediction, translations } ) => (
+const groupTable = ( { group, predictionsOrResults, translations } ) => (
     <div>
         <table className="table table-bordered">
             <thead>
@@ -16,13 +16,13 @@ const groupTable = ( { group, prediction, translations } ) => (
                 </tr>
             </thead>
             <tbody>
-                {Object.keys(getLeagueGroupTable(prediction, group)).map(team => (
+                {Object.keys(getLeagueGroupTable(predictionsOrResults, group)).map(team => (
                     <tr key={team}>
-                        <td>{countryShortNames[getLeagueGroupTable(prediction, group)[team].name]}</td>
-                        <td>{getLeagueGroupTable(prediction, group)[team].points}</td>
-                        <td>{getLeagueGroupTable(prediction, group)[team].gamesPlayed}</td>
-                        <td>{getLeagueGroupTable(prediction, group)[team].goalsScored}</td>
-                        <td>{getLeagueGroupTable(prediction, group)[team].goalsConceded}</td>
+                        <td>{countryShortNames[getLeagueGroupTable(predictionsOrResults, group)[team].name]}</td>
+                        <td>{getLeagueGroupTable(predictionsOrResults, group)[team].points}</td>
+                        <td>{getLeagueGroupTable(predictionsOrResults, group)[team].gamesPlayed}</td>
+                        <td>{getLeagueGroupTable(predictionsOrResults, group)[team].goalsScored}</td>
+                        <td>{getLeagueGroupTable(predictionsOrResults, group)[team].goalsConceded}</td>
                     </tr>
                 ))}
             </tbody>
@@ -32,10 +32,10 @@ const groupTable = ( { group, prediction, translations } ) => (
 
 const stateMapToProps = (state, ownProps) => {
     let { translations } = state
-    let { group, prediction } = ownProps
+    let { group, predictionsOrResults } = ownProps
     return {
         group,
-        prediction,
+        predictionsOrResults,
         translations
     }
 }

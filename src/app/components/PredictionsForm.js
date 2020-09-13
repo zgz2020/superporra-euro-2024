@@ -9,10 +9,12 @@ const PredictionsForm = ( {
     newPrediction,
     newPredictionUsername,
     generatingRandomPredictions,
-    predictions,
+    predictionsOrResults,
+    // predictions,
     users,
     predictionType,
     userID,
+    predictionID,
     setUsernameHandler,
     setPredictionFieldHandler,
     generateRandomPredictionsRequest,
@@ -26,18 +28,28 @@ const PredictionsForm = ( {
     translations
 } ) => { 
 
-    const predictionDetails = (predictionType) => {
-        if (predictionType === 'new') return { 
-            predictions: newPrediction,
-            username: newPredictionUsername,
-            userID: ""
-        }
-        if (predictionType === 'existent' || 'results') return {
-            predictions: predictions.byId[userID],
-            username: users.byId[userID].username,
-            userID: userID
-        }
-    }
+    const username = (predictionType) => 
+        predictionType === 'new' ?
+            newPredictionUsername
+            :
+            predictionType === 'existent' ?
+                predictions.byId[predictionID].username
+                :
+                null
+    
+    // const predictionDetails = (predictionType) => {
+    //     if (predictionType === 'new') return { 
+    //         // predictions: newPrediction,
+    //         username: newPredictionUsername,
+    //         predictionID: ""
+    //     }
+    //     if (predictionType === 'existent') return {  // === 'existent' || 'results')
+    //         // predictions: predictions.byId[predictionID],
+    //         username: predictions.byId[predictionID].username,
+    //         predictionID: predictionID
+    //     }
+    //     return {}
+    // }
 
     const formHeader = (predictionType) => {
         if (predictionType === 'new') return { 
@@ -75,7 +87,17 @@ const PredictionsForm = ( {
                 <h5>{formHeader(predictionType).description}</h5>
             </div>
 
-            <form onSubmit={e => submitFormHandler(predictionType, predictionDetails(predictionType).userID, predictionDetails(predictionType).username, predictionDetails(predictionType).predictions, translations, e)} >
+            <form onSubmit={e => 
+                submitFormHandler(
+                    predictionType, 
+                    userID, 
+                    predictionID, // predictionDetails(predictionType).predictionID, 
+                    username(predictionType), // predictionDetails(predictionType).username, 
+                    predictionsOrResults, 
+                    translations, 
+                    e
+                )
+            } >
 
                 {submitButton(predictionType)}
 
@@ -85,18 +107,32 @@ const PredictionsForm = ( {
 
                 <div> </div>
                 
-                {userID !== "U1" ?
+                {predictionType !== 'results' ? // predictionID !== "U1"
                     <div>
                         <div className="form-group pt-3 px-2 col-md-6 offset-md-3">
                             {`${translations.predictionsForm.username}: `}
-                            <input type="text" onChange={e => setUsernameHandler(predictionType, predictionDetails(predictionType).userID, e)} value={predictionDetails(predictionType).username} className="form-control" data-automation="username-input"/>
+                            <input 
+                                type="text" 
+                                onChange={e => setUsernameHandler(
+                                    predictionType, 
+                                    predictionID, // predictionDetails(predictionType).predictionID, 
+                                    e
+                                )} 
+                                value={username(predictionType)}
+                                className="form-control" 
+                                data-automation="username-input"
+                            />
                         </div>
 
                         {!generatingRandomPredictions ?
                             <div className="text-center py-3">
                                 <button 
                                     type="button" 
-                                    onClick={e => generateRandomPredictionsRequest(predictionType, predictionDetails(predictionType).userID, e)} 
+                                    onClick={e => generateRandomPredictionsRequest(
+                                        predictionType, 
+                                        predictionID, //predictionDetails(predictionType).predictionID, 
+                                        e
+                                    )} 
                                     className="btn btn-info"
                                     data-automation="random-predictions-button"
                                 >
@@ -106,33 +142,93 @@ const PredictionsForm = ( {
                             :
                             <div className="text-center py-3">
                                 <button className="btn btn-info" type="button" disabled>
-                                    <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                                    <span 
+                                        className="spinner-border spinner-border-sm" 
+                                        role="status" 
+                                        aria-hidden="true"
+                                    ></span>
                                     {`  ${translations.placeholders.loading}...`}
                                 </button>
                             </div>
                         }       
                         
-                    <h4 className="pt-2 pl-2">{translations.predictionsForm.predictions}</h4>
+                        <h4 className="pt-2 pl-2">{translations.predictionsForm.predictions}</h4>
                     </div>
                     :
                     null
                 }
 
-                <ConnectedEuroStage predictionType={predictionType} mode="edit" userID={predictionDetails(predictionType).userID} stageName={translations.stages.groupStage} matchType="league" changeHandler={setGoalsLeagueHandler} prediction={predictionDetails(predictionType).predictions}/>
+                <ConnectedEuroStage 
+                    predictionType={predictionType} 
+                    mode="edit" 
+                    predictionID={predictionID} //{predictionDetails(predictionType).predictionID} 
+                    stageName={translations.stages.groupStage} matchType="league" 
+                    changeHandler={setGoalsLeagueHandler} 
+                    predictionsOrResults={predictionsOrResults} //prediction={predictionsOrResults}
+                />
 
-                <ConnectedEuroStage predictionType={predictionType} mode="edit" userID={predictionDetails(predictionType).userID} stageName={translations.stages.r16} matchType="r16" changeHandler={setGoalsR16Handler} prediction={predictionDetails(predictionType).predictions}/>
+                <ConnectedEuroStage 
+                    predictionType={predictionType} 
+                    mode="edit" 
+                    predictionID={predictionID} //{predictionDetails(predictionType).predictionID} 
+                    stageName={translations.stages.r16} 
+                    matchType="r16" 
+                    changeHandler={setGoalsR16Handler} 
+                    predictionsOrResults={predictionsOrResults} //prediction={predictionsOrResults}
+                />
 
-                <ConnectedEuroStage predictionType={predictionType} mode="edit" userID={predictionDetails(predictionType).userID} stageName={translations.stages.quarterFinals} matchType="quarterFinal" changeHandler={setGoalsQuarterFinalHandler} prediction={predictionDetails(predictionType).predictions}/>
+                <ConnectedEuroStage 
+                    predictionType={predictionType} 
+                    mode="edit" 
+                    predictionID={predictionID} //{predictionDetails(predictionType).predictionID} 
+                    stageName={translations.stages.quarterFinals} 
+                    matchType="quarterFinal" 
+                    changeHandler={setGoalsQuarterFinalHandler} 
+                    predictionsOrResults={predictionsOrResults} //prediction={predictionsOrResults}
+                />
 
-                <ConnectedEuroStage predictionType={predictionType} mode="edit" userID={predictionDetails(predictionType).userID} stageName={translations.stages.semiFinals} matchType="semiFinal" changeHandler={setGoalsSemiFinalHandler} prediction={predictionDetails(predictionType).predictions}/>
+                <ConnectedEuroStage 
+                    predictionType={predictionType} 
+                    mode="edit" 
+                    predictionID={predictionID} //{predictionDetails(predictionType).predictionID} 
+                    stageName={translations.stages.semiFinals} matchType="semiFinal" 
+                    changeHandler={setGoalsSemiFinalHandler} 
+                    predictionsOrResults={predictionsOrResults} //prediction={predictionsOrResults}
+                />
 
-                <ConnectedEuroStage predictionType={predictionType} mode="edit" userID={predictionDetails(predictionType).userID} stageName={translations.stages.final} matchType="final" changeHandler={setGoalsFinalHandler} prediction={predictionDetails(predictionType).predictions}/>
+                <ConnectedEuroStage 
+                    predictionType={predictionType} 
+                    mode="edit" 
+                    predictionID={predictionID} //{predictionDetails(predictionType).predictionID} 
+                    stageName={translations.stages.final} 
+                    matchType="final" 
+                    changeHandler={setGoalsFinalHandler} 
+                    predictionsOrResults={predictionsOrResults} //prediction={predictionsOrResults}
+                />
 
-                <ConnectedGeneralPrediction title={translations.predictionsForm.euroWinner} predictionName="winner" predictionType={predictionType} userID={predictionDetails(predictionType).userID} />
+                <ConnectedGeneralPrediction 
+                    title={translations.predictionsForm.euroWinner} 
+                    predictionName="winner" 
+                    predictionType={predictionType} 
+                    predictionID={predictionID} //{predictionDetails(predictionType).predictionID}
+                    predictionsOrResults={predictionsOrResults} 
+                />
 
-                <ConnectedGeneralPrediction title={translations.predictionsForm.topScorer} predictionName="topScorer" predictionType={predictionType} userID={predictionDetails(predictionType).userID} />
+                <ConnectedGeneralPrediction 
+                    title={translations.predictionsForm.topScorer} 
+                    predictionName="topScorer" 
+                    predictionType={predictionType} 
+                    predictionID={predictionID} //{predictionDetails(predictionType).predictionID} 
+                    predictionsOrResults={predictionsOrResults}
+                />
 
-                <ConnectedGeneralPrediction title={translations.predictionsForm.leastConceded} predictionName="leastConceded" predictionType={predictionType} userID={predictionDetails(predictionType).userID} />
+                <ConnectedGeneralPrediction 
+                    title={translations.predictionsForm.leastConceded} 
+                    predictionName="leastConceded" 
+                    predictionType={predictionType} 
+                    predictionID={predictionID} //{predictionDetails(predictionType).predictionID} 
+                    predictionsOrResults={predictionsOrResults}
+                />
 
                 {submitButton(predictionType)}               
             </form>
@@ -146,79 +242,87 @@ const mapStateToProps = (state, ownProps) => {
         generatingRandomPredictions,
         predictions,
         users,
-        translations
+        translations,
+        loggedUser
     } = state
-    const { predictionType, userID } = ownProps
+    const { predictionType, predictionID, predictionsOrResults } = ownProps
 
+    const userID = loggedUser?.userID ? loggedUser.userID : null
+    
     return {
         newPrediction,
         newPredictionUsername,
         generatingRandomPredictions,
+        predictionsOrResults,
         predictions, 
         users,
         predictionType,
         userID,
+        predictionID,
         translations
     }
 }
 
 const mapDispatchToProps = (dispatch) => {    
     return {
-        setUsernameHandler(predictionType, userID, event){
+        setUsernameHandler(predictionType, predictionID, event){
             if (predictionType === 'new') 
                 return dispatch(mutations.setUsernameNewPrediction(event.target.value))
             if (predictionType === 'existent' || 'results') 
-                return dispatch(mutations.setUsername(event.target.value, userID))
+                return dispatch(mutations.setUsername(event.target.value, predictionID))
         },
-        setPredictionFieldHandler(predictionType, userID, field, event){
+        setPredictionFieldHandler(predictionType, predictionID, field, event){
             if (predictionType === 'new') 
                 return dispatch(mutations.setPredictionFieldNewPrediction(field, event.target.value))
             if (predictionType === 'existent' || 'results') 
-                return dispatch(mutations.setPredictionField(userID, field, event.target.value))
+                return dispatch(mutations.setPredictionField(predictionID, field, event.target.value))
         },
-        setGoalsLeagueHandler(predictionType, userID, matchKey, team, event){
+        setGoalsLeagueHandler(predictionType, predictionID, matchKey, team, event){
             if (predictionType === 'new') 
                 return dispatch(mutations.setGoalsNewPredictionLeague(matchKey, team, event.target.value))
             if (predictionType === 'existent' || 'results') 
-                return dispatch(mutations.setGoalsLeague(userID, matchKey, team, event.target.value))
+                return dispatch(mutations.setGoalsLeague(predictionID, matchKey, team, event.target.value))
         },
-        setGoalsR16Handler(predictionType, userID, matchKey, team, event){
+        setGoalsR16Handler(predictionType, predictionID, matchKey, team, event){
             if (predictionType === 'new') 
                 return dispatch(mutations.setGoalsNewPredictionR16(matchKey, team, event.target.value))
             if (predictionType === 'existent' || 'results') 
-                return dispatch(mutations.setGoalsR16(userID, matchKey, team, event.target.value))
+                return dispatch(mutations.setGoalsR16(predictionID, matchKey, team, event.target.value))
         },
-        setGoalsQuarterFinalHandler(predictionType, userID, matchKey, team, event){
+        setGoalsQuarterFinalHandler(predictionType, predictionID, matchKey, team, event){
             if (predictionType === 'new') 
                 return dispatch(mutations.setGoalsNewPredictionQuarterFinal(matchKey, team, event.target.value))
             if (predictionType === 'existent' || 'results')
-                return dispatch(mutations.setGoalsQuarterFinal(userID, matchKey, team, event.target.value))
+                return dispatch(mutations.setGoalsQuarterFinal(predictionID, matchKey, team, event.target.value))
         },
-        setGoalsSemiFinalHandler(predictionType, userID, matchKey, team, event){
+        setGoalsSemiFinalHandler(predictionType, predictionID, matchKey, team, event){
             if (predictionType === 'new') 
                 return dispatch(mutations.setGoalsNewPredictionSemiFinal(matchKey, team, event.target.value))
             if (predictionType === 'existent' || 'results')
-                return dispatch(mutations.setGoalsSemiFinal(userID, matchKey, team, event.target.value))
+                return dispatch(mutations.setGoalsSemiFinal(predictionID, matchKey, team, event.target.value))
         },
-        setGoalsFinalHandler(predictionType, userID, matchKey, team, event){
+        setGoalsFinalHandler(predictionType, predictionID, matchKey, team, event){
             if (predictionType === 'new') 
                 return dispatch(mutations.setGoalsNewPredictionFinal(matchKey, team, event.target.value))
             if (predictionType === 'existent' || 'results')
-                return dispatch(mutations.setGoalsFinal(userID, matchKey, team, event.target.value))
+                return dispatch(mutations.setGoalsFinal(predictionID, matchKey, team, event.target.value))
         },
-        generateRandomPredictionsRequest(predictionType, userID, event){
-                dispatch(mutations.generateRandomPredictionsRequest(predictionType, userID))
+        generateRandomPredictionsRequest(predictionType, predictionID, event){
+                dispatch(mutations.generateRandomPredictionsRequest(predictionType, predictionID))
         },
-        submitFormHandler(predictionType, userID, username, prediction, translations, event) {
+        submitFormHandler(predictionType, userID, predictionID, username, prediction, translations, event) {
             event.preventDefault()
-            if(!username)
+            if(!username && predictionType !== 'results') // !usernam
                 return alert(translations.predictionsForm.noUsernameAlert)
             else {
                 if (predictionType === 'new') {
-                    dispatch(mutations.requestPredictionCreation(username, prediction))
+                    dispatch(mutations.requestPredictionCreation(userID, username, prediction))
                 } else { 
-                    predictionType === 'existent' ? dispatch(mutations.hidePredictionsFormExistent()) : dispatch(mutations.hidePredictionsFormResults())
-                    dispatch(mutations.requestPredictionUpdate(userID, username, prediction))
+                    predictionType === 'existent' ? 
+                        dispatch(mutations.hidePredictionsFormExistent()) 
+                        : 
+                        dispatch(mutations.hidePredictionsFormResults())
+                    dispatch(mutations.requestPredictionUpdate(predictionID, username, prediction))
                 }
             }
         },

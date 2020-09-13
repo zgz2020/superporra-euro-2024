@@ -3,21 +3,28 @@ import { connect } from 'react-redux'
 import * as mutations from '../../store/mutations' 
 import { ConnectedResults } from '../Results'
 import { ConnectedHeader } from '../Header'
-
 import { ConnectedPredictionsForm } from '../PredictionsForm'
 import { ConnectedPredictionsFormButton } from '../PredictionsFormButton'
  
-const ResultsPage = ({ predictionsFormResults, showPredictionsFormResults, translations }) => (
+const ResultsPage = ({ loggedUserID, predictionsFormResults, showPredictionsFormResults, translations }) => (
     <div>
         <ConnectedHeader title={translations.resultsPage.title}/>
 
         {!predictionsFormResults ?
             <div>
-                <ConnectedPredictionsFormButton predictionType="results" clickHandler={showPredictionsFormResults} />
+                {loggedUserID === "8880442a3a44e2eeaa42b36557becaee" ?
+                    <ConnectedPredictionsFormButton predictionType="results" clickHandler={showPredictionsFormResults} />
+                    :
+                    null
+                }
+                
+                <ConnectedResults predictionType="results" />  
 
-                <ConnectedResults predictionType="results" userID="U1"  />
-
-                <ConnectedPredictionsFormButton predictionType="results" clickHandler={showPredictionsFormResults} />
+                {loggedUserID === "8880442a3a44e2eeaa42b36557becaee" ?
+                    <ConnectedPredictionsFormButton predictionType="results" clickHandler={showPredictionsFormResults} />
+                    :
+                    null
+                }            
             </div>
             :
             <ConnectedPredictionsForm predictionType="results" userID="U1" />
@@ -26,8 +33,11 @@ const ResultsPage = ({ predictionsFormResults, showPredictionsFormResults, trans
 )
 
 const mapStateToProps = (state) => {
-    const { predictionsFormResults, translations } = state
+    const { predictionsFormResults, translations, loggedUser } = state
+    let loggedUserID = loggedUser?.userID ? loggedUser.userID : "loggedOut"
+
     return {
+        loggedUserID,
         predictionsFormResults,
         translations
     }

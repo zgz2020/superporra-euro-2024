@@ -4,13 +4,9 @@ import { connect } from 'react-redux'
 const GeneralPrediction = ({ 
     title,
     predictionName,
-    predictionType,
-    userPrediction,
-    newPrediction,
+    predictionsOrResults,
     translations
 }) => {
-
-    let prediction = predictionType === "new" ? newPrediction : userPrediction
 
     return (
         <div className="card" data-automation="general-prediction">
@@ -18,18 +14,18 @@ const GeneralPrediction = ({
                 {title}
             </div>
 
-            {predictionName === "winner" || prediction[predictionName] === "???" ?
+            {predictionName === "winner" || predictionsOrResults[predictionName] === "???" ?
                     <div className="card-body text-center">
-                        {prediction[predictionName]}
+                        {predictionsOrResults[predictionName]}
                     </div>
                     :
                     <div className="card-body text-center">
-                        {Object.keys(prediction[predictionName]).map(team => (
+                        {Object.keys(predictionsOrResults[predictionName]).map(team => (
                             <div key={team}>
-                                {prediction[predictionName][team].team}
+                                {predictionsOrResults[predictionName][team].team}
                                 {" - "}
-                                {prediction[predictionName][team].goals}
-                                {prediction[predictionName][team].goals === 1 ? 
+                                {predictionsOrResults[predictionName][team].goals}
+                                {predictionsOrResults[predictionName][team].goals === 1 ? 
                                     ` ${translations.predictionsForm.goal}` : ` ${translations.predictionsForm.goals}`}
                             </div>
                         ))}
@@ -41,15 +37,13 @@ const GeneralPrediction = ({
 }
 
 const mapStateToProps = (state, ownProps) => {
-    const { newPrediction, translations } = state
-    const { title, predictionName, predictionType, userID } = ownProps
-    const userPrediction = state.predictions.byId[userID]
+    const { translations } = state
+    const { title, predictionName, predictionType, predictionsOrResults } = ownProps
     return {
         title,
         predictionName, // NOTE: 'predictionName' accepted values: "winner" / "topScorer" / "leastConceded"
-        predictionType, 
-        userPrediction,
-        newPrediction,
+        predictionType,
+        predictionsOrResults,
         translations
     }
 }

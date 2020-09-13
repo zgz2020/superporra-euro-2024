@@ -1,6 +1,7 @@
-import { take, put, select, delay } from 'redux-saga/effects'
+import { take, put, select, delay, all } from 'redux-saga/effects'
 import axios from 'axios'
 import uuid from 'uuid'
+import md5 from 'md5'
 import { normalizeDefaultStateMongo } from '../../server/defaultState'
 import {
     getR16Teams,
@@ -13,43 +14,40 @@ import {
 } from '../../utils/predictions'
 import { generateRandomPredictions } from '../../utils/randomPredictions'
 import * as selectors from './selectors'
-
 import * as mutations from './mutations'
+import { newUser, getLocalStorageUser, setLocalStorageUser } from '../../utils/common'
+import { isAuthenticated } from '../../Auth/Auth'
 
 const url = process.env.NODE_ENV === 'production' ? '' : 'http://localhost:7777'
 
 
+// ------ GET LOGGED USER --------------------
+export function* getLoggedUserSaga() {
+    while (true) {
+        yield take(mutations.GET_LOGGED_USER)
 
-
-// -----------------------------------------------------
-// ---- LOGIN - https://auth0.com/blog/beyond-create-react-app-react-router-redux-saga-and-more/
-
-import { call, takeLatest } from 'redux-saga/effects';
-// import { HANDLE_AUTHENTICATION_CALLBACK, USER_PROFILE_LOADED } from './mutations';
-import { handleAuthentication } from '../../Auth/Auth';
-
-
-export function* parseHash() {
-    const user = yield call(handleAuthentication)
-    yield put({ type: mutations.USER_PROFILE_LOADED, user })
-}   
-
-export function* handleAuthenticationCallback() {
-    yield takeLatest(mutations.HANDLE_AUTHENTICATION_CALLBACK, parseHash);
+        if (isAuthenticated()) {
+            const { idToken, expiresAt, userID } = getLocalStorageUser()
+            yield put(mutations.userProfileLoaded( idToken, expiresAt, userID))
+        }
+    }
 }
 
-// replace the current rootSaga generator  !!!!!!! - I don't have this thing
-// export default function* rootSaga() {
-//     yield all([loadToDoList(), handleAuthenticationCallback()])
-// }
-  
 
+// ------ GET LANGUAGES FROM LOCAL STORAGE --- 
 
-// ---- LOGIN END --------------------------------------
-// -----------------------------------------------------
+export function* getLocalStorageLanguageSaga() {
+    while (true) {
+        yield take(mutations.GET_LOCAL_STORAGE_LANGUAGE)
 
+        const localStorageLanguage = localStorage.getItem("language")
 
-
+        if (localStorageLanguage === "english" || localStorageLanguage === "spanish") {
+            yield put(mutations.setLanguage(localStorageLanguage))
+            yield put(mutations.setTranslations(localStorageLanguage))
+        }
+    }
+}
 
 
 // ------ GET DATA FROM MONGO DATABASE -----
@@ -59,34 +57,87 @@ export function* getMongoDataSaga() {
         const { getData } = yield take(mutations.GET_MONGO_DATA)
         try {
             const { data } = yield axios.post(url + '/mongo/data', { getData })
+
+
+            console.log('getMongoDataSaga - DATA: ', data)
             let state = normalizeDefaultStateMongo(data.mongoState)
 
-            yield put(mutations.setState(state))   
+            yield put(mutations.setState(state))
+            yield put(mutations.mongoDataLoaded())
+
         } catch (e) {
             console.log('Not working? - ', e.message)
         }
     }
 }
 
+
+// ---- LOGIN - https://auth0.com/blog/beyond-create-react-app-react-router-redux-saga-and-more/
+
+import { call } from 'redux-saga/effects';
+import { handleAuthentication } from '../../Auth/Auth';
+
+
+export function* parseHash() {
+    while (true) {
+        yield all([
+            take(mutations.HANDLE_AUTHENTICATION_CALLBACK),
+            take(mutations.MONGO_DATA_LOADED)
+        ])
+
+        const { idToken, expiresAt, email } = yield call(handleAuthentication)        
+        let emailHash = md5(email)
+        yield put(mutations.userProfileLoaded( idToken, expiresAt, emailHash ))
+        setLocalStorageUser(idToken, expiresAt, emailHash)
+
+        let users = yield select(selectors.getUsers)
+        if (newUser(users, emailHash)) yield put(mutations.requestUserCreation(emailHash, email))
+    }
+}   
+
+
+// --------- SET LANGUAGE - COOKIE -----------
+// This is needed so language selection is not lost when logging in
+
+export function* setLanguageSaga() {
+    while (true) {
+        const { language } = yield take(mutations.SET_LANGUAGE)
+        localStorage.setItem("language", language)
+    }
+}
+
+
+// ------ CREATE NEW USER -----
+
+export function* userCreationSaga() {
+    while (true) {
+        const { emailHash, email } = yield take(mutations.REQUEST_USER_CREATION)
+        const userID = emailHash
+
+        yield put(mutations.createUser(userID, email))
+        const userData = yield axios.post(url + '/user/new', {
+            user: {
+                id: userID,
+                email: email
+            }
+        })
+    }
+}
+
+
 // ------ CREATE NEW PREDICTION -----
 
 export function* predictionCreationSaga() {
     while (true) {
-        const request = yield take(mutations.REQUEST_PREDICTION_CREATION)
-        const userID = uuid()
-        const username = request.username
-        const prediction = request.prediction
-        yield put(mutations.createUser(userID, username))
-        const userData = yield axios.post(url + '/user/new', {
-            user: {
-                id: userID,
-                username: username
-            }
-        })
-        yield put(mutations.createPrediction(userID, prediction))
+        const { userID, username, prediction } = yield take(mutations.REQUEST_PREDICTION_CREATION)
+        const predictionID = uuid()
+        
+        yield put(mutations.createPrediction(predictionID, userID, username, prediction))
         const predictionData = yield axios.post(url + '/prediction/new', {
             prediction: {
+                id: predictionID,
                 owner: userID,
+                username: username,
                 winner: prediction.winner,
                 topScorer: prediction.topScorer,
                 leastConceded: prediction.leastConceded,
@@ -108,19 +159,26 @@ export function* predictionCreationSaga() {
 
 export function* predictionUpdateSaga() {
     while (true) {
-        const { userID, username, prediction } = yield take(mutations.REQUEST_PREDICTION_UPDATE)
+        const { predictionID, username, prediction } = yield take(mutations.REQUEST_PREDICTION_UPDATE)
 
-        yield put(mutations.setUsername(username, userID))
+        yield put(mutations.setUsername(username, predictionID))
         const userData = yield axios.post(url + '/user/update', {
             user: {
-                id: userID,
+                ...user,
+                id: predictionID,
                 username: username
             }
         })
-        yield put(mutations.updatePrediction(userID, prediction))
+        // !!!!!!!!!!!!!!!!!!!!!!!!
+        // --- TO BE FIXED --> Now the predictionID won't be the same as the userID, 
+        // ------------------- since a user can create many predictions
+        // ------------------- sReview and fix everything related to create, update and render predictions
+        // !!!!!!!!!!!!!!!!!!!!!!!!
+        yield put(mutations.updatePrediction(predictionID, prediction))
         const predictionData = yield axios.post(url + '/prediction/update-dos', {
             prediction: {
-                owner: userID,
+                ...prediction,
+                id: predictionID,
                 winner: prediction.winner,
                 topScorer: prediction.topScorer,
                 leastConceded: prediction.leastConceded,
@@ -139,6 +197,13 @@ export function* predictionUpdateSaga() {
 
 export function* generateRandomPredictionsSaga() {
     while (true) {
+
+
+        // !!!!!!!!!!!!!!!!!!!!!!!!
+        // --- TO BE FIXED --> Now the predictionID won't be the same as the userID, 
+        // ------------------- since a user can create many predictions
+        // ------------------- sReview and fix everything related to create, update and render predictions
+        // !!!!!!!!!!!!!!!!!!!!!!!!
         const { predictionType, userID } = yield take(mutations.GENERATE_RANDOM_PREDICTIONS_REQUEST)
 
         yield put(mutations.randomPredictionsLoading())
