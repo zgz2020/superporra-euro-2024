@@ -8,11 +8,22 @@ import { ConnectedPredictionsForm } from '../PredictionsForm'
 import { ConnectedParticipantsList } from '../ParticipantsList'
   
 
-const AccountPage = ({ loggedUser, predictionsFormNew, showPredictionsFormNew, newPrediction, translations, predictions }) => {
+const AccountPage = ({ 
+    loggedUser, 
+    predictionsFormNew, 
+    showPredictionsFormNew, 
+    newPrediction, 
+    translations, 
+    predictions 
+}) => {
     
-    const myPredictions = Object.keys(predictions.byId).filter( prediction => 
-        predictions.byId[prediction].owner === loggedUser.userID )
-
+    const myPredictions = Object.keys(predictions.byId).filter(prediction => 
+        predictions.byId[prediction].owner === loggedUser.userID)
+        .reduce((myPredictionsList, owner) => {
+            myPredictionsList[owner] = predictions.byId[owner]
+            return myPredictionsList
+        }, {})
+        
     return (
         <div>
             <ConnectedHeader title={translations.accountPage.title} />
@@ -27,7 +38,7 @@ const AccountPage = ({ loggedUser, predictionsFormNew, showPredictionsFormNew, n
                             {myPredictions.length === 0 ? 
                                 translations.accountPage.noBets 
                                 : 
-                                <ConnectedParticipantsList />
+                                <ConnectedParticipantsList myPredictions={myPredictions} />
                             }
                         </div>
                     </div>
