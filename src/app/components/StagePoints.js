@@ -6,13 +6,6 @@ import {
     leagueGroups
 } from '../../utils/config'
 import { 
-    getMatchTeamGoalsPoints,
-    getLeagueMatchWinnerPoints,
-    getLeagueMatchPoints,
-    getMatchGoalsBonusPoints,
-    getKnockOutMatchPoints,
-    getGroupMatchPoints,
-    getStageMatchPoints,
     stageQualifiedTeamsPoints,
     getR16BonusQualifiedTeams,
     getStageQualifiedTeams,
@@ -72,7 +65,14 @@ const StagePoints = (ownProps) => (
                                 </div>
 
                                 {Object.keys(groupMatches(group, ownProps.userPredictions)).map(match => (
-                                        <ConnectedMatchPoints key={match} {...ownProps} predictionType="existent" mode="show" matchID={match} />
+                                    <div key={match} >
+                                        <ConnectedMatchPoints 
+                                            {...ownProps} 
+                                            predictionType="existent" 
+                                            mode="show" 
+                                            matchID={match} 
+                                        />
+                                    </ div>
                                 ))}
                             </div>
                         </div>
@@ -82,9 +82,21 @@ const StagePoints = (ownProps) => (
                 <div className="container">  
                     <div className="row no-gutters justify-content-center"> 
                         <div className="col-md-8 col-lg-7 col-xl-6">
-                            {stageQualifiedTeams(ownProps.translations, ownProps.results, ownProps.userPredictions, ownProps.stage)}
+                            {stageQualifiedTeams(
+                                ownProps.translations, 
+                                ownProps.results, 
+                                ownProps.userPredictions, 
+                                ownProps.stage
+                            )}
                             {Object.keys(tableMatches(ownProps.userPredictions, ownProps.stage)).map(match => (
-                                <ConnectedMatchPoints key={match} {...ownProps} predictionType="existent" mode="show" matchID={match}/>
+                                <div key={match} >
+                                    <ConnectedMatchPoints 
+                                        {...ownProps} 
+                                        predictionType="existent" 
+                                        mode="show" 
+                                        matchID={match}
+                                    />
+                                </ div>
                             ))}
                         </div>
                     </div>

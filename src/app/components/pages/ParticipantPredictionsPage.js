@@ -51,7 +51,6 @@ const mapStateToProps = (state, ownProps) => {
     let prediction = predictions.byId[predictionID]
     let predictionOwner = prediction && loggedUser.userID ? loggedUser.userID === prediction.owner : false
 
-    console.log('TEST - predictionOwner: ', predictionOwner) 
     return { 
         predictionID,
         prediction,
@@ -61,7 +60,7 @@ const mapStateToProps = (state, ownProps) => {
     }
 }
 
-const mapDispatchToProps = (dispatch, ownProps) => {
+const mapDispatchToProps = (dispatch) => {
     return {
         showPredictionsFormExistent() {
             dispatch(mutations.showPredictionsFormExistent())

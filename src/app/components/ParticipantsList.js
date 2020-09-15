@@ -30,26 +30,21 @@ const ParticipantsList = ( {
                             </tr>
                         </thead>
                         <tbody>
-                            {Object.keys(predictionsList).map((key, index) => {
-                                //if (key !== "U1") {
-                                    // console.log('PartLIST - USERNAME')
-                                    return (
-                                        <tr key={index} data-automation="leaderboard-row">
-                                            <td>{index}</td>
-                                            <td>
-                                                <Link to={`/participants/${key}`}>
-                                                    {predictionsList[key].username}
-                                                </Link>
-                                            </td>
-                                            <td>
-                                                <Link to={`/participants/score/${key}`}>
-                                                    {participantTotalPoints(predictionsList[key], results)}
-                                                </ Link>
-                                            </td>
-                                        </tr>
-                                    )
-                                //}
-                            })}
+                            {Object.keys(predictionsList).map((key, index) => (
+                                <tr key={index} data-automation="leaderboard-row">
+                                    <td>{index}</td>
+                                    <td>
+                                        <Link to={`/participants/${key}`}>
+                                            {predictionsList[key].username}
+                                        </Link>
+                                    </td>
+                                    <td>
+                                        <Link to={`/participants/score/${key}`}>
+                                            {participantTotalPoints(predictionsList[key], results)}
+                                        </ Link>
+                                    </td>
+                                </tr>
+                            ))}
                         </tbody>
                     </table>
                 }

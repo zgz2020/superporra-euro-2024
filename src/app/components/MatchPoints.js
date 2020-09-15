@@ -12,7 +12,6 @@ import { capitaliseFirstLetter } from '../../utils/common'
 
 const collapseID = ownProps => `${ownProps.matchType}-${ownProps.matchID}`
 
-
 const MatchPoints = (ownProps) => (
     <div className="text-center mb-2">
 
