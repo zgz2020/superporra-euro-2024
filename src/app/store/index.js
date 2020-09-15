@@ -217,7 +217,7 @@ export const store = createStore(
                         }
                     }
                 case mutations.SET_USERNAME:
-                    return { ...pedictions, byId: { ...pedictions.byId, [action.predictionID]: { ...pedictions.byId[action.predictionID], username: action.username } } }
+                    return { ...predictions, byId: { ...predictions.byId, [action.predictionID]: { ...predictions.byId[action.predictionID], username: action.username } } }
                 case mutations.SET_GOALS_LEAGUE:
                     return { ...predictions, byId: { ...predictions.byId, [action.predictionID]: { ...predictions.byId[action.predictionID], leagueMatches: { ...predictions.byId[action.predictionID].leagueMatches, [action.leagueMatchKey]: { ...predictions.byId[action.predictionID].leagueMatches[action.leagueMatchKey], [action.team]: action.goals}}}}}
                 case mutations.SET_R16_TEAMS:
@@ -250,14 +250,8 @@ export const store = createStore(
             switch(action.type) {
                 case mutations.SET_STATE:
                     return action.state.results
-                case mutations.UPDATE_PREDICTION:
-                    return {
-                        ...predictions,
-                        byId: {
-                            ...predictions.byId,
-                            [action.predictionID]: action.prediction
-                        }
-                    }
+                case mutations.UPDATE_RESULTS:
+                    return action.results
             }
             return results
         },

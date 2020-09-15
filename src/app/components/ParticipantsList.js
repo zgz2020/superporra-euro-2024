@@ -31,7 +31,8 @@ const ParticipantsList = ( {
                         </thead>
                         <tbody>
                             {Object.keys(predictionsList).map((key, index) => {
-                                if (key !== "U1") {
+                                //if (key !== "U1") {
+                                    // console.log('PartLIST - USERNAME')
                                     return (
                                         <tr key={index} data-automation="leaderboard-row">
                                             <td>{index}</td>
@@ -47,7 +48,7 @@ const ParticipantsList = ( {
                                             </td>
                                         </tr>
                                     )
-                                }
+                                //}
                             })}
                         </tbody>
                     </table>

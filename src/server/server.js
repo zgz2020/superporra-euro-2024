@@ -40,6 +40,43 @@ if (process.env.NODE_ENV == `production`) {
 }
 
 
+export const updateResults = async results => {
+
+    let { id, winner, topScorer, leastConceded, leagueMatches, r16Matches, quarterFinalMatches, semiFinalMatches, finalMatches } = results
+
+    let db =await connectDB()
+    let collection = db.collection('results')
+
+    if ( winner ) await collection.updateOne( { id }, { $set: { winner } })
+
+    if ( topScorer ) await collection.updateOne( { id }, { $set: { topScorer } })
+
+    if ( leastConceded ) await collection.updateOne( { id }, { $set: { leastConceded } })
+    
+    if ( leagueMatches ) await collection.updateOne( 
+        { id }, 
+        { $set: { leagueMatches, r16Matches, quarterFinalMatches, semiFinalMatches, finalMatches } }
+    )
+
+    if ( r16Matches ) await collection.updateOne( 
+        { id }, 
+        { $set: { r16Matches, quarterFinalMatches, semiFinalMatches, finalMatches } }
+    )
+
+    if ( quarterFinalMatches ) await collection.updateOne( 
+        { id }, 
+        { $set: { quarterFinalMatches, semiFinalMatches, finalMatches } }
+    )
+
+    if ( semiFinalMatches ) await collection.updateOne( 
+        { id }, 
+        { $set: { semiFinalMatches, finalMatches } }
+    )
+
+    if ( finalMatches ) await collection.updateOne( { id }, { $set: { finalMatches } }
+    )
+}
+
 export const addNewPrediction = async prediction => {
     let db = await connectDB()
     let collection = db.collection('predictions')
@@ -47,15 +84,13 @@ export const addNewPrediction = async prediction => {
 }
 
 export const updatePredictionDOS = async prediction => {
-    // !!!!!!!!!!!!!!!!!!!!!!!!
-    // --- TO BE FIXED --> Now the predictionID won't be the same as the userID, 
-    // ------------------- since a user can create many predictions
-    // ------------------- sReview and fix everything related to create, update and render predictions
-    // !!!!!!!!!!!!!!!!!!!!!!!!
-    let { id, winner, topScorer, leastConceded, leagueMatches, r16Matches, quarterFinalMatches, semiFinalMatches, finalMatches } = prediction
+
+    let { id, username, winner, topScorer, leastConceded, leagueMatches, r16Matches, quarterFinalMatches, semiFinalMatches, finalMatches } = prediction
 
     let db =await connectDB()
     let collection = db.collection('predictions')
+
+    if ( username ) await collection.updateOne( { id }, { $set: { username} })
 
     if ( winner ) await collection.updateOne( { id }, { $set: { winner } })
 
@@ -88,10 +123,12 @@ export const updatePredictionDOS = async prediction => {
 }
 
 export const updatePrediction = async prediction => {
-    let { id, winner, topScorer, leastConceded, leagueMatches, r16Matches, quarterFinalMatches, semiFinalMatches, finalMatches } = prediction
+    let { id, username, winner, topScorer, leastConceded, leagueMatches, r16Matches, quarterFinalMatches, semiFinalMatches, finalMatches } = prediction
 
     let db = await connectDB()
     let collection = db.collection('predictions')
+
+    if ( username ) await collection.updateOne( { id }, { $set: { username} })
 
     if ( winner ) await collection.updateOne( { id }, { $set: { winner } })
 
@@ -124,6 +161,12 @@ export const updateUser = async user => {
     await collection.updateOne( { id }, { $set: { username } })
 }
 
+
+app.post('/results/update', async (req, res) => {
+    let results = req.body.results
+    await updateResults(results)
+    res.status(200).send()
+})
 
 app.post('/prediction/new', async (req, res) => {
     let prediction = req.body.prediction

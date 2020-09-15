@@ -28,15 +28,14 @@ const PredictionsForm = ( {
     translations
 } ) => { 
 
-    const username = (predictionType) => 
-        predictionType === 'new' ?
-            newPredictionUsername
+    const username = predictionType === 'new' ?
+        newPredictionUsername
+        :
+        predictionType === 'existent' ?
+            predictionsOrResults.username // predictions.byId[predictionID].username
             :
-            predictionType === 'existent' ?
-                predictions.byId[predictionID].username
-                :
-                null
-    
+            null
+
     // const predictionDetails = (predictionType) => {
     //     if (predictionType === 'new') return { 
     //         // predictions: newPrediction,
@@ -91,8 +90,8 @@ const PredictionsForm = ( {
                 submitFormHandler(
                     predictionType, 
                     userID, 
-                    predictionID, // predictionDetails(predictionType).predictionID, 
-                    username(predictionType), // predictionDetails(predictionType).username, 
+                    predictionsOrResults.id, // predictionID, // predictionDetails(predictionType).predictionID, 
+                    username, // predictionDetails(predictionType).username, 
                     predictionsOrResults, 
                     translations, 
                     e
@@ -115,10 +114,10 @@ const PredictionsForm = ( {
                                 type="text" 
                                 onChange={e => setUsernameHandler(
                                     predictionType, 
-                                    predictionID, // predictionDetails(predictionType).predictionID, 
+                                    predictionsOrResults.id, //predictionID, // predictionDetails(predictionType).predictionID, 
                                     e
                                 )} 
-                                value={username(predictionType)}
+                                value={username}
                                 className="form-control" 
                                 data-automation="username-input"
                             />
@@ -317,13 +316,15 @@ const mapDispatchToProps = (dispatch) => {
             else {
                 if (predictionType === 'new') {
                     dispatch(mutations.requestPredictionCreation(userID, username, prediction))
-                } else { 
-                    predictionType === 'existent' ? 
-                        dispatch(mutations.hidePredictionsFormExistent()) 
-                        : 
-                        dispatch(mutations.hidePredictionsFormResults())
-                    dispatch(mutations.requestPredictionUpdate(predictionID, username, prediction))
-                }
+                } 
+                if (predictionType === 'existent') {
+                    dispatch(mutations.hidePredictionsFormExistent())
+                    dispatch(mutations.requestPredictionUpdate(predictionID, prediction, username))
+                }  
+                if (predictionType === 'results') {
+                    dispatch(mutations.hidePredictionsFormResults())
+                    dispatch(mutations.requestResultsUpdate(results))
+                }               
             }
         },
         cancelPredictionForm(predictionType, event) {

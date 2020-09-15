@@ -1,3 +1,8 @@
+// ----- UPDATE RESULTS -----
+
+export const UPDATE_RESULTS = 'UPDATE_RESULTS'
+
+
 // ----- CREATE PREDICTION -----
 
 export const REQUEST_USER_CREATION = 'REQUEST_USER_CREATION'
@@ -135,6 +140,12 @@ export const mongoDataLoaded = () => ({
     type: MONGO_DATA_LOADED
 })
 
+// ----- UPDATE RESULTS -----
+
+export const updateResults = (results) => ({
+    type: UPDATE_RESULTS,
+    results
+})
 
 
 // ----- CREATE PREDICTION -----
@@ -172,17 +183,18 @@ export const resetPredictionCreationForm = () => ({
 
 // ----- UPDATE PREDICTION -----
 
-export const requestPredictionUpdate = (predictionID, username, prediction) => ({
+export const requestPredictionUpdate = (predictionID, prediction, username) => ({
     type: REQUEST_PREDICTION_UPDATE,
     predictionID,
-    username,
-    prediction
+    prediction,
+    username
 })
 
-export const updatePrediction = (predictionID, prediction) => ({
+export const updatePrediction = (predictionID, prediction, username) => ({
     type: UPDATE_PREDICTION,
     predictionID,
-    prediction
+    prediction,
+    username
 })
 
 

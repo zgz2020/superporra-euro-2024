@@ -25,14 +25,14 @@ const Results = (ownProps) => (
 
 const mapStateToProps = (state, ownProps) => {
     let { translations, newPrediction, results } = state
-    let { userID, predictionType } = ownProps
+    let { predictionID, predictionType } = ownProps
 
     let predictionsOrResults = {}
     switch(predictionType) {
         case "new":   
             predictionsOrResults = newPrediction
         case "existent":   
-            predictionsOrResults = state.predictions.byId[userID]
+            predictionsOrResults = state.predictions.byId[predictionID]
         case "results":   
             predictionsOrResults = results
     }

@@ -1,4 +1,4 @@
-import { take, put, select, delay, all } from 'redux-saga/effects'
+import { take, put, select, delay, all, actionChannel } from 'redux-saga/effects'
 import axios from 'axios'
 import uuid from 'uuid'
 import md5 from 'md5'
@@ -155,30 +155,43 @@ export function* predictionCreationSaga() {
 }
 
 
+// ------ UPDATE RESULTS (Mongo database ONLY) -----
+
+export function* updateResultsSaga() {
+    while (true) {
+        const { results } = yield take(mutations.UPDATE_RESULTS)
+
+        const resultsData = yield axios.post(url + '/results/update', {
+            results: {
+                ...results,
+                id: results.id,
+                winner: results.winner,
+                topScorer: results.topScorer,
+                leastConceded: results.leastConceded,
+                leagueMatches: results.leagueMatches,
+                r16Matches: results.r16Matches,
+                quarterFinalMatches: results.quarterFinalMatches,
+                semiFinalMatches: results.semiFinalMatches,
+                finalMatches: results.finalMatches
+            }
+        })
+    }
+}
+
+ 
 // ------ UPDATE EXISTENT PREDICTION (Mongo database ONLY) -----
 
 export function* predictionUpdateSaga() {
     while (true) {
-        const { predictionID, username, prediction } = yield take(mutations.REQUEST_PREDICTION_UPDATE)
+        const { predictionID, prediction, username } = yield take(mutations.REQUEST_PREDICTION_UPDATE)
 
-        yield put(mutations.setUsername(username, predictionID))
-        const userData = yield axios.post(url + '/user/update', {
-            user: {
-                ...user,
-                id: predictionID,
-                username: username
-            }
-        })
-        // !!!!!!!!!!!!!!!!!!!!!!!!
-        // --- TO BE FIXED --> Now the predictionID won't be the same as the userID, 
-        // ------------------- since a user can create many predictions
-        // ------------------- sReview and fix everything related to create, update and render predictions
-        // !!!!!!!!!!!!!!!!!!!!!!!!
-        yield put(mutations.updatePrediction(predictionID, prediction))
+        yield put(mutations.updatePrediction(predictionID, prediction, username))
+
         const predictionData = yield axios.post(url + '/prediction/update-dos', {
             prediction: {
                 ...prediction,
                 id: predictionID,
+                username: username,
                 winner: prediction.winner,
                 topScorer: prediction.topScorer,
                 leastConceded: prediction.leastConceded,
@@ -204,6 +217,7 @@ export function* generateRandomPredictionsSaga() {
         // ------------------- since a user can create many predictions
         // ------------------- sReview and fix everything related to create, update and render predictions
         // !!!!!!!!!!!!!!!!!!!!!!!!
+        
         const { predictionType, userID } = yield take(mutations.GENERATE_RANDOM_PREDICTIONS_REQUEST)
 
         yield put(mutations.randomPredictionsLoading())
