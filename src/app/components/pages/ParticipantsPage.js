@@ -1,14 +1,15 @@
 import React from 'react'
 import { connect } from 'react-redux' 
+import { Redirect } from 'react-router'
 import * as mutations from '../../store/mutations'
 import { ConnectedHeader } from '../Header'
 import { ConnectedParticipantsList } from '../ParticipantsList'
 import { ConnectedPredictionsFormButton } from '../PredictionsFormButton'
 import { ConnectedPredictionsForm } from '../PredictionsForm'
+import { signIn } from '../../../Auth/Auth'
 
 const ParticipantsPage = ({ 
     predictionsFormNew,
-    showPredictionsFormNew,
     predictionsSubmitted,
     translations
 }) => (
@@ -21,7 +22,7 @@ const ParticipantsPage = ({
             <div>
                 <ConnectedParticipantsList />
 
-                <ConnectedPredictionsFormButton predictionType="new" clickHandler={showPredictionsFormNew} />
+                <ConnectedPredictionsFormButton predictionType="new" clickHandler={signIn} />
             </div>
         }
 
@@ -45,13 +46,4 @@ const mapStateToProps = (state) => {
     }
 }
 
-const mapDispatchToProps = (dispatch) => {
-    return {
-        showPredictionsFormNew() {
-            dispatch(mutations.showPredictionsFormNew())
-            dispatch(mutations.hidePredictionsSubmitted())
-        }
-    }
-}
-
-export const ConnectedParticipantsPage = connect(mapStateToProps, mapDispatchToProps)(ParticipantsPage)
+export const ConnectedParticipantsPage = connect(mapStateToProps)(ParticipantsPage)

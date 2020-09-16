@@ -1,7 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux' 
 import * as mutations from '../../store/mutations' 
-import { ConnectedResults } from '../Results'
 import { ConnectedHeader } from '../Header'
 import { ConnectedPredictionsFormButton } from '../PredictionsFormButton'
 import { ConnectedPredictionsForm } from '../PredictionsForm'
@@ -61,27 +60,6 @@ const AccountPage = ({
                     </div>
                 </ div>
             }
-
-
-            {/* {user ? 
-                <div>
-                    <ConnectedHeader title={`${translations.participantPredictionsPage.title}: ${user.username}`} />
-
-                    {!predictionsFormExistent ?
-                        <div>
-                            <ConnectedPredictionsFormButton predictionType="existent" clickHandler={showPredictionsFormExistent} />
-
-                            <ConnectedResults predictionType="existent" userID={user.id} />
-
-                            <ConnectedPredictionsFormButton predictionType="existent" clickHandler={showPredictionsFormExistent} />
-                        </div>
-                        :
-                        <ConnectedPredictionsForm predictionType="existent" userID={user.id}/> 
-                    }
-                </div>
-                :
-                <div>{translations.placeholders.loading}</div>
-            } */}
         </div>
     )
 }
