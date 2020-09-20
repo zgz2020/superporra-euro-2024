@@ -1,0 +1,13 @@
+export * from './goalsUpdate'
+export * from './language'
+export * from './login'
+export * from './mongoData'
+export * from './predictionCreation'
+export * from './predictionForm'
+export * from './predictionNew'
+export * from './predictionRandom'
+export * from './predictionUpdate'
+export * from './resultsUpdate'
+export * from './stageTeamsUpdate'
+export * from './users'
+

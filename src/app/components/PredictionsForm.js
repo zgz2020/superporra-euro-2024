@@ -16,13 +16,13 @@ const PredictionsForm = ( {
     userID,
     predictionID,
     setUsernameHandler,
-    setPredictionFieldHandler,
+    // setPredictionFieldHandler,
     generateRandomPredictionsRequest,
-    setGoalsLeagueHandler,
-    setGoalsR16Handler,
-    setGoalsQuarterFinalHandler,
-    setGoalsSemiFinalHandler,
-    setGoalsFinalHandler,
+    // setGoalsLeagueHandler,
+    // setGoalsR16Handler,
+    // setGoalsQuarterFinalHandler,
+    // setGoalsSemiFinalHandler,
+    // setGoalsFinalHandler,
     submitFormHandler,
     cancelPredictionForm,
     translations
@@ -161,8 +161,10 @@ const PredictionsForm = ( {
                     predictionType={predictionType} 
                     mode="edit" 
                     predictionID={predictionID} //{predictionDetails(predictionType).predictionID} 
-                    stageName={translations.stages.groupStage} matchType="league" 
-                    changeHandler={setGoalsLeagueHandler} 
+                    stageName={translations.stages.groupStage} 
+                    // matchType="league" 
+                    stage="leagueMatches"
+                    // changeHandler={setGoalsLeagueHandler} 
                     predictionsOrResults={predictionsOrResults} //prediction={predictionsOrResults}
                 />
 
@@ -171,8 +173,9 @@ const PredictionsForm = ( {
                     mode="edit" 
                     predictionID={predictionID} //{predictionDetails(predictionType).predictionID} 
                     stageName={translations.stages.r16} 
-                    matchType="r16" 
-                    changeHandler={setGoalsR16Handler} 
+                    // matchType="r16"
+                    stage="r16Matches"
+                    // changeHandler={setGoalsR16Handler} 
                     predictionsOrResults={predictionsOrResults} //prediction={predictionsOrResults}
                 />
 
@@ -181,8 +184,9 @@ const PredictionsForm = ( {
                     mode="edit" 
                     predictionID={predictionID} //{predictionDetails(predictionType).predictionID} 
                     stageName={translations.stages.quarterFinals} 
-                    matchType="quarterFinal" 
-                    changeHandler={setGoalsQuarterFinalHandler} 
+                    // matchType="quarterFinal" 
+                    stage="quarterFinalMatches"
+                    // changeHandler={setGoalsQuarterFinalHandler} 
                     predictionsOrResults={predictionsOrResults} //prediction={predictionsOrResults}
                 />
 
@@ -190,8 +194,10 @@ const PredictionsForm = ( {
                     predictionType={predictionType} 
                     mode="edit" 
                     predictionID={predictionID} //{predictionDetails(predictionType).predictionID} 
-                    stageName={translations.stages.semiFinals} matchType="semiFinal" 
-                    changeHandler={setGoalsSemiFinalHandler} 
+                    stageName={translations.stages.semiFinals} 
+                    // matchType="semiFinal" 
+                    stage="semiFinalMatches"
+                    // changeHandler={setGoalsSemiFinalHandler} 
                     predictionsOrResults={predictionsOrResults} //prediction={predictionsOrResults}
                 />
 
@@ -200,8 +206,9 @@ const PredictionsForm = ( {
                     mode="edit" 
                     predictionID={predictionID} //{predictionDetails(predictionType).predictionID} 
                     stageName={translations.stages.final} 
-                    matchType="final" 
-                    changeHandler={setGoalsFinalHandler} 
+                    // matchType="final" 
+                    stage="finalMatches"
+                    // changeHandler={setGoalsFinalHandler} 
                     predictionsOrResults={predictionsOrResults} //prediction={predictionsOrResults}
                 />
 
@@ -276,36 +283,37 @@ const mapDispatchToProps = (dispatch) => {
             if (predictionType === 'existent' || 'results') 
                 return dispatch(mutations.setPredictionField(predictionID, field, event.target.value))
         },
-        setGoalsLeagueHandler(predictionType, predictionID, matchKey, team, event){
-            if (predictionType === 'new') 
-                return dispatch(mutations.setGoalsNewPredictionLeague(matchKey, team, event.target.value))
-            if (predictionType === 'existent' || 'results') 
-                return dispatch(mutations.setGoalsLeague(predictionID, matchKey, team, event.target.value))
-        },
-        setGoalsR16Handler(predictionType, predictionID, matchKey, team, event){
-            if (predictionType === 'new') 
-                return dispatch(mutations.setGoalsNewPredictionR16(matchKey, team, event.target.value))
-            if (predictionType === 'existent' || 'results') 
-                return dispatch(mutations.setGoalsR16(predictionID, matchKey, team, event.target.value))
-        },
-        setGoalsQuarterFinalHandler(predictionType, predictionID, matchKey, team, event){
-            if (predictionType === 'new') 
-                return dispatch(mutations.setGoalsNewPredictionQuarterFinal(matchKey, team, event.target.value))
-            if (predictionType === 'existent' || 'results')
-                return dispatch(mutations.setGoalsQuarterFinal(predictionID, matchKey, team, event.target.value))
-        },
-        setGoalsSemiFinalHandler(predictionType, predictionID, matchKey, team, event){
-            if (predictionType === 'new') 
-                return dispatch(mutations.setGoalsNewPredictionSemiFinal(matchKey, team, event.target.value))
-            if (predictionType === 'existent' || 'results')
-                return dispatch(mutations.setGoalsSemiFinal(predictionID, matchKey, team, event.target.value))
-        },
-        setGoalsFinalHandler(predictionType, predictionID, matchKey, team, event){
-            if (predictionType === 'new') 
-                return dispatch(mutations.setGoalsNewPredictionFinal(matchKey, team, event.target.value))
-            if (predictionType === 'existent' || 'results')
-                return dispatch(mutations.setGoalsFinal(predictionID, matchKey, team, event.target.value))
-        },
+        // setGoalsLeagueHandler(predictionType, predictionID, matchKey, team, event){
+        //     if (predictionType === 'new') 
+        //         // return dispatch(mutations.setGoalsNewPredictionLeague(matchKey, team, event.target.value))
+        //         return dispatch(mutations.setGoalsAll('new', 'leagueMatches', matchKey, team, event.target.value))
+        //     if (predictionType === 'existent' || 'results') 
+        //         return dispatch(mutations.setGoalsLeague(predictionID, matchKey, team, event.target.value))
+        // },
+        // setGoalsR16Handler(predictionType, predictionID, matchKey, team, event){
+        //     if (predictionType === 'new') 
+        //         return dispatch(mutations.setGoalsNewPredictionR16(matchKey, team, event.target.value))
+        //     if (predictionType === 'existent' || 'results') 
+        //         return dispatch(mutations.setGoalsR16(predictionID, matchKey, team, event.target.value))
+        // },
+        // setGoalsQuarterFinalHandler(predictionType, predictionID, matchKey, team, event){
+        //     if (predictionType === 'new') 
+        //         return dispatch(mutations.setGoalsNewPredictionQuarterFinal(matchKey, team, event.target.value))
+        //     if (predictionType === 'existent' || 'results')
+        //         return dispatch(mutations.setGoalsQuarterFinal(predictionID, matchKey, team, event.target.value))
+        // },
+        // setGoalsSemiFinalHandler(predictionType, predictionID, matchKey, team, event){
+        //     if (predictionType === 'new') 
+        //         return dispatch(mutations.setGoalsNewPredictionSemiFinal(matchKey, team, event.target.value))
+        //     if (predictionType === 'existent' || 'results')
+        //         return dispatch(mutations.setGoalsSemiFinal(predictionID, matchKey, team, event.target.value))
+        // },
+        // setGoalsFinalHandler(predictionType, predictionID, matchKey, team, event){
+        //     if (predictionType === 'new') 
+        //         return dispatch(mutations.setGoalsNewPredictionFinal(matchKey, team, event.target.value))
+        //     if (predictionType === 'existent' || 'results')
+        //         return dispatch(mutations.setGoalsFinal(predictionID, matchKey, team, event.target.value))
+        // },
         generateRandomPredictionsRequest(predictionType, predictionID, event){
                 dispatch(mutations.generateRandomPredictionsRequest(predictionType, predictionID))
         },

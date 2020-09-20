@@ -6,7 +6,7 @@ import { ConnectedHeader } from '../Header'
 import { ConnectedPredictionsForm } from '../PredictionsForm'
 import { ConnectedPredictionsFormButton } from '../PredictionsFormButton'
  
-const ResultsPage = ({ loggedUserID, predictionsFormResults, showPredictionsFormResults, translations }) => (
+const ResultsPage = ({ loggedUserID, predictionsFormResults, showPredictionsFormResults, translations, results }) => (
     <div>
         <ConnectedHeader title={translations.resultsPage.title}/>
 
@@ -27,19 +27,20 @@ const ResultsPage = ({ loggedUserID, predictionsFormResults, showPredictionsForm
                 }            
             </div>
             :
-            <ConnectedPredictionsForm predictionType="results" userID="U1" />
+            <ConnectedPredictionsForm predictionType="results" predictionsOrResults={results} predictionID="results" />
         }
     </div>
 )
 
 const mapStateToProps = (state) => {
-    const { predictionsFormResults, translations, loggedUser } = state
+    const { predictionsFormResults, translations, loggedUser, results } = state
     let loggedUserID = loggedUser?.userID ? loggedUser.userID : "loggedOut"
 
     return {
         loggedUserID,
         predictionsFormResults,
-        translations
+        translations,
+        results
     }
 }
 

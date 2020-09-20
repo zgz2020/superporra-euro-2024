@@ -2,6 +2,8 @@ export const getNewPrediction = (state) => state.newPrediction
 
 export const getPredictions = (state) => state.predictions
 
+export const getResults = (state) => state.results
+
 export const getUsers = (state) => state.users // state.users.allIds
 
 // --- SELECTOR
