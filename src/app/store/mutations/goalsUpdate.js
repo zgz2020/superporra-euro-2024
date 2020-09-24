@@ -38,10 +38,11 @@ export const setGoalsAll = (predictionType, predictionID, stage, matchKey, team,
     goals
 })
 
-export const goalsUpdated = (predictionType, stage) => ({
+export const goalsUpdated = (predictionType, stage, predictionID) => ({
     type: GOALS_UPDATED,
     predictionType,
-    stage
+    stage,
+    predictionID
 })
 
 export const setGoalsNewPrediction = (stage, matchKey, team, goals) => ({
@@ -69,8 +70,9 @@ export const setGoalsResults = (stage, matchKey, team, goals) => ({
     goals
 })
 
-export const updateTeamsRequest = (predictionType, stage) => ({
+export const updateTeamsRequest = (predictionType, stage, predictionID) => ({
     type: UPDATE_TEAMS_REQUEST,
     predictionType,
-    stage
+    stage,
+    predictionID
 })

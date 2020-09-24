@@ -12,6 +12,6 @@ export function* setGoalsSaga() {
         if (predictionType === 'results') yield put(mutations.setGoalsResults(stage, matchKey, team, goals))        
 
         // Triggers action to update R16 / QF / SF / FINAL teams if needed
-        yield put(mutations.goalsUpdated(predictionType, stage))
+        yield put(mutations.goalsUpdated(predictionType, stage, predictionID))
     }
 }

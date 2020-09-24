@@ -331,7 +331,7 @@ const mapDispatchToProps = (dispatch) => {
                 }  
                 if (predictionType === 'results') {
                     dispatch(mutations.hidePredictionsFormResults())
-                    dispatch(mutations.requestResultsUpdate(results))
+                    dispatch(mutations.updateResults(prediction))
                 }               
             }
         },

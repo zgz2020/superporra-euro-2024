@@ -8,12 +8,10 @@ const editFontSize = (mode) => mode === "show" ? {fontSize: "1rem"} : {fontSize:
 const TeamScore = ( { 
     predictionsOrResults, 
     predictionType, 
-    predictionID, 
     mode, 
     stage, 
     matchID, 
     team, 
-    // changeHandler,
     setGoalsHandler
 } ) => (
     <div className="d-flex flex-row p-0">
@@ -31,11 +29,7 @@ const TeamScore = ( {
                     {predictionsOrResults[stage][matchID][`${team}Goals`]}
                 </div>
                 :
-                // <select onChange={e => changeHandler(predictionType, predictionID, matchID, `${team}Goals`, e)} value={predictionsOrResults[stage][matchID][`${team}Goals`]} style={ editFontSize(mode)} >
-                //     <option key="default" value=" ">{" "}</option>
-                //     {goalsMenuOptions()}
-                // </select>
-                <select onChange={e => setGoalsHandler(predictionType, predictionID, matchID, `${team}Goals`, e)} value={predictionsOrResults[stage][matchID][`${team}Goals`]} style={ editFontSize(mode)} >
+                <select onChange={e => setGoalsHandler(predictionType, matchID, `${team}Goals`, e)} value={predictionsOrResults[stage][matchID][`${team}Goals`]} style={ editFontSize(mode)} >
                     <option key="default" value=" ">{" "}</option>
                     {goalsMenuOptions()}
                 </select>
@@ -54,34 +48,24 @@ const TeamScore = ( {
 )
 
 const mapStateToProps = (state, ownProps) => {
-    const { predictionType, mode, predictionID, stage, matchID, team, predictionsOrResults } = ownProps  // changeHandler
+    const { predictionType, mode, stage, matchID, team, predictionsOrResults } = ownProps 
 
     return {
         predictionType,
-        predictionID,
         mode,
         stage,
         matchID,
         team,
-        // changeHandler,
         predictionsOrResults
     }
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => {
-    const { stage } = ownProps
+    const { predictionsOrResults, stage } = ownProps
 
     return {
-        setGoalsHandler(predictionType, predictionID, matchKey, team, event){
-
-            return dispatch(mutations.setGoalsAll(predictionType, predictionID, stage, matchKey, team, event.target.value))
-
-
-            // if (predictionType === 'new') 
-            //     // return dispatch(mutations.setGoalsNewPredictionLeague(matchKey, team, event.target.value))
-            //     return dispatch(mutations.setGoalsAll('new', stage, matchKey, team, event.target.value))
-            // if (predictionType === 'existent' || 'results') 
-            //     return dispatch(mutations.setGoalsLeague(predictionID, matchKey, team, event.target.value))
+        setGoalsHandler(predictionType, matchKey, team, event){
+            return dispatch(mutations.setGoalsAll(predictionType, predictionsOrResults.id, stage, matchKey, team, event.target.value))
         }
     }
 }
