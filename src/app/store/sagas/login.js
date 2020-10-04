@@ -32,8 +32,6 @@ export function* getSessionStatusSaga() {
             const { data } = yield axios.post(url + '/id-token', { idToken })
             const { authenticated, id } = data.session
 
-            console.log('GET_SESSION - authent / id : ', authenticated , ' / ', id)
-
             yield put(mutations.processAuthenticateUser(authenticated, id))
 
         } catch (e) {

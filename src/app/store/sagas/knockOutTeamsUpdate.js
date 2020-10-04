@@ -17,8 +17,6 @@ export function* getTeamsAfterGoalsUpdateSaga() {
     while (true) {
         let { predictionType, stage, predictionID } = yield take(mutations.GOALS_UPDATED)
 
-        console.log('AfterGOALS SAGA - PredID: ', predictionID)
-
         yield put(mutations.updateTeamsRequest(predictionType, stage, predictionID))
     }
 }
@@ -26,8 +24,6 @@ export function* getTeamsAfterGoalsUpdateSaga() {
 export function* getTeamsAfterTeamsUpdateSaga() {
     while (true) {
         let { predictionType, stage, predictionID } = yield take(mutations.TEAMS_UPDATED)
-
-        console.log('AfterTEAMS SAGA - PredID: ', predictionID)
 
         yield put(mutations.updateTeamsRequest(predictionType, stage, predictionID))
     }
@@ -38,8 +34,6 @@ export function* getTeamsSaga() {
     while (true) {
         let { predictionType, stage, predictionID } = yield take(mutations.UPDATE_TEAMS_REQUEST)
 
-        console.log('getTeamsSAGA - predictionID: ', predictionID)
-
         // Gets newPrediction/predictions/results state from store
         let predictionsOrResults = {}
         if (predictionType === 'new') predictionsOrResults = yield select(selectors.getNewPrediction)
@@ -49,8 +43,6 @@ export function* getTeamsSaga() {
         }
         if (predictionType === 'results') predictionsOrResults = yield select(selectors.getResults)
         
-        console.log('getTeamsSAGA - predictionsOrResults: ', predictionsOrResults)
-
         if (stage === 'leagueMatches') {
             // Gets the R16 teams according to the prediction data
             let r16Teams = getR16Teams(predictionsOrResults) 

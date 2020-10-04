@@ -13,10 +13,8 @@ export function* getMongoDataSaga() {
         try {
             const { data } = yield axios.post(url + '/mongo/data', { getData })
 
-            console.log('getMongoDataSaga - DATA: ', data)
             let state = { ...normalizeDefaultStateMongo(data.mongoState), session: defaultState.session}
 
-            console.log('LLL GetMONGO - state: ', state)
             yield put(mutations.setState(state))
             yield put(mutations.mongoDataLoaded())
 

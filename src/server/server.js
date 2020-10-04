@@ -246,8 +246,6 @@ app.post('/id-token', async (req, res) => {
 
     let { idToken } = req.body
 
-    console.log('TEST!!!! - ID_TOKEN: ', idToken)
-
     let db = await connectDB()
     let tokensCollection = db.collection('idTokens')
 
