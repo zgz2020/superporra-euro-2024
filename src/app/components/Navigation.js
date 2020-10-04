@@ -6,7 +6,7 @@ import * as mutations from '../store/mutations'
 import { signIn, signOut } from '../../Auth/Auth'
 
 
-const Navigation = ({ translations, session, signOutRequest }) => (
+const Navigation = ({ translations, session, signOutRequest, hideNavBarResponsive }) => (
     <nav className="navbar navbar-expand-lg navbar-light bg-white sticky-top">
         <ConnectedLanguagePicker />
         <div className="pr-5"></div>
@@ -15,15 +15,15 @@ const Navigation = ({ translations, session, signOutRequest }) => (
         </button>
         <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div className="navbar-nav">        
-                <Link className="nav-item nav-link mr-3" to="/" data-automation="nav-item">{translations.navigation.home}</Link>
-                <Link className="nav-item nav-link mr-3" to="/participants" data-automation="nav-item">{translations.navigation.participants}</Link> 
-                <Link className="nav-item nav-link mr-3" to="/results" data-automation="nav-item">{translations.navigation.results}</Link> 
-                <Link className="nav-item nav-link mr-3" to="/scoring-rules" data-automation="nav-item">{translations.navigation.scoringRules}</Link> 
+                <Link className="nav-item nav-link mr-3" to="/" onClick={hideNavBarResponsive} data-automation="nav-item">{translations.navigation.home}</Link>
+                <Link className="nav-item nav-link mr-3" to="/participants" onClick={hideNavBarResponsive} data-automation="nav-item">{translations.navigation.participants}</Link> 
+                <Link className="nav-item nav-link mr-3" to="/results" onClick={hideNavBarResponsive} data-automation="nav-item">{translations.navigation.results}</Link> 
+                <Link className="nav-item nav-link mr-3" to="/scoring-rules" onClick={hideNavBarResponsive} data-automation="nav-item">{translations.navigation.scoringRules}</Link> 
                 {!session.id && 
-                    <Link className="nav-item nav-link mr-3 text-primary" to="/sign-in" data-automation="nav-item">{translations.navigation.login}</Link>
+                    <Link className="nav-item nav-link mr-3 text-primary" to="/sign-in" onClick={hideNavBarResponsive} data-automation="nav-item">{translations.navigation.login}</Link>
                 }
                 {session.id && 
-                    <Link className="nav-item nav-link mr-3" to={`/account`} data-automation="nav-item">{translations.navigation.account}</Link>
+                    <Link className="nav-item nav-link mr-3" to={`/account`} onClick={hideNavBarResponsive} data-automation="nav-item">{translations.navigation.account}</Link>
                 }
                 {session.id && 
                     <Link className="nav-item nav-link mr-3 text-primary" to='/' onClick={signOutRequest} data-automation="nav-item">{translations.navigation.logout}</Link>
@@ -44,7 +44,11 @@ const mapStateToProps = (state) => {
 const mapDispatchTpProps = (dispatch) => {
     return {
         signOutRequest(e) {
+            $(".navbar-collapse").collapse('hide')
             dispatch(mutations.signOutRequest())
+        },
+        hideNavBarResponsive(e) {
+            $(".navbar-collapse").collapse('hide')
         }
     }
 }
