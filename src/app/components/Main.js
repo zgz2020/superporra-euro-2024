@@ -3,7 +3,7 @@ import { Provider } from 'react-redux'
 import { store } from '../store'
 import { Router, Route } from 'react-router-dom'
 import { history } from '../store/history'
-import { getLoggedUser, getLocalStorageLanguage, getMongoData } from '../store/mutations'
+import { getLocalStorageLanguage, getMongoData, getSessionStatus } from '../store/mutations'
 
 import { ConnectedNavigation } from './Navigation'
 import { ConnectedHomePage } from './pages/HomePage'
@@ -14,6 +14,7 @@ import { ConnectedParticipantScoreDetailedPage } from './pages/ParticipantScoreD
 import { ConnectedScoringRulesPage } from './pages/ScoringRulesPage'
 import { ConnectedAccountPage } from './pages/Account'
 import { ConnectedCallback } from './pages/CallbackPage'
+import { ConnectedLoginPage } from './pages/LoginPaje'
 
 export const Main = () => (
     <Router history={history}>
@@ -21,6 +22,8 @@ export const Main = () => (
             <div>
                 <ConnectedNavigation />
                 <Route exact path="/" render={() => (<ConnectedHomePage />)} />
+                <Route path="/sign-in" render={() => (<ConnectedLoginPage />)} />
+                <Route path="/sign-out" render={() => (<ConnectedLoginPage />)} />
                 <Route path="/results" render={() => (<ConnectedResultsPage />)} />
                 <Route exact path="/participants" render={() => (<ConnectedParticipantsPage />)} />
                 <Route exact path="/participants/:id" render={({ match }) => (<ConnectedParticipantPredictionsPage match={match} />)} />
@@ -33,6 +36,6 @@ export const Main = () => (
     </Router>
 )
 
-store.dispatch(getLoggedUser())
+store.dispatch(getSessionStatus())
 store.dispatch(getLocalStorageLanguage())
 store.dispatch(getMongoData())

@@ -6,13 +6,13 @@ import { ConnectedHeader } from '../Header'
 import { ConnectedPredictionsForm } from '../PredictionsForm'
 import { ConnectedPredictionsFormButton } from '../PredictionsFormButton'
  
-const ResultsPage = ({ loggedUserID, predictionsFormResults, showPredictionsFormResults, translations, results }) => (
+const ResultsPage = ({ role, predictionsFormResults, showPredictionsFormResults, translations, results }) => (
     <div>
         <ConnectedHeader title={translations.resultsPage.title}/>
 
         {!predictionsFormResults ?
             <div>
-                {loggedUserID === "8880442a3a44e2eeaa42b36557becaee" ?
+                {role === 'admin' ? 
                     <ConnectedPredictionsFormButton predictionType="results" clickHandler={showPredictionsFormResults} />
                     :
                     null
@@ -20,7 +20,7 @@ const ResultsPage = ({ loggedUserID, predictionsFormResults, showPredictionsForm
                 
                 <ConnectedResults predictionType="results" />  
 
-                {loggedUserID === "8880442a3a44e2eeaa42b36557becaee" ?
+                {role === 'admin' ? 
                     <ConnectedPredictionsFormButton predictionType="results" clickHandler={showPredictionsFormResults} />
                     :
                     null
@@ -33,11 +33,11 @@ const ResultsPage = ({ loggedUserID, predictionsFormResults, showPredictionsForm
 )
 
 const mapStateToProps = (state) => {
-    const { predictionsFormResults, translations, loggedUser, results } = state
-    let loggedUserID = loggedUser?.userID ? loggedUser.userID : "loggedOut"
+    const { predictionsFormResults, translations, results, session, users } = state
+    let role = session?.id && users.byId[session.id] ? users.byId[session.id].role : "no role"
 
     return {
-        loggedUserID,
+        role,
         predictionsFormResults,
         translations,
         results

@@ -2,7 +2,7 @@ import { take, put } from 'redux-saga/effects'
 import axios from 'axios'
 import * as mutations from '../mutations'
 import { url } from './url'
-import { normalizeDefaultStateMongo } from '../../../server/defaultState'
+import { normalizeDefaultStateMongo, defaultState } from '../../../server/defaultState'
 
 
 // ------ GET DATA FROM MONGO DATABASE AT LOAD -----
@@ -13,10 +13,10 @@ export function* getMongoDataSaga() {
         try {
             const { data } = yield axios.post(url + '/mongo/data', { getData })
 
-
             console.log('getMongoDataSaga - DATA: ', data)
-            let state = normalizeDefaultStateMongo(data.mongoState)
+            let state = { ...normalizeDefaultStateMongo(data.mongoState), session: defaultState.session}
 
+            console.log('LLL GetMONGO - state: ', state)
             yield put(mutations.setState(state))
             yield put(mutations.mongoDataLoaded())
 

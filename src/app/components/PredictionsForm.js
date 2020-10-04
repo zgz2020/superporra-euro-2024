@@ -249,11 +249,12 @@ const mapStateToProps = (state, ownProps) => {
         predictions,
         users,
         translations,
-        loggedUser
+        //loggedUser,
+        session
     } = state
     const { predictionType, predictionID, predictionsOrResults } = ownProps
 
-    const userID = loggedUser?.userID ? loggedUser.userID : null
+    const userID = session?.id ? session.id : null
     
     return {
         newPrediction,

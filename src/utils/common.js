@@ -18,3 +18,31 @@ export const setLocalStorageUser = (idToken, expiresAt, userID) => {
     localStorage.setItem("expires_at", expiresAt)
     localStorage.setItem("user_id", userID)
 }
+
+
+
+// +++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+// Express React Full stack app LOGIN
+
+// export const getLocalStorageUser_ERF = () => {
+//     const userID = localStorage.getItem("user_id")
+
+//     return { userID}
+// }
+
+// export const setLocalStorageUser_ERF = (userID) => {
+//     localStorage.setItem("user_id", userID)
+// }
+
+export const getLocalStorageUser_ERF = () => {
+    const idToken = localStorage.getItem("id_token")
+
+    return { idToken }
+}
+
+export const setLocalStorageUser_ERF = (idToken) => {
+    localStorage.setItem("id_token", idToken)
+}
+
+// +++++++++++++++++++++++++++++++++++++++++++++++++++++

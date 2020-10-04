@@ -1,4 +1,5 @@
 import * as mutations from '../mutations'
+import { defaultState } from '../../../server/defaultState'
 
 export const loggedUser = (loggedUser = {}, action) => {
     switch (action.type) {
@@ -11,4 +12,23 @@ export const loggedUser = (loggedUser = {}, action) => {
             }
     }
     return loggedUser
+}
+
+export const session = (userSession = defaultState.session, action) => {
+    let { type, authenticated, id } = action
+
+    switch(type) {
+        case mutations.USER_PROFILE_LOADED_ERF:
+            return { 
+                ...userSession, 
+                id,
+                authenticated
+            }
+        case mutations.REQUEST_AUTHENTICATE_USER:
+            return { ...userSession, authenticated: mutations.AUTHENTICATING }
+        case mutations.PROCESSING_AUTHENTICATE_USER:
+            return { ...userSession, id, authenticated }
+        default:
+            return userSession
+    }
 }

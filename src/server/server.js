@@ -9,6 +9,11 @@ import './initialize-db';
 import { connectDB } from './connect-db'
 import { updatePredictionMatches } from './serverUtils'
 
+import uuid from 'uuid';
+import md5 from 'md5'
+import { AUTHENTICATING } from '../app/store/mutations';
+
+// import { authenticationRoute } from './authenticate'
 
 let port = process.env.PORT || 7777
 let app = express()
@@ -196,4 +201,67 @@ app.post('/user/update', async (req, res) => {
     let user = req.body.user
     await updateUser(user)
     res.status(200).send()
+})
+
+
+// ============
+
+
+app.post('/authenticate', async (req, res) => {
+
+    let { username, password } = req.body
+
+    let db = await connectDB()
+    let collection = db.collection('users')
+
+    let user = await collection.findOne({ id: username })
+    if (!user) {
+        return res.status(500).send('User not found!')
+    }
+    // let hash = md5(password)
+    // let passwordCorrect = hash === user.passwordHash;
+    let passwordCorrect = password === user.password
+    if (!passwordCorrect) {
+        return res.status(500).send('Password incorrect!')
+    }
+
+    let token = uuid()
+    let tokensCollection = db.collection('idTokens')
+    let idToken = { 
+        token, 
+        userID: user.id
+    }
+    await tokensCollection.insertOne(idToken)
+
+    let session = {
+        authenticated: 'AUTHENTICATED',
+        id: user.id,
+        idToken
+    }
+
+    res.send({ session })
+})
+
+app.post('/id-token', async (req, res) => {
+
+    let { idToken } = req.body
+
+    console.log('TEST!!!! - ID_TOKEN: ', idToken)
+
+    let db = await connectDB()
+    let tokensCollection = db.collection('idTokens')
+
+    let token = await tokensCollection.findOne({ token: idToken })
+    if (!token) {
+        return res.status(500).send('Token not valid!')
+    }
+
+    let session = {
+        authenticated: 'AUTHENTICATED',
+        id: token.userID,
+        idToken
+    }
+
+    res.send({ session })
+
 })

@@ -1,6 +1,10 @@
 import { emptyPrediction } from '../utils/config'
 
 export const defaultState = {
+    session: {
+        id: "",
+        authenticated: ""
+    },
     users: {
         byId: {},
         allIds: [] 
@@ -25,16 +29,21 @@ export const defaultState = {
 // - - - - - - - - - - - - - - - - - - - -
 
 export const defaultStateDOS = {
-    // users: [
-    //     {
-    //         id: "U1",
-    //         username: "Admin",
-    //     },
-    //     {
-    //         id: "U2",
-    //         username: "pollo",
-    //     }
-    // ],
+    users: [
+        {
+            id: "jjlanga@hotmail.com",
+            password: "Admin",
+            role: "admin"
+        },
+        {
+            id: "paco@porras.com",
+            password: "paco"
+        }
+        // {
+        //     id: "U2",
+        //     username: "pollo",
+        // }
+    ],
     // predictions: [
     //     {
     //         ...emptyPrediction, owner: "U1"
@@ -82,7 +91,7 @@ export const normalizeDefaultStateMongo = (defaultStateMongo) => {
                     ...newStateMongoNorm.users.byId,
                     [user.id]: {
                         id: user.id,
-                        email: user.email
+                        role: user.role
                     }
                 },
                 allIds: [

@@ -8,7 +8,8 @@ import { ConnectedParticipantsList } from '../ParticipantsList'
   
 
 const AccountPage = ({ 
-    loggedUser, 
+    session,
+    //loggedUser, 
     predictionsFormNew, 
     showPredictionsFormNew, 
     newPrediction, 
@@ -17,7 +18,7 @@ const AccountPage = ({
 }) => {
     
     const myPredictions = Object.keys(predictions.byId).filter(prediction => 
-        predictions.byId[prediction].owner === loggedUser.userID)
+        predictions.byId[prediction].owner === session.id)
         .reduce((myPredictionsList, owner) => {
             myPredictionsList[owner] = predictions.byId[owner]
             return myPredictionsList
@@ -27,7 +28,7 @@ const AccountPage = ({
         <div>
             <ConnectedHeader title={translations.accountPage.title} />
 
-            {loggedUser.userID ?
+            {session.id ?
                 <div>
                     <div className="card">
                         <div className="card-header">
@@ -65,14 +66,15 @@ const AccountPage = ({
 }
 
 const mapStateToProps = (state, ownProps) => {
-    const { loggedUser, newPrediction, predictions, predictionsFormNew, translations } = state
+    const { session, newPrediction, predictions, predictionsFormNew, translations } = state
 
     return {
-        loggedUser,
+        //loggedUser,
         predictionsFormNew,
         newPrediction,
         translations,
-        predictions
+        predictions,
+        session
     }
 }
 

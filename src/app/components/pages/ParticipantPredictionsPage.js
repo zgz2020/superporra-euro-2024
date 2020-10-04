@@ -46,10 +46,10 @@ const ParticipantPredictionsPage = ({
 )
 
 const mapStateToProps = (state, ownProps) => {
-    const { predictionsFormExistent, translations, predictions, loggedUser } = state
+    const { predictionsFormExistent, translations, predictions, session } = state
     let predictionID = ownProps.match.params.id
     let prediction = predictions.byId[predictionID]
-    let predictionOwner = prediction && loggedUser.userID ? loggedUser.userID === prediction.owner : false
+    let predictionOwner = prediction && session.id ? session.id === prediction.owner : false
 
     return { 
         predictionID,

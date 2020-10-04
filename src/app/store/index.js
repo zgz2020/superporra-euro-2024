@@ -3,7 +3,7 @@ import { createLogger } from 'redux-logger'
 import createSagaMiddleware from 'redux-saga'
 import * as sagas from './sagas'
 
-import { loggedUser } from './reducers/login' 
+import { loggedUser, session } from './reducers/login' 
 import { language, translations } from './reducers/language'
 import { mongoDataLoading } from './reducers/mongoData'
 import { 
@@ -24,6 +24,7 @@ const sagaMiddleware = createSagaMiddleware()
 export const store = createStore(
     combineReducers({
         loggedUser,
+        session,
         language,
         translations,
         mongoDataLoading,

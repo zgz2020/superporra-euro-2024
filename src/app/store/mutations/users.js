@@ -12,3 +12,20 @@ export const createUser = (userID, email) => ({
     userID,
     email
 })
+
+
+
+export const REQUEST_USER_CREATION_DOS = 'REQUEST_USER_CREATION_DOS'
+export const CREATE_USER_DOS = 'CREATE_USER_DOS'
+
+export const requestUserCreationDOS = (email, passwordHash) => ({
+    type: REQUEST_USER_CREATION_DOS,
+    email,
+    passwordHash
+})
+
+export const createUserDOS = (userID, passwordHash) => ({
+    type: CREATE_USER_DOS,
+    userID,
+    passwordHash
+})

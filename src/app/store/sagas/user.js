@@ -21,3 +21,18 @@ export function* userCreationSaga() {
     }
 }
 
+export function* userCreationSagaDOS() {
+    while (true) {
+        const { email, passwordHash } = yield take(mutations.REQUEST_USER_CREATION_DOS)
+        const userID = email
+
+        yield put(mutations.createUser(userID, passwordHash))
+        const userData = yield axios.post(url + '/user/new', {
+            user: {
+                id: userID,
+                password: passwordHash
+            }
+        })
+    }
+}
+
