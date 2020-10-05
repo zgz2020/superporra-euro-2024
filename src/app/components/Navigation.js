@@ -7,6 +7,22 @@ import { signIn, signOut } from '../../Auth/Auth'
 
 const hideNavBarResponsive = () => $(".navbar-collapse").collapse('hide')
 
+const navigationOption = (path, clickHandler, label, login) => {
+
+    const itemClass = login ? "nav-item nav-link mr-3 text-primary" : "nav-item nav-link mr-3"
+
+    return (
+        <Link 
+            className={itemClass}
+            to={path} 
+            onClick={clickHandler}
+            data-automation="nav-item"
+        >
+            {label}
+        </Link>
+    )
+}
+
 const Navigation = ({ translations, session, signOutRequest }) => (
     <nav className="navbar navbar-expand-lg navbar-light bg-white sticky-top">
         <ConnectedLanguagePicker />
@@ -16,18 +32,18 @@ const Navigation = ({ translations, session, signOutRequest }) => (
         </button>
         <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div className="navbar-nav">        
-                <Link className="nav-item nav-link mr-3" to="/" onClick={hideNavBarResponsive} data-automation="nav-item">{translations.navigation.home}</Link>
-                <Link className="nav-item nav-link mr-3" to="/participants" onClick={hideNavBarResponsive} data-automation="nav-item">{translations.navigation.participants}</Link> 
-                <Link className="nav-item nav-link mr-3" to="/results" onClick={hideNavBarResponsive} data-automation="nav-item">{translations.navigation.results}</Link> 
-                <Link className="nav-item nav-link mr-3" to="/scoring-rules" onClick={hideNavBarResponsive} data-automation="nav-item">{translations.navigation.scoringRules}</Link> 
+                {navigationOption('/', hideNavBarResponsive, translations.navigation.home)}
+                {navigationOption('/participants', hideNavBarResponsive, translations.navigation.participants)}
+                {navigationOption('/results', hideNavBarResponsive, translations.navigation.results)}
+                {navigationOption('/scoring-rules', hideNavBarResponsive, translations.navigation.scoringRules)}
                 {!session.id && 
-                    <Link className="nav-item nav-link mr-3 text-primary" to="/sign-in" onClick={hideNavBarResponsive} data-automation="nav-item">{translations.navigation.login}</Link>
+                    navigationOption('/sign-in', hideNavBarResponsive, translations.navigation.login, true)
                 }
                 {session.id && 
-                    <Link className="nav-item nav-link mr-3" to={`/account`} onClick={hideNavBarResponsive} data-automation="nav-item">{translations.navigation.account}</Link>
+                    navigationOption('/account', hideNavBarResponsive, translations.navigation.account)
                 }
                 {session.id && 
-                    <Link className="nav-item nav-link mr-3 text-primary" to='/' onClick={signOutRequest} data-automation="nav-item">{translations.navigation.logout}</Link>
+                    navigationOption('/', signOutRequest, translations.navigation.logout, true)
                 }
             </div>
         </div>
