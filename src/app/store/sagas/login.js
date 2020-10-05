@@ -43,10 +43,10 @@ export function* getSessionStatusSaga() {
 
 export function* userAuthenticationSaga(){
     while (true){
-        const { username, password } = yield take(mutations.REQUEST_AUTHENTICATE_USER)
+        const { username, passwordHash } = yield take(mutations.REQUEST_AUTHENTICATE_USER)
 
         try {
-            const { data } = yield axios.post(url + '/authenticate', { username, password })
+            const { data } = yield axios.post(url + '/authenticate', { username, passwordHash })
             const { authenticated, id, idToken } = data.session
 
             yield put(mutations.processAuthenticateUser(authenticated, id))

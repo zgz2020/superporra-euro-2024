@@ -209,7 +209,7 @@ app.post('/user/update', async (req, res) => {
 
 app.post('/authenticate', async (req, res) => {
 
-    let { username, password } = req.body
+    let { username, passwordHash } = req.body
 
     let db = await connectDB()
     let collection = db.collection('users')
@@ -220,7 +220,7 @@ app.post('/authenticate', async (req, res) => {
     }
     // let hash = md5(password)
     // let passwordCorrect = hash === user.passwordHash;
-    let passwordCorrect = password === user.password
+    let passwordCorrect = passwordHash === user.passwordHash
     if (!passwordCorrect) {
         return res.status(500).send('Password incorrect!')
     }

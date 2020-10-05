@@ -1,3 +1,4 @@
+import md5 from 'md5'
 import { emptyPrediction } from '../utils/config'
 
 export const defaultState = {
@@ -32,12 +33,12 @@ export const defaultStateDOS = {
     users: [
         {
             id: "jjlanga@hotmail.com",
-            password: "Admin",
+            passwordHash: md5("Admin"),
             role: "admin"
         },
         {
             id: "paco@porras.com",
-            password: "paco"
+            passwordHash: md5("paco")
         }
         // {
         //     id: "U2",

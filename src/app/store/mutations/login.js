@@ -38,10 +38,10 @@ export const AUTHENTICATED = 'AUTHENTICATED'
 export const NOT_AUTHENTICATED = 'NOT_AUTHENTICATED'
 export const USERNAME_RESERVED = 'USERNAME_RESERVED'
 
-export const requestAuthenticateUser = (username, password) => ({
+export const requestAuthenticateUser = (username, passwordHash) => ({
     type: REQUEST_AUTHENTICATE_USER,
     username,
-    password
+    passwordHash
 })
 
 export const processAuthenticateUser = (status = AUTHENTICATING, id) => ({

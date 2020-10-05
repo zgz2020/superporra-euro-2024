@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import * as mutations from '../../store/mutations'
-import { translations } from '../../store/reducers/language'
+import md5 from 'md5'
 
 const signIn = (requestAuthenticateUser, authenticated, translations, wrongCredentialsMessage) => (
     <form onSubmit={requestAuthenticateUser}>
@@ -63,7 +63,8 @@ const mapDispatchToProps = (dispatch) => {
             e.preventDefault()
             let emailAddress = e.target['emailAddress'].value
             let password = e.target['password'].value
-            dispatch(mutations.requestAuthenticateUser(emailAddress, password))
+            let passwordHash = md5(password)
+            dispatch(mutations.requestAuthenticateUser(emailAddress, passwordHash))
         }
     }
 }
