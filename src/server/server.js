@@ -152,12 +152,6 @@ export const updatePrediction = async prediction => {
     if ( finalMatches ) updatePredictionMatches(collection, id, prediction, "finalMatches")
 }
 
-export const addNewUser = async user => {
-    let db = await connectDB()
-    let collection = db.collection('users')
-    await collection.insertOne(user)
-}
-
 export const updateUser = async user => {
     let { id, username} = user
 
@@ -191,12 +185,6 @@ app.post('/prediction/update', async (req, res) => {
     res.status(200).send()
 })
 
-app.post('/user/new', async (req, res) => {
-    let user = req.body.user
-    await addNewUser(user)
-    res.status(200).send()
-})
-
 app.post('/user/update', async (req, res) => {
     let user = req.body.user
     await updateUser(user)
@@ -204,7 +192,6 @@ app.post('/user/update', async (req, res) => {
 })
 
 
-// ============
 
 
 app.post('/authenticate', async (req, res) => {
@@ -218,8 +205,7 @@ app.post('/authenticate', async (req, res) => {
     if (!user) {
         return res.status(500).send('User not found!')
     }
-    // let hash = md5(password)
-    // let passwordCorrect = hash === user.passwordHash;
+
     let passwordCorrect = passwordHash === user.passwordHash
     if (!passwordCorrect) {
         return res.status(500).send('Password incorrect!')
@@ -262,4 +248,28 @@ app.post('/id-token', async (req, res) => {
 
     res.send({ session })
 
+})
+
+app.post('/user/new', async (req, res) => {
+    let user = req.body.user
+
+    let db = await connectDB()
+    let collection = db.collection('users')
+    await collection.insertOne(user)
+
+    let token = uuid()
+    let tokensCollection = db.collection('idTokens')
+    let idToken = { 
+        token, 
+        userID: user.id
+    }
+    await tokensCollection.insertOne(idToken)
+
+    let session = {
+        authenticated: 'AUTHENTICATED',
+        id: user.id,
+        idToken
+    }
+
+    res.send({ session })
 })

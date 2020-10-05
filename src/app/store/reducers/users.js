@@ -10,12 +10,12 @@ export const users = (users = defaultState.users, action) => {
                 ...users, 
                 byId: {
                     ...users.byId,
-                    [action.userID]: {
-                        id: action.userID,
-                        email: action.email,
+                    [action.id]: {
+                        id: action.id,
+                        passwordHash: action.passwordHash,
                     }
                 },
-                allIds: [ ...users.allIds, action.userID]
+                allIds: [ ...users.allIds, action.id]
             }
         default:
             return users

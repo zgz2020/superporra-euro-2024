@@ -11,7 +11,8 @@ export const englishTranslations = {
     homepage: {
         title: "Superporra Euro 2021"
     },
-    signIn: {
+    signInPage: {
+        title: "Sign In",
         email: "Email address",
         emailPlaceholder: "my@account.com",
         password: "Password",

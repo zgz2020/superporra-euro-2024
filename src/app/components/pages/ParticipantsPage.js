@@ -7,7 +7,14 @@ import { ConnectedPredictionsFormButton } from '../PredictionsFormButton'
 import { ConnectedPredictionsForm } from '../PredictionsForm'
 import { translations } from '../../store/reducers/language'
 
-    
+const noParticipantsBlock = (translations) => (
+    <div className="card">
+        <div className="card-body p-5">
+            {translations.participantsPage.noParticipantsYet}
+        </div>
+    </div>
+)    
+
 const redirectToSignInPage = () => history.push('/sign-in') 
 const redirectToAccountPage = () => history.push('/account')
 
@@ -26,11 +33,7 @@ const ParticipantsPage = ({
             : 
             <div>
                 {noParticipants ?
-                    <div className="card">
-                        <div className="card-body p-5">
-                            {translations.participantsPage.noParticipantsYet}
-                        </div>
-                    </div>
+                    noParticipantsBlock(translations)
                     :
                     <ConnectedParticipantsList />
                 }

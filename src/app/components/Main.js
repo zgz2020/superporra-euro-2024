@@ -12,7 +12,7 @@ import { ConnectedParticipantPredictionsPage } from './pages/ParticipantPredicti
 import { ConnectedParticipantScoreDetailedPage } from './pages/ParticipantScoreDetailedPage'
 import { ConnectedScoringRulesPage } from './pages/ScoringRulesPage'
 import { ConnectedAccountPage } from './pages/AccountPage'
-import { ConnectedLoginPage } from './pages/LoginPaje'
+import { ConnectedLoginPage } from './pages/LoginPage'
 
 export const Main = () => (
     <Router history={history}>
