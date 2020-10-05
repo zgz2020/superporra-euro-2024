@@ -20,7 +20,8 @@ export const englishTranslations = {
         wrongCredentials: "Email address or password incorrect"
     },
     participantsPage: {
-        title: "Superporra Paticipants"
+        title: "Superporra Paticipants",
+        noParticipantsYet: "There are no particpants yet. Be the first one joining the competition by clicking on the 'JOIN' button!"
     },
     participantPredictionsPage: {
         title: "Predictions"

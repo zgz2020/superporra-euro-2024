@@ -20,7 +20,8 @@ export const spanishTranslations = {
         wrongCredentials: "Dirección o clave erróneas"
     },
     participantsPage: {
-        title: "Paticipantes de la Superporra"
+        title: "Paticipantes de la Superporra",
+        noParticipantsYet: "Todavía no hay ningún participante. ¡Se el primero en participar haciendo click en el botón 'PARTICIPAR'!"
     },
     participantPredictionsPage: {
         title: "Predicciones"

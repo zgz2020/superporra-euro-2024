@@ -5,14 +5,17 @@ import { ConnectedHeader } from '../Header'
 import { ConnectedParticipantsList } from '../ParticipantsList'
 import { ConnectedPredictionsFormButton } from '../PredictionsFormButton'
 import { ConnectedPredictionsForm } from '../PredictionsForm'
+import { translations } from '../../store/reducers/language'
 
-
+    
 const redirectToSignInPage = () => history.push('/sign-in') 
 const redirectToAccountPage = () => history.push('/account')
+
 
 const ParticipantsPage = ({ 
     predictionsFormNew,
     translations,
+    noParticipants,
     authenticated
 }) => (
     <div>
@@ -22,7 +25,15 @@ const ParticipantsPage = ({
             <ConnectedPredictionsForm predictionType="new" userID="" /> 
             : 
             <div>
-                <ConnectedParticipantsList />
+                {noParticipants ?
+                    <div className="card">
+                        <div className="card-body p-5">
+                            {translations.participantsPage.noParticipantsYet}
+                        </div>
+                    </div>
+                    :
+                    <ConnectedParticipantsList />
+                }
 
                 <ConnectedPredictionsFormButton predictionType="new" clickHandler={authenticated ? redirectToAccountPage : redirectToSignInPage} />
             </div>
@@ -32,12 +43,14 @@ const ParticipantsPage = ({
 
 
 const mapStateToProps = (state) => {
-    const { predictionsFormNew, translations, session } = state
+    const { predictionsFormNew, translations, session, predictions } = state
+    let noParticipants = predictions.allIds.length === 0 ? true : false
     let authenticated = session.authenticated === 'AUTHENTICATED'
 
     return {
         predictionsFormNew,
         translations,
+        noParticipants,
         authenticated
     }
 }
