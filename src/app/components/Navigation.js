@@ -5,8 +5,9 @@ import { ConnectedLanguagePicker } from './LanguagePicker'
 import * as mutations from '../store/mutations'
 import { signIn, signOut } from '../../Auth/Auth'
 
+const hideNavBarResponsive = () => $(".navbar-collapse").collapse('hide')
 
-const Navigation = ({ translations, session, signOutRequest, hideNavBarResponsive }) => (
+const Navigation = ({ translations, session, signOutRequest }) => (
     <nav className="navbar navbar-expand-lg navbar-light bg-white sticky-top">
         <ConnectedLanguagePicker />
         <div className="pr-5"></div>
@@ -43,12 +44,9 @@ const mapStateToProps = (state) => {
 
 const mapDispatchTpProps = (dispatch) => {
     return {
-        signOutRequest(e) {
-            $(".navbar-collapse").collapse('hide')
+        signOutRequest() {
+            hideNavBarResponsive()
             dispatch(mutations.signOutRequest())
-        },
-        hideNavBarResponsive(e) {
-            $(".navbar-collapse").collapse('hide')
         }
     }
 }
