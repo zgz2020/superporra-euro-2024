@@ -1,19 +1,6 @@
 import * as mutations from '../mutations'
 import { defaultState } from '../../../server/defaultState'
 
-export const loggedUser = (loggedUser = {}, action) => {
-    switch (action.type) {
-        case mutations.USER_PROFILE_LOADED:
-            return { 
-                ...loggedUser, 
-                userID: action.userID,
-                expiresAt: action.expiresAt,
-                idToken: action.idToken
-            }
-    }
-    return loggedUser
-}
-
 export const session = (userSession = defaultState.session, action) => {
     let { type, authenticated, id } = action
 

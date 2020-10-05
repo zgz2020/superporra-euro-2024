@@ -4,7 +4,6 @@ import { store } from '../store'
 import { Router, Route } from 'react-router-dom'
 import { history } from '../store/history'
 import { getLocalStorageLanguage, getMongoData, getSessionStatus } from '../store/mutations'
-
 import { ConnectedNavigation } from './Navigation'
 import { ConnectedHomePage } from './pages/HomePage'
 import { ConnectedResultsPage } from './pages/ResultsPage'
@@ -12,8 +11,7 @@ import { ConnectedParticipantsPage } from './pages/ParticipantsPage'
 import { ConnectedParticipantPredictionsPage } from './pages/ParticipantPredictionsPage'
 import { ConnectedParticipantScoreDetailedPage } from './pages/ParticipantScoreDetailedPage'
 import { ConnectedScoringRulesPage } from './pages/ScoringRulesPage'
-import { ConnectedAccountPage } from './pages/Account'
-import { ConnectedCallback } from './pages/CallbackPage'
+import { ConnectedAccountPage } from './pages/AccountPage'
 import { ConnectedLoginPage } from './pages/LoginPaje'
 
 export const Main = () => (
@@ -29,7 +27,6 @@ export const Main = () => (
                 <Route exact path="/participants/:id" render={({ match }) => (<ConnectedParticipantPredictionsPage match={match} />)} />
                 <Route exact path="/participants/score/:id" render={({ match }) => (<ConnectedParticipantScoreDetailedPage match={match} />)} />
                 <Route path="/scoring-rules" render={() => (<ConnectedScoringRulesPage />)} />
-                <Route path="/callback" render={() => (<ConnectedCallback />)}/>
                 <Route path="/account" render={() => (<ConnectedAccountPage />)} />
             </div>
         </Provider>

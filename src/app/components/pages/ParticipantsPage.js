@@ -1,14 +1,19 @@
 import React from 'react'
 import { connect } from 'react-redux' 
+import { history } from '../../store/history'
 import { ConnectedHeader } from '../Header'
 import { ConnectedParticipantsList } from '../ParticipantsList'
 import { ConnectedPredictionsFormButton } from '../PredictionsFormButton'
 import { ConnectedPredictionsForm } from '../PredictionsForm'
-import { signIn } from '../../../Auth/Auth'
+
+
+const redirectToSignInPage = () => history.push('/sign-in') 
+const redirectToAccountPage = () => history.push('/account')
 
 const ParticipantsPage = ({ 
     predictionsFormNew,
-    translations
+    translations,
+    authenticated
 }) => (
     <div>
         <ConnectedHeader title={translations.participantsPage.title} />
@@ -19,7 +24,7 @@ const ParticipantsPage = ({
             <div>
                 <ConnectedParticipantsList />
 
-                <ConnectedPredictionsFormButton predictionType="new" clickHandler={signIn} />
+                <ConnectedPredictionsFormButton predictionType="new" clickHandler={authenticated ? redirectToAccountPage : redirectToSignInPage} />
             </div>
         }
     </div>
@@ -27,10 +32,13 @@ const ParticipantsPage = ({
 
 
 const mapStateToProps = (state) => {
-    const { predictionsFormNew, predictionsSubmitted, translations } = state
+    const { predictionsFormNew, translations, session } = state
+    let authenticated = session.authenticated === 'AUTHENTICATED'
+
     return {
         predictionsFormNew,
-        translations
+        translations,
+        authenticated
     }
 }
 

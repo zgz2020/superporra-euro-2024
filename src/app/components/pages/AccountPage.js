@@ -9,7 +9,6 @@ import { ConnectedParticipantsList } from '../ParticipantsList'
 
 const AccountPage = ({ 
     session,
-    //loggedUser, 
     predictionsFormNew, 
     showPredictionsFormNew, 
     newPrediction, 
@@ -69,7 +68,6 @@ const mapStateToProps = (state, ownProps) => {
     const { session, newPrediction, predictions, predictionsFormNew, translations } = state
 
     return {
-        //loggedUser,
         predictionsFormNew,
         newPrediction,
         translations,
