@@ -32,3 +32,13 @@ export const session = (userSession = defaultState.session, action) => {
             return userSession
     }
 }
+
+export const wrongCredentialsMessage = (wrongCredentialsMessage = false, action) => {
+    switch(action.type) {
+        case mutations.SHOW_WRONG_CREDENTIALS_MESSAGE:
+            return true
+        case mutations.HIDE_WRONG_CREDENTIALS_MESSAGE:
+            return false
+    }
+    return wrongCredentialsMessage
+}

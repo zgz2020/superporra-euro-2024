@@ -58,6 +58,17 @@ export const signOutRequest = () => ({
 })
 
 
+export const SHOW_WRONG_CREDENTIALS_MESSAGE = 'SHOW_WRONG_CREDENTIALS_MESSAGE'
+export const HIDE_WRONG_CREDENTIALS_MESSAGE = 'HIDE_WRONG_CREDENTIALS_MESSAGE'
+
+export const showWrongCredentialsMessage = () => ({
+    type: SHOW_WRONG_CREDENTIALS_MESSAGE
+})
+export const hideWrongCredentialsMessage = () => ({
+    type: HIDE_WRONG_CREDENTIALS_MESSAGE
+})
+
+
 
 
 // -------- AUTH0 authentication -------------------

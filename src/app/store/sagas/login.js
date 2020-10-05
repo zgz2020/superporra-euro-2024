@@ -50,12 +50,14 @@ export function* userAuthenticationSaga(){
             const { authenticated, id, idToken } = data.session
 
             yield put(mutations.processAuthenticateUser(authenticated, id))
+            yield put(mutations.hideWrongCredentialsMessage())
 
             setLocalStorageUser_ERF(idToken.token)
 
             history.push('/account')
         } catch (e) {
             yield put(mutations.processAuthenticateUser(mutations.NOT_AUTHENTICATED))
+            yield put(mutations.showWrongCredentialsMessage())
         }
     }
 }

@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import * as mutations from '../../store/mutations'
 import { translations } from '../../store/reducers/language'
 
-const signIn = (requestAuthenticateUser, authenticated, translations) => (
+const signIn = (requestAuthenticateUser, authenticated, translations, wrongCredentialsMessage) => (
     <form onSubmit={requestAuthenticateUser}>
 
         {`${translations.signIn.email}:`}
@@ -24,11 +24,8 @@ const signIn = (requestAuthenticateUser, authenticated, translations) => (
             data-automation="password-input"
         />
 
-        {authenticated === mutations.NOT_AUTHENTICATED ? 
-            <p className="text-danger font-italic mt-2">{translations.signIn.wrongCredentials}</p>
-            :
-            null
-        }
+        {wrongCredentialsMessage &&  
+            <p className="text-danger font-italic mt-2">{translations.signIn.wrongCredentials}</p>}
 
         <button 
             type="submit" 
@@ -41,21 +38,22 @@ const signIn = (requestAuthenticateUser, authenticated, translations) => (
     </ form>
 )
 
-const LoginPage = ({ requestAuthenticateUser, authenticated, translations }) => (
+const LoginPage = ({ requestAuthenticateUser, authenticated, translations, wrongCredentialsMessage }) => (
     <div className="card">
         <div className="card-body">
-            {signIn(requestAuthenticateUser, authenticated, translations)}
+            {signIn(requestAuthenticateUser, authenticated, translations, wrongCredentialsMessage)}
         </div>
     </div>
 )
 
 const mapStateToProps = (state) => {
-    let { session, translations } = state
+    let { session, translations, wrongCredentialsMessage } = state
     let authenticated = session.authenticated
     
     return {
         authenticated,
-        translations
+        translations,
+        wrongCredentialsMessage
     }
 }
 
