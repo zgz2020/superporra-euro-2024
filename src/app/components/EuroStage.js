@@ -13,9 +13,9 @@ const EuroStage = (ownProps) => (
 
         <div className="card-body pt-3">
 
-            {ownProps.matchType === "league" ?
+            {ownProps.stage === "leagueMatches" ?
 
-                <div key={ownProps.matchType}>
+                <div key={ownProps.stage}>
                     {groupsList.map(leagueGroup => (
                         <div key={leagueGroup} className="pt-2">
                             <ConnectedLeagueGroupContainer { ...ownProps} leagueGroup={leagueGroup} />
@@ -26,8 +26,8 @@ const EuroStage = (ownProps) => (
                 :
                 <div className="container">  
                     <div className="row justify-content-center">              
-                        <div key={ownProps.matchType} className="pb-4">
-                            {Object.keys(emptyPrediction[`${ownProps.matchType}Matches`]).map(match => (
+                        <div key={ownProps.stage} className="pb-4">
+                            {Object.keys(emptyPrediction[ownProps.stage]).map(match => (
                                 <div key={match} className="pt-2 pb-2 d-flex flex-row">
                                     <ConnectedEuroMatch { ...ownProps } matchID={match} />
                                 </div>

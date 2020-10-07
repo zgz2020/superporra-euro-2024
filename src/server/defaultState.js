@@ -1,33 +1,29 @@
+import md5 from 'md5'
 import { emptyPrediction } from '../utils/config'
 
 export const defaultState = {
     session: {
-        authenticated: false
+        id: "",
+        authenticated: ""
     },
     users: {
-        byId: {
-            "U1": {
-                id: "U1",
-                username: "Admin",
-            }
-        },
-        allIds: ["U1"] 
+        byId: {},
+        allIds: [] 
     },
     predictions: {
-        byId: {
-            "U1": {
-                owner: " ",
-                winner: "???",
-                topScorer: "???",
-                leastConceded: "???",
-                leagueMatches: emptyPrediction.leagueMatches,
-                r16Matches: emptyPrediction.r16Matches,
-                quarterFinalMatches: emptyPrediction.quarterFinalMatches,
-                semiFinalMatches: emptyPrediction.semiFinalMatches,
-                finalMatches: emptyPrediction.finalMatches
-            }
-        },
-        allIds: ["U1"] 
+        byId: {},
+        allIds: [] 
+    },
+    results: {
+        id: "officialResults",
+        winner: "???",
+        topScorer: "???",
+        leastConceded: "???",
+        leagueMatches: emptyPrediction.leagueMatches,
+        r16Matches: emptyPrediction.r16Matches,
+        quarterFinalMatches: emptyPrediction.quarterFinalMatches,
+        semiFinalMatches: emptyPrediction.semiFinalMatches,
+        finalMatches: emptyPrediction.finalMatches
     }
 }
 
@@ -36,29 +32,46 @@ export const defaultState = {
 export const defaultStateDOS = {
     users: [
         {
-            id: "U1",
-            username: "Admin",
+            id: "jjlanga@hotmail.com",
+            passwordHash: md5("Admin"),
+            role: "admin"
         },
         {
-            id: "U2",
-            username: "pollo",
+            id: "paco@porras.com",
+            passwordHash: md5("paco")
         }
+        // {
+        //     id: "U2",
+        //     username: "pollo",
+        // }
     ],
-    predictions: [
+    // predictions: [
+    //     {
+    //         ...emptyPrediction, owner: "U1"
+    //     },
+    //     {
+    //         ...emptyPrediction, owner: "U2"
+    //     }
+    // ],
+    // users: [],
+    // predictions: [],
+    results: [
         {
-            ...emptyPrediction, owner: "U1"
-        },
-        {
-            ...emptyPrediction, owner: "U2"
-        }
+            id: "officialResults",
+            winner: emptyPrediction.winner,
+            topScorer: emptyPrediction.topScorer,
+            leastConceded: emptyPrediction.leastConceded,
+            leagueMatches: emptyPrediction.leagueMatches,
+            r16Matches: emptyPrediction.r16Matches,
+            quarterFinalMatches: emptyPrediction.quarterFinalMatches,
+            semiFinalMatches: emptyPrediction.semiFinalMatches,
+            finalMatches: emptyPrediction.finalMatches
+        }   
     ]
 }
 
 export const normalizeDefaultStateMongo = (defaultStateMongo) => {
     let newStateMongoNorm = {
-        session: {
-            authenticated: false
-        },
         users: {
             byId: {},
             allIds: []
@@ -66,7 +79,8 @@ export const normalizeDefaultStateMongo = (defaultStateMongo) => {
         predictions: {
             byId: {},
             allIds: []
-        }
+        },
+        results: {}
     }
 
     defaultStateMongo.users.forEach( user => {        
@@ -78,7 +92,7 @@ export const normalizeDefaultStateMongo = (defaultStateMongo) => {
                     ...newStateMongoNorm.users.byId,
                     [user.id]: {
                         id: user.id,
-                        username: user.username
+                        role: user.role
                     }
                 },
                 allIds: [
@@ -96,8 +110,10 @@ export const normalizeDefaultStateMongo = (defaultStateMongo) => {
                 ...newStateMongoNorm.predictions,
                 byId: {
                     ...newStateMongoNorm.predictions.byId,
-                    [prediction.owner]: {
+                    [prediction.id]: {
+                        id: prediction.id,
                         owner: prediction.owner,
+                        username: prediction.username,
                         winner: prediction.winner,
                         topScorer: prediction.topScorer,
                         leastConceded: prediction.leastConceded,
@@ -110,11 +126,33 @@ export const normalizeDefaultStateMongo = (defaultStateMongo) => {
                 },
                 allIds: [
                     ...newStateMongoNorm.predictions.allIds,
-                    prediction.owner
+                    prediction.id
                 ]
             }
         }
     })
+
+
+    newStateMongoNorm = {
+        ...newStateMongoNorm,
+        results: defaultStateMongo.results[0]
+    }
+
+    // defaultStateMongo.results[0]( $results => {
+    //     newStateMongoNorm = {
+    //         ...newStateMongoNorm,
+    //         results: {
+    //             winner: $results.winner,
+    //             topScorer: $results.topScorer,
+    //             leastConceded: $results.leastConceded,
+    //             leagueMatches: $results.leagueMatches,
+    //             r16Matches: $results.r16Matches,
+    //             quarterFinalMatches: $results.quarterFinalMatches,
+    //             semiFinalMatches: $results.semiFinalMatches,
+    //             finalMatches: $results.finalMatches
+    //         }
+    //     }
+    // })
 
     return newStateMongoNorm
 }

@@ -6,23 +6,61 @@ import { ConnectedGeneralPredictionScore } from '../GeneralPredictionScore'
 
 const ParticipantScoreDetailedPage = (ownProps) => (
     <div>
-        {ownProps.user ?
+        {ownProps.userPredictions ?
             <div>
-                <ConnectedHeader title={`${ownProps.translations.participantScoreDetailedPage.title}: ${ownProps.user.username}`} /> 
+                <ConnectedHeader title={`${ownProps.translations.participantScoreDetailedPage.title}: ${ownProps.userPredictions.username}`} /> 
 
-                <ConnectedStagePoints {...ownProps} stage="leagueMatches" matchType="league" />
+                <ConnectedStagePoints 
+                    {...ownProps} 
+                    stage="leagueMatches" 
+                    matchType="league" 
+                    predictionsOrResults={ownProps.userPredictions} 
+                />
 
-                <ConnectedStagePoints {...ownProps} stage="r16Matches" matchType="r16" />
+                <ConnectedStagePoints 
+                    {...ownProps} 
+                    stage="r16Matches" 
+                    matchType="r16" 
+                    predictionsOrResults={ownProps.userPredictions} 
+                />
 
-                <ConnectedStagePoints {...ownProps} stage="quarterFinalMatches" matchType="quarterFinal" />
+                <ConnectedStagePoints 
+                    {...ownProps} 
+                    stage="quarterFinalMatches" 
+                    matchType="quarterFinal" 
+                    predictionsOrResults={ownProps.userPredictions} 
+                />
 
-                <ConnectedStagePoints {...ownProps} stage="semiFinalMatches" matchType="semiFinal" />
+                <ConnectedStagePoints 
+                    {...ownProps} 
+                    stage="semiFinalMatches" 
+                    matchType="semiFinal" 
+                    predictionsOrResults={ownProps.userPredictions} 
+                />
 
-                <ConnectedStagePoints {...ownProps} stage="finalMatches" matchType="final" />
+                <ConnectedStagePoints 
+                    {...ownProps} stage="finalMatches" 
+                    matchType="final" 
+                    predictionsOrResults={ownProps.userPredictions} 
+                /> 
 
-                <ConnectedGeneralPredictionScore {...ownProps} title={ownProps.translations.predictionsForm.euroWinner} predictionName="winner" />
-                <ConnectedGeneralPredictionScore {...ownProps} title={ownProps.translations.predictionsForm.topScorer} predictionName="topScorer" />
-                <ConnectedGeneralPredictionScore {...ownProps} title={ownProps.translations.predictionsForm.leastConceded} predictionName="leastConceded" />
+                <ConnectedGeneralPredictionScore 
+                    {...ownProps} 
+                    title={ownProps.translations.predictionsForm.euroWinner} 
+                    predictionName="winner" 
+                />
+
+                <ConnectedGeneralPredictionScore 
+                    {...ownProps} 
+                    title={ownProps.translations.predictionsForm.topScorer} 
+                    predictionName="topScorer" 
+                />
+
+                <ConnectedGeneralPredictionScore 
+                    {...ownProps} 
+                    title={ownProps.translations.predictionsForm.leastConceded} 
+                    predictionName="leastConceded" 
+                />
             </div>
             :
             <div>{ownProps.translations.placeholders.loading}</div>
@@ -31,16 +69,13 @@ const ParticipantScoreDetailedPage = (ownProps) => (
 )
 
 const mapSatateToProps = (state, ownProps) => {
-    let { translations, predictions } = state 
-    let userID = ownProps.match.params.id
-    let user = state.users.byId[userID]
-    let userPredictions = predictions.byId[userID]
-    let results = predictions.byId["U1"]
+    let { translations, predictions, results } = state 
+    let predictionID = ownProps.match.params.id
+    let userPredictions = predictions.byId[predictionID]
 
     return {
         ...ownProps,
-        user,
-        userID,
+        predictionID,
         userPredictions,
         results,
         translations

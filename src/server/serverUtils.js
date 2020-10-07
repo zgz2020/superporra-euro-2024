@@ -1,4 +1,4 @@
-export const updatePredictionMatches = async (collection, owner, prediction, matchType) => {
+export const updatePredictionMatches = async (collection, id, prediction, matchType) => {
     let query = {}
 
     let matchesLength = (matchType) => {
@@ -27,7 +27,7 @@ export const updatePredictionMatches = async (collection, owner, prediction, mat
                 query[`${matchType}.${i}.homeGoals`] = prediction[matchType][i.toString()].homeGoals
 
                 await collection.updateOne( 
-                    { owner }, 
+                    { id }, 
                     { $set: query }
                 )
             }
@@ -36,7 +36,7 @@ export const updatePredictionMatches = async (collection, owner, prediction, mat
                 query[`${matchType}.${i}.awayGoals`] = prediction[matchType][i.toString()].awayGoals
 
                 await collection.updateOne( 
-                    { owner }, 
+                    { id }, 
                     { $set: query }
                 )
             }

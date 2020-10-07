@@ -1,62 +1,73 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import * as mutations from '../store/mutations'
 import { goalsMenuOptions } from '../../utils/predictions'
 
 const editFontSize = (mode) => mode === "show" ? {fontSize: "1rem"} : {fontSize: "0.9rem"}
 
-const TeamScore = ( { predictionType, userID, mode, matchType, matchID, team, changeHandler, userPredictions, newPrediction } ) => {
+const TeamScore = ( { 
+    predictionsOrResults, 
+    predictionType, 
+    mode, 
+    stage, 
+    matchID, 
+    team, 
+    setGoalsHandler
+} ) => (
+    <div className="d-flex flex-row p-0">
+        {team === "home" ? 
+            <div className="p-1" data-automation="score-team" style={ editFontSize(mode)}>
+                {predictionsOrResults[stage][matchID][`${team}Team`]}
+            </div>
+            :
+            null
+        }
 
-    let teamScorePrediction = predictionType === "new" ? newPrediction : userPredictions 
-
-    return (
-        <div className="d-flex flex-row p-0">
-            {team === "home" ? 
-                <div className="p-1" data-automation="score-team" style={ editFontSize(mode)}>
-                    {teamScorePrediction[`${matchType}Matches`][matchID][`${team}Team`]}
+        <div className="p-1" data-automation="score-goals">
+            {mode === "show" ?
+                <div>
+                    {predictionsOrResults[stage][matchID][`${team}Goals`]}
                 </div>
                 :
-                null
+                <select onChange={e => setGoalsHandler(predictionType, matchID, `${team}Goals`, e)} value={predictionsOrResults[stage][matchID][`${team}Goals`]} style={ editFontSize(mode)} >
+                    <option key="default" value=" ">{" "}</option>
+                    {goalsMenuOptions()}
+                </select>
+            
             }
+        </div>
 
-            <div className="p-1" data-automation="score-goals">
-                {mode === "show" ?
-                    <div>
-                        {teamScorePrediction[`${matchType}Matches`][matchID][`${team}Goals`]}
-                    </div>
-                    :
-                    <select onChange={e => changeHandler(predictionType, userID, matchID, `${team}Goals`, e)} value={teamScorePrediction[`${matchType}Matches`][matchID][`${team}Goals`]} style={ editFontSize(mode)} >
-                        <option key="default" value=" ">{" "}</option>
-                        {goalsMenuOptions()}
-                    </select>
-                
-                }
+        {team === "away" ? 
+            <div className="p-1" data-automation="score-team" style={ editFontSize(mode)}>
+                {predictionsOrResults[stage][matchID][`${team}Team`]}
             </div>
-
-            {team === "away" ? 
-                <div className="p-1" data-automation="score-team" style={ editFontSize(mode)}>
-                    {teamScorePrediction[`${matchType}Matches`][matchID][`${team}Team`]}
-                </div>
-                : 
-                null
-            }
-        </div> 
-)}
+            : 
+            null
+        }
+    </div> 
+)
 
 const mapStateToProps = (state, ownProps) => {
-    const { newPrediction } = state
-    const { predictionType, mode, userID, matchType, matchID, team, changeHandler } = ownProps
-    const userPredictions = state.predictions.byId[userID]
+    const { predictionType, mode, stage, matchID, team, predictionsOrResults } = ownProps 
+
     return {
         predictionType,
-        userID,
         mode,
-        matchType,
+        stage,
         matchID,
         team,
-        changeHandler,
-        userPredictions,
-        newPrediction
+        predictionsOrResults
     }
 }
 
-export const ConnectedTeamScore = connect(mapStateToProps)(TeamScore)
+const mapDispatchToProps = (dispatch, ownProps) => {
+    const { predictionsOrResults, stage } = ownProps
+
+    return {
+        setGoalsHandler(predictionType, matchKey, team, event){
+            return dispatch(mutations.setGoalsAll(predictionType, predictionsOrResults.id, stage, matchKey, team, event.target.value))
+        }
+    }
+}
+
+export const ConnectedTeamScore = connect(mapStateToProps, mapDispatchToProps)(TeamScore)

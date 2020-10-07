@@ -3,33 +3,44 @@ import { connect } from 'react-redux'
 import * as mutations from '../../store/mutations' 
 import { ConnectedResults } from '../Results'
 import { ConnectedHeader } from '../Header'
-
 import { ConnectedPredictionsForm } from '../PredictionsForm'
 import { ConnectedPredictionsFormButton } from '../PredictionsFormButton'
  
-const ResultsPage = ({ predictionsFormResults, showPredictionsFormResults, translations }) => (
+const ResultsPage = ({ role, predictionsFormResults, showPredictionsFormResults, translations, results }) => (
     <div>
         <ConnectedHeader title={translations.resultsPage.title}/>
 
         {!predictionsFormResults ?
             <div>
-                <ConnectedPredictionsFormButton predictionType="results" clickHandler={showPredictionsFormResults} />
+                {role === 'admin' ? 
+                    <ConnectedPredictionsFormButton predictionType="results" clickHandler={showPredictionsFormResults} />
+                    :
+                    null
+                }
+                
+                <ConnectedResults predictionType="results" />  
 
-                <ConnectedResults predictionType="results" userID="U1"  />
-
-                <ConnectedPredictionsFormButton predictionType="results" clickHandler={showPredictionsFormResults} />
+                {role === 'admin' ? 
+                    <ConnectedPredictionsFormButton predictionType="results" clickHandler={showPredictionsFormResults} />
+                    :
+                    null
+                }            
             </div>
             :
-            <ConnectedPredictionsForm predictionType="results" userID="U1" />
+            <ConnectedPredictionsForm predictionType="results" predictionsOrResults={results} predictionID="results" />
         }
     </div>
 )
 
 const mapStateToProps = (state) => {
-    const { predictionsFormResults, translations } = state
+    const { predictionsFormResults, translations, results, session, users } = state
+    let role = session?.id && users.byId[session.id] ? users.byId[session.id].role : "no role"
+
     return {
+        role,
         predictionsFormResults,
-        translations
+        translations,
+        results
     }
 }
 

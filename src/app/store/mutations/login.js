@@ -1,0 +1,51 @@
+export const GET_SESSION_STATUS = 'GET_SESSION_STATUS'
+export const USER_PROFILE_LOADED_ERF = 'USER_PROFILE_LOADED_ERF'
+
+export const REQUEST_AUTHENTICATE_USER = 'REQUEST_AUTHENTICATE_USER'
+export const PROCESSING_AUTHENTICATE_USER = 'PROCESSING_AUTHENTICATE_USER'
+export const AUTHENTICATING = 'AUTHENTICATING'
+export const AUTHENTICATED = 'AUTHENTICATED'
+export const NOT_AUTHENTICATED = 'NOT_AUTHENTICATED'
+export const USERNAME_RESERVED = 'USERNAME_RESERVED'
+
+export const SIGN_OUT_REQUEST = 'SIGN_OUT_REQUEST'
+
+export const SHOW_WRONG_CREDENTIALS_MESSAGE = 'SHOW_WRONG_CREDENTIALS_MESSAGE'
+export const HIDE_WRONG_CREDENTIALS_MESSAGE = 'HIDE_WRONG_CREDENTIALS_MESSAGE'
+
+
+export const getSessionStatus = () => ({
+    type: GET_SESSION_STATUS
+})
+
+export const userProfileLoaded_ERF = ( id, authenticated ) => ({
+    type: USER_PROFILE_LOADED_ERF,
+    id,
+    authenticated
+})
+
+
+export const requestAuthenticateUser = (username, passwordHash) => ({
+    type: REQUEST_AUTHENTICATE_USER,
+    username,
+    passwordHash
+})
+
+export const processAuthenticateUser = (status = AUTHENTICATING, id) => ({
+    type: PROCESSING_AUTHENTICATE_USER,
+    authenticated: status,
+    id
+})
+
+
+export const signOutRequest = () => ({
+    type: SIGN_OUT_REQUEST
+})
+
+
+export const showWrongCredentialsMessage = () => ({
+    type: SHOW_WRONG_CREDENTIALS_MESSAGE
+})
+export const hideWrongCredentialsMessage = () => ({
+    type: HIDE_WRONG_CREDENTIALS_MESSAGE
+})

@@ -1,5 +1,5 @@
 {
-    "baseUrl": "http://localhost:8080/",
+    "baseUrl": "https://feature-branch-superporra.herokuapp.com/",
     "integrationFolder": "./cypress/tests",
     "chromeWebSecurity": false,
     "video": false,

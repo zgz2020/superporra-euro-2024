@@ -29,6 +29,7 @@ const LeagueGroupContainer = (ownprops) => (
 
 const mapStateToProps = (state, ownProps) => {
     let { translations } = state
+
     return {
         ...ownProps,
         translations

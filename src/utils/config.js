@@ -110,7 +110,9 @@ export const teamsOdds = {
 }
 
 export const emptyPrediction = {
+    id: " ",
     owner: " ",
+    username: " ",
     winner: "???",
     topScorer: "???",
     leastConceded: "???",

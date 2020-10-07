@@ -7,26 +7,36 @@ import { ConnectedPredictionsFormButton } from '../PredictionsFormButton'
 import { ConnectedPredictionsForm } from '../PredictionsForm'
  
 const ParticipantPredictionsPage = ({
-    user,
+    predictionID,
+    prediction,
+    predictionOwner,
     predictionsFormExistent,
     showPredictionsFormExistent,
     translations
 }) => (
     <div>
-        {user ? 
+        {prediction ? 
             <div>
-                <ConnectedHeader title={`${translations.participantPredictionsPage.title}: ${user.username}`} />
+                <ConnectedHeader title={`${translations.participantPredictionsPage.title}: ${prediction.username}`} />
 
                 {!predictionsFormExistent ?
                     <div>
-                        <ConnectedPredictionsFormButton predictionType="existent" clickHandler={showPredictionsFormExistent} />
+                        {predictionOwner ? 
+                            <ConnectedPredictionsFormButton predictionType="existent" clickHandler={showPredictionsFormExistent} />
+                            :
+                            null
+                        }
 
-                        <ConnectedResults predictionType="existent" userID={user.id} />
+                        <ConnectedResults predictionType="existent" predictionID={predictionID} />
 
-                        <ConnectedPredictionsFormButton predictionType="existent" clickHandler={showPredictionsFormExistent} />
+                        {predictionOwner ? 
+                            <ConnectedPredictionsFormButton predictionType="existent" clickHandler={showPredictionsFormExistent} />
+                            :
+                            null
+                        }
                     </div>
                     :
-                    <ConnectedPredictionsForm predictionType="existent" userID={user.id}/> 
+                    <ConnectedPredictionsForm predictionType="existent" predictionsOrResults={prediction}/> 
                 }
             </div>
             :
@@ -36,17 +46,21 @@ const ParticipantPredictionsPage = ({
 )
 
 const mapStateToProps = (state, ownProps) => {
-    const { predictionsFormExistent, translations } = state
-    let userID = ownProps.match.params.id
-    let user = state.users.byId[userID]
+    const { predictionsFormExistent, translations, predictions, session } = state
+    let predictionID = ownProps.match.params.id
+    let prediction = predictions.byId[predictionID]
+    let predictionOwner = prediction && session.id ? session.id === prediction.owner : false
+
     return { 
-        user,
+        predictionID,
+        prediction,
+        predictionOwner,
         predictionsFormExistent,
         translations
     }
 }
 
-const mapDispatchToProps = (dispatch, ownProps) => {
+const mapDispatchToProps = (dispatch) => {
     return {
         showPredictionsFormExistent() {
             dispatch(mutations.showPredictionsFormExistent())

@@ -3,48 +3,65 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { participantTotalPoints } from '../../utils/leaderboard'
 
-const ParticipantsList = ( { users, predictions, translations } ) => (
-    <div className="container">
-        <div className="row justify-content-center">
-            <table className="table table-bordered col-sm-7 col-md-7 col-lg-5 col-xl-4" data-automation="leaderboard">
-                <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>{translations.leaderboard.name}</th>
-                        <th>{translations.leaderboard.score}</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {Object.keys(users.byId).map((key, index) => {
-                        if (key !== "U1") {
-                            return (
+const ParticipantsList = ( { 
+    mongoDataLoading, 
+    predictions, 
+    myPredictions,
+    results, 
+    translations 
+} ) => {
+
+    const predictionsList = myPredictions ? myPredictions : predictions.byId
+
+    return (
+
+        <div className="container">
+            <div className="row justify-content-center">
+
+                {mongoDataLoading ?
+                    "Loading..."
+                    :
+                    <table className="table table-bordered col-sm-7 col-md-7 col-lg-5 col-xl-4" data-automation="leaderboard">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>{translations.leaderboard.name}</th>
+                                <th>{translations.leaderboard.score}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {Object.keys(predictionsList).map((key, index) => (
                                 <tr key={index} data-automation="leaderboard-row">
                                     <td>{index}</td>
                                     <td>
                                         <Link to={`/participants/${key}`}>
-                                            {users.byId[key].username}
+                                            {predictionsList[key].username}
                                         </Link>
                                     </td>
                                     <td>
                                         <Link to={`/participants/score/${key}`}>
-                                            {participantTotalPoints(predictions.byId[key], predictions.byId["U1"])}
+                                            {participantTotalPoints(predictionsList[key], results)}
                                         </ Link>
                                     </td>
                                 </tr>
-                            )
-                        }
-                    })}
-                </tbody>
-            </table>
+                            ))}
+                        </tbody>
+                    </table>
+                }
+            </div>
         </div>
-    </div>
-)
+    )
+}
 
-const mapStateToProps = (state) => {
-    let { users, predictions, translations } = state
+const mapStateToProps = (state, ownProps) => {
+    let { mongoDataLoading, predictions, results, translations } = state
+    let { myPredictions } = ownProps
+
     return {
-        users,
+        mongoDataLoading,
         predictions,
+        myPredictions,
+        results,
         translations
     }
 }

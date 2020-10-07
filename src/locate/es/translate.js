@@ -3,13 +3,28 @@ export const spanishTranslations = {
         home: "Inicio",
         participants: "Participantes",
         results: "Resultados",
-        scoringRules: "Normas puntuación"
+        scoringRules: "Normas puntuación",
+        account: "Cuenta",
+        login: "Mi cuenta",
+        logout: "Cerrar"
     },
     homepage: {
         title: "Superporra Eurocopa 2021"
     },
+    signInPage: {
+        title: "Iniciar sesión",
+        email: "Correo electrónico",
+        emailPlaceholder: "mi@cuenta.com",
+        password: "Clave",
+        passwordPlaceholder: "miClave",
+        signIn: "Iniciar sesión",
+        wrongCredentials: "Dirección o clave erróneas",
+        signUpHeader: "¿Aún no tienes una cuenta? ¡Crea una aquí mismo!",
+        signUp: "Crear cuenta"
+    },
     participantsPage: {
-        title: "Paticipantes de la Superporra"
+        title: "Paticipantes de la Superporra",
+        noParticipantsYet: "Todavía no hay ningún participante. ¡Se el primero en participar haciendo click en el botón 'PARTICIPAR'!"
     },
     participantPredictionsPage: {
         title: "Predicciones"
@@ -22,6 +37,15 @@ export const spanishTranslations = {
     },
     resultsPage: {
         title: "Resultados Oficiales"
+    },
+    accountPage: {
+        title: "Mi cuenta",
+        notSignedIn: {
+            title: "Sesión no iniciada",
+            description: "Tienes que iniciar sesión para acceder a tu cuenta. Para iniciar sesión, haz click en la opción 'Mi cuenta' del menú principal."
+        },
+        myBets: "Mis apuestas",
+        noBets: "Aún no tienes ninguna apuesta. Haz click en el botón 'PARTICIPAR' para crear tus apuestas."
     },
     leaderboard: {
         name: "Nombre",
@@ -89,7 +113,7 @@ export const spanishTranslations = {
         generateRandomPredictions: "Generar Predicciones Aleatorias",
         predictionsSubmitted: "¡Se han enviado tus predicciones!",
         note: "Nota",
-        or: "o"       
+        or: "o"
     },
     placeholders: {
         underConstruction: "En construcción",

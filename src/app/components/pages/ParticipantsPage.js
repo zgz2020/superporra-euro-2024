@@ -1,16 +1,29 @@
 import React from 'react'
 import { connect } from 'react-redux' 
-import * as mutations from '../../store/mutations'
+import { history } from '../../store/history'
 import { ConnectedHeader } from '../Header'
 import { ConnectedParticipantsList } from '../ParticipantsList'
 import { ConnectedPredictionsFormButton } from '../PredictionsFormButton'
 import { ConnectedPredictionsForm } from '../PredictionsForm'
+import { translations } from '../../store/reducers/language'
+
+const noParticipantsBlock = (translations) => (
+    <div className="card">
+        <div className="card-body p-5">
+            {translations.participantsPage.noParticipantsYet}
+        </div>
+    </div>
+)    
+
+const redirectToSignInPage = () => history.push('/sign-in') 
+const redirectToAccountPage = () => history.push('/account')
+
 
 const ParticipantsPage = ({ 
     predictionsFormNew,
-    showPredictionsFormNew,
-    predictionsSubmitted,
-    translations
+    translations,
+    noParticipants,
+    authenticated
 }) => (
     <div>
         <ConnectedHeader title={translations.participantsPage.title} />
@@ -19,39 +32,30 @@ const ParticipantsPage = ({
             <ConnectedPredictionsForm predictionType="new" userID="" /> 
             : 
             <div>
-                <ConnectedParticipantsList />
+                {noParticipants ?
+                    noParticipantsBlock(translations)
+                    :
+                    <ConnectedParticipantsList />
+                }
 
-                <ConnectedPredictionsFormButton predictionType="new" clickHandler={showPredictionsFormNew} />
+                <ConnectedPredictionsFormButton predictionType="new" clickHandler={authenticated ? redirectToAccountPage : redirectToSignInPage} />
             </div>
-        }
-
-        {predictionsSubmitted ? 
-            <div className="card mx-auto">
-                <div className="card-body text-center" data-automation="prediction-submitted-success">
-                    {translations.common.predictionsSubmitted}
-                </div>
-            </div> 
-            : null
         }
     </div>
 )
 
+
 const mapStateToProps = (state) => {
-    const { predictionsFormNew, predictionsSubmitted, translations } = state
+    const { predictionsFormNew, translations, session, predictions } = state
+    let noParticipants = predictions.allIds.length === 0 ? true : false
+    let authenticated = session.authenticated === 'AUTHENTICATED'
+
     return {
         predictionsFormNew,
-        predictionsSubmitted,
-        translations
+        translations,
+        noParticipants,
+        authenticated
     }
 }
 
-const mapDispatchToProps = (dispatch) => {
-    return {
-        showPredictionsFormNew() {
-            dispatch(mutations.showPredictionsFormNew())
-            dispatch(mutations.hidePredictionsSubmitted())
-        }
-    }
-}
-
-export const ConnectedParticipantsPage = connect(mapStateToProps, mapDispatchToProps)(ParticipantsPage)
+export const ConnectedParticipantsPage = connect(mapStateToProps)(ParticipantsPage)
