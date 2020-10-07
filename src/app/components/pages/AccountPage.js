@@ -22,7 +22,7 @@ const AccountPage = ({
             myPredictionsList[owner] = predictions.byId[owner]
             return myPredictionsList
         }, {})
-        
+
     return (
         <div>
             <ConnectedHeader title={translations.accountPage.title} />
@@ -34,9 +34,9 @@ const AccountPage = ({
                             {translations.accountPage.myBets}
                         </div>
                         <div className="card-body">
-                            {myPredictions.length === 0 ? 
-                                translations.accountPage.noBets 
-                                : 
+                            {Object.keys(myPredictions).length === 0 ?
+                                translations.accountPage.noBets                                 
+                                :
                                 <ConnectedParticipantsList myPredictions={myPredictions} />
                             }
                         </div>

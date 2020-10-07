@@ -18,7 +18,9 @@ export const englishTranslations = {
         password: "Password",
         passwordPlaceholder: "myPassword",
         signIn: "Sign In",
-        wrongCredentials: "Email address or password incorrect"
+        wrongCredentials: "Email address or password incorrect",
+        signUpHeader: "Don't have an account yet? Sign Up here!",
+        signUp: "Sign Up"
     },
     participantsPage: {
         title: "Superporra Paticipants",

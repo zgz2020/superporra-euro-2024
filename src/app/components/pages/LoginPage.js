@@ -56,10 +56,10 @@ const LoginPage = ({ requestAuthenticateUser, requestCreateUser, authenticated, 
 
         <div className="card mt-3">
             <div className="card-header">
-                Don't have an account yet? Sign Up here!
+                {translations.signInPage.signUpHeader}
             </ div>
         </div>
-        {credentialsForm(requestCreateUser, authenticated, translations, wrongCredentialsMessage, 'SIGN UP')}
+        {credentialsForm(requestCreateUser, authenticated, translations, wrongCredentialsMessage, translations.signInPage.signUp)}
 
     </div>
 )

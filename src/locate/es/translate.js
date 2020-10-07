@@ -18,7 +18,9 @@ export const spanishTranslations = {
         password: "Clave",
         passwordPlaceholder: "miClave",
         signIn: "Iniciar sesión",
-        wrongCredentials: "Dirección o clave erróneas"
+        wrongCredentials: "Dirección o clave erróneas",
+        signUpHeader: "¿Aún no tienes una cuenta? ¡Crea una aquí mismo!",
+        signUp: "Crear cuenta"
     },
     participantsPage: {
         title: "Paticipantes de la Superporra",
