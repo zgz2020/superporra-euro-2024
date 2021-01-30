@@ -77,17 +77,18 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     let emailAddress = (e) => e.target['emailAddress'].value
-    let password = (e) => e.target['password'].value
-    let passwordHash = (password) => md5(password)
+    // let password = (e) => e.target['password'].value
+    // let passwordHash = (password) => md5(password)
+    let passwordHash = (e) => md5(e.target['password'].value)
 
     return {
         requestAuthenticateUser(e) {
             e.preventDefault()
-            dispatch(mutations.requestAuthenticateUser(emailAddress(e), passwordHash(password(e))))
+            dispatch(mutations.requestAuthenticateUser(emailAddress(e), passwordHash(e)))
         },
         requestCreateUser(e) {
             e.preventDefault()
-            dispatch(mutations.requestUserCreation(emailAddress(e), passwordHash(password(e))))
+            dispatch(mutations.requestUserCreation(emailAddress(e), passwordHash(e)))
         }
     }
 }
