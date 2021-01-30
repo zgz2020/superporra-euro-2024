@@ -1,0 +1,1 @@
+export const userExists = (users, newUser) => users.includes(newUser) ? true : false

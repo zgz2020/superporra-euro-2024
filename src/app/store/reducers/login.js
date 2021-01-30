@@ -20,12 +20,42 @@ export const session = (userSession = defaultState.session, action) => {
     }
 }
 
-export const wrongCredentialsMessage = (wrongCredentialsMessage = false, action) => {
+export const emailNotRegisteredMessage = (emailNotRegisteredMessage = false, action) => {
     switch(action.type) {
-        case mutations.SHOW_WRONG_CREDENTIALS_MESSAGE:
+        case mutations.SHOW_EMAIL_NOT_REGISTERED_MESSAGE:
             return true
-        case mutations.HIDE_WRONG_CREDENTIALS_MESSAGE:
+        case mutations.HIDE_EMAIL_NOT_REGISTERED_MESSAGE:
             return false
     }
-    return wrongCredentialsMessage
+    return emailNotRegisteredMessage
+}
+
+export const emailAlreadyRegisteredMessage = (emailAlreadyRegisteredMessage = false, action) => {
+    switch(action.type) {
+        case mutations.SHOW_EMAIL_ALREADY_REGISTERED_MESSAGE:
+            return true
+        case mutations.HIDE_EMAIL_ALREADY_REGISTERED_MESSAGE:
+            return false
+    }
+    return emailAlreadyRegisteredMessage
+}
+
+export const incorrectPasswordMessage = (incorrectPasswordMessage = false, action) => {
+    switch(action.type) {
+        case mutations.SHOW_INCORRECT_PASSWORD_MESSAGE:
+            return true
+        case mutations.HIDE_INCORRECT_PASSWORD_MESSAGE:
+            return false
+    }
+    return incorrectPasswordMessage
+}
+
+export const noPasswordMessage = (noPasswordMessage = false, action) => {
+    switch(action.type) {
+        case mutations.SHOW_NO_PASSWORD_MESSAGE:
+            return true
+        case mutations.HIDE_NO_PASSWORD_MESSAGE:
+            return false
+    }
+    return noPasswordMessage
 }

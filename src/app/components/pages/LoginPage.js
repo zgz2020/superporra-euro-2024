@@ -5,7 +5,17 @@ import * as mutations from '../../store/mutations'
 import { ConnectedHeader } from '../Header'
 
 
-const credentialsForm = (submitHandler, authenticated, translations, wrongCredentialsMessage, buttonLabel) => (
+const emailErrorText = (type, translations) => {
+    if (type == 'signIn') return translations.signInPage.emailNotRegistered
+    if (type == 'signUp') return translations.signInPage.emailAlreadyRegistered
+}
+
+const passwordErrorText = (type, translations) => {
+    if (type == 'signIn') return translations.signInPage.wrongPassword
+    if (type == 'signUp') return translations.signInPage.noPassword
+}
+
+const credentialsForm = (type, submitHandler, authenticated, translations, errorMessageEmail, errorMessagePassword, buttonLabel) => (
     <div className="card">
         <div className="card-body">
 
@@ -20,6 +30,9 @@ const credentialsForm = (submitHandler, authenticated, translations, wrongCreden
                     data-automation="email-address-input"
                 />
 
+                {errorMessageEmail &&  
+                    <p className="text-danger font-italic mt-2">{emailErrorText(type, translations)}</p>}
+
                 {`${translations.signInPage.password}:`}
                 <input 
                     type="password" 
@@ -29,8 +42,8 @@ const credentialsForm = (submitHandler, authenticated, translations, wrongCreden
                     data-automation="password-input"
                 />
 
-                {wrongCredentialsMessage &&  
-                    <p className="text-danger font-italic mt-2">{translations.signInPage.wrongCredentials}</p>}
+                {errorMessagePassword &&  
+                    <p className="text-danger font-italic mt-2">{passwordErrorText(type, translations)}</p>}
 
                 <button 
                     type="submit" 
@@ -48,37 +61,56 @@ const credentialsForm = (submitHandler, authenticated, translations, wrongCreden
 )
 
 
-const LoginPage = ({ requestAuthenticateUser, requestCreateUser, authenticated, translations, wrongCredentialsMessage }) => (
+const LoginPage = ({ 
+    requestAuthenticateUser,
+    requestCreateUser,
+    authenticated,
+    translations,
+    emailNotRegisteredMessage,
+    emailAlreadyRegisteredMessage,
+    incorrectPasswordMessage,
+    noPasswordMessage,  
+}) => (
     <div>
         <ConnectedHeader title={translations.signInPage.title} />
 
-        {credentialsForm(requestAuthenticateUser, authenticated, translations, wrongCredentialsMessage, translations.signInPage.signIn)}
+        {credentialsForm('signIn', requestAuthenticateUser, authenticated, translations, emailNotRegisteredMessage, incorrectPasswordMessage, translations.signInPage.signIn)}
 
         <div className="card mt-3">
             <div className="card-header">
                 {translations.signInPage.signUpHeader}
             </ div>
         </div>
-        {credentialsForm(requestCreateUser, authenticated, translations, wrongCredentialsMessage, translations.signInPage.signUp)}
+        {credentialsForm('signUp', requestCreateUser, authenticated, translations, emailAlreadyRegisteredMessage, noPasswordMessage, translations.signInPage.signUp)}
 
     </div>
 )
 
 const mapStateToProps = (state) => {
-    let { session, translations, wrongCredentialsMessage } = state
+    let { 
+        session,
+        translations, 
+        emailNotRegisteredMessage,
+        emailAlreadyRegisteredMessage,
+        incorrectPasswordMessage,
+        noPasswordMessage,  
+    } = state
     let authenticated = session.authenticated
-    
+
+    console.log('LOGIN - STATE:', state)
+
     return {
         authenticated,
         translations,
-        wrongCredentialsMessage
+        emailNotRegisteredMessage,
+        emailAlreadyRegisteredMessage,
+        incorrectPasswordMessage,
+        noPasswordMessage,  
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
     let emailAddress = (e) => e.target['emailAddress'].value
-    // let password = (e) => e.target['password'].value
-    // let passwordHash = (password) => md5(password)
     let passwordHash = (e) => md5(e.target['password'].value)
 
     return {

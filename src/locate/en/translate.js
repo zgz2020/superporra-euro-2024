@@ -18,7 +18,10 @@ export const englishTranslations = {
         password: "Password",
         passwordPlaceholder: "myPassword",
         signIn: "Sign In",
-        wrongCredentials: "Email address or password incorrect",
+        emailNotRegistered: "Email address not registered. Please sign up",
+        emailAlreadyRegistered: "Email address already registered",
+        wrongPassword: "Password incorrect",
+        noPassword: "You must enter a password",
         signUpHeader: "Don't have an account yet? Sign Up here!",
         signUp: "Sign Up"
     },
