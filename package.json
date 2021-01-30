@@ -9,7 +9,6 @@
     "cy:test": "cypress run --headless --spec=cypress/tests/*.test.js --browser chrome",
     "deploy": "npm run build && git commit -a -m deployment && git push heroku master",
     "dev": "webpack-dev-server --open",
-    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install npm && run build",
     "initialize": "babel-node src/server/initialize-db",
     "server": "cross-env NODE_ENV=production babel-node src/server",
     "server-dev": "nodemon src/server --exec babel-node src/server",
