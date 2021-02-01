@@ -17,9 +17,11 @@ export function* userCreationSaga() {
         if (userExists(allUsers.allIds, userID)) {
             yield put(mutations.showEmailAlreadyRegisteredMessage())
         } else if (passwordHash == 'd41d8cd98f00b204e9800998ecf8427e' ) {
+            yield put(mutations.hideEmailAlreadyRegisteredMessage())
             yield put(mutations.showNoPasswordMessage())
         } else {
             yield put(mutations.hideEmailAlreadyRegisteredMessage())
+            yield put(mutations.hideNoPasswordMessage())
             yield put(mutations.createUser(userID, passwordHash))
         
             const { data } = yield axios.post(url + '/user/new', {
