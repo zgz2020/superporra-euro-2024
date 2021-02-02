@@ -97,8 +97,6 @@ const mapStateToProps = (state) => {
     } = state
     let authenticated = session.authenticated
 
-    console.log('LOGIN - STATE:', state)
-
     return {
         authenticated,
         translations,
