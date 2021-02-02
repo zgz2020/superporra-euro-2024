@@ -1,10 +1,10 @@
 export const leagueGroups = {
     "A": ["Italy", "Switzerland", "Turkey", "Wales"], 
     "B": ["Belgium", "Denmark", "Finland", "Russia"], 
-    "C": ["Austria", "Netherlands", "Ukraine", "Play-off D"], 
-    "D": ["Croatia", "Czech Republic", "England", "Play-off C"], 
-    "E": ["Poland", "Spain", "Sweden", "Play-off B"],
-    "F": ["France", "Germany", "Portugal", "Play-off A"]
+    "C": ["Austria", "Netherlands", "North Macedonia", "Ukraine"], 
+    "D": ["Croatia", "Czech Republic", "England", "Scotland"], 
+    "E": ["Poland", "Slovakia", "Spain", "Sweden"],
+    "F": ["France", "Germany", "Hungary", "Portugal"]
 } 
 
 export const groupsList = Object.keys(leagueGroups)
@@ -21,20 +21,20 @@ export const countryShortNames = {
     [leagueGroups["B"][3]]: "RUS", 
     [leagueGroups["C"][0]]: "AUT", 
     [leagueGroups["C"][1]]: "NED", 
-    [leagueGroups["C"][2]]: "UKR", 
-    [leagueGroups["C"][3]]: "POD", 
+    [leagueGroups["C"][2]]: "MKD", 
+    [leagueGroups["C"][3]]: "UKR", 
     [leagueGroups["D"][0]]: "CRO", 
     [leagueGroups["D"][1]]: "CZE", 
     [leagueGroups["D"][2]]: "ENG", 
-    [leagueGroups["D"][3]]: "POC", 
+    [leagueGroups["D"][3]]: "SCO", 
     [leagueGroups["E"][0]]: "POL", 
-    [leagueGroups["E"][1]]: "ESP", 
-    [leagueGroups["E"][2]]: "SWE", 
-    [leagueGroups["E"][3]]: "POB",
+    [leagueGroups["E"][1]]: "SVK", 
+    [leagueGroups["E"][2]]: "ESP", 
+    [leagueGroups["E"][3]]: "SWE",
     [leagueGroups["F"][0]]: "FRA", 
     [leagueGroups["F"][1]]: "GER", 
-    [leagueGroups["F"][2]]:"POR", 
-    [leagueGroups["F"][3]]: "POA"
+    [leagueGroups["F"][2]]: "HUN", 
+    [leagueGroups["F"][3]]: "POR"
 }
 
 const leagueGroupFirstAndLastMatches = {
