@@ -1,8 +1,8 @@
 {
-    "baseUrl": "https://feature-branch-superporra.herokuapp.com/",
+    "baseUrl": "https://superporra2021.herokuapp.com",
     "integrationFolder": "./cypress/tests",
     "chromeWebSecurity": false,
     "video": false,
     "trashAssetsBeforeRuns": false,
-    "blacklistHosts": "www.googletagmanager.com"
+    "blockHosts": "www.googletagmanager.com"
 }

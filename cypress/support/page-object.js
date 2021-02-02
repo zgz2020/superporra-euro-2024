@@ -36,9 +36,13 @@ export const selectors = {
     predictionsSubittedMessage: automationSelector("prediction-submitted-success"),
 
     resultsContainer: automationSelector("results-container"),
-    firstScoreGoals: `${automationSelector("score-goals")}:nth(0)`
-}
+    firstScoreGoals: `${automationSelector("score-goals")}:nth(0)`,
 
+    emailInput: automationSelector("email-address-input"),
+    passwordInput: automationSelector("password-input"),
+    submitButton: '.btn-primary'
+}
+ 
 
 export const clickOnCTA = (cta) => cy.get(cta).click()
 
@@ -179,3 +183,14 @@ export const updateFirstMatchScore = (goals) =>
 
 export const checkFirstMatchScoreGoals = (goals) => 
     cy.get(selectors.firstScoreGoals).invoke('text').should('eq', goals)
+
+
+
+// Sign In / Up
+
+export const signIn = (email, password) => {
+    cy.get(selectors.emailInput).eq(0).type(email)
+        .get(selectors.passwordInput).eq(0).type(password)
+        .get(selectors.submitButton).eq(0).click()
+        .wait(500)
+}
