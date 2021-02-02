@@ -18,7 +18,10 @@ export const spanishTranslations = {
         password: "Clave",
         passwordPlaceholder: "miClave",
         signIn: "Iniciar sesión",
-        wrongCredentials: "Dirección o clave erróneas",
+        emailNotRegistered: "Dirección de correo no registrada",
+        emailAlreadyRegistered: "Dirección de correo ya está registrada",
+        wrongPassword: "Clave incorrecta",
+        noPassword: "Debes introducir una clave",
         signUpHeader: "¿Aún no tienes una cuenta? ¡Crea una aquí mismo!",
         signUp: "Crear cuenta"
     },

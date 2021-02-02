@@ -13,7 +13,6 @@ import uuid from 'uuid';
 import md5 from 'md5'
 import { AUTHENTICATING } from '../app/store/mutations';
 
-// import { authenticationRoute } from './authenticate'
 
 let port = process.env.PORT || 7777
 let app = express()
@@ -206,7 +205,7 @@ app.post('/authenticate', async (req, res) => {
         return res.status(500).send('User not found!')
     }
 
-    let passwordCorrect = passwordHash === user.passwordHash
+    let passwordCorrect = passwordHash === user.password
     if (!passwordCorrect) {
         return res.status(500).send('Password incorrect!')
     }

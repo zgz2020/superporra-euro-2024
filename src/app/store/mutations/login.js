@@ -10,8 +10,15 @@ export const USERNAME_RESERVED = 'USERNAME_RESERVED'
 
 export const SIGN_OUT_REQUEST = 'SIGN_OUT_REQUEST'
 
-export const SHOW_WRONG_CREDENTIALS_MESSAGE = 'SHOW_WRONG_CREDENTIALS_MESSAGE'
-export const HIDE_WRONG_CREDENTIALS_MESSAGE = 'HIDE_WRONG_CREDENTIALS_MESSAGE'
+export const SHOW_EMAIL_NOT_REGISTERED_MESSAGE = 'SHOW_EMAIL_NOT_REGISTERED_MESSAGE'
+export const HIDE_EMAIL_NOT_REGISTERED_MESSAGE = 'HIDE_EMAIL_NOT_REGISTERED_MESSAGE'
+export const SHOW_EMAIL_ALREADY_REGISTERED_MESSAGE = 'SHOW_EMAIL_ALREADY_REGISTERED_MESSAGE'
+export const HIDE_EMAIL_ALREADY_REGISTERED_MESSAGE = 'HIDE_EMAIL_ALREADY_REGISTERED_MESSAGE'
+
+export const SHOW_INCORRECT_PASSWORD_MESSAGE = 'SHOW_INCORRECT_PASSWORD_MESSAGE'
+export const HIDE_INCORRECT_PASSWORD_MESSAGE = 'HIDE_INCORRECT_PASSWORD_MESSAGE'
+export const SHOW_NO_PASSWORD_MESSAGE = 'SHOW_NO_PASSWORD_MESSAGE'
+export const HIDE_NO_PASSWORD_MESSAGE = 'HIDE_NO_PASSWORD_MESSAGE'
 
 
 export const getSessionStatus = () => ({
@@ -43,9 +50,30 @@ export const signOutRequest = () => ({
 })
 
 
-export const showWrongCredentialsMessage = () => ({
-    type: SHOW_WRONG_CREDENTIALS_MESSAGE
+export const showEmailNotRegisteredMessage = () => ({
+    type: SHOW_EMAIL_NOT_REGISTERED_MESSAGE
 })
-export const hideWrongCredentialsMessage = () => ({
-    type: HIDE_WRONG_CREDENTIALS_MESSAGE
+export const hideEmailNotRegisteredMessage = () => ({
+    type: HIDE_EMAIL_NOT_REGISTERED_MESSAGE
+})
+
+export const showEmailAlreadyRegisteredMessage = () => ({
+    type: SHOW_EMAIL_ALREADY_REGISTERED_MESSAGE
+})
+export const hideEmailAlreadyRegisteredMessage = () => ({
+    type: HIDE_EMAIL_ALREADY_REGISTERED_MESSAGE
+})
+
+export const showIncorrectPasswordMessage = () => ({
+    type: SHOW_INCORRECT_PASSWORD_MESSAGE
+})
+export const hideIncorrectPasswordMessage = () => ({
+    type: HIDE_INCORRECT_PASSWORD_MESSAGE
+})
+
+export const showNoPasswordMessage = () => ({
+    type: SHOW_NO_PASSWORD_MESSAGE
+})
+export const hideNoPasswordMessage = () => ({
+    type: HIDE_NO_PASSWORD_MESSAGE
 })
