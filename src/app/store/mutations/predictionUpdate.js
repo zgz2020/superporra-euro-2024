@@ -36,8 +36,9 @@ export const updatePrediction = (predictionID, prediction) => ({
 })
 
 
-export const setUsernameExistentPrediction = (username) => ({
+export const setUsernameExistentPrediction = (predictionID, username) => ({
     type: SET_USERNAME_EXISTENT_PREDICTION,
+    predictionID,
     username
 })
 

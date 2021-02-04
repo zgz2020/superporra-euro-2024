@@ -4,5 +4,6 @@
     "chromeWebSecurity": false,
     "video": false,
     "trashAssetsBeforeRuns": false,
+    "retries": 2,
     "blockHosts": "www.googletagmanager.com"
 }
