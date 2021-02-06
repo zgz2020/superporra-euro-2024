@@ -74,4 +74,4 @@ Check testing documentation [here](./docs/TESTING.md).
 - `Participant's Detailed Scores` page -> Knock-out stages -> Actual list of teams qualified should be displayed as well
 - Sign Up -> Check if `email address` already in use
 - Create new prediction -> Check if `username` already in use
-- Adding `private leagues` functionality
+- Adding `private leagues` functionality.
