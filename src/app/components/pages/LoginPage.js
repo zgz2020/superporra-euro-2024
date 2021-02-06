@@ -15,7 +15,7 @@ const passwordErrorText = (type, translations) => {
     if (type == 'signUp') return translations.signInPage.noPassword
 }
 
-const credentialsForm = (type, submitHandler, authenticated, translations, errorMessageEmail, errorMessagePassword, buttonLabel) => (
+const credentialsForm = (type, submitHandler, authenticated, translations, noEmailMessage, errorMessageEmail, errorMessagePassword, buttonLabel) => (
     <div className="card">
         <div className="card-body">
 
@@ -29,6 +29,9 @@ const credentialsForm = (type, submitHandler, authenticated, translations, error
                     className="form-control" 
                     data-automation="email-address-input"
                 />
+
+                {noEmailMessage &&  
+                    <p className="text-danger font-italic mt-2">{translations.signInPage.noEmail}</p>}
 
                 {errorMessageEmail &&  
                     <p className="text-danger font-italic mt-2">{emailErrorText(type, translations)}</p>}
@@ -66,6 +69,8 @@ const LoginPage = ({
     requestCreateUser,
     authenticated,
     translations,
+    noEmailSignInMessage,
+    noEmailSignUpMessage,
     emailNotRegisteredMessage,
     emailAlreadyRegisteredMessage,
     incorrectPasswordMessage,
@@ -74,14 +79,14 @@ const LoginPage = ({
     <div>
         <ConnectedHeader title={translations.signInPage.title} />
 
-        {credentialsForm('signIn', requestAuthenticateUser, authenticated, translations, emailNotRegisteredMessage, incorrectPasswordMessage, translations.signInPage.signIn)}
+        {credentialsForm('signIn', requestAuthenticateUser, authenticated, translations, noEmailSignInMessage, emailNotRegisteredMessage, incorrectPasswordMessage, translations.signInPage.signIn)}
 
         <div className="card mt-3">
             <div className="card-header">
                 {translations.signInPage.signUpHeader}
             </ div>
         </div>
-        {credentialsForm('signUp', requestCreateUser, authenticated, translations, emailAlreadyRegisteredMessage, noPasswordMessage, translations.signInPage.signUp)}
+        {credentialsForm('signUp', requestCreateUser, authenticated, translations, noEmailSignUpMessage, emailAlreadyRegisteredMessage, noPasswordMessage, translations.signInPage.signUp)}
 
     </div>
 )
@@ -89,7 +94,9 @@ const LoginPage = ({
 const mapStateToProps = (state) => {
     let { 
         session,
-        translations, 
+        translations,
+        noEmailSignInMessage,
+        noEmailSignUpMessage,
         emailNotRegisteredMessage,
         emailAlreadyRegisteredMessage,
         incorrectPasswordMessage,
@@ -100,6 +107,8 @@ const mapStateToProps = (state) => {
     return {
         authenticated,
         translations,
+        noEmailSignInMessage,
+        noEmailSignUpMessage,
         emailNotRegisteredMessage,
         emailAlreadyRegisteredMessage,
         incorrectPasswordMessage,

@@ -10,6 +10,10 @@ export const USERNAME_RESERVED = 'USERNAME_RESERVED'
 
 export const SIGN_OUT_REQUEST = 'SIGN_OUT_REQUEST'
 
+export const SHOW_NO_EMAIL_SIGN_IN_MESSAGE = 'SHOW_NO_EMAIL_SIGN_IN_MESSAGE'
+export const HIDE_NO_EMAIL_SIGN_IN_MESSAGE = 'HIDE_NO_EMAIL_SIGN_IN_MESSAGE'
+export const SHOW_NO_EMAIL_SIGN_UP_MESSAGE = 'SHOW_NO_EMAIL_SIGN_UP_MESSAGE'
+export const HIDE_NO_EMAIL_SIGN_UP_MESSAGE = 'HIDE_NO_EMAIL_SIGN_UP_MESSAGE'
 export const SHOW_EMAIL_NOT_REGISTERED_MESSAGE = 'SHOW_EMAIL_NOT_REGISTERED_MESSAGE'
 export const HIDE_EMAIL_NOT_REGISTERED_MESSAGE = 'HIDE_EMAIL_NOT_REGISTERED_MESSAGE'
 export const SHOW_EMAIL_ALREADY_REGISTERED_MESSAGE = 'SHOW_EMAIL_ALREADY_REGISTERED_MESSAGE'
@@ -49,6 +53,20 @@ export const signOutRequest = () => ({
     type: SIGN_OUT_REQUEST
 })
 
+
+export const showNoEmailSignInMessage = () => ({
+    type: SHOW_NO_EMAIL_SIGN_IN_MESSAGE
+})
+export const hideNoEmailSignInMessage = () => ({
+    type: HIDE_NO_EMAIL_SIGN_IN_MESSAGE
+})
+
+export const showNoEmailSignUpMessage = () => ({
+    type: SHOW_NO_EMAIL_SIGN_UP_MESSAGE
+})
+export const hideNoEmailSignUpMessage = () => ({
+    type: HIDE_NO_EMAIL_SIGN_UP_MESSAGE
+})
 
 export const showEmailNotRegisteredMessage = () => ({
     type: SHOW_EMAIL_NOT_REGISTERED_MESSAGE

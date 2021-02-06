@@ -23,7 +23,7 @@ import {
 import { registeredUser } from '../support/testData'
 
 
-describe('Elements rendered and links - NEW User with no predictions', () => {
+describe('My Account - New User with no predictions', () => {
 
     // TODO !!!
     // after(() => {

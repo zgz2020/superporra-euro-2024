@@ -20,6 +20,28 @@ export const session = (userSession = defaultState.session, action) => {
     }
 }
 
+
+
+export const noEmailSignInMessage = (noEmailSignInMessage = false, action) => {
+    switch(action.type) {
+        case mutations.SHOW_NO_EMAIL_SIGN_IN_MESSAGE:
+            return true
+        case mutations.HIDE_NO_EMAIL_SIGN_IN_MESSAGE:
+            return false
+    }
+    return noEmailSignInMessage
+}
+
+export const noEmailSignUpMessage = (noEmailSignUpMessage = false, action) => {
+    switch(action.type) {
+        case mutations.SHOW_NO_EMAIL_SIGN_UP_MESSAGE:
+            return true
+        case mutations.HIDE_NO_EMAIL_SIGN_UP_MESSAGE:
+            return false
+    }
+    return noEmailSignUpMessage
+}
+
 export const emailNotRegisteredMessage = (emailNotRegisteredMessage = false, action) => {
     switch(action.type) {
         case mutations.SHOW_EMAIL_NOT_REGISTERED_MESSAGE:

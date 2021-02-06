@@ -2,7 +2,15 @@ import { createStore, applyMiddleware, combineReducers } from 'redux'
 import { createLogger } from 'redux-logger'
 import createSagaMiddleware from 'redux-saga'
 import * as sagas from './sagas'
-import { session, emailNotRegisteredMessage, emailAlreadyRegisteredMessage, incorrectPasswordMessage, noPasswordMessage } from './reducers/login' 
+import { 
+    session, 
+    noEmailSignInMessage,
+    noEmailSignUpMessage,
+    emailNotRegisteredMessage,
+    emailAlreadyRegisteredMessage,
+    incorrectPasswordMessage,
+    noPasswordMessage
+} from './reducers/login' 
 import { language, translations } from './reducers/language'
 import { mongoDataLoading } from './reducers/mongoData'
 import { 
@@ -23,6 +31,8 @@ const sagaMiddleware = createSagaMiddleware()
 export const store = createStore(
     combineReducers({
         session,
+        noEmailSignInMessage,
+        noEmailSignUpMessage,
         emailNotRegisteredMessage,
         emailAlreadyRegisteredMessage,
         incorrectPasswordMessage, 
