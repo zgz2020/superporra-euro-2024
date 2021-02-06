@@ -42,7 +42,15 @@ export const selectors = {
 
     emailInput: automationSelector("email-address-input"),
     passwordInput: automationSelector("password-input"),
-    submitButton: '.btn-primary'
+    submitButton: '.btn-primary',
+    errors: {
+        noEmailSignIn: automationSelector('no-email-message-signIn'),
+        noEmailSignUp: automationSelector('no-email-message-signUp'),
+        emailErrorSignIn: automationSelector('email-error-signIn'),
+        emailErrorSignUp: automationSelector('email-error-signUp'),
+        passwordErrorSignIn: automationSelector('password-error-signIn'),
+        passwordErrorSignUp: automationSelector('password-error-signUp')
+    }
 }
  
 
@@ -249,3 +257,13 @@ export const signUp = (email, password) => {
 const randomInt10000 = () => Math.floor(Math.random() * 1000)
 
 export const randomEmail = () => `automated-${randomInt10000()}@test.com`
+
+export const onlyThisErrorVisible = (error) => {
+    Object.keys(selectors.errors).forEach($error => {
+        if ($error == error) {
+            cy.get(selectors.errors[$error]).should('be.visible')
+        } else {
+            cy.get(selectors.errors[$error]).should('not.to.exist')
+        }
+    })
+}

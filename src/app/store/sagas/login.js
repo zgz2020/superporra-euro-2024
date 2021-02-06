@@ -31,6 +31,10 @@ export function* userAuthenticationSaga(){
 
         let allUsers = yield select(selectors.getUsers)
 
+        yield put(mutations.hideNoEmailSignUpMessage())
+        yield put(mutations.hideEmailAlreadyRegisteredMessage())
+        yield put(mutations.hideNoPasswordMessage())
+
         if ( username == '') {
             yield put(mutations.hideEmailNotRegisteredMessage())
             yield put(mutations.hideIncorrectPasswordMessage())
