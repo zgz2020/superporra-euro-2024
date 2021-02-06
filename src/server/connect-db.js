@@ -16,7 +16,7 @@ let db = null
 
 export async function connectDB(){
     if (db) return db
-    let client = await MongoClient.connect(url, { useNewUrlParser: true })
+    let client = await MongoClient.connect(url, { useNewUrlParser: true,  useUnifiedTopology: true })
     db = client.db()
     return db
 }

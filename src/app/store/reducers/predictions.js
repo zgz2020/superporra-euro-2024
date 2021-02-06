@@ -34,7 +34,7 @@ export const predictions = (predictions = defaultState.predictions, action) => {
                     [action.predictionID]: action.prediction
                 }
             }
-        case mutations.SET_USERNAME:
+        case mutations.SET_USERNAME_EXISTENT_PREDICTION:
             return { ...predictions, byId: { ...predictions.byId, [action.predictionID]: { ...predictions.byId[action.predictionID], username: action.username } } }
 
         // ------- NEW COMMON REDUCER -----------

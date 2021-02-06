@@ -31,8 +31,8 @@ const ParticipantsList = ( {
                         </thead>
                         <tbody>
                             {Object.keys(predictionsList).map((key, index) => (
-                                <tr key={index} data-automation="leaderboard-row">
-                                    <td>{index}</td>
+                                <tr key={index+1} data-automation="leaderboard-row">
+                                    <td>{index+1}</td>
                                     <td>
                                         <Link to={`/participants/${key}`}>
                                             {predictionsList[key].username}

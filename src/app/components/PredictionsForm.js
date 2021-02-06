@@ -275,15 +275,15 @@ const mapDispatchToProps = (dispatch) => {
         setUsernameHandler(predictionType, predictionID, event){
             if (predictionType === 'new') 
                 return dispatch(mutations.setUsernameNewPrediction(event.target.value))
-            if (predictionType === 'existent' || 'results') 
-                return dispatch(mutations.setUsername(event.target.value, predictionID))
+            if (predictionType === 'existent') // || 'results'
+                return dispatch(mutations.setUsernameExistentPrediction(predictionID, event.target.value))
         },
-        setPredictionFieldHandler(predictionType, predictionID, field, event){
-            if (predictionType === 'new') 
-                return dispatch(mutations.setPredictionFieldNewPrediction(field, event.target.value))
-            if (predictionType === 'existent' || 'results') 
-                return dispatch(mutations.setPredictionField(predictionID, field, event.target.value))
-        },
+        // setPredictionFieldHandler(predictionType, predictionID, field, event){
+        //     if (predictionType === 'new') 
+        //         return dispatch(mutations.setPredictionFieldNewPrediction(field, event.target.value))
+        //     if (predictionType === 'existent' || 'results') 
+        //         return dispatch(mutations.setPredictionField(predictionID, field, event.target.value))
+        // },
         // setGoalsLeagueHandler(predictionType, predictionID, matchKey, team, event){
         //     if (predictionType === 'new') 
         //         // return dispatch(mutations.setGoalsNewPredictionLeague(matchKey, team, event.target.value))

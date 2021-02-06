@@ -7,12 +7,14 @@ export const selectors = {
     mobileNavToggleButton: automationSelector("mobile-nav-toggle-button"),
 
     pageHeader: automationSelector("page-header"),
+    cardHeader: '.card-header',
+    cardBody: '.card-body',
 
     leaderboard: automationSelector("leaderboard"),
     leaderboardRow: {
         rank: `${automationSelector("leaderboard-row")} td:nth-child(1)`,
-        username: `${automationSelector("leaderboard-row")} td:nth-child(2)`,
-        score: `${automationSelector("leaderboard-row")} td:nth-child(3)`
+        username: `${automationSelector("leaderboard-row")} td:nth-child(2) a`,
+        score: `${automationSelector("leaderboard-row")} td:nth-child(3) a`
     },
 
     updateButton: `${automationSelector("update-button")}:nth(0)`,
@@ -36,19 +38,31 @@ export const selectors = {
     predictionsSubittedMessage: automationSelector("prediction-submitted-success"),
 
     resultsContainer: automationSelector("results-container"),
-    firstScoreGoals: `${automationSelector("score-goals")}:nth(0)`
-}
+    firstScoreGoals: `${automationSelector("score-goals")}:nth(0)`,
 
+    emailInput: automationSelector("email-address-input"),
+    passwordInput: automationSelector("password-input"),
+    submitButton: '.btn-primary'
+}
+ 
 
 export const clickOnCTA = (cta) => cy.get(cta).click()
 
 
+
+// --------------------------------------------------------------
 // LANGUAGE PICKER
+// --------------------------------------------------------------
+
 export const selectLanguage = (language) =>
     cy.get(selectors.languagePicker).select(language)
 
 
+
+// --------------------------------------------------------------
 // NAVIGATION
+// --------------------------------------------------------------
+
 export const checkNavigationItemLabel = (position, label) => 
     cy.get(selectors.navItem(position)).should('contain', label)
 
@@ -61,14 +75,38 @@ export const checkNavigationItemLink = (viewport, position, slug) => {
 }
 
 
+
+// --------------------------------------------------------------
 // LEADERBOARD 
+// --------------------------------------------------------------
+
+export const checkFirstRank = () => cy.get(selectors.leaderboardRow.rank).eq(0).should('contain', '1')
+
+export const checkFirstParticipantLinks = () => {
+    cy.get(selectors.leaderboardRow.username).eq(0).click()
+        .wait(500)
+        .get(selectors.pageHeader).should('contain', 'Predictions:')
+    cy.go('back')
+    cy.get(selectors.leaderboardRow.score).eq(0).click()
+        .get(selectors.pageHeader).should('contain', 'Scores:')
+
+}
+
 export const checkLeaderboardLastParticipant = () => cy.get(selectors.leaderboardRow.username).last().should('contain', 'ZZ Test Participant')
     // Checks that the leaderboard's last participant is the TEST participant just added
 
-export const selectLastParticipant = () => cy.get(`${selectors.leaderboardRow.username} a`).last().click()
+export const selectLastParticipant = () => cy.get(selectors.leaderboardRow.username).last().click()
+
+export const checkUserOnlyPrediction = () => cy.get(selectors.leaderboardRow.username).should('contain', 'ZZ Test Participant')
+
+export const selectUserOnlyPrediction = () => cy.get(selectors.leaderboardRow.username).click()
 
 
+
+// --------------------------------------------------------------
 // PREDICTIONS FORM
+// --------------------------------------------------------------
+
 export const checkElementVisibility = (selector, visible) => cy.get(selector).should(visible) 
     // 'visible' values: 'not.be.visible', 'be.visible'
 
@@ -179,3 +217,35 @@ export const updateFirstMatchScore = (goals) =>
 
 export const checkFirstMatchScoreGoals = (goals) => 
     cy.get(selectors.firstScoreGoals).invoke('text').should('eq', goals)
+
+
+
+// --------------------------------------------------------------
+// My Account 
+// --------------------------------------------------------------
+
+export const checkNoBetsYet = () => cy.get(selectors.cardBody).should('contain', "You don't have any bets yet")
+
+
+
+// --------------------------------------------------------------
+// Sign In / Up
+// --------------------------------------------------------------
+
+export const signIn = (email, password) => {
+    cy.get(selectors.emailInput).eq(0).type(email)
+        .get(selectors.passwordInput).eq(0).type(password)
+        .get(selectors.submitButton).eq(0).click()
+        .wait(1000)
+}
+
+export const signUp = (email, password) => {
+    cy.get(selectors.emailInput).eq(1).type(email)
+        .get(selectors.passwordInput).eq(1).type(password)
+        .get(selectors.submitButton).eq(1).click()
+        .wait(1000)
+}
+
+const randomInt10000 = () => Math.floor(Math.random() * 1000)
+
+export const randomEmail = () => `automated-${randomInt10000()}@test.com`
