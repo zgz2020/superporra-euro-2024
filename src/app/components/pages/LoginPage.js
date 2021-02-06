@@ -31,10 +31,22 @@ const credentialsForm = (type, submitHandler, authenticated, translations, noEma
                 />
 
                 {noEmailMessage &&  
-                    <p className="text-danger font-italic mt-2">{translations.signInPage.noEmail}</p>}
+                    <p 
+                        className="text-danger font-italic mt-2"
+                        data-automation={`no-email-message-${type}`}
+                    >
+                        {translations.signInPage.noEmail}
+                    </p>
+                }
 
                 {errorMessageEmail &&  
-                    <p className="text-danger font-italic mt-2">{emailErrorText(type, translations)}</p>}
+                    <p 
+                        className="text-danger font-italic mt-2"
+                        data-automation={`email-error-${type}`}
+                    >
+                        {emailErrorText(type, translations)}
+                    </p>
+                }
 
                 {`${translations.signInPage.password}:`}
                 <input 
@@ -46,7 +58,13 @@ const credentialsForm = (type, submitHandler, authenticated, translations, noEma
                 />
 
                 {errorMessagePassword &&  
-                    <p className="text-danger font-italic mt-2">{passwordErrorText(type, translations)}</p>}
+                    <p 
+                        className="text-danger font-italic mt-2"
+                        data-automation={`password-error-${type}`}
+                    >
+                        {passwordErrorText(type, translations)}
+                    </p>
+                }
 
                 <button 
                     type="submit" 
