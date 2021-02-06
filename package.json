@@ -50,6 +50,9 @@
     "uuid": "^3.3.2",
     "webpack": "^4.17.2"
   },
+  "engines": {
+    "node": "10.0.0"
+  },
   "devDependencies": {
     "@babel/core": "^7.0.0",
     "@babel/node": "^7.0.0",
