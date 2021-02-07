@@ -18,7 +18,8 @@ import {
     checkLeaderboardLastParticipant,
     selectLastParticipant,
     checkPageHeader,
-    updateInputForm
+    updateInputForm,
+    nicknameTakenTest,
 } from '../support/page-object'
 import { registeredUser } from '../support/testData'
 
@@ -52,6 +53,8 @@ describe('My Account - New User with no predictions', () => {
         submitPredictionsNoUsername('bottom')
         submitPredictionsNoUsername('top')
 
+        nicknameTakenTest()
+
         fillInInputForm()
         cy.wait(500)
         checkFormIsFilledIn()
@@ -82,6 +85,7 @@ describe('My Account - New User with no predictions', () => {
         clickOnCTA(selectors.updateButton)
 
         checkInputFormHeader('Update your predictions')
+        nicknameTakenTest()
         updateInputForm()
     })
     

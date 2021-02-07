@@ -1,8 +1,25 @@
-import { take, put } from 'redux-saga/effects'
+import { take, put, select } from 'redux-saga/effects'
 import axios from 'axios'
 import uuid from 'uuid'
 import * as mutations from '../mutations'
+import * as selectors from '../selectors'
 import { url } from './url'
+
+
+// ------ USERNAME VALIDATIO ----
+
+export function* usernameValidationSaga() {
+    while (true) {
+        const { username } = yield take(mutations.USERNAME_VALIDATION)
+        let existentUsernames = yield select(selectors.getNicknames)
+
+        if (existentUsernames.includes(username)) {
+            yield put(mutations.showNicknameTaken())
+        } else {
+            yield put(mutations.hideNicknameTaken())
+        }
+    }
+}
 
 
 // ------ CREATE NEW PREDICTION -----

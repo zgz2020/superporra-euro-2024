@@ -68,6 +68,7 @@ export const englishTranslations = {
         },
         username: "Username",
         noUsernameAlert: "Fill in the 'Username' field",
+        usernameTakenError: "Nickname already taken",
         predictions: "Predictions",
         group: "GROUP",
         team: "TEAM",

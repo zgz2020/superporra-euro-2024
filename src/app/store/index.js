@@ -19,7 +19,8 @@ import {
     predictionsFormResults,
     createPredictionsForm,
     generatingRandomPredictions,
-    predictionsSubmitted
+    predictionsSubmitted,
+    nicknameTaken,
 } from './reducers/predictionsForm'
 import { newPrediction, newPredictionUsername } from './reducers/newPrediction'
 import { users } from './reducers/users'
@@ -48,6 +49,7 @@ export const store = createStore(
         newPredictionUsername,
         generatingRandomPredictions,
         predictionsSubmitted,
+        nicknameTaken,
         users,
         results,
         predictions
