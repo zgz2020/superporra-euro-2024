@@ -10,6 +10,10 @@ export const HIDE_CREATE_PREDICTIONS_FORM = 'HIDE_CREATE_PREDICTIONS_FORM'
 export const SHOW_PREDICTIONS_SUBMITTED = 'SHOW_PREDICTIONS_SUBMITTED'
 export const HIDE_PREDICTIONS_SUBMITTED = 'HIDE_PREDICTIONS_SUBMITTED'
 
+export const USERNAME_VALIDATION = 'USERNAME_VALIDATION'
+export const SHOW_NICKNAME_TAKEN = 'SHOW_NICKNAME_TAKEN'
+export const HIDE_NICKNAME_TAKEN = 'HIDE_NICKNAME_TAKEN'
+
 
 export const showPredictionsFormNew = () => ({
     type: SHOW_PREDICTIONS_FORM_NEW
@@ -37,4 +41,18 @@ export const showPredictionsSubmitted = () => ({
 })
 export const hidePredictionsSubmitted = () => ({
     type: HIDE_PREDICTIONS_SUBMITTED
+})
+
+
+export const usernameValidation = (username) => ({
+    type: USERNAME_VALIDATION,
+    username
+})
+
+export const showNicknameTaken = () => ({
+    type: SHOW_NICKNAME_TAKEN
+})
+
+export const hideNicknameTaken = () => ({
+    type: HIDE_NICKNAME_TAKEN
 })

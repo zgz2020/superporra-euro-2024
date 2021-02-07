@@ -68,6 +68,7 @@ export const spanishTranslations = {
         },
         username: "Nombre de usuario",
         noUsernameAlert: "Introduce un nombre de usuario",
+        usernameTakenError: "Nombre no disponible",
         predictions: "Predicciones",
         group: "GRUPO",
         team: "EQUIPO",

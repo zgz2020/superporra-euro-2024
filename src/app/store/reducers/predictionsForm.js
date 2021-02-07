@@ -51,11 +51,21 @@ export const generatingRandomPredictions = (generatingRandomPredictions = false,
 }
 
 export const predictionsSubmitted = (predictionsSubmitted = false, action) => {
-    switch(action.type) {
+    switch (action.type) {
         case mutations.SHOW_PREDICTIONS_SUBMITTED:
             return true
         case mutations.HIDE_PREDICTIONS_SUBMITTED:
             return false
     }
     return predictionsSubmitted
+}
+
+export const nicknameTaken = (nicknameTaken = false, action) => {
+    switch (action.type) {
+        case mutations.SHOW_NICKNAME_TAKEN:
+            return true
+        case mutations.HIDE_NICKNAME_TAKEN:
+            return false
+    }
+    return nicknameTaken
 }

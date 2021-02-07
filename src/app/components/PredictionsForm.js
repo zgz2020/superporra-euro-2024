@@ -12,6 +12,7 @@ const PredictionsForm = ( {
     predictionsOrResults,
     // predictions,
     users,
+    nicknameTaken,
     predictionType,
     userID,
     predictionID,
@@ -70,9 +71,16 @@ const PredictionsForm = ( {
         if (predictionType === 'existent' || 'results') return translations.common.submitUpdates
     }
 
-    const submitButton = (predictionType) => (
+    const submitButton = (predictionType, nicknameTaken) => (
         <div className="text-center py-4">
-            <button type="submit" className="btn btn-primary" data-automation="submit-button">{submitButtonLabel(predictionType)}</button>
+            <button 
+                type="submit" 
+                className="btn btn-primary" 
+                disabled={nicknameTaken}
+                data-automation="submit-button"
+            >
+                {submitButtonLabel(predictionType)}
+            </button>
         </div>  
     )
 
@@ -98,10 +106,17 @@ const PredictionsForm = ( {
                 )
             } >
 
-                {submitButton(predictionType)}
+                {submitButton(predictionType, nicknameTaken)}
 
                 <div className="text-center pb-4">
-                    <button type="button" onClick={e => cancelPredictionForm(predictionType, e)} className="btn btn-danger" data-automation="cancel-button">{translations.common.cancel}</button>
+                    <button 
+                        type="button" 
+                        onClick={e => cancelPredictionForm(predictionType, e)} 
+                        className="btn btn-danger" 
+                        data-automation="cancel-button"
+                    >
+                        {translations.common.cancel}
+                    </button>
                 </div> 
 
                 <div> </div>
@@ -121,6 +136,15 @@ const PredictionsForm = ( {
                                 className="form-control" 
                                 data-automation="username-input"
                             />
+
+                            {nicknameTaken && 
+                                <p
+                                    className="text-danger font-italic mt-2"
+                                    data-automation={`username-taken-${predictionType}`}
+                                >
+                                    {translations.predictionsForm.usernameTakenError}
+                                </p>
+                            }
                         </div>
 
                         {!generatingRandomPredictions ?
@@ -232,22 +256,24 @@ const PredictionsForm = ( {
                     title={translations.predictionsForm.leastConceded} 
                     predictionName="leastConceded" 
                     predictionType={predictionType} 
-                    predictionID={predictionID} //{predictionDetails(predictionType).predictionID} 
+                    predictionID={predictionID}
                     predictionsOrResults={predictionsOrResults}
                 />
 
-                {submitButton(predictionType)}               
+                {submitButton(predictionType, nicknameTaken)}               
             </form>
         </div>
     )
 }
 
 const mapStateToProps = (state, ownProps) => {
-    const { newPrediction,
+    const { 
+        newPrediction,
         newPredictionUsername,
         generatingRandomPredictions,
         predictions,
         users,
+        nicknameTaken,
         translations,
         //loggedUser,
         session
@@ -263,6 +289,7 @@ const mapStateToProps = (state, ownProps) => {
         predictionsOrResults,
         predictions, 
         users,
+        nicknameTaken,
         predictionType,
         userID,
         predictionID,
@@ -273,48 +300,12 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = (dispatch) => {    
     return {
         setUsernameHandler(predictionType, predictionID, event){
+            dispatch(mutations.usernameValidation(event.target.value))
             if (predictionType === 'new') 
                 return dispatch(mutations.setUsernameNewPrediction(event.target.value))
-            if (predictionType === 'existent') // || 'results'
+            if (predictionType === 'existent')
                 return dispatch(mutations.setUsernameExistentPrediction(predictionID, event.target.value))
         },
-        // setPredictionFieldHandler(predictionType, predictionID, field, event){
-        //     if (predictionType === 'new') 
-        //         return dispatch(mutations.setPredictionFieldNewPrediction(field, event.target.value))
-        //     if (predictionType === 'existent' || 'results') 
-        //         return dispatch(mutations.setPredictionField(predictionID, field, event.target.value))
-        // },
-        // setGoalsLeagueHandler(predictionType, predictionID, matchKey, team, event){
-        //     if (predictionType === 'new') 
-        //         // return dispatch(mutations.setGoalsNewPredictionLeague(matchKey, team, event.target.value))
-        //         return dispatch(mutations.setGoalsAll('new', 'leagueMatches', matchKey, team, event.target.value))
-        //     if (predictionType === 'existent' || 'results') 
-        //         return dispatch(mutations.setGoalsLeague(predictionID, matchKey, team, event.target.value))
-        // },
-        // setGoalsR16Handler(predictionType, predictionID, matchKey, team, event){
-        //     if (predictionType === 'new') 
-        //         return dispatch(mutations.setGoalsNewPredictionR16(matchKey, team, event.target.value))
-        //     if (predictionType === 'existent' || 'results') 
-        //         return dispatch(mutations.setGoalsR16(predictionID, matchKey, team, event.target.value))
-        // },
-        // setGoalsQuarterFinalHandler(predictionType, predictionID, matchKey, team, event){
-        //     if (predictionType === 'new') 
-        //         return dispatch(mutations.setGoalsNewPredictionQuarterFinal(matchKey, team, event.target.value))
-        //     if (predictionType === 'existent' || 'results')
-        //         return dispatch(mutations.setGoalsQuarterFinal(predictionID, matchKey, team, event.target.value))
-        // },
-        // setGoalsSemiFinalHandler(predictionType, predictionID, matchKey, team, event){
-        //     if (predictionType === 'new') 
-        //         return dispatch(mutations.setGoalsNewPredictionSemiFinal(matchKey, team, event.target.value))
-        //     if (predictionType === 'existent' || 'results')
-        //         return dispatch(mutations.setGoalsSemiFinal(predictionID, matchKey, team, event.target.value))
-        // },
-        // setGoalsFinalHandler(predictionType, predictionID, matchKey, team, event){
-        //     if (predictionType === 'new') 
-        //         return dispatch(mutations.setGoalsNewPredictionFinal(matchKey, team, event.target.value))
-        //     if (predictionType === 'existent' || 'results')
-        //         return dispatch(mutations.setGoalsFinal(predictionID, matchKey, team, event.target.value))
-        // },
         generateRandomPredictionsRequest(predictionType, predictionID, event){
                 dispatch(mutations.generateRandomPredictionsRequest(predictionType, predictionID))
         },
