@@ -140,7 +140,7 @@ const PredictionsForm = ( {
                             {nicknameTaken && 
                                 <p
                                     className="text-danger font-italic mt-2"
-                                    data-automation={`username-taken-${predictionType}`}
+                                    data-automation={`username-taken`}
                                 >
                                     {translations.predictionsForm.usernameTakenError}
                                 </p>

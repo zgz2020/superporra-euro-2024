@@ -28,6 +28,7 @@ export const selectors = {
         cancelButton: automationSelector("cancel-button"),
         randomPredictionsButton: automationSelector("random-predictions-button"),
         usernameInput: automationSelector("username-input"),
+        nicknameTakenError: automationSelector("username-taken"),
         euroStage: automationSelector("euro-stage"),
         euroStageFirstScore: stage => `${automationSelector("euro-stage")}:nth(${stage}) select:nth(0)`,
         finalStage: `${automationSelector("euro-stage")}:nth(4)`,
@@ -53,6 +54,10 @@ export const selectors = {
     }
 }
  
+const elementVisibilityAssertion = (status) => {
+    if (status == 'visible') return 'be.visible'
+    if (status == 'hidden') return 'not.to.exist'
+}
 
 export const clickOnCTA = (cta) => cy.get(cta).click()
 
@@ -165,7 +170,7 @@ export const checkFormIsEmpty = () => {
 }
 
 export const fillInInputForm = () => {
-    cy.get(selectors.inputForm.usernameInput).type('ZZ Test Participant')
+    typeNickname(`ZZ Test Participant - ${randomInt10000()}`)
     clickOnCTA(selectors.inputForm.randomPredictionsButton)
     cy.wait(1000)
 }
@@ -195,7 +200,7 @@ const checkFinalMatchTeam = (team, predictionData) => // 'team' values: 0 / 1
 
 export const updateInputForm = () => {
     // Update username
-    cy.get(selectors.inputForm.usernameInput).clear().type('ZZ Test Participant - UPDATED')
+    typeNickname(`ZZ Test Participant - UPDATED - ${randomInt10000()}`)
     // Update predictions
     clickOnCTA(selectors.inputForm.randomPredictionsButton)
 
@@ -227,6 +232,23 @@ export const checkFirstMatchScoreGoals = (goals) =>
     cy.get(selectors.firstScoreGoals).invoke('text').should('eq', goals)
 
 
+const verifyNicknameTakenError = (status) => {
+    cy.get(selectors.inputForm.nicknameTakenError).should(elementVisibilityAssertion(status))
+}
+
+const typeNickname = (nickname) => cy.get(selectors.inputForm.usernameInput).clear().type(nickname)
+
+const verifySubmitButtonDisabled = (location) => {
+    cy.get(selectors.inputForm.submitButton(location)).should('have.attr', 'disabled')
+}
+
+export const nicknameTakenTest = () => {
+    verifyNicknameTakenError('hidden')
+    typeNickname('juanjo')
+    verifyNicknameTakenError('visible')
+    verifySubmitButtonDisabled('top')
+    verifySubmitButtonDisabled('bottom')
+}
 
 // --------------------------------------------------------------
 // My Account 
