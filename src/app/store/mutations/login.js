@@ -24,6 +24,9 @@ export const HIDE_INCORRECT_PASSWORD_MESSAGE = 'HIDE_INCORRECT_PASSWORD_MESSAGE'
 export const SHOW_NO_PASSWORD_MESSAGE = 'SHOW_NO_PASSWORD_MESSAGE'
 export const HIDE_NO_PASSWORD_MESSAGE = 'HIDE_NO_PASSWORD_MESSAGE'
 
+export const HIDE_LOGIN_PAGE_ERROR_MESSAGES = 'HIDE_LOGIN_PAGE_ERROR_MESSAGES'
+export const LOGIN_PAGE_ERROR_MESSAGES_HIDDEN = 'LOGIN_PAGE_ERROR_MESSAGES_HIDDEN'
+
 
 export const getSessionStatus = () => ({
     type: GET_SESSION_STATUS
@@ -68,10 +71,10 @@ export const hideNoEmailSignUpMessage = () => ({
     type: HIDE_NO_EMAIL_SIGN_UP_MESSAGE
 })
 
-export const showEmailNotRegisteredMessage = () => ({
+export const showEmailNotRegisteredSignInMessage = () => ({
     type: SHOW_EMAIL_NOT_REGISTERED_MESSAGE
 })
-export const hideEmailNotRegisteredMessage = () => ({
+export const hideEmailNotRegisteredSignInMessage = () => ({
     type: HIDE_EMAIL_NOT_REGISTERED_MESSAGE
 })
 
@@ -94,4 +97,11 @@ export const showNoPasswordMessage = () => ({
 })
 export const hideNoPasswordMessage = () => ({
     type: HIDE_NO_PASSWORD_MESSAGE
+})
+
+export const hideLoginPageErrorMessages = () => ({
+    type: HIDE_LOGIN_PAGE_ERROR_MESSAGES
+})
+export const loginPageErrorMessagesHidden = () => ({
+    type: HIDE_LOGIN_PAGE_ERROR_MESSAGES
 })

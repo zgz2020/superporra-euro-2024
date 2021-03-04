@@ -1,4 +1,6 @@
+export * from './forgotPassword'
 export * from './goalsSet'
+export * from './hideErrorMessages'
 export * from './knockOutTeamsUpdate'
 export * from './language'
 export * from './login'

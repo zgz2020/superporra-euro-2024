@@ -13,6 +13,7 @@ import uuid from 'uuid';
 import md5 from 'md5'
 import { AUTHENTICATING } from '../app/store/mutations';
 
+const nodemailer = require('nodemailer')
 
 let port = process.env.PORT || 7777
 let app = express()
@@ -271,4 +272,55 @@ app.post('/user/new', async (req, res) => {
     }
 
     res.send({ session })
+})
+
+app.post('/forgot-password-email', async(req, res) => {
+    let userId = req.body.email
+
+    let db = await connectDB()
+    let usersCollection = db.collection('users')
+
+    let user = await usersCollection.findOne({ id: userId })
+
+    if (!user) {
+        return res.status(500).send('Username not registered')
+    }
+
+    let token = uuid()
+    let resetPasswordtokensCollection = db.collection('resetPasswordTokens')
+    let resetPasswordToken = { 
+        token, 
+        tokenExpires: Date.now() + 3600000,
+        userID: userId
+    }
+    await resetPasswordtokensCollection.insertOne(resetPasswordToken)
+
+    const transporter = nodemailer.createTransport({
+        service: 'gmail',
+        auth: {
+            user: 'superporra.reset@gmail.com',
+            pass: 'test1234!'
+        }
+    })
+
+    const mailOptions = {
+        from: 'superporra.reset@gmail.com',
+        to: userId,
+        subject: 'Superporra - Reset your password',
+        text: 'You are receiving this email because you (or someone else) have requested the reset of the password for your account.\n\n'
+            + 'Please click on the following link, or paste this into your browser, to complete the process within one hour of receiving it:\n\n'
+            + `https://superporra2021.herokuapp.com/reset/${token}\n\n\n`
+            + 'If you did not request this, please ignore this email and your password will emain unchanged.\n'
+    }
+
+    console.log('Sending email')
+
+    transporter.sendMail(mailOptions, (err, response) => {
+        if (err) {
+            console.error('There was an error sending the email: ', err)
+        } else {
+            console.log('Here is the response: ', response)
+            res.status(200).json('Recovery email sent')
+        }
+    })
 })

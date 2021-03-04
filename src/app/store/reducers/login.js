@@ -42,14 +42,54 @@ export const noEmailSignUpMessage = (noEmailSignUpMessage = false, action) => {
     return noEmailSignUpMessage
 }
 
-export const emailNotRegisteredMessage = (emailNotRegisteredMessage = false, action) => {
+export const noEmailForgotPasswordMessage = (noEmailForgotPasswordMessage = false, action) => {
+    switch(action.type) {
+        case mutations.SHOW_NO_EMAIL_FORGOT_PASSWORD_MESSAGE:
+            return true
+        case mutations.HIDE_NO_EMAIL_FORGOT_PASSWORD_MESSAGE:
+            return false
+    }
+    return noEmailForgotPasswordMessage
+}
+
+export const emailNotRegisteredSignInMessage = (emailNotRegisteredSignInMessage = false, action) => {
     switch(action.type) {
         case mutations.SHOW_EMAIL_NOT_REGISTERED_MESSAGE:
             return true
         case mutations.HIDE_EMAIL_NOT_REGISTERED_MESSAGE:
             return false
     }
-    return emailNotRegisteredMessage
+    return emailNotRegisteredSignInMessage
+}
+
+export const emailNotRegisteredForgotPasswordMessage = (emailNotRegisteredForgotPasswordMessage = false, action) => {
+    switch(action.type) {
+        case mutations.SHOW_EMAIL_NOT_REGISTERED_FORGOT_PASSWORD_MESSAGE:
+            return true
+        case mutations.HIDE_EMAIL_NOT_REGISTERED_FORGOT_PASSWORD_MESSAGE:
+            return false
+    }
+    return emailNotRegisteredForgotPasswordMessage
+}
+
+export const resetPasswordEmailSentMessage = (resetPasswordEmailSentMessage = false, action) => {
+    switch(action.type) {
+        case mutations.SHOW_RESET_PASSWORD_EMAIL_SENT_MESSAGE:
+            return true
+        case mutations.HIDE_RESET_PASSWORD_EMAIL_SENT_MESSAGE:
+            return false
+    }
+    return resetPasswordEmailSentMessage
+}
+
+export const resetPasswordEmailErrorMessage = (resetPasswordEmailErrorMessage = false, action) => {
+    switch(action.type) {
+        case mutations.SHOW_RESET_PASSWORD_EMAIL_ERROR_MESSAGE:
+            return true
+        case mutations.HIDE_RESET_PASSWORD_EMAIL_ERROR_MESSAGE:
+            return false
+    }
+    return resetPasswordEmailErrorMessage
 }
 
 export const emailAlreadyRegisteredMessage = (emailAlreadyRegisteredMessage = false, action) => {

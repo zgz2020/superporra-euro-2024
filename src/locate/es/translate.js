@@ -24,7 +24,15 @@ export const spanishTranslations = {
         wrongPassword: "Clave incorrecta",
         noPassword: "Debes introducir una clave",
         signUpHeader: "¿Aún no tienes una cuenta? ¡Crea una aquí mismo!",
-        signUp: "Crear cuenta"
+        signUp: "Crear cuenta",
+        forgotPasswordHeader: "¿Olvidaste tu contraseña? Crea una nueva aquí",
+        sendPasswordResetEmail: "Crear contraseña nueva",
+        resetPasswordEmailSent: "Se ha enviado un correo para crear una contraseña nueva",
+        resetPasswordEmailError: "Ha habido un error. Inténtalo de nuevo."
+    },
+    passwordResetPage: {
+        title: "Actualizar contraseña",
+        resetButton: "Actualizar contraseña"
     },
     participantsPage: {
         title: "Paticipantes de la Superporra",
