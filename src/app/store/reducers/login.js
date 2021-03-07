@@ -121,3 +121,13 @@ export const noPasswordMessage = (noPasswordMessage = false, action) => {
     }
     return noPasswordMessage
 }
+
+export const passwordResetTokenExpired = (passwordResetTokenExpired = true, action) => {
+    switch(action.type) {
+        case mutations.PASSWORD_RESET_TOKEN_VALID:
+            return false
+        case mutations.PASSWORD_RESET_TOKEN_EXPIRED:
+            return true
+    }
+    return passwordResetTokenExpired
+}

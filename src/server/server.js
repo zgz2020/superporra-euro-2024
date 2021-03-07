@@ -309,7 +309,7 @@ app.post('/forgot-password-email', async(req, res) => {
         subject: 'Superporra - Reset your password',
         text: 'You are receiving this email because you (or someone else) have requested the reset of the password for your account.\n\n'
             + 'Please click on the following link, or paste this into your browser, to complete the process within one hour of receiving it:\n\n'
-            + `https://superporra2021.herokuapp.com/reset/${token}\n\n\n`
+            + `https://superporra2021.herokuapp.com/password-reset/${token}\n\n\n`
             + 'If you did not request this, please ignore this email and your password will emain unchanged.\n'
     }
 
@@ -323,4 +323,19 @@ app.post('/forgot-password-email', async(req, res) => {
             res.status(200).json('Recovery email sent')
         }
     })
+})
+
+app.post('/password-reset-token', async (req, res) => {
+    let token = req.body.token
+
+    let db = await connectDB()
+    let resetPasswordTokensCollection = db.collection('resetPasswordTokens')
+
+    let tokenData = await resetPasswordTokensCollection.findOne({ token: token })
+
+    if (!tokenData) {
+        return res.status(500).send('Reset Password token not valid')
+    }
+
+    res.send({ tokenData })
 })

@@ -32,6 +32,8 @@ export const englishTranslations = {
     },
     passwordResetPage: {
         title: "Password Reset",
+        passwordResetTokenExpiredText: "The token to reset your password has expired.",
+        passwordResetTokenExpiredButton: "Request a new token",
         resetButton: "Reset Password"
     },
     participantsPage: {
