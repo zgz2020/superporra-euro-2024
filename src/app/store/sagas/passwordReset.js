@@ -24,3 +24,24 @@ export function* passwordResetTokenStatusSaga (){
         yield put(mutations.passwordResetTokenExpired())
     }
 }
+
+export function* requestPasswordResetSaga (){
+    while (true) {
+        const { newPassword } = yield take(mutations.REQUEST_PASSWORD_RESET)
+
+        yield put(mutations.hideLoginPageErrorMessages())
+        yield take(mutations.LOGIN_PAGE_ERROR_MESSAGES_HIDDEN)
+
+        if (newPassword == '') {
+            yield put(mutations.showNoPasswordMessage())
+        } 
+        else {
+            try {
+                // CODE to RESET password
+                yield put(mutations.showResetPasswordSuccessMessage())
+            } catch (e) {
+                yield put(mutations.showResetPasswordErrorMessage())
+            }
+        }
+    }
+}

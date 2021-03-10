@@ -26,52 +26,103 @@ const passwordResetTokenExpiredBlock = (translations) => (
     </div>
 )
 
-const passwordResetForm = (translations, submitHandler) => (
+const passwordResetForm = (
+    translations,
+    submitHandler,
+    errorMessagePassword,
+    resetPasswordSuccessMessage,
+    resetPasswordErrorMessage
+) => (
     <div className="card">
         <div className="card-body">
 
             <form onSubmit={submitHandler}>
-
-                {/* {`${translations.signInPage.email}:`}
+                {`${translations.signInPage.password}:`}
                 <input 
-                    type="text" 
-                    placeholder={translations.signInPage.emailPlaceholder}
-                    name="emailAddress"
+                    type="password" 
+                    placeholder={translations.signInPage.passwordPlaceholder}
+                    name="password"
                     className="form-control" 
-                    data-automation="email-address-input"
+                    data-automation="password-input"
                 />
+
+                {errorMessagePassword &&  
+                    <p 
+                        className="text-danger font-italic mt-2"
+                        data-automation={'password-error'}
+                    >
+                        {translations.signInPage.noPassword}
+                    </p>
+                }
+
+                {resetPasswordSuccessMessage &&  
+                    <p 
+                        className="text-success font-italic mt-2"
+                        data-automation={'email-error'}
+                    >
+                        {translations.passwordResetPage.resetPasswordSuccess}
+                    </p>
+                }
+
+                {resetPasswordErrorMessage &&  
+                    <p 
+                        className="text-success font-italic mt-2"
+                        data-automation={'reset-password-error'}
+                    >
+                        {translations.passwordResetPage.resetPasswordError}
+                    </p>
+                }
 
                 <button 
                     type="submit" 
-                    // disabled={authenticated === `PROCESSING`} 
                     className="form-control mt-2 btn btn-primary"
                 >
                     {translations.passwordResetPage.resetButton}
-                </ button> */}
-
-
+                </ button>
             </form>
 
         </div>
     </div>
 )
 
-const PasswordResetPage = ({ passwordResetTokenExpired, translations, requestPasswordReset }) => (
+const PasswordResetPage = ({ 
+    passwordResetTokenExpired,
+    translations,
+    requestPasswordReset,
+    noPasswordMessage,
+    resetPasswordSuccessMessage,
+    resetPasswordErrorMessage 
+}) => (
     <div>
         <ConnectedHeader title={translations.passwordResetPage.title} />
 
         {passwordResetTokenExpired ?
             passwordResetTokenExpiredBlock(translations)
             :
-            passwordResetForm(translations, requestPasswordReset)}
+            passwordResetForm(
+                translations,
+                requestPasswordReset,
+                noPasswordMessage,
+                resetPasswordSuccessMessage,
+                resetPasswordErrorMessage
+            )}
     </div>
 )
 
 const mapStateToProps = (state, ownProps) => {
-    let { passwordResetTokenExpired, translations } = state
+    let { 
+        passwordResetTokenExpired,
+        noPasswordMessage,
+        resetPasswordSuccessMessage,
+        resetPasswordErrorMessage,
+        translations
+    } = state
 
     return { 
         passwordResetTokenExpired,
+        noPasswordMessage,
+        resetPasswordSuccessMessage,
+        resetPasswordErrorMessage,
         translations
     }
 }
@@ -83,6 +134,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     return {
         requestPasswordReset(e) {
             e.preventDefault()
+            dispatch(mutations.requestPasswordReset(e.target['password'].value))
             // dispatch action
         }
     }

@@ -15,7 +15,7 @@ export function* userCreationSaga() {
         let allUsers = yield select(selectors.getUsers)
 
         yield put(mutations.hideLoginPageErrorMessages())
-        yield take(mutations.HIDE_LOGIN_PAGE_ERROR_MESSAGES)
+        yield take(mutations.LOGIN_PAGE_ERROR_MESSAGES_HIDDEN)
 
         if (userID == '') {
             yield put(mutations.showNoEmailSignUpMessage())

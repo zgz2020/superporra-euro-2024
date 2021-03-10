@@ -131,3 +131,23 @@ export const passwordResetTokenExpired = (passwordResetTokenExpired = true, acti
     }
     return passwordResetTokenExpired
 }
+
+export const resetPasswordSuccessMessage = (resetPasswordSuccessMessage = false, action) => {
+    switch(action.type) {
+        case mutations.SHOW_RESET_PASSWORD_SUCCESS_MESSAGE:
+            return true
+        case mutations.HIDE_RESET_PASSWORD_SUCCESS_MESSAGE:
+            return false
+    }
+    return resetPasswordSuccessMessage
+}
+
+export const resetPasswordErrorMessage = (resetPasswordErrorMessage = false, action) => {
+    switch(action.type) {
+        case mutations.SHOW_RESET_PASSWORD_ERROR_MESSAGE:
+            return true
+        case mutations.HIDE_RESET_PASSWORD_ERROR_MESSAGE:
+            return false
+    }
+    return resetPasswordErrorMessage
+}

@@ -34,7 +34,9 @@ export const spanishTranslations = {
         title: "Actualizar contraseña",
         passwordResetTokenExpiredText: "El token para actualizar tu contrseña ha expirado.",
         passwordResetTokenExpiredButton: "Solicitar token nuevo",
-        resetButton: "Actualizar contraseña"
+        resetButton: "Actualizar contraseña",
+        resetPasswordSuccess: "Tu contrseña se ha actualizado.",
+        resetPasswordError: "Ha habido un error. Inténtalo de nuevo."
     },
     participantsPage: {
         title: "Paticipantes de la Superporra",

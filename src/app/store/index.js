@@ -14,7 +14,9 @@ import {
     emailAlreadyRegisteredMessage,
     incorrectPasswordMessage,
     noPasswordMessage,
-    passwordResetTokenExpired
+    passwordResetTokenExpired,
+    resetPasswordSuccessMessage,
+    resetPasswordErrorMessage
 } from './reducers/login' 
 import { language, translations } from './reducers/language'
 import { mongoDataLoading } from './reducers/mongoData'
@@ -48,6 +50,8 @@ export const store = createStore(
         incorrectPasswordMessage, 
         noPasswordMessage,
         passwordResetTokenExpired,
+        resetPasswordSuccessMessage,
+        resetPasswordErrorMessage,
         language,
         translations,
         mongoDataLoading,

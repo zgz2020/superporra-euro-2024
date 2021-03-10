@@ -16,6 +16,8 @@ export function* hideLoginPageErrorMessages() {
         yield put(mutations.hideNoEmailForgotPasswordMessage())
         yield put(mutations.hideResetPasswordEmailSentMessage())
         yield put(mutations.hideResetPasswordEmailErrorMessage())
+        yield put(mutations.showResetPasswordErrorMessage())
+        yield put(mutations.hideResetPasswordErrorMessage())
 
         // Send completion signal 
         yield put(mutations.loginPageErrorMessagesHidden())

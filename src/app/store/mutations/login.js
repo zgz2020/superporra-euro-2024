@@ -103,5 +103,5 @@ export const hideLoginPageErrorMessages = () => ({
     type: HIDE_LOGIN_PAGE_ERROR_MESSAGES
 })
 export const loginPageErrorMessagesHidden = () => ({
-    type: HIDE_LOGIN_PAGE_ERROR_MESSAGES
+    type: LOGIN_PAGE_ERROR_MESSAGES_HIDDEN
 })

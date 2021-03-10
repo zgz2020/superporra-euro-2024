@@ -34,7 +34,9 @@ export const englishTranslations = {
         title: "Password Reset",
         passwordResetTokenExpiredText: "The token to reset your password has expired.",
         passwordResetTokenExpiredButton: "Request a new token",
-        resetButton: "Reset Password"
+        resetButton: "Reset Password",
+        resetPasswordSuccess: "Your password has been reset!",
+        resetPasswordError: "There was an error. Please try again."
     },
     participantsPage: {
         title: "Superporra Paticipants",

@@ -12,6 +12,7 @@ export const HIDE_RESET_PASSWORD_EMAIL_SENT_MESSAGE = 'HIDE_RESET_PASSWORD_EMAIL
 export const SHOW_RESET_PASSWORD_EMAIL_ERROR_MESSAGE = 'SHOW_RESET_PASSWORD_EMAIL_ERROR_MESSAGE'
 export const HIDE_RESET_PASSWORD_EMAIL_ERROR_MESSAGE = 'HIDE_RESET_PASSWORD_EMAIL_ERROR_MESSAGE'
 
+export const REQUEST_PASSWORD_RESET = 'REQUEST_PASSWORD_RESET'
 
 export const requestForgotPasswordEmail = (email) => ({
     type: REQUEST_FORGOT_PASSWORD_EMAIL,
@@ -46,3 +47,7 @@ export const hideResetPasswordEmailErrorMessage = () => ({
     type: HIDE_RESET_PASSWORD_EMAIL_ERROR_MESSAGE
 })
 
+export const requestPasswordReset = (newPassword) => ({
+    type: REQUEST_PASSWORD_RESET,
+    newPassword
+})
