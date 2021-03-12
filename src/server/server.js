@@ -339,3 +339,17 @@ app.post('/password-reset-token', async (req, res) => {
 
     res.send({ tokenData })
 })
+
+app.post('/reset-password', async (req, res) => {
+    let { userID, newPassword } = req.body
+
+    console.log('SERVER - userID: ', userID)
+    console.log('SERVER - newPassword: ', newPassword)
+
+    let db = await connectDB()
+    let usersCollection = db.collection('users')
+
+    await usersCollection.updateOne( { id: userID }, { $set: { password: newPassword } })
+
+    res.status(200).send()
+})

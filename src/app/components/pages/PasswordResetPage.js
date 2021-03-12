@@ -1,4 +1,5 @@
 import React from 'react'
+import md5 from 'md5'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { store } from '../../store'
@@ -130,12 +131,12 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = (dispatch, ownProps) => {
     let resetPasswordToken = ownProps.match.params.token
     store.dispatch(mutations.passwordResetTokenStatus(resetPasswordToken))
+    let passwordHash = (e) => md5(e.target['password'].value)
 
     return {
         requestPasswordReset(e) {
             e.preventDefault()
-            dispatch(mutations.requestPasswordReset(e.target['password'].value))
-            // dispatch action
+            dispatch(mutations.requestPasswordReset(resetPasswordToken, passwordHash(e)))
         }
     }
 }

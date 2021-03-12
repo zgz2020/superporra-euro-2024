@@ -13,10 +13,7 @@ export function* passwordResetTokenStatusSaga (){
     console.log('PRTS - SAGA - token: ', token)
 
     const { data } = yield axios.post(url + '/password-reset-token', { token })
-
-    console.log('PRTS_Saga - response: ', data)
     let { tokenData } = data
-    console.log('PRTS_Saga - tokenExpires: ', tokenData.tokenExpires)
 
     if (tokenData.tokenExpires > Date.now()) {
         yield put(mutations.passwordResetTokenValid())
@@ -27,7 +24,7 @@ export function* passwordResetTokenStatusSaga (){
 
 export function* requestPasswordResetSaga (){
     while (true) {
-        const { newPassword } = yield take(mutations.REQUEST_PASSWORD_RESET)
+        const { token, newPassword } = yield take(mutations.REQUEST_PASSWORD_RESET)
 
         yield put(mutations.hideLoginPageErrorMessages())
         yield take(mutations.LOGIN_PAGE_ERROR_MESSAGES_HIDDEN)
@@ -37,7 +34,15 @@ export function* requestPasswordResetSaga (){
         } 
         else {
             try {
-                // CODE to RESET password
+                const { data } = yield axios.post(url + '/password-reset-token', { token })
+                let { tokenData } = data
+                let userID = tokenData.userID
+
+                const respuesta = yield axios.post(url + '/reset-password', { userID, newPassword })
+               
+                // TODO !!!
+                // Remove password-reset-token from database
+
                 yield put(mutations.showResetPasswordSuccessMessage())
             } catch (e) {
                 yield put(mutations.showResetPasswordErrorMessage())

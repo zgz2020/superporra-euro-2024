@@ -47,7 +47,8 @@ export const hideResetPasswordEmailErrorMessage = () => ({
     type: HIDE_RESET_PASSWORD_EMAIL_ERROR_MESSAGE
 })
 
-export const requestPasswordReset = (newPassword) => ({
+export const requestPasswordReset = (token, newPassword) => ({
     type: REQUEST_PASSWORD_RESET,
+    token,
     newPassword
 })
