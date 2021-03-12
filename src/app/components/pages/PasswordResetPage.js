@@ -14,10 +14,8 @@ const passwordResetTokenExpiredBlock = (translations) => (
             </div>
             <div className="py-4">
                 <Link
-                    //className={itemClass}
                     to={'/sign-in'} 
-                    //onClick={clickHandler}
-                    data-automation="nav-item"
+                    data-automation="rquest-new-token"
                 >
                     {translations.passwordResetPage.passwordResetTokenExpiredButton}
                 </Link>
@@ -56,12 +54,19 @@ const passwordResetForm = (
                     </p>
                 }
 
-                {resetPasswordSuccessMessage &&  
+                {resetPasswordSuccessMessage && 
                     <p 
                         className="text-success font-italic mt-2"
                         data-automation={'email-error'}
                     >
                         {translations.passwordResetPage.resetPasswordSuccess}
+                        <Link
+                            className="ml-2 ps-3 btn btn-primary"
+                            to={'/sign-in'} 
+                            data-automation="sign-in"
+                        >
+                            {translations.signInPage.signIn}
+                        </Link>
                     </p>
                 }
 
@@ -74,12 +79,20 @@ const passwordResetForm = (
                     </p>
                 }
 
-                <button 
+                {!resetPasswordSuccessMessage &&
+                    <button 
+                        type="submit" 
+                        className="form-control mt-2 btn btn-primary"
+                    >
+                        {translations.passwordResetPage.resetButton}
+                    </ button>
+                }
+                {/* <button 
                     type="submit" 
                     className="form-control mt-2 btn btn-primary"
                 >
                     {translations.passwordResetPage.resetButton}
-                </ button>
+                </ button> */}
             </form>
 
         </div>
