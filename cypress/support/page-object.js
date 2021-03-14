@@ -47,11 +47,14 @@ export const selectors = {
     errors: {
         noEmailSignIn: automationSelector('no-email-message-signIn'),
         noEmailSignUp: automationSelector('no-email-message-signUp'),
+        noEmailForgotPassword: automationSelector('no-email-message-forgotPassword'),
         emailErrorSignIn: automationSelector('email-error-signIn'),
         emailErrorSignUp: automationSelector('email-error-signUp'),
+        emailErrorForgotPassword: automationSelector('email-error-forgotPassword'),
         passwordErrorSignIn: automationSelector('password-error-signIn'),
-        passwordErrorSignUp: automationSelector('password-error-signUp')
-    }
+        passwordErrorSignUp: automationSelector('password-error-signUp'),
+    },
+    emailSent: automationSelector('reset-password-email-sent')
 }
  
 const elementVisibilityAssertion = (status) => {

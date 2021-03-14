@@ -39,12 +39,9 @@ export function* requestPasswordResetSaga (){
                 let userID = tokenData.userID
 
                 const respuesta = yield axios.post(url + '/reset-password', { userID, newPassword })
-               
-                // TODO !!!
-                // Remove password-reset-token from database
-
                 yield put(mutations.showResetPasswordSuccessMessage())
             } catch (e) {
+                console.log('There was an error reseting the password: ', e)
                 yield put(mutations.showResetPasswordErrorMessage())
             }
         }
