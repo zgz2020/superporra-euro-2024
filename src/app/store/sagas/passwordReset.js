@@ -29,7 +29,7 @@ export function* requestPasswordResetSaga (){
         yield put(mutations.hideLoginPageErrorMessages())
         yield take(mutations.LOGIN_PAGE_ERROR_MESSAGES_HIDDEN)
 
-        if (newPassword == '') {
+        if (newPassword == 'd41d8cd98f00b204e9800998ecf8427e') {
             yield put(mutations.showNoPasswordMessage())
         } 
         else {
@@ -38,7 +38,7 @@ export function* requestPasswordResetSaga (){
                 let { tokenData } = data
                 let userID = tokenData.userID
 
-                const respuesta = yield axios.post(url + '/reset-password', { userID, newPassword })
+                const respuesta = yield axios.post(url + '/password-reset-request', { userID, newPassword })
                 yield put(mutations.showResetPasswordSuccessMessage())
             } catch (e) {
                 console.log('There was an error reseting the password: ', e)

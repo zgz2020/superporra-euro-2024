@@ -340,7 +340,7 @@ app.post('/password-reset-token', async (req, res) => {
     res.send({ tokenData })
 })
 
-app.post('/reset-password', async (req, res) => {
+app.post('/password-reset-request', async (req, res) => {
     let { userID, newPassword } = req.body
 
     console.log('SERVER - userID: ', userID)

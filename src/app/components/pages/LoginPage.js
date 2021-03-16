@@ -52,7 +52,7 @@ const credentialsForm = (type, submitHandler, translations, noEmailMessage, erro
                 {resetPasswordEmailSentMessage &&  
                     <p 
                         className="text-success font-italic mt-2"
-                        data-automation={'reset-password-email-sent'}
+                        data-automation={'password-reset-email-sent'}
                     >
                         {translations.signInPage.resetPasswordEmailSent}
                     </p>

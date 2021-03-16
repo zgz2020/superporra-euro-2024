@@ -7,7 +7,7 @@ import { ConnectedHeader } from '../Header'
 import * as mutations from '../../store/mutations'
 
 const passwordResetTokenExpiredBlock = (translations) => (
-    <div className="card">
+    <div className="card" data-automation="password-reset-token-expired-block">
         <div className="card-body text-center">
             <div className="pt-4">
                 {translations.passwordResetPage.passwordResetTokenExpiredText}
@@ -15,7 +15,7 @@ const passwordResetTokenExpiredBlock = (translations) => (
             <div className="py-4">
                 <Link
                     to={'/sign-in'} 
-                    data-automation="rquest-new-token"
+                    data-automation="request-new-token"
                 >
                     {translations.passwordResetPage.passwordResetTokenExpiredButton}
                 </Link>
@@ -57,7 +57,7 @@ const passwordResetForm = (
                 {resetPasswordSuccessMessage && 
                     <p 
                         className="text-success font-italic mt-2"
-                        data-automation={'email-error'}
+                        data-automation={'password-reset-success'}
                     >
                         {translations.passwordResetPage.resetPasswordSuccess}
                         <Link
@@ -73,7 +73,7 @@ const passwordResetForm = (
                 {resetPasswordErrorMessage &&  
                     <p 
                         className="text-success font-italic mt-2"
-                        data-automation={'reset-password-error'}
+                        data-automation={'password-reset-error'}
                     >
                         {translations.passwordResetPage.resetPasswordError}
                     </p>

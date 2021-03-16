@@ -44,7 +44,7 @@ export const selectors = {
     emailInput: automationSelector("email-address-input"),
     passwordInput: automationSelector("password-input"),
     submitButton: '.btn-primary',
-    errors: {
+    signInPageErrors: {
         noEmailSignIn: automationSelector('no-email-message-signIn'),
         noEmailSignUp: automationSelector('no-email-message-signUp'),
         noEmailForgotPassword: automationSelector('no-email-message-forgotPassword'),
@@ -54,7 +54,12 @@ export const selectors = {
         passwordErrorSignIn: automationSelector('password-error-signIn'),
         passwordErrorSignUp: automationSelector('password-error-signUp'),
     },
-    emailSent: automationSelector('reset-password-email-sent')
+    emailSent: automationSelector('password-reset-email-sent'),
+    passwordResetTokenExpiredBlock: automationSelector('password-reset-token-expired-block'),
+    requestNewTokenLink: automationSelector('request-new-token'),
+    passwordResetPasswordError: automationSelector('password-error'),
+    passwordResetSuccessMessage: automationSelector('password-reset-success'),
+    signInButton: automationSelector('sign-in')
 }
  
 const elementVisibilityAssertion = (status) => {
@@ -64,6 +69,12 @@ const elementVisibilityAssertion = (status) => {
 
 export const clickOnCTA = (cta) => cy.get(cta).click()
 
+
+// --------------------------------------------------------------
+// NAVIGATION BAR
+// --------------------------------------------------------------
+
+export const checkNavBarVisible = () => cy.get('.navbar').should('be.visible')
 
 
 // --------------------------------------------------------------
@@ -262,7 +273,7 @@ export const checkNoBetsYet = () => cy.get(selectors.cardBody).should('contain',
 
 
 // --------------------------------------------------------------
-// Sign In / Up
+// Sign In, Sign Up and Forgot Password
 // --------------------------------------------------------------
 
 export const signIn = (email, password) => {
@@ -283,12 +294,29 @@ const randomInt10000 = () => Math.floor(Math.random() * 1000)
 
 export const randomEmail = () => `automated-${randomInt10000()}@test.com`
 
+export const randomPassword = () => `testing${randomInt10000()}`
+
 export const onlyThisErrorVisible = (error) => {
-    Object.keys(selectors.errors).forEach($error => {
+    Object.keys(selectors.signInPageErrors).forEach($error => {
         if ($error == error) {
-            cy.get(selectors.errors[$error]).should('be.visible')
+            cy.get(selectors.signInPageErrors[$error]).should('be.visible')
         } else {
-            cy.get(selectors.errors[$error]).should('not.to.exist')
+            cy.get(selectors.signInPageErrors[$error]).should('not.to.exist')
         }
     })
+}
+
+
+// --------------------------------------------------------------
+// Password Reset
+// --------------------------------------------------------------
+
+export const verifyPasswordResetTokenExpiredBlock = () => {
+    cy.get(selectors.passwordResetTokenExpiredBlock)
+        // Check block text 
+        .should('contain', 'The token to reset your password has expired')
+        // Check block link
+        .get(selectors.requestNewTokenLink).click()
+        // Check rediect to Sign In page
+        .url().should('contain', '/sign-in')
 }
