@@ -31,35 +31,25 @@ export function* userAuthenticationSaga(){
 
         let allUsers = yield select(selectors.getUsers)
 
-        yield put(mutations.hideNoEmailSignUpMessage())
-        yield put(mutations.hideEmailAlreadyRegisteredMessage())
-        yield put(mutations.hideNoPasswordMessage())
+        yield put(mutations.hideLoginPageErrorMessages())
+        yield take(mutations.LOGIN_PAGE_ERROR_MESSAGES_HIDDEN)
 
         if ( username == '') {
-            yield put(mutations.hideEmailNotRegisteredMessage())
-            yield put(mutations.hideIncorrectPasswordMessage())
             yield put(mutations.showNoEmailSignInMessage())
         } else if (!userExists(allUsers.allIds, username)) {
-            yield put(mutations.hideNoEmailSignInMessage())
-            yield put(mutations.hideIncorrectPasswordMessage())
-            yield put(mutations.showEmailNotRegisteredMessage())
+            yield put(mutations.showEmailNotRegisteredSignInMessage())
         } else {
             try {
                 const { data } = yield axios.post(url + '/authenticate', { username, passwordHash })
                 const { authenticated, id, idToken } = data.session
     
                 yield put(mutations.processAuthenticateUser(authenticated, id))
-                yield put(mutations.hideNoEmailSignInMessage())
-                yield put(mutations.hideEmailNotRegisteredMessage())
-                yield put(mutations.hideIncorrectPasswordMessage())
     
                 setLocalStorageUser(idToken.token)
     
                 history.push('/account')
             } catch (e) {
                 yield put(mutations.processAuthenticateUser(mutations.NOT_AUTHENTICATED))
-                yield put(mutations.hideNoEmailSignInMessage())
-                yield put(mutations.hideEmailNotRegisteredMessage())
                 yield put(mutations.showIncorrectPasswordMessage())
             }
         }

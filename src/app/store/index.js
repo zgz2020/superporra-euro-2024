@@ -6,10 +6,17 @@ import {
     session, 
     noEmailSignInMessage,
     noEmailSignUpMessage,
-    emailNotRegisteredMessage,
+    noEmailForgotPasswordMessage,
+    emailNotRegisteredSignInMessage,
+    emailNotRegisteredForgotPasswordMessage,
+    resetPasswordEmailSentMessage,
+    resetPasswordEmailErrorMessage,
     emailAlreadyRegisteredMessage,
     incorrectPasswordMessage,
-    noPasswordMessage
+    noPasswordMessage,
+    passwordResetTokenExpired,
+    resetPasswordSuccessMessage,
+    resetPasswordErrorMessage
 } from './reducers/login' 
 import { language, translations } from './reducers/language'
 import { mongoDataLoading } from './reducers/mongoData'
@@ -34,10 +41,17 @@ export const store = createStore(
         session,
         noEmailSignInMessage,
         noEmailSignUpMessage,
-        emailNotRegisteredMessage,
+        noEmailForgotPasswordMessage,
+        emailNotRegisteredSignInMessage,
+        emailNotRegisteredForgotPasswordMessage,
+        resetPasswordEmailSentMessage,
+        resetPasswordEmailErrorMessage,
         emailAlreadyRegisteredMessage,
         incorrectPasswordMessage, 
         noPasswordMessage,
+        passwordResetTokenExpired,
+        resetPasswordSuccessMessage,
+        resetPasswordErrorMessage,
         language,
         translations,
         mongoDataLoading,

@@ -24,7 +24,19 @@ export const englishTranslations = {
         wrongPassword: "Password incorrect",
         noPassword: "You must enter a password",
         signUpHeader: "Don't have an account yet? Sign Up here!",
-        signUp: "Sign Up"
+        signUp: "Sign Up",
+        forgotPasswordHeader: "Forgot your password? Reset it here",
+        sendPasswordResetEmail: "Send password reset email",
+        resetPasswordEmailSent: "Password reset email sent",
+        resetPasswordEmailError: "There was an error. Please try again."
+    },
+    passwordResetPage: {
+        title: "Password Reset",
+        passwordResetTokenExpiredText: "The token to reset your password has expired.",
+        passwordResetTokenExpiredButton: "Request a new token",
+        resetButton: "Reset Password",
+        resetPasswordSuccess: "Your password has been reset!",
+        resetPasswordError: "There was an error. Please try again."
     },
     participantsPage: {
         title: "Superporra Paticipants",

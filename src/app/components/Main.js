@@ -13,6 +13,7 @@ import { ConnectedParticipantScoreDetailedPage } from './pages/ParticipantScoreD
 import { ConnectedScoringRulesPage } from './pages/ScoringRulesPage'
 import { ConnectedAccountPage } from './pages/AccountPage'
 import { ConnectedLoginPage } from './pages/LoginPage'
+import { ConnectedPasswordResetPage } from './pages/PasswordResetPage'
 
 export const Main = () => (
     <Router history={history}>
@@ -22,6 +23,7 @@ export const Main = () => (
                 <Route exact path="/" render={() => (<ConnectedHomePage />)} />
                 <Route path="/sign-in" render={() => (<ConnectedLoginPage />)} />
                 <Route path="/sign-out" render={() => (<ConnectedLoginPage />)} />
+                <Route path="/password-reset/:token" render={({ match }) => (<ConnectedPasswordResetPage match={match} />)} />
                 <Route path="/results" render={() => (<ConnectedResultsPage />)} />
                 <Route exact path="/participants" render={() => (<ConnectedParticipantsPage />)} />
                 <Route exact path="/participants/:id" render={({ match }) => (<ConnectedParticipantPredictionsPage match={match} />)} />

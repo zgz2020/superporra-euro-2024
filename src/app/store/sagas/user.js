@@ -14,26 +14,16 @@ export function* userCreationSaga() {
 
         let allUsers = yield select(selectors.getUsers)
 
-        yield put(mutations.hideNoEmailSignInMessage())
-        yield put(mutations.hideEmailNotRegisteredMessage())
-        yield put(mutations.hideIncorrectPasswordMessage())
+        yield put(mutations.hideLoginPageErrorMessages())
+        yield take(mutations.LOGIN_PAGE_ERROR_MESSAGES_HIDDEN)
 
         if (userID == '') {
-            yield put(mutations.hideEmailAlreadyRegisteredMessage())
-            yield put(mutations.hideNoPasswordMessage())
             yield put(mutations.showNoEmailSignUpMessage())
         } else if (userExists(allUsers.allIds, userID)) {
-            yield put(mutations.hideNoEmailSignUpMessage())
-            yield put(mutations.hideNoPasswordMessage())
             yield put(mutations.showEmailAlreadyRegisteredMessage())
         } else if (passwordHash == 'd41d8cd98f00b204e9800998ecf8427e' ) {
-            yield put(mutations.hideNoEmailSignUpMessage())
-            yield put(mutations.hideEmailAlreadyRegisteredMessage())
             yield put(mutations.showNoPasswordMessage())
         } else {
-            yield put(mutations.hideNoEmailSignUpMessage())
-            yield put(mutations.hideEmailAlreadyRegisteredMessage())
-            yield put(mutations.hideNoPasswordMessage())
             yield put(mutations.createUser(userID, passwordHash))
         
             const { data } = yield axios.post(url + '/user/new', {

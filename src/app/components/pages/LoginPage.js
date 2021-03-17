@@ -6,7 +6,8 @@ import { ConnectedHeader } from '../Header'
 
 
 const emailErrorText = (type, translations) => {
-    if (type == 'signIn') return translations.signInPage.emailNotRegistered
+    if (['signIn', 'forgotPassword'].includes(type)) return translations.signInPage.emailNotRegistered
+
     if (type == 'signUp') return translations.signInPage.emailAlreadyRegistered
 }
 
@@ -15,7 +16,7 @@ const passwordErrorText = (type, translations) => {
     if (type == 'signUp') return translations.signInPage.noPassword
 }
 
-const credentialsForm = (type, submitHandler, authenticated, translations, noEmailMessage, errorMessageEmail, errorMessagePassword, buttonLabel) => (
+const credentialsForm = (type, submitHandler, translations, noEmailMessage, errorMessageEmail, resetPasswordEmailSentMessage, resetPasswordEmailErrorMessage, buttonLabel, authenticated, errorMessagePassword) => (
     <div className="card">
         <div className="card-body">
 
@@ -48,22 +49,44 @@ const credentialsForm = (type, submitHandler, authenticated, translations, noEma
                     </p>
                 }
 
-                {`${translations.signInPage.password}:`}
-                <input 
-                    type="password" 
-                    placeholder={translations.signInPage.passwordPlaceholder}
-                    name="password"
-                    className="form-control" 
-                    data-automation="password-input"
-                />
-
-                {errorMessagePassword &&  
+                {resetPasswordEmailSentMessage &&  
                     <p 
-                        className="text-danger font-italic mt-2"
-                        data-automation={`password-error-${type}`}
+                        className="text-success font-italic mt-2"
+                        data-automation={'password-reset-email-sent'}
                     >
-                        {passwordErrorText(type, translations)}
+                        {translations.signInPage.resetPasswordEmailSent}
                     </p>
+                }
+
+                {resetPasswordEmailErrorMessage &&  
+                    <p 
+                        className="text-success font-italic mt-2"
+                        data-automation={`email-error-${type}`}
+                    >
+                        {translations.signInPage.resetPasswordEmailError}
+                    </p>
+                }
+
+                {type != "forgotPassword"  && 
+                    <div>
+                        {`${translations.signInPage.password}:`}
+                        <input 
+                            type="password" 
+                            placeholder={translations.signInPage.passwordPlaceholder}
+                            name="password"
+                            className="form-control" 
+                            data-automation="password-input"
+                        />
+
+                        {errorMessagePassword &&  
+                            <p 
+                                className="text-danger font-italic mt-2"
+                                data-automation={`password-error-${type}`}
+                            >
+                                {passwordErrorText(type, translations)}
+                            </p>
+                        }
+                    </div>
                 }
 
                 <button 
@@ -89,23 +112,34 @@ const LoginPage = ({
     translations,
     noEmailSignInMessage,
     noEmailSignUpMessage,
-    emailNotRegisteredMessage,
+    noEmailForgotPasswordMessage,
+    emailNotRegisteredSignInMessage,
+    emailNotRegisteredForgotPasswordMessage,
+    resetPasswordEmailSentMessage,
+    resetPasswordEmailErrorMessage,
     emailAlreadyRegisteredMessage,
     incorrectPasswordMessage,
     noPasswordMessage,  
+    requestForgotPasswordEmail
 }) => (
     <div>
         <ConnectedHeader title={translations.signInPage.title} />
 
-        {credentialsForm('signIn', requestAuthenticateUser, authenticated, translations, noEmailSignInMessage, emailNotRegisteredMessage, incorrectPasswordMessage, translations.signInPage.signIn)}
+        {credentialsForm('signIn', requestAuthenticateUser, translations, noEmailSignInMessage, emailNotRegisteredSignInMessage, null, null, translations.signInPage.signIn, authenticated, incorrectPasswordMessage)}
 
         <div className="card mt-3">
             <div className="card-header">
                 {translations.signInPage.signUpHeader}
             </ div>
         </div>
-        {credentialsForm('signUp', requestCreateUser, authenticated, translations, noEmailSignUpMessage, emailAlreadyRegisteredMessage, noPasswordMessage, translations.signInPage.signUp)}
+        {credentialsForm('signUp', requestCreateUser, translations, noEmailSignUpMessage, emailAlreadyRegisteredMessage, null, null, translations.signInPage.signUp, null, noPasswordMessage)}
 
+        <div className="card mt-3">
+            <div className="card-header">
+                {translations.signInPage.forgotPasswordHeader}
+            </ div>
+        </div>
+        {credentialsForm('forgotPassword', requestForgotPasswordEmail, translations, noEmailForgotPasswordMessage, emailNotRegisteredForgotPasswordMessage, resetPasswordEmailSentMessage, resetPasswordEmailErrorMessage, translations.signInPage.sendPasswordResetEmail)}
     </div>
 )
 
@@ -115,10 +149,14 @@ const mapStateToProps = (state) => {
         translations,
         noEmailSignInMessage,
         noEmailSignUpMessage,
-        emailNotRegisteredMessage,
+        noEmailForgotPasswordMessage,
+        emailNotRegisteredSignInMessage,
+        emailNotRegisteredForgotPasswordMessage,
+        resetPasswordEmailSentMessage,
+        resetPasswordEmailErrorMessage,
         emailAlreadyRegisteredMessage,
         incorrectPasswordMessage,
-        noPasswordMessage,  
+        noPasswordMessage
     } = state
     let authenticated = session.authenticated
 
@@ -127,7 +165,11 @@ const mapStateToProps = (state) => {
         translations,
         noEmailSignInMessage,
         noEmailSignUpMessage,
-        emailNotRegisteredMessage,
+        noEmailForgotPasswordMessage,
+        emailNotRegisteredSignInMessage,
+        emailNotRegisteredForgotPasswordMessage,
+        resetPasswordEmailSentMessage,
+        resetPasswordEmailErrorMessage,
         emailAlreadyRegisteredMessage,
         incorrectPasswordMessage,
         noPasswordMessage,  
@@ -146,6 +188,10 @@ const mapDispatchToProps = (dispatch) => {
         requestCreateUser(e) {
             e.preventDefault()
             dispatch(mutations.requestUserCreation(emailAddress(e), passwordHash(e)))
+        },
+        requestForgotPasswordEmail(e) {
+            e.preventDefault()
+            dispatch(mutations.requestForgotPasswordEmail(emailAddress(e)))
         }
     }
 }

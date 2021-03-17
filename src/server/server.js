@@ -13,6 +13,7 @@ import uuid from 'uuid';
 import md5 from 'md5'
 import { AUTHENTICATING } from '../app/store/mutations';
 
+const nodemailer = require('nodemailer')
 
 let port = process.env.PORT || 7777
 let app = express()
@@ -271,4 +272,84 @@ app.post('/user/new', async (req, res) => {
     }
 
     res.send({ session })
+})
+
+app.post('/forgot-password-email', async(req, res) => {
+    let userId = req.body.email
+
+    let db = await connectDB()
+    let usersCollection = db.collection('users')
+
+    let user = await usersCollection.findOne({ id: userId })
+
+    if (!user) {
+        return res.status(500).send('Username not registered')
+    }
+
+    let token = uuid()
+    let resetPasswordtokensCollection = db.collection('resetPasswordTokens')
+    let resetPasswordToken = { 
+        token, 
+        tokenExpires: Date.now() + 3600000,
+        userID: userId
+    }
+    await resetPasswordtokensCollection.insertOne(resetPasswordToken)
+
+    const transporter = nodemailer.createTransport({
+        service: 'gmail',
+        auth: {
+            user: 'superporra.reset@gmail.com',
+            pass: 'test1234!'
+        }
+    })
+
+    const mailOptions = {
+        from: 'superporra.reset@gmail.com',
+        to: userId,
+        subject: 'Superporra - Reset your password',
+        text: 'You are receiving this email because you (or someone else) have requested the reset of the password for your account.\n\n'
+            + 'Please click on the following link, or paste this into your browser, to complete the process within one hour of receiving it:\n\n'
+            + `https://superporra2021.herokuapp.com/password-reset/${token}\n\n\n`
+            + 'If you did not request this, please ignore this email and your password will emain unchanged.\n'
+    }
+
+    console.log('Sending email')
+
+    transporter.sendMail(mailOptions, (err, response) => {
+        if (err) {
+            console.error('There was an error sending the email: ', err)
+        } else {
+            console.log('Here is the response: ', response)
+            res.status(200).json('Recovery email sent')
+        }
+    })
+})
+
+app.post('/password-reset-token', async (req, res) => {
+    let token = req.body.token
+
+    let db = await connectDB()
+    let resetPasswordTokensCollection = db.collection('resetPasswordTokens')
+
+    let tokenData = await resetPasswordTokensCollection.findOne({ token: token })
+
+    if (!tokenData) {
+        return res.status(500).send('Reset Password token not valid')
+    }
+
+    res.send({ tokenData })
+})
+
+app.post('/password-reset-request', async (req, res) => {
+    let { userID, newPassword } = req.body
+
+    console.log('SERVER - userID: ', userID)
+    console.log('SERVER - newPassword: ', newPassword)
+
+    let db = await connectDB()
+    let usersCollection = db.collection('users')
+
+    await usersCollection.updateOne( { id: userID }, { $set: { password: newPassword } })
+
+    res.status(200).send()
 })

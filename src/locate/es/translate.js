@@ -24,7 +24,19 @@ export const spanishTranslations = {
         wrongPassword: "Clave incorrecta",
         noPassword: "Debes introducir una clave",
         signUpHeader: "¿Aún no tienes una cuenta? ¡Crea una aquí mismo!",
-        signUp: "Crear cuenta"
+        signUp: "Crear cuenta",
+        forgotPasswordHeader: "¿Olvidaste tu contraseña? Crea una nueva aquí",
+        sendPasswordResetEmail: "Crear contraseña nueva",
+        resetPasswordEmailSent: "Se ha enviado un correo para crear una contraseña nueva",
+        resetPasswordEmailError: "Ha habido un error. Inténtalo de nuevo."
+    },
+    passwordResetPage: {
+        title: "Actualizar contraseña",
+        passwordResetTokenExpiredText: "El token para actualizar tu contrseña ha expirado.",
+        passwordResetTokenExpiredButton: "Solicitar token nuevo",
+        resetButton: "Actualizar contraseña",
+        resetPasswordSuccess: "Tu contrseña se ha actualizado.",
+        resetPasswordError: "Ha habido un error. Inténtalo de nuevo."
     },
     participantsPage: {
         title: "Paticipantes de la Superporra",
