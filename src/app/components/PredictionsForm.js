@@ -129,7 +129,7 @@ const PredictionsForm = ( {
                                 type="text" 
                                 onChange={e => setUsernameHandler(
                                     predictionType, 
-                                    predictionsOrResults.id, //predictionID, // predictionDetails(predictionType).predictionID, 
+                                    predictionsOrResults.id,
                                     e
                                 )} 
                                 value={username}
