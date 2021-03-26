@@ -11,7 +11,10 @@ import { updatePredictionMatches } from './serverUtils'
 
 import uuid from 'uuid';
 import md5 from 'md5'
-import { AUTHENTICATING } from '../app/store/mutations';
+import { AUTHENTICATING } from '../app/store/mutations'
+
+import { englishTranslations } from '../locate/en/translate'
+import { spanishTranslations } from '../locate/es/translate'
 
 const nodemailer = require('nodemailer')
 
