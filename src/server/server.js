@@ -11,7 +11,10 @@ import { updatePredictionMatches } from './serverUtils'
 
 import uuid from 'uuid';
 import md5 from 'md5'
-import { AUTHENTICATING } from '../app/store/mutations';
+import { AUTHENTICATING } from '../app/store/mutations'
+
+import { englishTranslations } from '../locate/en/translate'
+import { spanishTranslations } from '../locate/es/translate'
 
 const nodemailer = require('nodemailer')
 
@@ -276,6 +279,7 @@ app.post('/user/new', async (req, res) => {
 
 app.post('/forgot-password-email', async(req, res) => {
     let userId = req.body.email
+    let language = req.body.language
 
     let db = await connectDB()
     let usersCollection = db.collection('users')
@@ -303,14 +307,20 @@ app.post('/forgot-password-email', async(req, res) => {
         }
     })
 
+    const emailSubject = () => {
+        if (language == 'english') return englishTranslations.signInPage.forgotPasswordEmailSubject
+        if (language == 'spanish') return spanishTranslations.signInPage.forgotPasswordEmailSubject
+    }
+    const emailText = () => {
+        if (language == 'english') return englishTranslations.signInPage.forgotPasswordEmailBody(token)
+        if (language == 'spanish') return spanishTranslations.signInPage.forgotPasswordEmailBody(token)
+    }
+
     const mailOptions = {
         from: 'superporra.reset@gmail.com',
         to: userId,
-        subject: 'Superporra - Reset your password',
-        text: 'You are receiving this email because you (or someone else) have requested the reset of the password for your account.\n\n'
-            + 'Please click on the following link, or paste this into your browser, to complete the process within one hour of receiving it:\n\n'
-            + `https://superporra2021.herokuapp.com/password-reset/${token}\n\n\n`
-            + 'If you did not request this, please ignore this email and your password will emain unchanged.\n'
+        subject: emailSubject(),
+        text: emailText()
     }
 
     console.log('Sending email')
@@ -342,9 +352,6 @@ app.post('/password-reset-token', async (req, res) => {
 
 app.post('/password-reset-request', async (req, res) => {
     let { userID, newPassword } = req.body
-
-    console.log('SERVER - userID: ', userID)
-    console.log('SERVER - newPassword: ', newPassword)
 
     let db = await connectDB()
     let usersCollection = db.collection('users')

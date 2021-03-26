@@ -72,7 +72,7 @@ const passwordResetForm = (
 
                 {resetPasswordErrorMessage &&  
                     <p 
-                        className="text-success font-italic mt-2"
+                        className="text-danger font-italic mt-2"
                         data-automation={'password-reset-error'}
                     >
                         {translations.passwordResetPage.resetPasswordError}

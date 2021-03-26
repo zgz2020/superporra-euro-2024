@@ -60,7 +60,7 @@ const credentialsForm = (type, submitHandler, translations, noEmailMessage, erro
 
                 {resetPasswordEmailErrorMessage &&  
                     <p 
-                        className="text-success font-italic mt-2"
+                        className="text-danger font-italic mt-2"
                         data-automation={`email-error-${type}`}
                     >
                         {translations.signInPage.resetPasswordEmailError}
