@@ -33,7 +33,7 @@ export const spanishTranslations = {
         forgotPasswordEmailBody: (token) => 'Has recibido este correo electrónico porque tú (u otra persona) ha solicitado crear una contraseña nueva para tu cuenta.\n\n'
             + 'Haz clic en el siguiente enlace, o copia y pega en tu navegador, para completar el proceso en la próxima hora:\n\n'
             + `https://superporra2021.herokuapp.com/password-reset/${token}\n\n\n`
-            + 'Si no habías manddo esta solicitud, por favor ignora este correo electrónico y no se cambiará tu contraseña.\n'
+            + 'Si no habías mandado esta solicitud, por favor ignora este correo electrónico y no se cambiará tu contraseña.\n'
     },
     passwordResetPage: {
         title: "Actualizar contraseña",
