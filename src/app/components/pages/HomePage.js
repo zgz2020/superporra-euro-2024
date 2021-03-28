@@ -10,7 +10,7 @@ const HomePage = ({ translations }) => (
 
         <ConnectedHomepageJoin />
 
-        <ConnectedHomepageIntro />
+        {/* <ConnectedHomepageIntro /> */}
 
     </div>
 )

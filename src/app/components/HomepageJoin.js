@@ -9,7 +9,10 @@ const joinStep = (stepNumber, translations) => (
         </div>
         <div className="card-body">
             {stepNumber == "1" ? 
-                <Link to={"/sign-in"}>
+                <Link 
+                    to={"/sign-in"}
+                    data-automation="sign-up-link"
+                >
                     {translations.body[stepNumber]}
                 </Link>
                 :

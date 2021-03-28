@@ -10,6 +10,8 @@ export const selectors = {
     cardHeader: '.card-header',
     cardBody: '.card-body',
 
+    homepageSignUpLink: automationSelector("sign-up-link"),
+
     leaderboard: automationSelector("leaderboard"),
     leaderboardRow: {
         rank: `${automationSelector("leaderboard-row")} td:nth-child(1)`,
@@ -101,6 +103,13 @@ export const checkNavigationItemLink = (viewport, position, slug) => {
     cy.url().should('eq', `${Cypress.config().baseUrl}${slug}`)
 }
 
+
+
+// --------------------------------------------------------------
+// HOMEPAGE
+// --------------------------------------------------------------
+
+export const clickOnSignUpLink = () => clickOnCTA(selectors.homepageSignUpLink)
 
 
 // --------------------------------------------------------------
