@@ -37,7 +37,6 @@ const MatchPoints = (ownProps) => (
                         }
                     `}
                 </a>
-
             </div>
 
             <div className="collapse" id={collapseID(ownProps)}>

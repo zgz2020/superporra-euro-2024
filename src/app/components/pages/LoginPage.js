@@ -125,21 +125,69 @@ const LoginPage = ({
     <div>
         <ConnectedHeader title={translations.signInPage.title} />
 
-        {credentialsForm('signIn', requestAuthenticateUser, translations, noEmailSignInMessage, emailNotRegisteredSignInMessage, null, null, translations.signInPage.signIn, authenticated, incorrectPasswordMessage)}
+        <div className="card mt-3 tab-card mb-5">
+            <div className="card-header tab-card-header">
+                <ul className="nav nav-tabs card-header-tabs" id="myTab" role="tablist">
+                    <li className="nav-item">
+                        <a className="nav-link" id="sign-in-tab" data-toggle="tab" href="#sign-in-panel" role="tab" aria-controls="Sign-in-panel" aria-selected="false">
+                            {translations.signInPage.signIn}
+                        </a>
+                    </li>
+                    <li className="nav-item">
+                        <a className="nav-link active" id="sign-up-tab" data-toggle="tab" href="#sign-up-panel" role="tab" aria-controls="Sign-up-panel" aria-selected="true">
+                            {translations.signInPage.signUp}
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="tab-content" id="myTabContent">
+                <div class="tab-pane fade p-3" id="sign-in-panel" role="tabpanel" aria-labelledby="sign-in-tab">
+                    {credentialsForm(
+                        'signIn', 
+                        requestAuthenticateUser, 
+                        translations, 
+                        noEmailSignInMessage, 
+                        emailNotRegisteredSignInMessage, 
+                        null, 
+                        null, 
+                        translations.signInPage.signIn, 
+                        authenticated, 
+                        incorrectPasswordMessage
+                    )}           
+                </div>
+                <div class="tab-pane fade show active p-3" id="sign-up-panel" role="tabpanel" aria-labelledby="sign-up-tab">
+                    {credentialsForm(
+                        'signUp', 
+                        requestCreateUser, 
+                        translations, 
+                        noEmailSignUpMessage, 
+                        emailAlreadyRegisteredMessage, 
+                        null, 
+                        null, 
+                        translations.signInPage.signUp, 
+                        null, 
+                        noPasswordMessage
+                    )}            
+                </div>
+            </div>
 
-        <div className="card mt-3">
-            <div className="card-header">
-                {translations.signInPage.signUpHeader}
-            </ div>
+            <div className="card-footer">
+                <a className="nav-link" data-toggle="collapse" href="#forgot-password-form" role="button" aria-expanded="false" aria-controls="forgot-password-form">{translations.signInPage.forgotPasswordHeader}</a>
+            </div>
+            <div className="card-body collapse" id="forgot-password-form">
+                {credentialsForm(
+                    'forgotPassword', 
+                    requestForgotPasswordEmail, 
+                    translations, 
+                    noEmailForgotPasswordMessage, 
+                    emailNotRegisteredForgotPasswordMessage, 
+                    resetPasswordEmailSentMessage, 
+                    resetPasswordEmailErrorMessage, 
+                    translations.signInPage.sendPasswordResetEmail
+                )} 
+            </div>
         </div>
-        {credentialsForm('signUp', requestCreateUser, translations, noEmailSignUpMessage, emailAlreadyRegisteredMessage, null, null, translations.signInPage.signUp, null, noPasswordMessage)}
 
-        <div className="card mt-3">
-            <div className="card-header">
-                {translations.signInPage.forgotPasswordHeader}
-            </ div>
-        </div>
-        {credentialsForm('forgotPassword', requestForgotPasswordEmail, translations, noEmailForgotPasswordMessage, emailNotRegisteredForgotPasswordMessage, resetPasswordEmailSentMessage, resetPasswordEmailErrorMessage, translations.signInPage.sendPasswordResetEmail)}
     </div>
 )
 

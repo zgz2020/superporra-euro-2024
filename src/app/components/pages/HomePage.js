@@ -11,7 +11,6 @@ const HomePage = ({ translations }) => (
         <ConnectedHomepageJoin />
 
         {/* <ConnectedHomepageIntro /> */}
-
     </div>
 )
 
