@@ -1,7 +1,8 @@
 import { 
     selectors,
     onlyThisErrorVisible,
-    randomEmail
+    randomEmail,
+    clickOnCTA
 } from '../support/page-object'
 import { registeredUser } from '../support/testData'
 
@@ -30,17 +31,20 @@ describe('Sign In, Sign Up & Forgot your Password - Unhappy paths', () => {
     })
 
     it('Sign In - No email enterd', () => {
+        clickOnCTA(selectors.signInTab)
         cy.get(selectors.submitButton).eq(0).click()
         onlyThisErrorVisible('noEmailSignIn')
     })
 
     it('Sign In - Email not registered', () => {
+        clickOnCTA(selectors.signInTab)
         cy.get(selectors.emailInput).eq(0).clear().type('not-registered@test.com')
             .get(selectors.submitButton).eq(0).click()
         onlyThisErrorVisible('emailErrorSignIn')
     })
 
     it('Sign In - Wrong password', () => {
+        clickOnCTA(selectors.signInTab)
         cy.get(selectors.emailInput).eq(0).clear().type(registeredUser.email)
             // No password entered
             .get(selectors.submitButton).eq(0).click()
@@ -52,28 +56,33 @@ describe('Sign In, Sign Up & Forgot your Password - Unhappy paths', () => {
     })
 
     it('Sign Up - No email enterd', () => {
+        clickOnCTA(selectors.signUpTab)
         cy.get(selectors.submitButton).eq(1).click()
         onlyThisErrorVisible('noEmailSignUp')
     })
 
     it('Sign Up - Email already registered', () => {
+        clickOnCTA(selectors.signUpTab)
         cy.get(selectors.emailInput).eq(1).clear().type(registeredUser.email)
             .get(selectors.submitButton).eq(1).click()
         onlyThisErrorVisible('emailErrorSignUp')
     })
 
     it('Sign Up - No password entered', () => {
+        clickOnCTA(selectors.signUpTab)
         cy.get(selectors.emailInput).eq(1).clear().type(randomEmail())
             .get(selectors.submitButton).eq(1).click()
         onlyThisErrorVisible('passwordErrorSignUp')
     })
 
     it('Forgot your password - No email enterd', () => {
+        clickOnCTA(selectors.forgotPasswordLink)
         cy.get(selectors.submitButton).eq(2).click()
         onlyThisErrorVisible('noEmailForgotPassword')
     })
 
     it('Forgot your password - Email not registered', () => {
+        clickOnCTA(selectors.forgotPasswordLink)
         cy.get(selectors.emailInput).eq(2).clear().type('not-registered@test.com')
             .get(selectors.submitButton).eq(2).click()
         onlyThisErrorVisible('emailErrorForgotPassword')
@@ -83,6 +92,11 @@ describe('Sign In, Sign Up & Forgot your Password - Unhappy paths', () => {
 
 
 describe('Forgot password - Happy path', () => {
+    it('Sign Up selected by default', () => {
+        cy.visit('/sign-in')
+            .get(selectors.submitButton).should('contain', 'Sign Up')
+    })
+
     it('Forgot your password - Email registered', () => {
 
         cy.intercept('/forgot-password-email', (req) => {
@@ -91,7 +105,8 @@ describe('Forgot password - Happy path', () => {
         }).as('forgotPasswordEmail')
 
         cy.visit('/sign-in')
-            .get(selectors.emailInput).eq(2).clear().type(registeredUser.email)
+        clickOnCTA(selectors.forgotPasswordLink)
+        cy.get(selectors.emailInput).eq(2).clear().type(registeredUser.email)
             .get(selectors.submitButton).eq(2).click()
             // Check success message visible
             .get(selectors.emailSent).should('be.visible')

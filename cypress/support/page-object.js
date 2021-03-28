@@ -43,6 +43,9 @@ export const selectors = {
     resultsContainer: automationSelector("results-container"),
     firstScoreGoals: `${automationSelector("score-goals")}:nth(0)`,
 
+    signInTab: '#sign-in-tab',
+    signUpTab: '#sign-up-tab',
+    forgotPasswordLink: '[aria-controls="forgot-password-form"]',
     emailInput: automationSelector("email-address-input"),
     passwordInput: automationSelector("password-input"),
     submitButton: '.btn-primary',
