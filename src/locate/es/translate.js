@@ -10,8 +10,17 @@ export const spanishTranslations = {
     },
     homepage: {
         title: "Superporra Eurocopa 2021",
+        joinBanner: {
+            title: "¡Únete a la competición en menos de un minuto!",
+            body: {
+                step: "PASO",
+                "1": "Crea una cuenta",
+                "2": "Crea un nombe de usuario y genera predicciones aleatorias (podrás cambiar tus predicciones más tarde si lo deseas)",
+                "3": "¡Manda tus predicciones!"
+            }
+        },
         intro: {
-            title: "Have fun with the Superporra Euro 2021",
+            title: "Diviértete con la Superporra Euro 2021",
             body: {
                 first: "La Superporra Eurocopa 2021 es un concurso a modo de porra en el que los participantes compiten intentando acertar los resultados finales de los partidos de la erucopa de fútbol del 2021, los países que pasen a las fases eliminatorias (octavos de final, cuartos de final, etc.) y el equipo ganador de la eurocopa.",
                 second: "No solo pasarás un buen rato con la superporra Euro 2021, sino que también contribuirás a una buena causa con tu donación y tendrás la oportunidad de ganar premios."

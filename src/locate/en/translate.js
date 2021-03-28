@@ -10,6 +10,15 @@ export const englishTranslations = {
     },
     homepage: {
         title: "Superporra Euro 2021",
+        joinBanner: {
+            title: "Join the Superporra in less than a minute!",
+            body: {
+                step: "STEP",
+                "1": "Sign up",
+                "2": "Create username and Generate Random predictions (you will be able to edit your predictions afterwards if you wish)",
+                "3": "Submit!"
+            }
+        },
         intro: {
             title: "Have fun with the Superporra Euro 2021",
             body: {
