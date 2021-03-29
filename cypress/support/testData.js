@@ -8,7 +8,7 @@ export const adminUser = {
     password: "admin"
 }
 
-export const passwordResetUser = 'automated-password-reset-empty@test.com'
+export const passwordResetUser = 'password-reset-auto-test@test.com'
 
 export const expiredToken = '49019c44-2356-4a10-9e40-cf706040d62c'
 
