@@ -23,16 +23,20 @@ import {
 } from '../support/page-object'
 import { registeredUser } from '../support/testData'
 
+let url = Cypress.config().baseUrl
 
 describe('My Account - New User with no predictions', () => {
 
-    // TODO !!!
-    // after(() => {
-    //     // Remove prediction and user created by these tests
-    //     // ...
-    //     // ...
-    //     // ...
-    // })
+    after(() => {
+        // Remove all test users created by these tests
+        cy.request('POST', `${url}/remove-test-users`).then(resp => {
+            if (resp.status == 200) {
+                cy.log('Test users remove successfully :D')
+            } else {
+                cy.log('Failed to remove test users :(')
+            }
+        })
+    })
 
     it('Elements rendered, create new prediction and update existent one', () => {
         //Create a new user
@@ -96,17 +100,20 @@ describe('My Account - Existent user with at least one prediction', () => {
 
     beforeEach(() => {
         cy.visit('/sign-in')
+        clickOnCTA(selectors.signInTab)
         signIn(registeredUser.email, registeredUser.password)
     })
 
-    // TODO !!!
-    // after(() => {
-    //     // Remove prediction created by these tests
-    //     // ...
-    //     // ...
-    //     // ...
-    // })
-
+    after(() => {
+        // Remove all test predictions crated by these tests
+        cy.request('POST', `${url}/remove-test-predictions`).then(resp => {
+            if (resp.status == 200) {
+                cy.log('Test prediction was removed successfully :D')
+            } else {
+                cy.log('Failed to remove test prediction :(')
+            }
+        })
+    })
 
     it('Elements rendered and links', () => {
         cy.visit('/account')

@@ -6,6 +6,7 @@ import {
 } from '../support/testData'
 import { 
     selectors,
+    clickOnCTA,
     checkNavBarVisible,
     verifyPasswordResetTokenExpiredBlock,
     randomPassword,
@@ -59,6 +60,7 @@ describe.only('Password Reset - Happy path', () => {
         // Sign in with new password
         cy.get(selectors.signInButton).click()
             .url().should('contain', '/sign-in')
+        clickOnCTA(selectors.signInTab)
         signIn(passwordResetUser, newPassword)
         cy.get(selectors.cardHeader).should('contain', 'My Bets')
     })

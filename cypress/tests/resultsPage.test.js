@@ -21,6 +21,7 @@ describe('Results page - Signed In as Admin', () => {
 
     it('Results container and Results update form', () => {
         cy.visit('/sign-in')
+        clickOnCTA(selectors.signInTab)
         signIn(adminUser.email, adminUser.password)
         cy.visit('/results')
 

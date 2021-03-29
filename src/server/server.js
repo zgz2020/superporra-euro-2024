@@ -360,3 +360,22 @@ app.post('/password-reset-request', async (req, res) => {
 
     res.status(200).send()
 })
+
+
+app.post('/remove-test-users', async (req, res) => {
+    let db = await connectDB()
+    let usersCollection = db.collection('users')
+
+    await usersCollection.deleteMany({ id: /automated-/})
+    
+    res.status(200).send()
+})
+
+app.post('/remove-test-predictions', async (req, res) => {
+    let db = await connectDB()
+    let predictionsCollection = db.collection('predictions')
+
+    await predictionsCollection.deleteMany({ username: /Test Participant/})
+
+    res.status(200).send()
+})
