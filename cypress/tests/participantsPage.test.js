@@ -38,6 +38,7 @@ describe('Participants page', () => {
         cy.url().should('contain', '/sign-in')
 
         // Signed in status - [JOIN] should redirect to /account
+        clickOnCTA(selectors.signInTab)
         signIn(registeredUser.email, registeredUser.password)
         cy.visit('/participants')
         clickOnCTA(selectors.updateButton)

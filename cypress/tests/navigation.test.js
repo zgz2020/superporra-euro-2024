@@ -1,6 +1,8 @@
 import { checkNavigationItemLabel,
     checkNavigationItemLink,
+    clickOnCTA,
     selectLanguage,
+    selectors,
     signIn
 } from '../support/page-object'
 import { registeredUser } from '../support/testData'
@@ -33,6 +35,7 @@ describe('Navigation - Desktop', () => {
 
     it('Navigation labels and Language Picker - Signed in', () => {
         cy.visit('/sign-in')
+        clickOnCTA(selectors.signInTab)
         signIn(registeredUser.email, registeredUser.password)
 
         checkNavigationItemLabel(1, 'Home')
@@ -77,6 +80,7 @@ describe('Navigation - Mobile', () => {
 
     it('Navigation labels and Language Picker - Signed in', () => {
         cy.viewport('iphone-6').visit('/sign-in')
+        clickOnCTA(selectors.signInTab)
         signIn(registeredUser.email, registeredUser.password)
 
         checkNavigationItemLink('mobile', 1, '/')
