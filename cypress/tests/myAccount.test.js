@@ -22,8 +22,8 @@ import {
     nicknameTakenTest,
 } from '../support/page-object'
 import { registeredUser } from '../support/testData'
-import { url } from '../../src/app/store/sagas/url'
 
+let url = Cypress.config().baseUrl
 
 describe('My Account - New User with no predictions', () => {
 
