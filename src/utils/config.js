@@ -1,8 +1,8 @@
 export const leagueGroups = {
     "A": ["Italy", "Switzerland", "Turkey", "Wales"], 
     "B": ["Belgium", "Denmark", "Finland", "Russia"], 
-    "C": ["Austria", "Netherlands", "North Macedonia", "Ukraine"], 
-    "D": ["Croatia", "Czech Republic", "England", "Scotland"], 
+    "C": ["Austria", "Netherlands", "N. Macedonia", "Ukraine"], 
+    "D": ["Croatia", "Czechia", "England", "Scotland"], 
     "E": ["Poland", "Slovakia", "Spain", "Sweden"],
     "F": ["France", "Germany", "Hungary", "Portugal"]
 } 
