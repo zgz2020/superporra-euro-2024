@@ -1,3 +1,5 @@
+export const viewports = ['macbook-15', 'iphone-6']
+
 export const registeredUser = {
     email: "automated@test.com",
     password: "testing"
