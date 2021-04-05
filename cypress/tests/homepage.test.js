@@ -1,6 +1,5 @@
 import { clickOnSignUpLink } from '../support/page-object'
-
-const viewports = ['macbook-15', 'iphone-6']
+import { viewports } from '../support/testData'
 
 describe('Homepage', () => {
     viewports.forEach(viewport => {
