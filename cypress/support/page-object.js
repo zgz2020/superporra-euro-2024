@@ -1,3 +1,5 @@
+import { myAccountAssertions } from "./testData"
+
 const automationSelector = name => `[data-automation="${name}"]`
 
 export const selectors = {
@@ -121,13 +123,13 @@ export const clickOnSignUpLink = () => clickOnCTA(selectors.homepageSignUpLink)
 
 export const checkFirstRank = () => cy.get(selectors.leaderboardRow.rank).eq(0).should('contain', '1')
 
-export const checkFirstParticipantLinks = () => {
+export const checkFirstParticipantLinks = (language) => {
     cy.get(selectors.leaderboardRow.username).eq(0).click()
         .wait(500)
-        .get(selectors.pageHeader).should('contain', 'Predictions:')
+        .get(selectors.pageHeader).should('contain', myAccountAssertions(language).predictionsHeader)
     cy.go('back')
     cy.get(selectors.leaderboardRow.score).eq(0).click()
-        .get(selectors.pageHeader).should('contain', 'Scores:')
+        .get(selectors.pageHeader).should('contain', myAccountAssertions(language).scoresHeader)
 
 }
 
@@ -152,13 +154,13 @@ export const checkElementVisibility = (selector, visible) => cy.get(selector).sh
 export const checkInputFormHeader = (header) => 
     cy.get(selectors.inputForm.form).should('contain', header)
 
-export const submitPredictionsNoUsername = (ctaLocation) => { 
+export const submitPredictionsNoUsername = (ctaLocation, language) => { 
     // Check that Alert is triggered (note that cypress closes alerts automatically)
     const stub = cy.stub()
     cy.on('window:alert', stub)
 
     clickOnCTA(selectors.inputForm.submitButton(ctaLocation)).then(() => {
-        expect(stub).to.be.calledWith("Fill in the 'Username' field")
+        expect(stub).to.be.calledWith(myAccountAssertions(language).noUsernameAlert)
     })
 }
 
@@ -280,7 +282,7 @@ export const nicknameTakenTest = () => {
 // My Account 
 // --------------------------------------------------------------
 
-export const checkNoBetsYet = () => cy.get(selectors.cardBody).should('contain', "You don't have any bets yet")
+export const checkNoBetsYet = (language) => cy.get(selectors.cardBody).should('contain', myAccountAssertions(language).noBetsYetText)
 
 
 
