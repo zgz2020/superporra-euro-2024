@@ -1,4 +1,4 @@
-import { myAccountAssertions } from "./testData"
+import { myAccountAssertions, passwordResetAssertions } from "./testData"
 
 const automationSelector = name => `[data-automation="${name}"]`
 
@@ -325,10 +325,10 @@ export const onlyThisErrorVisible = (error) => {
 // Password Reset
 // --------------------------------------------------------------
 
-export const verifyPasswordResetTokenExpiredBlock = () => {
+export const verifyPasswordResetTokenExpiredBlock = (language) => {
     cy.get(selectors.passwordResetTokenExpiredBlock)
         // Check block text 
-        .should('contain', 'The token to reset your password has expired')
+        .should('contain', passwordResetAssertions(language).tokenExpired)
         // Check block link
         .get(selectors.requestNewTokenLink).click()
         // Check rediect to Sign In page

@@ -61,3 +61,12 @@ export const navigationAssertions = language => language == 'english' ?
         navItem5B: 'Cuenta',
         navItem6: 'Cerrar'
     }
+
+export const passwordResetAssertions = language => language == 'english' ? 
+    {
+        tokenExpired: 'The token to reset your password has expired'
+    }
+    :
+    {
+        tokenExpired: 'El token para actualizar tu contrseña ha expirado'
+    }
