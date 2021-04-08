@@ -4,39 +4,41 @@ import {
     checkElementVisibility,
     checkFirstRank,
     checkFirstParticipantLinks,
-    signIn
+    signIn,
+    selectLanguage
 } from '../support/page-object'
-import { registeredUser, viewports } from '../support/testData'
+import { registeredUser, viewports, languages } from '../support/testData'
 
 
 
 describe('Participants page', () => {
     viewports.forEach(viewport => {
-        it(`Leaderboard renders and links - ${viewport}`, () => {
-            cy.viewport(viewport).visit('/participants')
-    
-            checkElementVisibility(selectors.leaderboard, 'be.visible') 
-            checkElementVisibility(selectors.inputForm.form, 'not.to.exist') 
-    
-            checkFirstRank()
-            checkFirstParticipantLinks()
+        languages.forEach(language => {
+            it(`Leaderboard renders and links - ${viewport} - ${language}`, () => {
+                cy.viewport(viewport).visit('/participants')
+                selectLanguage(language)
+        
+                checkElementVisibility(selectors.leaderboard, 'be.visible') 
+                checkElementVisibility(selectors.inputForm.form, 'not.to.exist') 
+        
+                checkFirstRank()
+                checkFirstParticipantLinks(language)
+            })
+        
+            it(`Join CTA - ${viewport} - ${language}`, () => {
+                // Signed out status - [JOIN] should redirect to /sign-in
+                cy.viewport(viewport).visit('/participants')
+                selectLanguage(language)
+                clickOnCTA(selectors.updateButton)
+                cy.url().should('contain', '/sign-in')
+        
+                // Signed in status - [JOIN] should redirect to /account
+                clickOnCTA(selectors.signInTab)
+                signIn(registeredUser.email, registeredUser.password)
+                cy.visit('/participants')
+                clickOnCTA(selectors.updateButton)
+                cy.url().should('contain', '/account')
+            })  
         })
-    
-        it(`Join CTA - ${viewport}`, () => {
-            // Signed out status - [JOIN] should redirect to /sign-in
-            cy.viewport(viewport).visit('/participants')
-            clickOnCTA(selectors.updateButton)
-            cy.url().should('contain', '/sign-in')
-    
-            // Signed in status - [JOIN] should redirect to /account
-            clickOnCTA(selectors.signInTab)
-            signIn(registeredUser.email, registeredUser.password)
-            cy.visit('/participants')
-            clickOnCTA(selectors.updateButton)
-            cy.url().should('contain', '/account')
-    
-        })  
     })
-      
-
 })
