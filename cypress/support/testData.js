@@ -40,3 +40,24 @@ export const myAccountAssertions = (language) => language == 'english' ?
         predictionsHeaderWithParticipantName: "Predicciones: ZZ Test Participant",
         scoresHeader: "Puntuaciones:"
     }
+
+export const navigationAssertions = language => language == 'english' ?
+    { 
+        navItem1: 'Home',
+        navItem2: 'Participants',
+        navItem3: 'Results',
+        navItem4: 'Scoring Rules',
+        navItem5A: 'Sign In',
+        navItem5B: 'Account',
+        navItem6: 'Sign Out'
+    }
+    :
+    {
+        navItem1: 'Inicio',
+        navItem2: 'Participantes',
+        navItem3: 'Resultados',
+        navItem4: 'Normas puntuación',
+        navItem5A: 'Mi cuenta',
+        navItem5B: 'Cuenta',
+        navItem6: 'Cerrar'
+    }
