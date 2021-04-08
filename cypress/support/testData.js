@@ -70,3 +70,14 @@ export const passwordResetAssertions = language => language == 'english' ?
     {
         tokenExpired: 'El token para actualizar tu contrseña ha expirado'
     }
+
+export const resultsAssertions = language => language == 'english' ?
+    {
+        officialResults: 'Official Results',
+        updateResults: 'Update the official results'
+    }
+    :
+    {
+        officialResults: 'Resultados Oficiales',
+        updateResults: 'Actualiza los resultados oficiales'
+    }
