@@ -81,3 +81,12 @@ export const resultsAssertions = language => language == 'english' ?
         officialResults: 'Resultados Oficiales',
         updateResults: 'Actualiza los resultados oficiales'
     }
+
+export const signInAssertions = language => language == 'english' ? 
+    {
+        signUp: 'Sign Up'
+    }
+    :
+    {
+        signUp: 'Crear cuenta'
+    }
