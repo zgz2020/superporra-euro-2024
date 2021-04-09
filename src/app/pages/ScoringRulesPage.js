@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { ConnectedHeader } from '../Header'
-import { ConnectedScoringRuleCategory } from '../ScoringRuleCategory'
+import { ConnectedHeader } from '../components/Header'
+import { ConnectedScoringRuleCategory } from '../components/ScoringRuleCategory'
 
 const ScoringRulesPage = ({ translations }) => (
     <div>

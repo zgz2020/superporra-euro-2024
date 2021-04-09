@@ -1,10 +1,10 @@
 import React from 'react'
 import { connect } from 'react-redux' 
-import * as mutations from '../../store/mutations' 
-import { ConnectedHeader } from '../Header'
-import { ConnectedPredictionsFormButton } from '../PredictionsFormButton'
-import { ConnectedPredictionsForm } from '../PredictionsForm'
-import { ConnectedParticipantsList } from '../ParticipantsList'
+import * as mutations from '../store/mutations' 
+import { ConnectedHeader } from '../components/Header'
+import { ConnectedPredictionsFormButton } from '../components/PredictionsFormButton'
+import { ConnectedPredictionsForm } from '../components/PredictionsForm'
+import { ConnectedParticipantsList } from '../components/ParticipantsList'
   
 
 const AccountPage = ({ 

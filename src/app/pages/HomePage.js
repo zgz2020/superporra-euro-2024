@@ -1,8 +1,8 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { ConnectedHeader } from '../Header'
-import { ConnectedHomepageIntro } from '../HomepageIntro'
-import { ConnectedHomepageJoin } from '../HomepageJoin'
+import { ConnectedHeader } from '../components/Header'
+import { ConnectedHomepageIntro } from '../components/HomepageIntro'
+import { ConnectedHomepageJoin } from '../components/HomepageJoin'
 
 const HomePage = ({ translations }) => (
     <div>

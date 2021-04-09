@@ -1,8 +1,8 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import md5 from 'md5'
-import * as mutations from '../../store/mutations'
-import { ConnectedHeader } from '../Header'
+import * as mutations from '../store/mutations'
+import { ConnectedHeader } from '../components/Header'
 
 
 const emailErrorText = (type, translations) => {

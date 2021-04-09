@@ -1,11 +1,11 @@
 import React from 'react'
 import { connect } from 'react-redux' 
-import { history } from '../../store/history'
-import { ConnectedHeader } from '../Header'
-import { ConnectedParticipantsList } from '../ParticipantsList'
-import { ConnectedPredictionsFormButton } from '../PredictionsFormButton'
-import { ConnectedPredictionsForm } from '../PredictionsForm'
-import { translations } from '../../store/reducers/language'
+import { history } from '../store/history'
+import { ConnectedHeader } from '../components/Header'
+import { ConnectedParticipantsList } from '../components/ParticipantsList'
+import { ConnectedPredictionsFormButton } from '../components/PredictionsFormButton'
+import { ConnectedPredictionsForm } from '../components/PredictionsForm'
+import { translations } from '../store/reducers/language'
 
 const noParticipantsBlock = (translations) => (
     <div className="card">
