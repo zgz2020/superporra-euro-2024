@@ -5,91 +5,49 @@ import { checkNavigationItemLabel,
     selectors,
     signIn
 } from '../support/page-object'
-import { registeredUser } from '../support/testData'
+import { registeredUser, viewports, languages, navigationAssertions } from '../support/testData'
 
-describe('Navigation - Desktop', () => {
+describe.only('Navigation - Desktop', () => {
 
-    it('Navigation labels and Language Picker - Signed out', () => {
-        cy.visit('/')
-
-        checkNavigationItemLabel(1, 'Home')
-        checkNavigationItemLabel(2, 'Participants')
-        checkNavigationItemLabel(3, 'Results')
-        checkNavigationItemLabel(4, 'Scoring Rules')
-        checkNavigationItemLabel(5, 'Sign In')
-
-        checkNavigationItemLink('desktop', 2, '/participants')
-        checkNavigationItemLink('desktop', 3, '/results')
-        checkNavigationItemLink('desktop', 4, '/scoring-rules')
-        checkNavigationItemLink('desktop', 5, '/sign-in')
-        checkNavigationItemLink('desktop', 1, '/')
-
-        selectLanguage('spanish')
-
-        checkNavigationItemLabel(1, 'Inicio')
-        checkNavigationItemLabel(2, 'Participantes')
-        checkNavigationItemLabel(3, 'Resultados')
-        checkNavigationItemLabel(4, 'Normas puntuación')
-        checkNavigationItemLabel(5, 'Mi cuenta')
-    })
-
-    it('Navigation labels and Language Picker - Signed in', () => {
-        cy.visit('/sign-in')
-        clickOnCTA(selectors.signInTab)
-        signIn(registeredUser.email, registeredUser.password)
-
-        checkNavigationItemLabel(1, 'Home')
-        checkNavigationItemLabel(2, 'Participants')
-        checkNavigationItemLabel(3, 'Results')
-        checkNavigationItemLabel(4, 'Scoring Rules')
-        checkNavigationItemLabel(5, 'Account')
-        checkNavigationItemLabel(6, 'Sign Out')
-
-        checkNavigationItemLink('desktop', 1, '/')
-        checkNavigationItemLink('desktop', 2, '/participants')
-        checkNavigationItemLink('desktop', 3, '/results')
-        checkNavigationItemLink('desktop', 4, '/scoring-rules')
-        checkNavigationItemLink('desktop', 5, '/account')
+    viewports.forEach(viewport => {
+        languages.forEach(language => {
+            it(`Navigation labels and Language Picker - Signed out - ${viewport} - ${language}`, () => {
+                cy.viewport(viewport).visit('/')
+                selectLanguage(language)
         
-        selectLanguage('spanish')
-
-        checkNavigationItemLabel(1, 'Inicio')
-        checkNavigationItemLabel(2, 'Participantes')
-        checkNavigationItemLabel(3, 'Resultados')
-        checkNavigationItemLabel(4, 'Normas puntuación')
-        checkNavigationItemLabel(5, 'Cuenta')
-        checkNavigationItemLabel(6, 'Cerrar')
-
-        // Signing out should redirect to homepage
-        checkNavigationItemLink('desktop', 6, '/')
-    })
-
-})
-
-describe('Navigation - Mobile', () => {
-    
-    it('Navigation labels and Language Picker - Signed out', () => {
-        cy.viewport('iphone-6').visit('')
-
-        checkNavigationItemLink('mobile', 2, '/participants')
-        checkNavigationItemLink('mobile', 3, '/results')
-        checkNavigationItemLink('mobile', 4, '/scoring-rules')
-        checkNavigationItemLink('mobile', 5, '/sign-in')
-        checkNavigationItemLink('mobile', 1, '/')
-    })
-
-    it('Navigation labels and Language Picker - Signed in', () => {
-        cy.viewport('iphone-6').visit('/sign-in')
-        clickOnCTA(selectors.signInTab)
-        signIn(registeredUser.email, registeredUser.password)
-
-        checkNavigationItemLink('mobile', 1, '/')
-        checkNavigationItemLink('mobile', 2, '/participants')
-        checkNavigationItemLink('mobile', 3, '/results')
-        checkNavigationItemLink('mobile', 4, '/scoring-rules')
-        checkNavigationItemLink('mobile', 5, '/account')
-        checkNavigationItemLink('mobile', 6, '/')
+                checkNavigationItemLabel(1, navigationAssertions(language).navItem1)
+                checkNavigationItemLabel(2, navigationAssertions(language).navItem2)
+                checkNavigationItemLabel(3, navigationAssertions(language).navItem3)
+                checkNavigationItemLabel(4, navigationAssertions(language).navItem4)
+                checkNavigationItemLabel(5, navigationAssertions(language).navItem5A)
         
-    })
+                checkNavigationItemLink(viewport, 2, '/participants')
+                checkNavigationItemLink(viewport, 3, '/results')
+                checkNavigationItemLink(viewport, 4, '/scoring-rules')
+                checkNavigationItemLink(viewport, 5, '/sign-in')
+                checkNavigationItemLink(viewport, 1, '/')
+            })
 
+            it(`Navigation labels and Language Picker - Signed in - ${viewport} - ${language}`, () => {
+                cy.viewport(viewport).visit('/sign-in')
+                selectLanguage(language)
+                clickOnCTA(selectors.signInTab)
+                signIn(registeredUser.email, registeredUser.password)
+        
+                checkNavigationItemLabel(1, navigationAssertions(language).navItem1)
+                checkNavigationItemLabel(2, navigationAssertions(language).navItem2)
+                checkNavigationItemLabel(3, navigationAssertions(language).navItem3)
+                checkNavigationItemLabel(4, navigationAssertions(language).navItem4)
+                checkNavigationItemLabel(5, navigationAssertions(language).navItem5B)
+                checkNavigationItemLabel(6, navigationAssertions(language).navItem6)
+        
+                checkNavigationItemLink(viewport, 1, '/')
+                checkNavigationItemLink(viewport, 2, '/participants')
+                checkNavigationItemLink(viewport, 3, '/results')
+                checkNavigationItemLink(viewport, 4, '/scoring-rules')
+                checkNavigationItemLink(viewport, 5, '/account')
+                checkNavigationItemLink(viewport, 6, '/')
+            })
+        })
+    })
 })
