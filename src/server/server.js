@@ -34,8 +34,9 @@ app.post('/mongo/data', async (req, res) => {
     let users = await db.collection('users').find().toArray()
     let predictions = await db.collection('predictions').find().toArray()
     let results = await db.collection('results').find().toArray()
+    let privateLeagues = await db.collection('privateLeagues').find().toArray()
 
-    let mongoState = { users, predictions, results }
+    let mongoState = { users, predictions, results, privateLeagues }
 
     res.send({ mongoState })
 })

@@ -140,8 +140,8 @@ const LoginPage = ({
                     </li>
                 </ul>
             </div>
-            <div class="tab-content" id="myTabContent">
-                <div class="tab-pane fade p-3" id="sign-in-panel" role="tabpanel" aria-labelledby="sign-in-tab">
+            <div className="tab-content" id="myTabContent">
+                <div className="tab-pane fade p-3" id="sign-in-panel" role="tabpanel" aria-labelledby="sign-in-tab">
                     {credentialsForm(
                         'signIn', 
                         requestAuthenticateUser, 
@@ -155,7 +155,7 @@ const LoginPage = ({
                         incorrectPasswordMessage
                     )}           
                 </div>
-                <div class="tab-pane fade show active p-3" id="sign-up-panel" role="tabpanel" aria-labelledby="sign-up-tab">
+                <div className="tab-pane fade show active p-3" id="sign-up-panel" role="tabpanel" aria-labelledby="sign-up-tab">
                     {credentialsForm(
                         'signUp', 
                         requestCreateUser, 

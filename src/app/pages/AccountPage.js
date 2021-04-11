@@ -37,7 +37,7 @@ const AccountPage = ({
                             {Object.keys(myPredictions).length === 0 ?
                                 translations.accountPage.noBets                                 
                                 :
-                                <ConnectedParticipantsList myPredictions={myPredictions} />
+                                <ConnectedParticipantsList filteredPredictions={myPredictions} />
                             }
                         </div>
                     </div>

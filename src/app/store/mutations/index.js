@@ -9,7 +9,7 @@ export * from './predictionForm'
 export * from './predictionNew'
 export * from './predictionRandom'
 export * from './predictionUpdate'
+export * from './privateLeagues'
 export * from './resultsUpdate'
 export * from './stageTeamsUpdate'
 export * from './users'
-

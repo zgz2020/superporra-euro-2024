@@ -85,6 +85,8 @@ export const englishTranslations = {
         noBets: "You don't have any bets yet. Click on 'JOIN' button to create a bet and join the competition."
     },
     leaderboard: {
+        global: "Global",
+        privateLeagues: "Private Leagues",
         name: "Name",
         score: "Score"
     },

@@ -2,10 +2,9 @@ import React from 'react'
 import { connect } from 'react-redux' 
 import { history } from '../store/history'
 import { ConnectedHeader } from '../components/Header'
-import { ConnectedParticipantsList } from '../components/ParticipantsList'
+import { ConnectedParticipantsListsSelection } from '../components/ParticipantsListsSelection'
 import { ConnectedPredictionsFormButton } from '../components/PredictionsFormButton'
 import { ConnectedPredictionsForm } from '../components/PredictionsForm'
-import { translations } from '../store/reducers/language'
 
 const noParticipantsBlock = (translations) => (
     <div className="card">
@@ -35,7 +34,9 @@ const ParticipantsPage = ({
                 {noParticipants ?
                     noParticipantsBlock(translations)
                     :
-                    <ConnectedParticipantsList />
+                    <div>
+                        <ConnectedParticipantsListsSelection />
+                    </div>
                 }
 
                 <ConnectedPredictionsFormButton predictionType="new" clickHandler={authenticated ? redirectToAccountPage : redirectToSignInPage} />

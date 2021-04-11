@@ -85,6 +85,8 @@ export const spanishTranslations = {
         noBets: "Aún no tienes ninguna apuesta. Haz click en el botón 'PARTICIPAR' para crear tus apuestas."
     },
     leaderboard: {
+        global: "Global",
+        privateLeagues: "Ligas privadas",
         name: "Nombre",
         score: "Puntuación"
     },
