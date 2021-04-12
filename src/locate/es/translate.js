@@ -79,7 +79,7 @@ export const spanishTranslations = {
         title: "Mi cuenta",
         notSignedIn: {
             title: "Sesión no iniciada",
-            description: "Tienes que iniciar sesión para acceder a tu cuenta. Para iniciar sesión, haz click en la opción 'Mi cuenta' del menú principal."
+            description: "Tienes que iniciar sesión para acceder a tu cuenta."
         },
         myBets: "Mis apuestas",
         noBets: "Aún no tienes ninguna apuesta. Haz click en el botón 'PARTICIPAR' para crear tus apuestas."

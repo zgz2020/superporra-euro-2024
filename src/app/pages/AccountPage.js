@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux' 
 import * as mutations from '../store/mutations' 
+import { Link } from 'react-router-dom'
 import { ConnectedHeader } from '../components/Header'
 import { ConnectedPredictionsFormButton } from '../components/PredictionsFormButton'
 import { ConnectedPredictionsForm } from '../components/PredictionsForm'
@@ -56,7 +57,10 @@ const AccountPage = ({
                         {translations.accountPage.notSignedIn.title}
                     </div>
                     <div className="card-body">
-                        {translations.accountPage.notSignedIn.description}
+                        {translations.accountPage.notSignedIn.description}{" "}
+                        <Link to={"/sign-in"} data-automation="sign-in-link">
+                            {translations.signInPage.signIn}
+                        </Link>
                     </div>
                 </ div>
             }

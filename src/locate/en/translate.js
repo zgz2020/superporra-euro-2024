@@ -79,7 +79,7 @@ export const englishTranslations = {
         title: "My Account",
         notSignedIn: {
             title: "Not Signed In",
-            description: "You need to sign in to access to the Account page. To sign in, please click on the 'Sign In' option of the navigation menu."
+            description: "You need to sign in to access to the Account page."
         },
         myBets: "My Bets",
         noBets: "You don't have any bets yet. Click on 'JOIN' button to create a bet and join the competition."
