@@ -52,7 +52,9 @@ const AccountPage = ({
                         <ConnectedPredictionsFormButton predictionType="new" clickHandler={showPredictionsFormNew} />
                     }
 
-                    <ConnectedPrivateLeagues myPredictions={myPredictions}/>
+                    {Object.keys(myPredictions).length !== 0 &&
+                        <ConnectedPrivateLeagues myPredictions={myPredictions}/>}
+                        
                 </div>
                 :
                 <div className="card">
