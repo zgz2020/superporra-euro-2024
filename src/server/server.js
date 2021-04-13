@@ -156,6 +156,19 @@ export const updatePrediction = async prediction => {
     if ( finalMatches ) updatePredictionMatches(collection, id, prediction, "finalMatches")
 }
 
+const updatePredictionPrivateLeague = async (username, privateLeague) => {
+    let db = await connectDB()
+    let collection = db.collection('predictions')
+
+    await collection.updateOne( { username }, { $set: { privateLeague} })
+
+    let prediction = collection.findOne({ username })
+    if (!prediction) {
+        return res.status(500).send('Prediction not found!')
+    }
+    return prediction
+}
+
 export const updateUser = async user => {
     let { id, username} = user
 
@@ -183,10 +196,13 @@ app.post('/prediction/update-dos', async (req, res) => {
     res.status(200).send()
 })
 
-app.post('/prediction/update', async (req, res) => {
-    let prediction = req.body.prediction
-    await updatePrediction(prediction)
-    res.status(200).send()
+app.post('/prediction/update-private-league', async (req, res) => {
+    let { username, privateLeague } = req.body
+
+    let prediction = await updatePredictionPrivateLeague(username, privateLeague)
+    let predictionId = prediction.id
+
+    res.send({ predictionId })
 })
 
 app.post('/user/update', async (req, res) => {
@@ -377,6 +393,19 @@ app.post('/remove-test-predictions', async (req, res) => {
     let predictionsCollection = db.collection('predictions')
 
     await predictionsCollection.deleteMany({ username: /Test Participant/})
+
+    res.status(200).send()
+})
+
+app.post('/private-league/create', async (req, res) => {
+    let privateLeague = {
+        name: req.body.leagueName
+    }
+
+    let db = await connectDB()
+    let privateLeaguesCollection = db.collection('privateLeagues')
+
+    await privateLeaguesCollection.insertOne(privateLeague)
 
     res.status(200).send()
 })

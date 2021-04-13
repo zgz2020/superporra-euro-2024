@@ -6,6 +6,7 @@ import { ConnectedHeader } from '../components/Header'
 import { ConnectedPredictionsFormButton } from '../components/PredictionsFormButton'
 import { ConnectedPredictionsForm } from '../components/PredictionsForm'
 import { ConnectedParticipantsList } from '../components/ParticipantsList'
+import { ConnectedPrivateLeagues } from '../components/PrivateLeagues'
   
 
 const AccountPage = ({ 
@@ -50,6 +51,8 @@ const AccountPage = ({
                         : 
                         <ConnectedPredictionsFormButton predictionType="new" clickHandler={showPredictionsFormNew} />
                     }
+
+                    <ConnectedPrivateLeagues myPredictions={myPredictions}/>
                 </div>
                 :
                 <div className="card">

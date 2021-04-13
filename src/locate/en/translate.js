@@ -82,7 +82,16 @@ export const englishTranslations = {
             description: "You need to sign in to access to the Account page."
         },
         myBets: "My Bets",
-        noBets: "You don't have any bets yet. Click on 'JOIN' button to create a bet and join the competition."
+        noBets: "You don't have any bets yet. Click on 'JOIN' button to create a bet and join the competition.",
+        privateLeagueIntro: "Create a private league with your friends or colleagues. You'll also take part in the global competition.",
+        privateLeague: "Private League",
+        joinLeague: "Join",
+        createLeague: "Create",
+        quitLeague: "Quit",
+        createLeaguePlaceholder: "League name",
+        submit: "Submit",
+        selectName: "Select name",
+        selectLeague: "Select League"
     },
     leaderboard: {
         global: "Global",

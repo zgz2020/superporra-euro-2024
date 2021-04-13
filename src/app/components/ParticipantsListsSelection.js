@@ -54,7 +54,7 @@ const ParticipantsListsSelection = ({ translations, privateLeagues, privateLeagu
                             ))}
                         </select>  
 
-                        {privateLeagueRankings && privateLeagueRankings != " " && 
+                        {privateLeagueRankings && privateLeagueRankings != "--" && 
                             <ConnectedParticipantsList filteredPredictions={privateLeaguePredictions(predictions, privateLeagueRankings)} />
                         }    
                     </div>

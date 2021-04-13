@@ -38,7 +38,7 @@ const ParticipantsList = ( {
                                             {predictionsList[key].username}
                                         </Link>
                                     </td>
-                                    <td>
+                                    <td className="text-center">
                                         <Link to={`/participants/score/${key}`}>
                                             {participantTotalPoints(predictionsList[key], results)}
                                         </ Link>

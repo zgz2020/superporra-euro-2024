@@ -82,7 +82,16 @@ export const spanishTranslations = {
             description: "Tienes que iniciar sesión para acceder a tu cuenta."
         },
         myBets: "Mis apuestas",
-        noBets: "Aún no tienes ninguna apuesta. Haz click en el botón 'PARTICIPAR' para crear tus apuestas."
+        noBets: "Aún no tienes ninguna apuesta. Haz click en el botón 'PARTICIPAR' para crear tus apuestas.",
+        privateLeagueIntro: "Crea una liga privada con tus amigos o compañeros de trabajo. También participarás en la competición global.",
+        privateLeague: "Liga privada",
+        joinLeague: "Unirse",
+        createLeague: "Crear",
+        quitLeague: "Abandonar",
+        createLeaguePlaceholder: "Nombre de liga",
+        submit: "Mandar",
+        selectName: "Elige nombre",
+        selectLeague: "Elige liga"
     },
     leaderboard: {
         global: "Global",
