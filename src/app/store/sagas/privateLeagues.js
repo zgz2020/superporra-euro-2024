@@ -11,6 +11,7 @@ export function* updatePredictionPrivateLeagueSaga() {
 
         if (username == translations.accountPage.selectName || 
             privateLeague == translations.accountPage.selectLeague) {
+                // TODO -> Message to be displayed in FE
                 console.log('You must select a name and a league')
         } else {
             const { data } = yield axios.post(url + '/prediction/update-private-league', { username, privateLeague })

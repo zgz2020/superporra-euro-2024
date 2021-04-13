@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import * as mutations from '../store/mutations'
 import { ConnectedMyPrivateLeagues } from './MyPrivateLeagues'
 
-const PrivateLeagues = ({ translations, myPredictions, privateLeagues, myPredictionsNames, joinHandler, createHandler }) => (
+const PrivateLeagues = ({ translations, myPredictions, privateLeagues, myPredictionsNames, joinHandler, createHandler, quitHandler }) => (
     <div className="card my-5">
         <div className="card-header">
             {translations.leaderboard.privateLeagues}
@@ -43,8 +43,8 @@ const PrivateLeagues = ({ translations, myPredictions, privateLeagues, myPredict
                                 <form onSubmit={joinHandler} className="mt-2">
                                     <select defaultValue="default" name="name" className="mb-3">
                                         <option key="default" value={translations.accountPage.selectName}>{translations.accountPage.selectName}</option>
-                                        {myPredictionsNames.map(league => (
-                                            <option key={league} value={league}>{league}</option>
+                                        {myPredictionsNames.map(name => (
+                                            <option key={name} value={name}>{name}</option>
                                         ))}
                                     </select>  
                                     <br />
@@ -55,23 +55,9 @@ const PrivateLeagues = ({ translations, myPredictions, privateLeagues, myPredict
                                         ))}
                                     </select>  
 
-                                    <button type="submit" className="form-control mt-2 btn btn-primary">
-                                        {translations.accountPage.submit}
-                                    </ button>
-                                </form>
-                            </div>
-                            <div className="tab-pane fade p-3" id="create-panel" role="tabpanel" aria-labelledby="create-tab">
-                                <form onSubmit={createHandler}>
-                                    {translations.accountPage.createLeaguePlaceholder}{":"}
-                                    <input
-                                        type="text" 
-                                        name="leagueName"
-                                        className="form-control my-2" 
-                                        data-automation="league-name-input"
-                                    >
-                                    </input>
-
-                                    {/* 
+                                    {/*  TODO !!! 
+                                        - Success message
+                                        - Error message
                                     {noEmailMessage &&  
                                         <p 
                                             className="text-danger font-italic mt-2"
@@ -80,40 +66,70 @@ const PrivateLeagues = ({ translations, myPredictions, privateLeagues, myPredict
                                             {translations.signInPage.noEmail}
                                         </p>
                                     } */}
-                                    {/* <select defaultValue="default" name="name" className="mb-3">
-                                        <option key="default" value={translations.accountPage.selectName}>{translations.accountPage.selectName}</option>
-                                        {myPredictionsNames.map(league => (
-                                            <option key={league} value={league}>{league}</option>
-                                        ))}
-                                    </select>  
-                                    <br />
-                                    <select defaultValue="default" name="league" className="mb-3">
-                                        <option key="default" value={translations.accountPage.selectLeague}>{translations.accountPage.selectLeague}</option>
-                                        {privateLeagues.map(league => (
-                                            <option key={league} value={league}>{league}</option>
-                                        ))}
-                                    </select>   */}
 
                                     <button type="submit" className="form-control mt-2 btn btn-primary">
                                         {translations.accountPage.submit}
                                     </ button>
                                 </form>
-                                {/* <select onChange={showPrivateLeagueRankings} value={privateLeagueRankings} className="mb-3">
-                                    <option key="default" value=" ">{"Select a private league"}</option>
-                                    {privateLeagues.map(league => (
-                                        <option key={league} value={league}>{league}</option>
-                                    ))}
-                                </select>  
-
-                                {privateLeagueRankings && privateLeagueRankings != "--" && 
-                                    <ConnectedParticipantsList filteredPredictions={privateLeaguePredictions(predictions, privateLeagueRankings)} />
-                                }     */}
                             </div>
+                            <div className="tab-pane fade p-3" id="create-panel" role="tabpanel" aria-labelledby="create-tab">
+                                <form onSubmit={createHandler}>
+                                    {translations.accountPage.createLeagueLabel}{":"}
+                                    <input
+                                        type="text" 
+                                        name="leagueName"
+                                        className="form-control my-2" 
+                                        data-automation="league-name-input"
+                                    >
+                                    </input>
+                                    
+                                    {/*  TODO !!! 
+                                        - Success message
+                                        - Error message
+                                    {noEmailMessage &&  
+                                        <p 
+                                            className="text-danger font-italic mt-2"
+                                            data-automation={`no-email-message-${type}`}
+                                        >
+                                            {translations.signInPage.noEmail}
+                                        </p>
+                                    } */}
+
+                                    <button type="submit" className="form-control mt-2 btn btn-primary">
+                                        {translations.accountPage.submit}
+                                    </ button>
+                                </form>
+                            </div>
+                            <div className="tab-pane fade p-3" id="quit-panel" role="tabpanel" aria-labelledby="quit-tab">
+                                <form onSubmit={quitHandler}>
+                                    <select defaultValue="default" name="name-quit" className="mb-3">
+                                        <option key="default" value={translations.accountPage.selectName}>{translations.accountPage.selectName}</option>
+                                        {myPredictionsNames.map(name => (
+                                            <option key={name} value={name}>{name}</option>
+                                        ))}
+                                    </select>
+
+                                    {/*  TODO !!! 
+                                        - Success message
+                                        - Error message
+                                    {noEmailMessage &&  
+                                        <p 
+                                            className="text-danger font-italic mt-2"
+                                            data-automation={`no-email-message-${type}`}
+                                        >
+                                            {translations.signInPage.noEmail}
+                                        </p>
+                                    } */}
+
+                                    <button type="submit" className="form-control mt-2 btn btn-primary">
+                                        {translations.accountPage.submit}
+                                    </ button>
+                                </form>
+                            </div>
+
+
                         </div>      
                     </div>
-
-
-
 
 
                 </div>
@@ -142,6 +158,7 @@ const mapDispatchToProps = (dispatch) => {
     let name = (e) => e.target['name'].value
     let league = (e) => e.target['league'].value
     let leagueName = (e) => e.target['leagueName'].value
+    let nameQuit = (e) => e.target['name-quit'].value
 
     return {
         joinHandler(e) {
@@ -150,9 +167,11 @@ const mapDispatchToProps = (dispatch) => {
         },
         createHandler(e) {
             e.preventDefault()
-            // TODO
-            console.log("CREATE LEAGUE!! - ", leagueName(e))
             dispatch(mutations.createPrivateLeague(leagueName(e)))
+        },
+        quitHandler(e) {
+            e.preventDefault()
+            dispatch(mutations.requestUpdatePredictionPrivateLeague(nameQuit(e), "--"))
         }
     }
 }

@@ -88,7 +88,7 @@ export const englishTranslations = {
         joinLeague: "Join",
         createLeague: "Create",
         quitLeague: "Quit",
-        createLeaguePlaceholder: "League name",
+        createLeagueLabel: "League name",
         submit: "Submit",
         selectName: "Select name",
         selectLeague: "Select League"

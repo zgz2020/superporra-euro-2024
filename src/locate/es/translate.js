@@ -88,7 +88,7 @@ export const spanishTranslations = {
         joinLeague: "Unirse",
         createLeague: "Crear",
         quitLeague: "Abandonar",
-        createLeaguePlaceholder: "Nombre de liga",
+        createLeagueLabel: "Nombre de liga",
         submit: "Mandar",
         selectName: "Elige nombre",
         selectLeague: "Elige liga"
