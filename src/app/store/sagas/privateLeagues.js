@@ -10,14 +10,29 @@ export function* updatePredictionPrivateLeagueSaga() {
         let translations = yield select(selectors.getTranslations)
 
         if (username == translations.accountPage.selectName || 
-            privateLeague == translations.accountPage.selectLeague) {
-                // TODO -> Message to be displayed in FE
-                console.log('You must select a name and a league')
+            privateLeague == translations.accountPage.selectLeague
+        ) {
+            if (privateLeague == '--') {
+                yield put(mutations.showQuitLeagueError())
+            } else {
+                yield put(mutations.showJoinLeagueError())
+            }
         } else {
             let { data } = yield axios.post(url + '/prediction/update-private-league', { username, privateLeague })
 
             let predictionID = data.predictionId
             yield put(mutations.updatePredictionPrivateLeague(predictionID, privateLeague))
+            if (privateLeague == '--') {
+                yield put(mutations.hideQuitLeagueError())
+                yield put(mutations.showQuitLeagueSuccess())
+                yield delay(2000)
+                yield put(mutations.hideQuitLeagueSuccess())
+            } else {
+                yield put(mutations.hideJoinLeagueError())
+                yield put(mutations.showJoinLeagueSuccess())
+                yield delay(2000)
+                yield put(mutations.hideJoinLeagueSuccess())
+            }
         }
     }
 }
@@ -30,7 +45,7 @@ export function* createPrivateLeagueSaga() {
 
         yield put(mutations.showCreateLeagueSuccess())
 
-        yield delay(5000)
+        yield delay(2000)
         yield put(mutations.hideCreateLeagueSuccess())
     }
 }

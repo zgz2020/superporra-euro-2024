@@ -92,8 +92,10 @@ export const spanishTranslations = {
         submit: "Mandar",
         selectName: "Elige nombre",
         selectLeague: "Elige liga",
+        joinLeagueError: "Debes elegir un nombre y una liga",
         leagueNameTaken: "Nombre no disponible",
-        success: "¡Liga creada!"
+        quitLeagueError: "Debes elegir un nombre",
+        success: "¡Hecho!",
     },
     leaderboard: {
         global: "Global",

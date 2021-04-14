@@ -92,8 +92,10 @@ export const englishTranslations = {
         submit: "Submit",
         selectName: "Select name",
         selectLeague: "Select League",
+        joinLeagueError: "You must select a name and a league",
         leagueNameTaken: "League name taken",
-        success: "Private league created!"
+        quitLeagueError: "You must select a name",
+        success: "Done!",
     },
     leaderboard: {
         global: "Global",

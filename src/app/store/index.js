@@ -27,7 +27,7 @@ import {
     createPredictionsForm,
     generatingRandomPredictions,
     predictionsSubmitted,
-    nicknameTaken,
+    nicknameTaken
 } from './reducers/predictionsForm'
 import { newPrediction, newPredictionUsername } from './reducers/newPrediction'
 import { users } from './reducers/users'
@@ -36,8 +36,12 @@ import { predictions } from './reducers/predictions'
 import { 
     privateLeagues,
     privateLeagueRankings,
+    joinLeagueError,
+    joinLeagueSuccess,
+    leagueNameTaken,
     createLeagueSuccess,
-    leagueNameTaken
+    quitLeagueError,
+    quitLeagueSuccess
 } from './reducers/privateLeagues'
 
 const sagaMiddleware = createSagaMiddleware()
@@ -75,8 +79,12 @@ export const store = createStore(
         predictions,
         privateLeagues,
         privateLeagueRankings,
+        joinLeagueError,
+        joinLeagueSuccess,
+        leagueNameTaken,
         createLeagueSuccess,
-        leagueNameTaken
+        quitLeagueError,
+        quitLeagueSuccess
     }),
     applyMiddleware(createLogger(), sagaMiddleware)
 )

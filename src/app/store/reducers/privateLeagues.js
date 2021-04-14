@@ -20,14 +20,24 @@ export const privateLeagueRankings = (privateLeagueRankings = "--", action) => {
     }
 }
 
-export const createLeagueSuccess = (createLeagueSuccess = false, action) => {
+export const joinLeagueError = (joinLeagueError = false, action) => {
     switch(action.type) {
-        case mutations.SHOW_CREATE_PRIVATE_LEAGUE_SUCCESS:
+        case mutations.SHOW_JOIN_LEAGUE_ERROR:
             return true
-        case mutations.HIDE_CREATE_PRIVATE_LEAGUE_SUCCESS:
+        case mutations.HIDE_JOIN_LEAGUE_ERROR:
             return false
     }
-    return createLeagueSuccess
+    return joinLeagueError
+}
+
+export const joinLeagueSuccess = (joinLeagueSuccess = false, action) => {
+    switch(action.type) {
+        case mutations.SHOW_JOIN_LEAGUE_SUCCESS:
+            return true
+        case mutations.HIDE_JOIN_LEAGUE_SUCCESS:
+            return false
+    }
+    return joinLeagueSuccess
 }
 
 export const leagueNameTaken = (leagueNameTaken = false, action) => {
@@ -38,4 +48,34 @@ export const leagueNameTaken = (leagueNameTaken = false, action) => {
             return false
     }
     return leagueNameTaken
+}
+
+export const createLeagueSuccess = (createLeagueSuccess = false, action) => {
+    switch(action.type) {
+        case mutations.SHOW_CREATE_PRIVATE_LEAGUE_SUCCESS:
+            return true
+        case mutations.HIDE_CREATE_PRIVATE_LEAGUE_SUCCESS:
+            return false
+    }
+    return createLeagueSuccess
+}
+
+export const quitLeagueError = (quitLeagueError = false, action) => {
+    switch(action.type) {
+        case mutations.SHOW_QUIT_LEAGUE_ERROR:
+            return true
+        case mutations.HIDE_QUIT_LEAGUE_ERROR:
+            return false
+    }
+    return quitLeagueError
+}
+
+export const quitLeagueSuccess = (quitLeagueSuccess = false, action) => {
+    switch(action.type) {
+        case mutations.SHOW_QUIT_LEAGUE_SUCCESS:
+            return true
+        case mutations.HIDE_QUIT_LEAGUE_SUCCESS:
+            return false
+    }
+    return quitLeagueSuccess
 }

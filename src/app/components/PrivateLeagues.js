@@ -11,9 +11,13 @@ const PrivateLeagues = ({
     joinHandler,
     createHandler,
     quitHandler,
+    joinLeagueError,
+    joinLeagueSuccess,
     leagueNameValidation,
     createLeagueSuccess,
-    leagueNameTaken
+    leagueNameTaken,
+    quitLeagueError,
+    quitLeagueSuccess
 }) => (
     <div className="card my-5">
         <div className="card-header">
@@ -66,17 +70,23 @@ const PrivateLeagues = ({
                                         ))}
                                     </select>  
 
-                                    {/*  TODO !!! 
-                                        - Success message
-                                        - Error message
-                                    {noEmailMessage &&  
+                                    {joinLeagueSuccess &&  
+                                        <p 
+                                            className="text-success font-italic mt-2"
+                                            data-automation={'join-league-success'}
+                                        >
+                                            {translations.accountPage.success}
+                                        </p>
+                                    }
+
+                                    {joinLeagueError &&  
                                         <p 
                                             className="text-danger font-italic mt-2"
-                                            data-automation={`no-email-message-${type}`}
+                                            data-automation={'join-league-error'}
                                         >
-                                            {translations.signInPage.noEmail}
+                                            {translations.accountPage.joinLeagueError}
                                         </p>
-                                    } */}
+                                    }
 
                                     <button type="submit" className="form-control mt-2 btn btn-primary">
                                         {translations.accountPage.submit}
@@ -112,18 +122,6 @@ const PrivateLeagues = ({
                                             {translations.accountPage.leagueNameTaken}
                                         </p>
                                     }
-                                    
-                                    {/*  TODO !!! 
-                                        - Success message
-                                        - Error message
-                                    {noEmailMessage &&  
-                                        <p 
-                                            className="text-danger font-italic mt-2"
-                                            data-automation={`no-email-message-${type}`}
-                                        >
-                                            {translations.signInPage.noEmail}
-                                        </p>
-                                    } */}
 
                                     <button type="submit" className="form-control mt-2 btn btn-primary" disabled={leagueNameTaken}>
                                         {translations.accountPage.submit}
@@ -139,17 +137,23 @@ const PrivateLeagues = ({
                                         ))}
                                     </select>
 
-                                    {/*  TODO !!! 
-                                        - Success message
-                                        - Error message
-                                    {noEmailMessage &&  
+                                    {quitLeagueSuccess &&  
+                                        <p 
+                                            className="text-success font-italic mt-2"
+                                            data-automation={'quit-league-success'}
+                                        >
+                                            {translations.accountPage.success}
+                                        </p>
+                                    }
+
+                                    {quitLeagueError &&  
                                         <p 
                                             className="text-danger font-italic mt-2"
-                                            data-automation={`no-email-message-${type}`}
+                                            data-automation={'quit-league-error'}
                                         >
-                                            {translations.signInPage.noEmail}
+                                            {translations.accountPage.quitLeagueError}
                                         </p>
-                                    } */}
+                                    }
 
                                     <button type="submit" className="form-control mt-2 btn btn-primary">
                                         {translations.accountPage.submit}
@@ -170,7 +174,16 @@ const PrivateLeagues = ({
 )
 
 const mapStateToProps = (state, ownProps) => {
-    let { translations, privateLeagues, createLeagueSuccess, leagueNameTaken } = state
+    let { 
+        translations,
+        privateLeagues,
+        joinLeagueError,
+        joinLeagueSuccess,
+        createLeagueSuccess,
+        leagueNameTaken,
+        quitLeagueError,
+        quitLeagueSuccess
+    } = state
     let { myPredictions } = ownProps
     let myPredictionsNames = Object.keys(myPredictions).map(prediction => myPredictions[prediction].username)
 
@@ -179,8 +192,12 @@ const mapStateToProps = (state, ownProps) => {
         myPredictions,
         privateLeagues,
         myPredictionsNames,
+        joinLeagueError,
+        joinLeagueSuccess,
         createLeagueSuccess,
-        leagueNameTaken
+        leagueNameTaken,
+        quitLeagueError,
+        quitLeagueSuccess
     }
 }
 
