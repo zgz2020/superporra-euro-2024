@@ -1,4 +1,4 @@
-import { take, put, select } from 'redux-saga/effects'
+import { take, put, select, delay } from 'redux-saga/effects'
 import axios from 'axios'
 import * as mutations from '../mutations'
 import * as selectors from '../selectors'
@@ -27,5 +27,10 @@ export function* createPrivateLeagueSaga() {
         const { leagueName } = yield take(mutations.CREATE_PRIVATE_LEAGUE)
 
         yield axios.post(url + '/private-league/create', { leagueName })
+
+        yield put(mutations.showCreateLeagueSuccess())
+
+        yield delay(5000)
+        yield put(mutations.hideCreateLeagueSuccess())
     }
 }

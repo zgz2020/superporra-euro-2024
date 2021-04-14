@@ -91,7 +91,8 @@ export const spanishTranslations = {
         createLeagueLabel: "Nombre de liga",
         submit: "Mandar",
         selectName: "Elige nombre",
-        selectLeague: "Elige liga"
+        selectLeague: "Elige liga",
+        success: "¡Liga creada!"
     },
     leaderboard: {
         global: "Global",

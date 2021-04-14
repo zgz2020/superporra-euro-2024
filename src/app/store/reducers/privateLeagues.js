@@ -19,3 +19,13 @@ export const privateLeagueRankings = (privateLeagueRankings = "--", action) => {
             return privateLeagueRankings
     }
 }
+
+export const createLeagueSuccess = (createLeagueSuccess = false, action) => {
+    switch(action.type) {
+        case mutations.SHOW_CREATE_PRIVATE_LEAGUE_SUCCESS:
+            return true
+        case mutations.HIDE_CREATE_PRIVATE_LEAGUE_SUCCESS:
+            return false
+    }
+    return createLeagueSuccess
+}

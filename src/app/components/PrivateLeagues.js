@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import * as mutations from '../store/mutations'
 import { ConnectedMyPrivateLeagues } from './MyPrivateLeagues'
 
-const PrivateLeagues = ({ translations, myPredictions, privateLeagues, myPredictionsNames, joinHandler, createHandler, quitHandler }) => (
+const PrivateLeagues = ({ translations, myPredictions, privateLeagues, myPredictionsNames, joinHandler, createHandler, quitHandler, createLeagueSuccess}) => (
     <div className="card my-5">
         <div className="card-header">
             {translations.leaderboard.privateLeagues}
@@ -82,6 +82,15 @@ const PrivateLeagues = ({ translations, myPredictions, privateLeagues, myPredict
                                         data-automation="league-name-input"
                                     >
                                     </input>
+
+                                    {createLeagueSuccess &&  
+                                        <p 
+                                            className="text-success font-italic mt-2"
+                                            data-automation={'create-league-success'}
+                                        >
+                                            {translations.accountPage.success}
+                                        </p>
+                                    }
                                     
                                     {/*  TODO !!! 
                                         - Success message
@@ -140,7 +149,7 @@ const PrivateLeagues = ({ translations, myPredictions, privateLeagues, myPredict
 )
 
 const mapStateToProps = (state, ownProps) => {
-    let { translations, privateLeagues } = state
+    let { translations, privateLeagues, createLeagueSuccess } = state
     let { myPredictions } = ownProps
     let myPredictionsNames = Object.keys(myPredictions).map(prediction => myPredictions[prediction].username)
     console.log('zzz - myPredictions: ', myPredictions)
@@ -150,7 +159,8 @@ const mapStateToProps = (state, ownProps) => {
         translations,
         myPredictions,
         privateLeagues,
-        myPredictionsNames
+        myPredictionsNames,
+        createLeagueSuccess
     }
 }
 

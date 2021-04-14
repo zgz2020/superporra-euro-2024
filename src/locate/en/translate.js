@@ -91,7 +91,8 @@ export const englishTranslations = {
         createLeagueLabel: "League name",
         submit: "Submit",
         selectName: "Select name",
-        selectLeague: "Select League"
+        selectLeague: "Select League",
+        success: "Private league created!"
     },
     leaderboard: {
         global: "Global",
