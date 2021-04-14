@@ -3,7 +3,18 @@ import { connect } from 'react-redux'
 import * as mutations from '../store/mutations'
 import { ConnectedMyPrivateLeagues } from './MyPrivateLeagues'
 
-const PrivateLeagues = ({ translations, myPredictions, privateLeagues, myPredictionsNames, joinHandler, createHandler, quitHandler, createLeagueSuccess}) => (
+const PrivateLeagues = ({ 
+    translations,
+    myPredictions,
+    privateLeagues,
+    myPredictionsNames,
+    joinHandler,
+    createHandler,
+    quitHandler,
+    leagueNameValidation,
+    createLeagueSuccess,
+    leagueNameTaken
+}) => (
     <div className="card my-5">
         <div className="card-header">
             {translations.leaderboard.privateLeagues}
@@ -78,6 +89,7 @@ const PrivateLeagues = ({ translations, myPredictions, privateLeagues, myPredict
                                     <input
                                         type="text" 
                                         name="leagueName"
+                                        onChange={leagueNameValidation}
                                         className="form-control my-2" 
                                         data-automation="league-name-input"
                                     >
@@ -89,6 +101,15 @@ const PrivateLeagues = ({ translations, myPredictions, privateLeagues, myPredict
                                             data-automation={'create-league-success'}
                                         >
                                             {translations.accountPage.success}
+                                        </p>
+                                    }
+
+                                    {leagueNameTaken &&  
+                                        <p 
+                                            className="text-danger font-italic mt-2"
+                                            data-automation={'league-name-taken'}
+                                        >
+                                            {translations.accountPage.leagueNameTaken}
                                         </p>
                                     }
                                     
@@ -104,7 +125,7 @@ const PrivateLeagues = ({ translations, myPredictions, privateLeagues, myPredict
                                         </p>
                                     } */}
 
-                                    <button type="submit" className="form-control mt-2 btn btn-primary">
+                                    <button type="submit" className="form-control mt-2 btn btn-primary" disabled={leagueNameTaken}>
                                         {translations.accountPage.submit}
                                     </ button>
                                 </form>
@@ -149,18 +170,17 @@ const PrivateLeagues = ({ translations, myPredictions, privateLeagues, myPredict
 )
 
 const mapStateToProps = (state, ownProps) => {
-    let { translations, privateLeagues, createLeagueSuccess } = state
+    let { translations, privateLeagues, createLeagueSuccess, leagueNameTaken } = state
     let { myPredictions } = ownProps
     let myPredictionsNames = Object.keys(myPredictions).map(prediction => myPredictions[prediction].username)
-    console.log('zzz - myPredictions: ', myPredictions)
-    console.log('zzz - myPredictionsNames: ', myPredictionsNames)
 
     return { 
         translations,
         myPredictions,
         privateLeagues,
         myPredictionsNames,
-        createLeagueSuccess
+        createLeagueSuccess,
+        leagueNameTaken
     }
 }
 
@@ -182,6 +202,9 @@ const mapDispatchToProps = (dispatch) => {
         quitHandler(e) {
             e.preventDefault()
             dispatch(mutations.requestUpdatePredictionPrivateLeague(nameQuit(e), "--"))
+        },
+        leagueNameValidation(e) {
+            dispatch(mutations.leagueNameValidation(e.target.value))
         }
     }
 }

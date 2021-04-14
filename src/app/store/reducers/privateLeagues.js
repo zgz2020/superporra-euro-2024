@@ -29,3 +29,13 @@ export const createLeagueSuccess = (createLeagueSuccess = false, action) => {
     }
     return createLeagueSuccess
 }
+
+export const leagueNameTaken = (leagueNameTaken = false, action) => {
+    switch(action.type) {
+        case mutations.SHOW_LEAGUE_NAME_TAKEN:
+            return true
+        case mutations.HIDE_LEAGUE_NAME_TAKEN:
+            return false
+    }
+    return leagueNameTaken
+}

@@ -92,6 +92,7 @@ export const spanishTranslations = {
         submit: "Mandar",
         selectName: "Elige nombre",
         selectLeague: "Elige liga",
+        leagueNameTaken: "Nombre no disponible",
         success: "¡Liga creada!"
     },
     leaderboard: {

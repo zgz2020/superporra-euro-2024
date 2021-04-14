@@ -346,7 +346,6 @@ app.post('/forgot-password-email', async(req, res) => {
         if (err) {
             console.error('There was an error sending the email: ', err)
         } else {
-            console.log('Here is the response: ', response)
             res.status(200).json('Recovery email sent')
         }
     })
@@ -395,6 +394,21 @@ app.post('/remove-test-predictions', async (req, res) => {
     await predictionsCollection.deleteMany({ username: /Test Participant/})
 
     res.status(200).send()
+})
+
+app.post('/private-league/league-name-validation', async (req, res) => {
+    let leagueName = req.body.leagueName
+
+    let db = await connectDB()
+    let privateLeaguesCollection = db.collection('privateLeagues')
+
+    let league = await privateLeaguesCollection.findOne({ name: leagueName})
+
+    if (!league) {
+        return res.send('League name available')
+    } else {
+        return res.send('League name already in use')
+    }
 })
 
 app.post('/private-league/create', async (req, res) => {

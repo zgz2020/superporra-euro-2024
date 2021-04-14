@@ -36,7 +36,8 @@ import { predictions } from './reducers/predictions'
 import { 
     privateLeagues,
     privateLeagueRankings,
-    createLeagueSuccess
+    createLeagueSuccess,
+    leagueNameTaken
 } from './reducers/privateLeagues'
 
 const sagaMiddleware = createSagaMiddleware()
@@ -74,7 +75,8 @@ export const store = createStore(
         predictions,
         privateLeagues,
         privateLeagueRankings,
-        createLeagueSuccess
+        createLeagueSuccess,
+        leagueNameTaken
     }),
     applyMiddleware(createLogger(), sagaMiddleware)
 )

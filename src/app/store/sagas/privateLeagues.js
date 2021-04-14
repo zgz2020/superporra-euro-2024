@@ -6,7 +6,7 @@ import { url } from './url'
 
 export function* updatePredictionPrivateLeagueSaga() {
     while (true) {
-        const { username, privateLeague } = yield take(mutations.REQUEST_UPDATE_PREDICTION_PRIVATE_LEAGUE)
+        let { username, privateLeague } = yield take(mutations.REQUEST_UPDATE_PREDICTION_PRIVATE_LEAGUE)
         let translations = yield select(selectors.getTranslations)
 
         if (username == translations.accountPage.selectName || 
@@ -14,9 +14,9 @@ export function* updatePredictionPrivateLeagueSaga() {
                 // TODO -> Message to be displayed in FE
                 console.log('You must select a name and a league')
         } else {
-            const { data } = yield axios.post(url + '/prediction/update-private-league', { username, privateLeague })
+            let { data } = yield axios.post(url + '/prediction/update-private-league', { username, privateLeague })
 
-            const predictionID = data.predictionId
+            let predictionID = data.predictionId
             yield put(mutations.updatePredictionPrivateLeague(predictionID, privateLeague))
         }
     }
@@ -24,7 +24,7 @@ export function* updatePredictionPrivateLeagueSaga() {
 
 export function* createPrivateLeagueSaga() {
     while (true) {
-        const { leagueName } = yield take(mutations.CREATE_PRIVATE_LEAGUE)
+        let { leagueName } = yield take(mutations.CREATE_PRIVATE_LEAGUE)
 
         yield axios.post(url + '/private-league/create', { leagueName })
 
@@ -32,5 +32,19 @@ export function* createPrivateLeagueSaga() {
 
         yield delay(5000)
         yield put(mutations.hideCreateLeagueSuccess())
+    }
+}
+
+export function* leagueNameValidationSaga() {
+    while (true) {
+        let { leagueName} = yield take(mutations.LEAGUE_NAME_VALIDATION)
+
+        let { data } = yield axios.post(url + '/private-league/league-name-validation', { leagueName })
+
+        if (data.includes('in use')) {
+            yield put(mutations.showLeagueNameTaken())
+        } else {
+            yield put(mutations.hideLeagueNameTaken())
+        }
     }
 }

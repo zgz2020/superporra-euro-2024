@@ -92,6 +92,7 @@ export const englishTranslations = {
         submit: "Submit",
         selectName: "Select name",
         selectLeague: "Select League",
+        leagueNameTaken: "League name taken",
         success: "Private league created!"
     },
     leaderboard: {
