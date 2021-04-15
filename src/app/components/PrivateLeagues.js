@@ -26,7 +26,7 @@ const PrivateLeagues = ({
         <div className="card-body">
             <div className="container col-sm-7 col-md-7 col-lg-5 col-xl-4 mt-3">
                 <div className="row justify-content-center">
-                    <div className="text-center">
+                    <div className="text-center lead mb-2">
                         {translations.accountPage.privateLeagueIntro}
                     </div>
 
@@ -55,8 +55,14 @@ const PrivateLeagues = ({
 
                         <div className="tab-content" id="privateLeaguesTabContent">
                             <div className="tab-pane fade show active p-3" id="join-panel" role="tabpanel" aria-labelledby="join-tab">
+                                <p className="lead">
+                                    {translations.accountPage.joinLeagueIntro}
+                                </p>
+                                <p className="text-muted">
+                                    {translations.accountPage.joinLeagueCreate}
+                                </p>
                                 <form onSubmit={joinHandler} className="mt-2">
-                                    <select defaultValue="default" name="name" className="mb-3">
+                                    <select defaultValue="default" name="name" className="my-3">
                                         <option key="default" value={translations.accountPage.selectName}>{translations.accountPage.selectName}</option>
                                         {myPredictionsNames.map(name => (
                                             <option key={name} value={name}>{name}</option>
@@ -94,6 +100,9 @@ const PrivateLeagues = ({
                                 </form>
                             </div>
                             <div className="tab-pane fade p-3" id="create-panel" role="tabpanel" aria-labelledby="create-tab">
+                                <p className="lead">
+                                    {translations.accountPage.createLeagueIntro}
+                                </p>
                                 <form onSubmit={createHandler}>
                                     {translations.accountPage.createLeagueLabel}{":"}
                                     <input
@@ -129,6 +138,9 @@ const PrivateLeagues = ({
                                 </form>
                             </div>
                             <div className="tab-pane fade p-3" id="quit-panel" role="tabpanel" aria-labelledby="quit-tab">
+                                <p className="lead">
+                                    {translations.accountPage.quitLeagueIntro}
+                                </p>
                                 <form onSubmit={quitHandler}>
                                     <select defaultValue="default" name="name-quit" className="mb-3">
                                         <option key="default" value={translations.accountPage.selectName}>{translations.accountPage.selectName}</option>
