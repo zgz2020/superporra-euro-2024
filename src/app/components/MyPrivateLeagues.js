@@ -16,7 +16,7 @@ const MyPrivateLeagues = ({ translations, myPredictions }) => (
                         {myPredictions[key].username}
                     </td>
                     <td>
-                        {myPredictions[key].privateLeague}
+                        {myPredictions[key].privateLeague ? myPredictions[key].privateLeague : "--"}
                     </td>
                 </tr>
             ))}

@@ -11,7 +11,7 @@ export const privateLeagues = (privateLeagues = [], action) => {
     }
 }
 
-export const privateLeagueRankings = (privateLeagueRankings = "--", action) => {
+export const privateLeagueRankings = (privateLeagueRankings = "", action) => {
     switch (action.type) {
         case mutations.SHOW_PRIVATE_LEAGUE_RANKINGS:
             return action.privateLeague

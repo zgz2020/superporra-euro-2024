@@ -47,14 +47,18 @@ const ParticipantsListsSelection = ({ translations, privateLeagues, privateLeagu
                         <ConnectedParticipantsList />      
                     </div>
                     <div className="tab-pane fade p-3" id="private-leagues-panel" role="tabpanel" aria-labelledby="private-leagues-tab">
-                        <select onChange={showPrivateLeagueRankings} value={privateLeagueRankings} className="mb-3">
+                        <select 
+                            onChange={showPrivateLeagueRankings} 
+                            value={privateLeagueRankings} 
+                            className="mb-3"
+                        >
                             <option key="default" value=" ">{"Select a private league"}</option>
                             {privateLeagues.map(league => (
                                 <option key={league} value={league}>{league}</option>
                             ))}
                         </select>  
 
-                        {privateLeagueRankings && privateLeagueRankings != "--" && 
+                        {privateLeagueRankings && privateLeagueRankings != " " && 
                             <ConnectedParticipantsList filteredPredictions={privateLeaguePredictions(predictions, privateLeagueRankings)} />
                         }    
                     </div>
