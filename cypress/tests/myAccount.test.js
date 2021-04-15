@@ -20,7 +20,9 @@ import {
     checkPageHeader,
     updateInputForm,
     nicknameTakenTest,
-    selectLanguage
+    selectLanguage,
+    visitViewportPageLanguage,
+    checkMyPrivateLeaguesTable
 } from '../support/page-object'
 import { registeredUser, viewports, languages, myAccountAssertions } from '../support/testData'
 
@@ -187,3 +189,25 @@ describe('My Account - Existent user with at least one prediction', () => {
     })
 })
 
+describe.only('My Account - Private Championships', () => {
+
+    beforeEach(() => {
+        cy.visit('/sign-in')
+        clickOnCTA(selectors.signInTab)
+        signIn(registeredUser.email, registeredUser.password)
+    })
+
+    viewports.forEach(viewport => {
+        languages.forEach(language => {
+            it(`Private Championship component renders as expected - ${viewport} - ${language}`, () => {
+                visitViewportPageLanguage(viewport, '/account', language)
+                checkMyPrivateLeaguesTable()
+            })
+
+            it(`Create a new Championship - ${viewport} - ${language}`, () => {
+                
+
+            })
+        })
+    })
+})

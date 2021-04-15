@@ -45,6 +45,8 @@ export const selectors = {
     resultsContainer: automationSelector("results-container"),
     firstScoreGoals: `${automationSelector("score-goals")}:nth(0)`,
 
+    myPrivateLeaguesTable: automationSelector('my-private-leagues-row'),
+
     signInTab: '#sign-in-tab',
     signUpTab: '#sign-up-tab',
     forgotPasswordLink: '[aria-controls="forgot-password-form"]',
@@ -75,6 +77,11 @@ const elementVisibilityAssertion = (status) => {
 }
 
 export const clickOnCTA = (cta) => cy.get(cta).click()
+
+export const visitViewportPageLanguage = (viewport, page, language) => {
+    cy.viewport(viewport).visit(page)
+    selectLanguage(language)
+}
 
 
 // --------------------------------------------------------------
@@ -284,7 +291,7 @@ export const nicknameTakenTest = () => {
 
 export const checkNoBetsYet = (language) => cy.get(selectors.cardBody).should('contain', myAccountAssertions(language).noBetsYetText)
 
-
+export const checkMyPrivateLeaguesTable = () => cy.get(selectors.myPrivateLeaguesTable).eq(0).should('contain', 'automatedTest')
 
 // --------------------------------------------------------------
 // Sign In, Sign Up and Forgot Password

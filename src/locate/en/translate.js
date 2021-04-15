@@ -84,7 +84,7 @@ export const englishTranslations = {
         myBets: "My Bets",
         noBets: "You don't have any bets yet. Click on 'JOIN' button to create a bet and join the competition.",
         privateLeagueIntro: "Create a private championship with your friends or colleagues. You'll also take part in the global competition.",
-        privateLeague: "Private championship",
+        privateLeague: "Championship",
         joinLeague: "Join",
         joinLeagueIntro: "Join one of the existent championships",
         joinLeagueCreate: "Select 'Create' tab to create a new one",
@@ -103,7 +103,7 @@ export const englishTranslations = {
     },
     leaderboard: {
         global: "Global",
-        privateLeagues: "Private Leagues",
+        privateLeagues: "Private Championships",
         name: "Name",
         score: "Score"
     },

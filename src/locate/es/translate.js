@@ -84,7 +84,7 @@ export const spanishTranslations = {
         myBets: "Mis apuestas",
         noBets: "Aún no tienes ninguna apuesta. Haz click en el botón 'PARTICIPAR' para crear tus apuestas.",
         privateLeagueIntro: "Crea un campeonato privado con tus amigos o compañeros de trabajo. También participarás en la competición global.",
-        privateLeague: "Campeonato privado",
+        privateLeague: "Campeonato",
         joinLeague: "Unirse",
         joinLeagueIntro: "Únete a uno de los campeonatos existentes",
         joinLeagueCreate: "Ve a la pestaña 'Crear' para crear un campeonato nuevo",
