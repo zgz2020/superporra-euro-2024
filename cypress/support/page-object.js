@@ -20,6 +20,13 @@ export const selectors = {
         username: `${automationSelector("leaderboard-row")} td:nth-child(2) a`,
         score: `${automationSelector("leaderboard-row")} td:nth-child(3) a`
     },
+    privateLeagueLeaderboard: {
+        rank: `[aria-labelledby="private-leagues-tab"] ${automationSelector("leaderboard-row")} td:nth-child(1)`,
+        username: `[aria-labelledby="private-leagues-tab"] ${automationSelector("leaderboard-row")} td:nth-child(2) a`,
+        score: `[aria-labelledby="private-leagues-tab"] ${automationSelector("leaderboard-row")} td:nth-child(3) a`
+    },
+    privateLeaguesTab: (tabName) => `[aria-controls="${tabName}-panel"]`,
+    privateLeaguesSelect: '[aria-labelledby="private-leagues-tab"] select',
 
     updateButton: `${automationSelector("update-button")}:nth(0)`,
 
@@ -80,7 +87,7 @@ export const selectors = {
  
 const elementVisibilityAssertion = (status) => {
     if (status == 'visible') return 'be.visible'
-    if (status == 'hidden') return 'not.to.exist'
+    if (status == 'hidden') return 'not.exist'
 }
 
 export const clickOnCTA = (cta) => cy.get(cta).click()
@@ -152,10 +159,20 @@ export const checkLeaderboardLastParticipant = () => cy.get(selectors.leaderboar
 
 export const selectLastParticipant = () => cy.get(selectors.leaderboardRow.username).last().click()
 
-export const checkUserOnlyPrediction = () => cy.get(selectors.leaderboardRow.username).should('contain', 'ZZ Test Participant')
+export const checkPredictionInLeaderboard = (username) => cy.get(selectors.leaderboardRow.username).should('contain', username)
+
+export const checkPredictionInPrivateLeagueLeaderboard = (username) => cy.get(selectors.privateLeagueLeaderboard.username).should('contain', username)
+export const checkPredictionNotInPrivateLeagueLeaderboard = (username) => cy.get(selectors.privateLeagueLeaderboard.username).should('not.exist')
 
 export const selectUserOnlyPrediction = () => cy.get(selectors.leaderboardRow.username).click()
 
+export const selectPrivateLeaguesTab = (tabName) => cy.get(selectors.privateLeaguesTab(tabName)).click()
+
+export const selectPrivateLeague = (leagueName) => cy.get(selectors.privateLeaguesSelect).select(leagueName)
+
+// export const checkPredictionInLeagueLeaderboards = (leagueName, username) => {
+//     cy.get(selectors.leaderboardRow.username).should('contain', username)
+// }
 
 
 // --------------------------------------------------------------
@@ -303,23 +320,23 @@ export const checkMyPrivateLeaguesTableRenders = () => cy.get(selectors.myPrivat
 
 export const checkPredictionPrivateLeague = (leagueName) => cy.get(selectors.myPrivateLeaguesTableLeagueName).should('contain', leagueName)
 
-export const selectPrivateLeaguesTab = (tabName) => cy.get(selectors.leagueTab(tabName)).click()
+const selectPrivateLeaguesActionTab = (tabName) => cy.get(selectors.leagueTab(tabName)).click()
 
 export const createNewPrivateLeague = (leagueName) => { 
-    selectPrivateLeaguesTab('Create')
+    selectPrivateLeaguesActionTab('Create')
     cy.get(selectors.createLeagueInput).clear().type(leagueName)
         .get(selectors.submitCTA('create')).click()
 }
 
 export const joinNewPrivateLeague = (leagueName) => { 
-    selectPrivateLeaguesTab('Join')
+    selectPrivateLeaguesActionTab('Join')
     cy.get(selectors.joinPredictionNameSelect).select('automatedTest')
         .get(selectors.joinLeagueNameSelect).select(leagueName)
         .get(selectors.submitCTA('join')).click()
 }
 
 export const quitNewPrivateLeague = (predictionName) => { 
-    selectPrivateLeaguesTab('Quit')
+    selectPrivateLeaguesActionTab('Quit')
     cy.wait(800)
         .get(selectors.quitPredictionNameSelect).select('automatedTest')
         .wait(1000)
@@ -356,7 +373,7 @@ export const onlyThisErrorVisible = (error) => {
         if ($error == error) {
             cy.get(selectors.signInPageErrors[$error]).should('be.visible')
         } else {
-            cy.get(selectors.signInPageErrors[$error]).should('not.to.exist')
+            cy.get(selectors.signInPageErrors[$error]).should('not.exist')
         }
     })
 }

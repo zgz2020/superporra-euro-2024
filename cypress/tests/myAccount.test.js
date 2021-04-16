@@ -4,7 +4,9 @@ import {
     randomEmail,
     signIn,
     checkNoBetsYet,
-    checkUserOnlyPrediction,
+    checkPredictionInLeaderboard,
+    checkPredictionInPrivateLeagueLeaderboard,
+    checkPredictionNotInPrivateLeagueLeaderboard,
     selectUserOnlyPrediction,
     checkElementVisibility,
     checkFirstRank,
@@ -27,7 +29,9 @@ import {
     checkPredictionPrivateLeague,
     createNewPrivateLeague,
     joinNewPrivateLeague,
-    quitNewPrivateLeague
+    quitNewPrivateLeague,
+    selectPrivateLeaguesTab,
+    selectPrivateLeague
 } from '../support/page-object'
 import {
     registeredUser,
@@ -61,7 +65,7 @@ describe('My Account - New User with no predictions', () => {
                 signUp(randomEmail(), 'testing')
         
                 // Test new user's account initial content
-                checkElementVisibility(selectors.leaderboard, 'not.to.exist') 
+                checkElementVisibility(selectors.leaderboard, 'not.exist') 
                 cy.get(selectors.cardHeader).should('contain', myAccountAssertions(language).myBetsHeader)
                 checkNoBetsYet(language)
         
@@ -96,8 +100,8 @@ describe('My Account - New User with no predictions', () => {
                 fillInInputForm()
                 clickOnCTA(selectors.inputForm.submitButton('top'))
         
-                checkElementVisibility(selectors.inputForm.form, 'not.to.exist') 
-                checkUserOnlyPrediction()
+                checkElementVisibility(selectors.inputForm.form, 'not.exist') 
+                checkPredictionInLeaderboard('ZZ Test Participant')
                 
                 // Check participant's predictions page
                 selectUserOnlyPrediction()
@@ -179,7 +183,7 @@ describe('My Account - Existent user with at least one prediction', () => {
                 fillInInputForm()
                 clickOnCTA(selectors.inputForm.submitButton('top'))
         
-                checkElementVisibility(selectors.inputForm.form, 'not.to.exist') 
+                checkElementVisibility(selectors.inputForm.form, 'not.exist') 
                 //checkElementVisibility(selectors.predictionsSubittedMessage, 'be.visible') 
         
                 checkLeaderboardLastParticipant()
@@ -235,20 +239,42 @@ describe.only('My Account - Private Championships - User with predictions', () =
             })
 
             it(`Create a new Championship - ${viewport} - ${language}`, () => {
+                // +++ TODO !!!
+                //    --- This test is not working fine
+                //        1. A random name should be added for each iteration, 
+                //           or the test should  be moved to another 'describe` and then
+                //           add an afteEach() to remove the newly created league 
+                //         2. some waits muts be added so error message is triggered if league name in use
+
                 visitViewportPageLanguage(viewport, '/account', language)
                 createNewPrivateLeague('AutoTest Championship')
             })
 
-            it(`Join and Quit a Championship - ${viewport} - ${language}`, () => {
+            it.only(`Join and Quit a Championship - ${viewport} - ${language}`, () => {
                 visitViewportPageLanguage(viewport, '/account', language)
                 joinNewPrivateLeague('AutoTest Championship')
                 checkPredictionPrivateLeague('AutoTest Championship')
-                // +++ TODO !!!
-                //      Check Participants page > 'AutoTest Championship' > 'automatedTest' listed
+                
+                //  Check Participants page > 'AutoTest Championship' > 'automatedTest' listed
+                cy.visit('/participants')
+                selectPrivateLeaguesTab('Private-leagues')
+                cy.wait(1000)
+                selectPrivateLeague('AutoTest Championship')
+                cy.wait(1000)
+                checkPredictionInPrivateLeagueLeaderboard('automatedTest')
+
+                cy.visit('/account')
                 quitNewPrivateLeague('automatedTest')
                 checkPredictionPrivateLeague('--')
-                // +++ TODO !!!
+
                 //      Check Participants page > 'AutoTest Championship' > 'automatedTest' NOT listed
+                cy.visit('/participants')
+                selectPrivateLeaguesTab('Private-leagues')
+                cy.wait(1000)
+                selectPrivateLeague('AutoTest Championship')
+                cy.wait(1000)
+                checkPredictionNotInPrivateLeagueLeaderboard('automatedTest')
+                cy.wait(3000)
             })
         })
     })
