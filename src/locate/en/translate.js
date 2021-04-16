@@ -60,7 +60,7 @@ export const englishTranslations = {
         resetPasswordError: "There was an error. Please try again."
     },
     participantsPage: {
-        title: "Superporra Paticipants",
+        title: "Superporra Participants",
         noParticipantsYet: "There are no particpants yet. Be the first one joining the competition by clicking on the 'JOIN' button!"
     },
     participantPredictionsPage: {
