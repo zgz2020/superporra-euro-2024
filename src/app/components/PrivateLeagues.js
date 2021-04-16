@@ -62,14 +62,24 @@ const PrivateLeagues = ({
                                     {translations.accountPage.joinLeagueCreate}
                                 </p>
                                 <form onSubmit={joinHandler} className="mt-2">
-                                    <select defaultValue="default" name="name" className="my-3">
+                                    <select 
+                                        defaultValue="default"
+                                        name="name"
+                                        className="my-3"
+                                        data-automation="prediction-name-select"
+                                    >
                                         <option key="default" value={translations.accountPage.selectName}>{translations.accountPage.selectName}</option>
                                         {myPredictionsNames.map(name => (
                                             <option key={name} value={name}>{name}</option>
                                         ))}
                                     </select>  
                                     <br />
-                                    <select defaultValue="default" name="league" className="mb-3">
+                                    <select 
+                                        defaultValue="default"
+                                        name="league"
+                                        className="mb-3"
+                                        data-automation="league-name-select"
+                                    >
                                         <option key="default" value={translations.accountPage.selectLeague}>{translations.accountPage.selectLeague}</option>
                                         {privateLeagues.map(league => (
                                             <option key={league} value={league}>{league}</option>
@@ -94,7 +104,11 @@ const PrivateLeagues = ({
                                         </p>
                                     }
 
-                                    <button type="submit" className="form-control mt-2 btn btn-primary">
+                                    <button 
+                                        type="submit" 
+                                        className="form-control mt-2 btn btn-primary"
+                                        data-automation="join-submit-cta"
+                                    >
                                         {translations.accountPage.submit}
                                     </ button>
                                 </form>
@@ -117,7 +131,7 @@ const PrivateLeagues = ({
                                     {createLeagueSuccess &&  
                                         <p 
                                             className="text-success font-italic mt-2"
-                                            data-automation={'create-league-success'}
+                                            data-automation='create-league-success'
                                         >
                                             {translations.accountPage.success}
                                         </p>
@@ -126,13 +140,18 @@ const PrivateLeagues = ({
                                     {leagueNameTaken &&  
                                         <p 
                                             className="text-danger font-italic mt-2"
-                                            data-automation={'league-name-taken'}
+                                            data-automation='league-name-taken'
                                         >
                                             {translations.accountPage.leagueNameTaken}
                                         </p>
                                     }
 
-                                    <button type="submit" className="form-control mt-2 btn btn-primary" disabled={leagueNameTaken}>
+                                    <button 
+                                        type="submit" 
+                                        className="form-control mt-2 btn btn-primary" 
+                                        disabled={leagueNameTaken}
+                                        data-automation="create-submit-cta"
+                                    >
                                         {translations.accountPage.submit}
                                     </ button>
                                 </form>
@@ -167,7 +186,11 @@ const PrivateLeagues = ({
                                         </p>
                                     }
 
-                                    <button type="submit" className="form-control mt-2 btn btn-primary">
+                                    <button 
+                                        type="submit" 
+                                        className="form-control mt-2 btn btn-primary"
+                                        data-automation="quit-submit-cta"
+                                    >
                                         {translations.accountPage.submit}
                                     </ button>
                                 </form>

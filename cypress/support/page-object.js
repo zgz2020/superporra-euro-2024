@@ -45,7 +45,14 @@ export const selectors = {
     resultsContainer: automationSelector("results-container"),
     firstScoreGoals: `${automationSelector("score-goals")}:nth(0)`,
 
-    myPrivateLeaguesTable: automationSelector('my-private-leagues-row'),
+    myPrivateLeaguesTableRow: automationSelector('my-private-leagues-row'),
+    myPrivateLeaguesTableLeagueName: `${automationSelector('my-private-leagues-row')} td:nth-child(2)`,
+    leagueTab: (tabName) => `[aria-controls="${tabName}-panel"]`,
+    joinPredictionNameSelect: '#join-panel select:nth-child(1)', 
+    joinLeagueNameSelect: '#join-panel select:nth-child(3)',
+    createLeagueInput: automationSelector('league-name-input'),
+    quitPredictionNameSelect: '#quit-panel select',
+    submitCTA: (tabName) => `[aria-labelledby="${tabName}-tab"] button`,
 
     signInTab: '#sign-in-tab',
     signUpTab: '#sign-up-tab',
@@ -291,7 +298,34 @@ export const nicknameTakenTest = () => {
 
 export const checkNoBetsYet = (language) => cy.get(selectors.cardBody).should('contain', myAccountAssertions(language).noBetsYetText)
 
-export const checkMyPrivateLeaguesTable = () => cy.get(selectors.myPrivateLeaguesTable).eq(0).should('contain', 'automatedTest')
+export const checkMyPrivateLeaguesTableNotRenders = () => cy.get(selectors.myPrivateLeaguesTableRow).should('not.exist')
+export const checkMyPrivateLeaguesTableRenders = () => cy.get(selectors.myPrivateLeaguesTableRow).eq(0).should('contain', 'automatedTest')
+
+export const checkPredictionPrivateLeague = (leagueName) => cy.get(selectors.myPrivateLeaguesTableLeagueName).should('contain', leagueName)
+
+export const selectPrivateLeaguesTab = (tabName) => cy.get(selectors.leagueTab(tabName)).click()
+
+export const createNewPrivateLeague = (leagueName) => { 
+    selectPrivateLeaguesTab('Create')
+    cy.get(selectors.createLeagueInput).clear().type(leagueName)
+        .get(selectors.submitCTA('create')).click()
+}
+
+export const joinNewPrivateLeague = (leagueName) => { 
+    selectPrivateLeaguesTab('Join')
+    cy.get(selectors.joinPredictionNameSelect).select('automatedTest')
+        .get(selectors.joinLeagueNameSelect).select(leagueName)
+        .get(selectors.submitCTA('join')).click()
+}
+
+export const quitNewPrivateLeague = (predictionName) => { 
+    selectPrivateLeaguesTab('Quit')
+    cy.wait(800)
+        .get(selectors.quitPredictionNameSelect).select('automatedTest')
+        .wait(1000)
+        .get(selectors.submitCTA('quit')).click()
+}
+
 
 // --------------------------------------------------------------
 // Sign In, Sign Up and Forgot Password

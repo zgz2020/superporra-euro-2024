@@ -22,9 +22,20 @@ import {
     nicknameTakenTest,
     selectLanguage,
     visitViewportPageLanguage,
-    checkMyPrivateLeaguesTable
+    checkMyPrivateLeaguesTableNotRenders,
+    checkMyPrivateLeaguesTableRenders,
+    checkPredictionPrivateLeague,
+    createNewPrivateLeague,
+    joinNewPrivateLeague,
+    quitNewPrivateLeague
 } from '../support/page-object'
-import { registeredUser, viewports, languages, myAccountAssertions } from '../support/testData'
+import {
+    registeredUser,
+    registeredUserNoPredictions,
+    viewports,
+    languages,
+    myAccountAssertions
+} from '../support/testData'
 
 let url = Cypress.config().baseUrl
 
@@ -189,7 +200,25 @@ describe('My Account - Existent user with at least one prediction', () => {
     })
 })
 
-describe.only('My Account - Private Championships', () => {
+describe('My Account - Private Championships - User with NO predictions', () => {
+
+    beforeEach(() => {
+        cy.visit('/sign-in')
+        clickOnCTA(selectors.signInTab)
+        signIn(registeredUserNoPredictions.email, registeredUserNoPredictions.password)
+    })
+
+    viewports.forEach(viewport => {
+        languages.forEach(language => {
+            it(`Championship component does NOT render - User with NO predictions - ${viewport} - ${language}`, () => {
+                visitViewportPageLanguage(viewport, '/account', language)
+                checkMyPrivateLeaguesTableNotRenders()
+            })
+        })
+    })
+})
+
+describe.only('My Account - Private Championships - User with predictions', () => {
 
     beforeEach(() => {
         cy.visit('/sign-in')
@@ -201,12 +230,25 @@ describe.only('My Account - Private Championships', () => {
         languages.forEach(language => {
             it(`Private Championship component renders as expected - ${viewport} - ${language}`, () => {
                 visitViewportPageLanguage(viewport, '/account', language)
-                checkMyPrivateLeaguesTable()
+                checkMyPrivateLeaguesTableRenders()
+                checkPredictionPrivateLeague('--')
             })
 
             it(`Create a new Championship - ${viewport} - ${language}`, () => {
-                
+                visitViewportPageLanguage(viewport, '/account', language)
+                createNewPrivateLeague('AutoTest Championship')
+            })
 
+            it(`Join and Quit a Championship - ${viewport} - ${language}`, () => {
+                visitViewportPageLanguage(viewport, '/account', language)
+                joinNewPrivateLeague('AutoTest Championship')
+                checkPredictionPrivateLeague('AutoTest Championship')
+                // +++ TODO !!!
+                //      Check Participants page > 'AutoTest Championship' > 'automatedTest' listed
+                quitNewPrivateLeague('automatedTest')
+                checkPredictionPrivateLeague('--')
+                // +++ TODO !!!
+                //      Check Participants page > 'AutoTest Championship' > 'automatedTest' NOT listed
             })
         })
     })
