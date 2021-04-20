@@ -100,6 +100,8 @@ export const spanishTranslations = {
         leagueNameTaken: "Nombre no disponible",
         quitLeagueError: "Debes elegir un nombre",
         success: "¡Hecho!",
+        username: "Mi nombre",
+        myChampionships: "Mis campeonatos"
     },
     leaderboard: {
         global: "Global",

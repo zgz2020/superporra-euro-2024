@@ -100,6 +100,8 @@ export const englishTranslations = {
         leagueNameTaken: "Championship name taken",
         quitLeagueError: "You must select a name",
         success: "Done!",
+        username: "My Name",
+        myChampionships: "My Championships"
     },
     leaderboard: {
         global: "Global",

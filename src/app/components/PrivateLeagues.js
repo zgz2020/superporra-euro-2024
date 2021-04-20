@@ -21,7 +21,8 @@ const PrivateLeagues = ({
 }) => (
     <div className="card my-5">
         <div className="card-header">
-            {translations.leaderboard.privateLeagues}
+            {/* {translations.leaderboard.privateLeagues} */}
+            {translations.accountPage.myChampionships}
         </div>
         <div className="card-body">
             <div className="container col-sm-7 col-md-7 col-lg-5 col-xl-4 mt-3">
