@@ -423,3 +423,12 @@ app.post('/private-league/create', async (req, res) => {
 
     res.status(200).send()
 })
+
+app.post('/private-league/remove', async (req, res) => {
+    let db = await connectDB()
+    let privateLeaguesCollection = db.collection('privateLeagues')
+
+    await privateLeaguesCollection.deleteMany({ name: /Automated-Championship/ })
+
+    res.status(200).send()
+})

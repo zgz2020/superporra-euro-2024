@@ -53,10 +53,11 @@ export const selectors = {
     firstScoreGoals: `${automationSelector("score-goals")}:nth(0)`,
 
     myPrivateLeaguesTableRow: automationSelector('my-private-leagues-row'),
-    myPrivateLeaguesTableLeagueName: `${automationSelector('my-private-leagues-row')} td:nth-child(2)`,
+    myPrivateLeaguesTableLeagueName: `${automationSelector('my-private-leagues-row')} td:nth-child(1)`,
     leagueTab: (tabName) => `[aria-controls="${tabName}-panel"]`,
     joinPredictionNameSelect: '#join-panel select:nth-child(1)', 
     joinLeagueNameSelect: '#join-panel select:nth-child(3)',
+    joinLeagueNameSelectOptions: '#join-panel select:nth-child(3) option',
     createLeagueInput: automationSelector('league-name-input'),
     quitPredictionNameSelect: '#quit-panel select',
     submitCTA: (tabName) => `[aria-labelledby="${tabName}-tab"] button`,
@@ -169,10 +170,6 @@ export const selectUserOnlyPrediction = () => cy.get(selectors.leaderboardRow.us
 export const selectPrivateLeaguesTab = (tabName) => cy.get(selectors.privateLeaguesTab(tabName)).click()
 
 export const selectPrivateLeague = (leagueName) => cy.get(selectors.privateLeaguesSelect).select(leagueName)
-
-// export const checkPredictionInLeagueLeaderboards = (leagueName, username) => {
-//     cy.get(selectors.leaderboardRow.username).should('contain', username)
-// }
 
 
 // --------------------------------------------------------------
@@ -324,7 +321,9 @@ const selectPrivateLeaguesActionTab = (tabName) => cy.get(selectors.leagueTab(ta
 
 export const createNewPrivateLeague = (leagueName) => { 
     selectPrivateLeaguesActionTab('Create')
-    cy.get(selectors.createLeagueInput).clear().type(leagueName)
+    cy.wait(800)
+        .get(selectors.createLeagueInput).clear().type(leagueName)
+        .wait(800)
         .get(selectors.submitCTA('create')).click()
 }
 
@@ -343,7 +342,12 @@ export const quitNewPrivateLeague = (predictionName) => {
         .get(selectors.submitCTA('quit')).click()
 }
 
-
+export const verifyChampionshipNameInSelectList = (name) => {
+    selectPrivateLeaguesActionTab('Join')
+    cy.get(selectors.joinLeagueNameSelectOptions).then($options => {
+        expect($options).to.contain(name)
+    })
+}
 // --------------------------------------------------------------
 // Sign In, Sign Up and Forgot Password
 // --------------------------------------------------------------
@@ -367,6 +371,8 @@ const randomInt10000 = () => Math.floor(Math.random() * 1000)
 export const randomEmail = () => `automated-${randomInt10000()}@test.com`
 
 export const randomPassword = () => `testing${randomInt10000()}`
+
+export const randomChampionship = () => `Automated-Championship-${randomInt10000()}`
 
 export const onlyThisErrorVisible = (error) => {
     Object.keys(selectors.signInPageErrors).forEach($error => {

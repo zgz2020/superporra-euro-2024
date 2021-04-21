@@ -2,6 +2,7 @@ import {
     selectors,
     signUp,
     randomEmail,
+    randomChampionship,
     signIn,
     checkNoBetsYet,
     checkPredictionInLeaderboard,
@@ -31,7 +32,8 @@ import {
     joinNewPrivateLeague,
     quitNewPrivateLeague,
     selectPrivateLeaguesTab,
-    selectPrivateLeague
+    selectPrivateLeague,
+    verifyChampionshipNameInSelectList
 } from '../support/page-object'
 import {
     registeredUser,
@@ -142,7 +144,7 @@ describe('My Account - Existent user with at least one prediction', () => {
 
     viewports.forEach(viewport => {
         languages.forEach(language => {
-            it(`Elements rendered and links - ${viewport} - ${language}`, () => {
+            it(`My Bets component rendered and links - ${viewport} - ${language}`, () => {
                 cy.viewport(viewport).visit('/account')
                 selectLanguage(language)
                 cy.get(selectors.cardHeader).should('contain', myAccountAssertions(language).myBetsHeader)
@@ -214,7 +216,7 @@ describe('My Account - Private Championships - User with NO predictions', () => 
 
     viewports.forEach(viewport => {
         languages.forEach(language => {
-            it(`Championship component does NOT render - User with NO predictions - ${viewport} - ${language}`, () => {
+            it(`Championship component does NOT render - ${viewport} - ${language}`, () => {
                 visitViewportPageLanguage(viewport, '/account', language)
                 checkMyPrivateLeaguesTableNotRenders()
             })
@@ -222,12 +224,23 @@ describe('My Account - Private Championships - User with NO predictions', () => 
     })
 })
 
-describe.only('My Account - Private Championships - User with predictions', () => {
+describe('My Account - Private Championships - User with predictions', () => {
 
     beforeEach(() => {
         cy.visit('/sign-in')
         clickOnCTA(selectors.signInTab)
         signIn(registeredUser.email, registeredUser.password)
+    })
+
+    after(() => {
+        // Remove all test Championships created by these tests
+        cy.request('POST', `${url}/private-league/remove`).then(resp => {
+            if (resp.status == 200) {
+                cy.log('Test championships remove successfully :D')
+            } else {
+                cy.log('Failed to remove test championships :(')
+            }
+        })
     })
 
     viewports.forEach(viewport => {
@@ -239,23 +252,21 @@ describe.only('My Account - Private Championships - User with predictions', () =
             })
 
             it(`Create a new Championship - ${viewport} - ${language}`, () => {
-                // +++ TODO !!!
-                //    --- This test is not working fine
-                //        1. A random name should be added for each iteration, 
-                //           or the test should  be moved to another 'describe` and then
-                //           add an afteEach() to remove the newly created league 
-                //         2. some waits muts be added so error message is triggered if league name in use
+                const randomName = randomChampionship()
 
                 visitViewportPageLanguage(viewport, '/account', language)
-                createNewPrivateLeague('AutoTest Championship')
+                createNewPrivateLeague(randomName)
+                verifyChampionshipNameInSelectList(randomName)
             })
 
-            it.only(`Join and Quit a Championship - ${viewport} - ${language}`, () => {
+            it(`Join and Quit a Championship - ${viewport} - ${language}`, () => {
                 visitViewportPageLanguage(viewport, '/account', language)
+
+                // Join a private league
                 joinNewPrivateLeague('AutoTest Championship')
                 checkPredictionPrivateLeague('AutoTest Championship')
                 
-                //  Check Participants page > 'AutoTest Championship' > 'automatedTest' listed
+                // Check Participants page > 'AutoTest Championship' > 'automatedTest' listed
                 cy.visit('/participants')
                 selectPrivateLeaguesTab('Private-leagues')
                 cy.wait(1000)
@@ -263,11 +274,12 @@ describe.only('My Account - Private Championships - User with predictions', () =
                 cy.wait(1000)
                 checkPredictionInPrivateLeagueLeaderboard('automatedTest')
 
+                // Quit private league
                 cy.visit('/account')
                 quitNewPrivateLeague('automatedTest')
                 checkPredictionPrivateLeague('--')
 
-                //      Check Participants page > 'AutoTest Championship' > 'automatedTest' NOT listed
+                // Check Participants page > 'AutoTest Championship' > 'automatedTest' NOT listed
                 cy.visit('/participants')
                 selectPrivateLeaguesTab('Private-leagues')
                 cy.wait(1000)
@@ -275,6 +287,13 @@ describe.only('My Account - Private Championships - User with predictions', () =
                 cy.wait(1000)
                 checkPredictionNotInPrivateLeagueLeaderboard('automatedTest')
                 cy.wait(3000)
+            })
+
+            it(`Negative paths - Join, Create and Quit - ${viewport} - ${language}`, () => {
+                visitViewportPageLanguage(viewport, '/account', language)
+
+                cy.get(selectors.submitCTA('join')).click()
+
             })
         })
     })
