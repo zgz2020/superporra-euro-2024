@@ -94,7 +94,7 @@ export const englishTranslations = {
         quitLeagueIntro: "Quit the private championship and participate only in the global competition",
         createLeagueLabel: "Championship name",
         submit: "Submit",
-        selectName: "Select username",
+        selectName: "Select Username",
         selectLeague: "Select Championship",
         joinLeagueError: "You must select a name and a championship",
         leagueNameTaken: "Championship name taken",

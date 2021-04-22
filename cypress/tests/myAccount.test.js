@@ -33,7 +33,8 @@ import {
     quitNewPrivateLeague,
     selectPrivateLeaguesTab,
     selectPrivateLeague,
-    verifyChampionshipNameInSelectList
+    verifyChampionshipNameInSelectList,
+    selectPrivateLeaguesActionTab
 } from '../support/page-object'
 import {
     registeredUser,
@@ -45,7 +46,7 @@ import {
 
 let url = Cypress.config().baseUrl
 
-let selectName = (language) => language == 'english' ? 'Select a Name' : 'Elige nombre'
+let selectName = (language) => language == 'english' ? 'Select Username' : 'Elige usuario'
 let selectLeague = (language) => language == 'english' ? 'Select Championship' : 'Elige campeonato'
 
 describe('My Account - New User with no predictions', () => {
