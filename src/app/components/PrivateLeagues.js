@@ -21,7 +21,6 @@ const PrivateLeagues = ({
 }) => (
     <div className="card my-5">
         <div className="card-header">
-            {/* {translations.leaderboard.privateLeagues} */}
             {translations.accountPage.myChampionships}
         </div>
         <div className="card-body">

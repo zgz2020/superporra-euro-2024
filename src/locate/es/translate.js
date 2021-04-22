@@ -94,13 +94,13 @@ export const spanishTranslations = {
         quitLeagueIntro: "Abandona el campeonato privado y participa solo en la competición global",
         createLeagueLabel: "Nombre del campeonato",
         submit: "Mandar",
-        selectName: "Elige nombre",
+        selectName: "Elige usuario",
         selectLeague: "Elige campeonato",
         joinLeagueError: "Debes elegir un nombre y un campeonato",
         leagueNameTaken: "Nombre no disponible",
         quitLeagueError: "Debes elegir un nombre",
         success: "¡Hecho!",
-        username: "Mi nombre",
+        username: "Usuario",
         myChampionships: "Mis campeonatos"
     },
     leaderboard: {

@@ -45,6 +45,9 @@ import {
 
 let url = Cypress.config().baseUrl
 
+let selectName = (language) => language == 'english' ? 'Select a Name' : 'Elige nombre'
+let selectLeague = (language) => language == 'english' ? 'Select Championship' : 'Elige campeonato'
+
 describe('My Account - New User with no predictions', () => {
 
     after(() => {
@@ -292,8 +295,42 @@ describe('My Account - Private Championships - User with predictions', () => {
             it(`Negative paths - Join, Create and Quit - ${viewport} - ${language}`, () => {
                 visitViewportPageLanguage(viewport, '/account', language)
 
+                // JOIN - Do not select neither a league or a username
                 cy.get(selectors.submitCTA('join')).click()
+                    .get(selectors.privateLeagueErrors.join).should('be.visible')
+                
+                cy.wait(500)
 
+                // JOIN - Select a username but not a league
+                cy.get(selectors.joinPredictionNameSelect).select('automatedTest')
+                    .get(selectors.submitCTA('join')).click()
+                    .get(selectors.privateLeagueErrors.join).should('be.visible')
+
+                cy.wait(500)
+
+                // JOIN - Select a league but not a username
+                cy.get(selectors.joinPredictionNameSelect).select(selectName(language))
+                    .get(selectors.joinLeagueNameSelect).select(selectLeague(language))
+                    .get(selectors.submitCTA('join')).click()
+                    .get(selectors.privateLeagueErrors.join).should('be.visible')
+                
+                cy.wait(500)
+
+                // CREATE - Do not select a league
+                selectPrivateLeaguesActionTab('Create')
+                cy.wait(1000)
+                    .get(selectors.submitCTA('create')).click()
+                    .get(selectors.privateLeagueErrors.create).should('be.visible')
+                
+                cy.wait(500)
+
+                // QUIT - Do not select a league
+                selectPrivateLeaguesActionTab('Quit')
+                cy.wait(1000)
+                    .get(selectors.submitCTA('quit')).click()
+                    .get(selectors.privateLeagueErrors.quit).should('be.visible')
+                
+                cy.wait(500)
             })
         })
     })

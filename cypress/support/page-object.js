@@ -61,6 +61,16 @@ export const selectors = {
     createLeagueInput: automationSelector('league-name-input'),
     quitPredictionNameSelect: '#quit-panel select',
     submitCTA: (tabName) => `[aria-labelledby="${tabName}-tab"] button`,
+    privateLeagueSuccess: {
+        join: automationSelector('join-league-success'),
+        create: automationSelector('create-league-success'),
+        quit: automationSelector('quit-league-success')
+    },
+    privateLeagueErrors: {
+        join: automationSelector('join-league-error'),
+        create: automationSelector('league-name-taken'),
+        quit: automationSelector('quit-league-error')
+    },
 
     signInTab: '#sign-in-tab',
     signUpTab: '#sign-up-tab',
@@ -317,7 +327,7 @@ export const checkMyPrivateLeaguesTableRenders = () => cy.get(selectors.myPrivat
 
 export const checkPredictionPrivateLeague = (leagueName) => cy.get(selectors.myPrivateLeaguesTableLeagueName).should('contain', leagueName)
 
-const selectPrivateLeaguesActionTab = (tabName) => cy.get(selectors.leagueTab(tabName)).click()
+export const selectPrivateLeaguesActionTab = (tabName) => cy.get(selectors.leagueTab(tabName)).click()
 
 export const createNewPrivateLeague = (leagueName) => { 
     selectPrivateLeaguesActionTab('Create')
@@ -325,6 +335,9 @@ export const createNewPrivateLeague = (leagueName) => {
         .get(selectors.createLeagueInput).clear().type(leagueName)
         .wait(800)
         .get(selectors.submitCTA('create')).click()
+        .get(selectors.privateLeagueSuccess.create).should(be.visible)
+        .wait(2100)
+        .get(selectors.privateLeagueSuccess.create).should(not.exist)
 }
 
 export const joinNewPrivateLeague = (leagueName) => { 
@@ -332,6 +345,9 @@ export const joinNewPrivateLeague = (leagueName) => {
     cy.get(selectors.joinPredictionNameSelect).select('automatedTest')
         .get(selectors.joinLeagueNameSelect).select(leagueName)
         .get(selectors.submitCTA('join')).click()
+        .get(selectors.privateLeagueSuccess.join).should(be.visible)
+        .wait(2100)
+        .get(selectors.privateLeagueSuccess.join).should(not.exist)
 }
 
 export const quitNewPrivateLeague = (predictionName) => { 
@@ -340,6 +356,9 @@ export const quitNewPrivateLeague = (predictionName) => {
         .get(selectors.quitPredictionNameSelect).select('automatedTest')
         .wait(1000)
         .get(selectors.submitCTA('quit')).click()
+        .get(selectors.privateLeagueSuccess.quit).should(be.visible)
+        .wait(2100)
+        .get(selectors.privateLeagueSuccess.quit).should(not.exist)
 }
 
 export const verifyChampionshipNameInSelectList = (name) => {

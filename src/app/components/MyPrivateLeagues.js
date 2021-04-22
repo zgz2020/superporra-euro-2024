@@ -8,15 +8,11 @@ const MyPrivateLeagues = ({ translations, myPredictions }) => (
             <tr>
                 <th>{translations.accountPage.privateLeague}</th>
                 <th>{translations.accountPage.username}</th>
-                {/* <th>{translations.accountPage.privateLeague}</th> */}
             </tr>
         </thead>
         <tbody>
             {Object.keys(myPredictions).map((key, index) => (
                 <tr key={index+1} data-automation="my-private-leagues-row">
-                    {/* <td>
-                        {myPredictions[key].username}
-                    </td> */}
                     <td>
                         {myPredictions[key].privateLeague  && myPredictions[key].privateLeague != "--" ? 
                             <Link to={"/participants"} data-automation="participants-link">

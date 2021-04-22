@@ -94,13 +94,13 @@ export const englishTranslations = {
         quitLeagueIntro: "Quit the private championship and participate only in the global competition",
         createLeagueLabel: "Championship name",
         submit: "Submit",
-        selectName: "Select name",
+        selectName: "Select username",
         selectLeague: "Select Championship",
         joinLeagueError: "You must select a name and a championship",
         leagueNameTaken: "Championship name taken",
         quitLeagueError: "You must select a name",
         success: "Done!",
-        username: "My Name",
+        username: "Username",
         myChampionships: "My Championships"
     },
     leaderboard: {
