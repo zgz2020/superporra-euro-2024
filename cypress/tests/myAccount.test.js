@@ -317,11 +317,13 @@ describe('My Account - Private Championships - User with predictions', () => {
                 
                 cy.wait(500)
 
-                // CREATE - Do not select a league
+                // CREATE - Enter a taken league name
                 selectPrivateLeaguesActionTab('Create')
-                cy.wait(1000)
-                    .get(selectors.submitCTA('create')).click()
+                cy.wait(1500)
+                    .get(selectors.createLeagueInput).clear().type('AutoTest Championship')
+                    .wait(1000)
                     .get(selectors.privateLeagueErrors.create).should('be.visible')
+                    .get(selectors.submitCTA('create')).should('be.disabled')
                 
                 cy.wait(500)
 

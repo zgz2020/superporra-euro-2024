@@ -335,9 +335,9 @@ export const createNewPrivateLeague = (leagueName) => {
         .get(selectors.createLeagueInput).clear().type(leagueName)
         .wait(800)
         .get(selectors.submitCTA('create')).click()
-        .get(selectors.privateLeagueSuccess.create).should(be.visible)
+        .get(selectors.privateLeagueSuccess.create).should('be.visible')
         .wait(2100)
-        .get(selectors.privateLeagueSuccess.create).should(not.exist)
+        .get(selectors.privateLeagueSuccess.create).should('not.exist')
 }
 
 export const joinNewPrivateLeague = (leagueName) => { 
@@ -345,9 +345,9 @@ export const joinNewPrivateLeague = (leagueName) => {
     cy.get(selectors.joinPredictionNameSelect).select('automatedTest')
         .get(selectors.joinLeagueNameSelect).select(leagueName)
         .get(selectors.submitCTA('join')).click()
-        .get(selectors.privateLeagueSuccess.join).should(be.visible)
+        .get(selectors.privateLeagueSuccess.join).should('be.visible')
         .wait(2100)
-        .get(selectors.privateLeagueSuccess.join).should(not.exist)
+        .get(selectors.privateLeagueSuccess.join).should('not.exist')
 }
 
 export const quitNewPrivateLeague = (predictionName) => { 
@@ -356,9 +356,9 @@ export const quitNewPrivateLeague = (predictionName) => {
         .get(selectors.quitPredictionNameSelect).select('automatedTest')
         .wait(1000)
         .get(selectors.submitCTA('quit')).click()
-        .get(selectors.privateLeagueSuccess.quit).should(be.visible)
+        .get(selectors.privateLeagueSuccess.quit).should('be.visible')
         .wait(2100)
-        .get(selectors.privateLeagueSuccess.quit).should(not.exist)
+        .get(selectors.privateLeagueSuccess.quit).should('not.exist')
 }
 
 export const verifyChampionshipNameInSelectList = (name) => {
