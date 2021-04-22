@@ -7,6 +7,11 @@ export const registeredUser = {
     password: "testing"
 }
 
+export const registeredUserNoPredictions = {
+    email: "automated-no-predictions@test.com",
+    password: "test1234"
+}
+
 export const adminUser = {
     email: "admin",
     password: "admin"

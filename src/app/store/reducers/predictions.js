@@ -34,6 +34,17 @@ export const predictions = (predictions = defaultState.predictions, action) => {
                     [action.predictionID]: action.prediction
                 }
             }
+        case mutations.UPDATE_PREDICTION_PRIVATE_LEAGUE:
+            return {
+                ...predictions,
+                byId: {
+                    ...predictions.byId,
+                    [action.predictionID]: { 
+                        ...predictions.byId[action.predictionID],
+                        privateLeague: action.privateLeague
+                    }
+                }
+            }
         case mutations.SET_USERNAME_EXISTENT_PREDICTION:
             return { ...predictions, byId: { ...predictions.byId, [action.predictionID]: { ...predictions.byId[action.predictionID], username: action.username } } }
 

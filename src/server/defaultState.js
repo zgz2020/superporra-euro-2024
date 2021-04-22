@@ -114,6 +114,7 @@ export const normalizeDefaultStateMongo = (defaultStateMongo) => {
                         id: prediction.id,
                         owner: prediction.owner,
                         username: prediction.username,
+                        privateLeague: prediction.privateLeague,
                         winner: prediction.winner,
                         topScorer: prediction.topScorer,
                         leastConceded: prediction.leastConceded,

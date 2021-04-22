@@ -1,8 +1,8 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { ConnectedHeader } from '../Header'
-import { ConnectedStagePoints } from '../StagePoints'
-import { ConnectedGeneralPredictionScore } from '../GeneralPredictionScore'
+import { ConnectedHeader } from '../components/Header'
+import { ConnectedStagePoints } from '../components/StagePoints'
+import { ConnectedGeneralPredictionScore } from '../components/GeneralPredictionScore'
 
 const ParticipantScoreDetailedPage = (ownProps) => (
     <div>

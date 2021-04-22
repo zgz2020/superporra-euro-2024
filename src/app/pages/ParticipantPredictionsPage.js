@@ -1,10 +1,10 @@
 import React from 'react'
 import { connect } from 'react-redux' 
-import * as mutations from '../../store/mutations' 
-import { ConnectedResults } from '../Results'
-import { ConnectedHeader } from '../Header'
-import { ConnectedPredictionsFormButton } from '../PredictionsFormButton'
-import { ConnectedPredictionsForm } from '../PredictionsForm'
+import * as mutations from '../store/mutations' 
+import { ConnectedResults } from '../components/Results'
+import { ConnectedHeader } from '../components/Header'
+import { ConnectedPredictionsFormButton } from '../components/PredictionsFormButton'
+import { ConnectedPredictionsForm } from '../components/PredictionsForm'
  
 const ParticipantPredictionsPage = ({
     predictionID,

@@ -79,12 +79,33 @@ export const spanishTranslations = {
         title: "Mi cuenta",
         notSignedIn: {
             title: "Sesión no iniciada",
-            description: "Tienes que iniciar sesión para acceder a tu cuenta. Para iniciar sesión, haz click en la opción 'Mi cuenta' del menú principal."
+            description: "Tienes que iniciar sesión para acceder a tu cuenta."
         },
         myBets: "Mis apuestas",
-        noBets: "Aún no tienes ninguna apuesta. Haz click en el botón 'PARTICIPAR' para crear tus apuestas."
+        noBets: "Aún no tienes ninguna apuesta. Haz click en el botón 'PARTICIPAR' para crear tus apuestas.",
+        privateLeagueIntro: "Crea un campeonato privado con tus amigos o compañeros de trabajo. También participarás en la competición global.",
+        privateLeague: "Campeonato",
+        joinLeague: "Unirse",
+        joinLeagueIntro: "Únete a uno de los campeonatos existentes",
+        joinLeagueCreate: "Ve a la pestaña 'Crear' para crear un campeonato nuevo",
+        createLeague: "Crear",
+        createLeagueIntro: "Crea un campeonato nuevo",
+        quitLeague: "Abandonar",
+        quitLeagueIntro: "Abandona el campeonato privado y participa solo en la competición global",
+        createLeagueLabel: "Nombre del campeonato",
+        submit: "Mandar",
+        selectName: "Elige usuario",
+        selectLeague: "Elige campeonato",
+        joinLeagueError: "Debes elegir un nombre y un campeonato",
+        leagueNameTaken: "Nombre no disponible",
+        quitLeagueError: "Debes elegir un nombre",
+        success: "¡Hecho!",
+        username: "Usuario",
+        myChampionships: "Mis campeonatos"
     },
     leaderboard: {
+        global: "Global",
+        privateLeagues: "Campeonatos privados",
         name: "Nombre",
         score: "Puntuación"
     },

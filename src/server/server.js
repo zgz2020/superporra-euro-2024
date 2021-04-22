@@ -34,8 +34,9 @@ app.post('/mongo/data', async (req, res) => {
     let users = await db.collection('users').find().toArray()
     let predictions = await db.collection('predictions').find().toArray()
     let results = await db.collection('results').find().toArray()
+    let privateLeagues = await db.collection('privateLeagues').find().toArray()
 
-    let mongoState = { users, predictions, results }
+    let mongoState = { users, predictions, results, privateLeagues }
 
     res.send({ mongoState })
 })
@@ -155,6 +156,19 @@ export const updatePrediction = async prediction => {
     if ( finalMatches ) updatePredictionMatches(collection, id, prediction, "finalMatches")
 }
 
+const updatePredictionPrivateLeague = async (username, privateLeague) => {
+    let db = await connectDB()
+    let collection = db.collection('predictions')
+
+    await collection.updateOne( { username }, { $set: { privateLeague} })
+
+    let prediction = collection.findOne({ username })
+    if (!prediction) {
+        return res.status(500).send('Prediction not found!')
+    }
+    return prediction
+}
+
 export const updateUser = async user => {
     let { id, username} = user
 
@@ -182,10 +196,13 @@ app.post('/prediction/update-dos', async (req, res) => {
     res.status(200).send()
 })
 
-app.post('/prediction/update', async (req, res) => {
-    let prediction = req.body.prediction
-    await updatePrediction(prediction)
-    res.status(200).send()
+app.post('/prediction/update-private-league', async (req, res) => {
+    let { username, privateLeague } = req.body
+
+    let prediction = await updatePredictionPrivateLeague(username, privateLeague)
+    let predictionId = prediction.id
+
+    res.send({ predictionId })
 })
 
 app.post('/user/update', async (req, res) => {
@@ -329,7 +346,6 @@ app.post('/forgot-password-email', async(req, res) => {
         if (err) {
             console.error('There was an error sending the email: ', err)
         } else {
-            console.log('Here is the response: ', response)
             res.status(200).json('Recovery email sent')
         }
     })
@@ -376,6 +392,43 @@ app.post('/remove-test-predictions', async (req, res) => {
     let predictionsCollection = db.collection('predictions')
 
     await predictionsCollection.deleteMany({ username: /Test Participant/})
+
+    res.status(200).send()
+})
+
+app.post('/private-league/league-name-validation', async (req, res) => {
+    let leagueName = req.body.leagueName
+
+    let db = await connectDB()
+    let privateLeaguesCollection = db.collection('privateLeagues')
+
+    let league = await privateLeaguesCollection.findOne({ name: leagueName})
+
+    if (!league) {
+        return res.send('League name available')
+    } else {
+        return res.send('League name already in use')
+    }
+})
+
+app.post('/private-league/create', async (req, res) => {
+    let privateLeague = {
+        name: req.body.leagueName
+    }
+
+    let db = await connectDB()
+    let privateLeaguesCollection = db.collection('privateLeagues')
+
+    await privateLeaguesCollection.insertOne(privateLeague)
+
+    res.status(200).send()
+})
+
+app.post('/private-league/remove', async (req, res) => {
+    let db = await connectDB()
+    let privateLeaguesCollection = db.collection('privateLeagues')
+
+    await privateLeaguesCollection.deleteMany({ name: /Automated-Championship/ })
 
     res.status(200).send()
 })

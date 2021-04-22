@@ -2,9 +2,9 @@ import React from 'react'
 import md5 from 'md5'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { store } from '../../store'
-import { ConnectedHeader } from '../Header'
-import * as mutations from '../../store/mutations'
+import { store } from '../store'
+import { ConnectedHeader } from '../components/Header'
+import * as mutations from '../store/mutations'
 
 const passwordResetTokenExpiredBlock = (translations) => (
     <div className="card" data-automation="password-reset-token-expired-block">

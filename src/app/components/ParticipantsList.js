@@ -6,12 +6,12 @@ import { participantTotalPoints } from '../../utils/leaderboard'
 const ParticipantsList = ( { 
     mongoDataLoading, 
     predictions, 
-    myPredictions,
+    filteredPredictions,
     results, 
     translations 
 } ) => {
 
-    const predictionsList = myPredictions ? myPredictions : predictions.byId
+    const predictionsList = filteredPredictions ? filteredPredictions : predictions.byId
 
     return (
 
@@ -38,7 +38,7 @@ const ParticipantsList = ( {
                                             {predictionsList[key].username}
                                         </Link>
                                     </td>
-                                    <td>
+                                    <td className="text-center">
                                         <Link to={`/participants/score/${key}`}>
                                             {participantTotalPoints(predictionsList[key], results)}
                                         </ Link>
@@ -55,12 +55,12 @@ const ParticipantsList = ( {
 
 const mapStateToProps = (state, ownProps) => {
     let { mongoDataLoading, predictions, results, translations } = state
-    let { myPredictions } = ownProps
+    let { filteredPredictions } = ownProps
 
     return {
         mongoDataLoading,
         predictions,
-        myPredictions,
+        filteredPredictions,
         results,
         translations
     }

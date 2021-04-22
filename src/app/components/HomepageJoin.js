@@ -7,7 +7,7 @@ const joinStep = (stepNumber, translations) => (
         <div className="card-header">
             {`${translations.body.step} ${stepNumber}`}
         </div>
-        <div className="card-body">
+        <div className="card-body lead">
             {stepNumber == "1" ? 
                 <Link 
                     to={"/sign-in"}

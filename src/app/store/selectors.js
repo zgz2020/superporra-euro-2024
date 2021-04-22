@@ -10,6 +10,8 @@ export const getNicknames = (state) => state.predictions.allIds.map(predictionId
 
 export const getLanguage = (state) => state.language
 
+export const getTranslations = (state) => state.translations
+
 // --- SELECTOR
 // See https://stackoverflow.com/questions/37772877/how-to-get-something-from-the-state-store-inside-a-redux-saga-function
 // OR 'select(selector, ...args)' in https://redux-saga.js.org/docs/api/

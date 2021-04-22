@@ -60,7 +60,7 @@ export const englishTranslations = {
         resetPasswordError: "There was an error. Please try again."
     },
     participantsPage: {
-        title: "Superporra Paticipants",
+        title: "Superporra Participants",
         noParticipantsYet: "There are no particpants yet. Be the first one joining the competition by clicking on the 'JOIN' button!"
     },
     participantPredictionsPage: {
@@ -79,12 +79,33 @@ export const englishTranslations = {
         title: "My Account",
         notSignedIn: {
             title: "Not Signed In",
-            description: "You need to sign in to access to the Account page. To sign in, please click on the 'Sign In' option of the navigation menu."
+            description: "You need to sign in to access to the Account page."
         },
         myBets: "My Bets",
-        noBets: "You don't have any bets yet. Click on 'JOIN' button to create a bet and join the competition."
+        noBets: "You don't have any bets yet. Click on 'JOIN' button to create a bet and join the competition.",
+        privateLeagueIntro: "Create a private championship with your friends or colleagues. You'll also take part in the global competition.",
+        privateLeague: "Championship",
+        joinLeague: "Join",
+        joinLeagueIntro: "Join one of the existent championships",
+        joinLeagueCreate: "Select 'Create' tab to create a new one",
+        createLeague: "Create",
+        createLeagueIntro: "Create a new championship",
+        quitLeague: "Quit",
+        quitLeagueIntro: "Quit the private championship and participate only in the global competition",
+        createLeagueLabel: "Championship name",
+        submit: "Submit",
+        selectName: "Select Username",
+        selectLeague: "Select Championship",
+        joinLeagueError: "You must select a name and a championship",
+        leagueNameTaken: "Championship name taken",
+        quitLeagueError: "You must select a name",
+        success: "Done!",
+        username: "Username",
+        myChampionships: "My Championships"
     },
     leaderboard: {
+        global: "Global",
+        privateLeagues: "Private Championships",
         name: "Name",
         score: "Score"
     },

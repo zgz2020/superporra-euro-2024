@@ -20,6 +20,13 @@ export const selectors = {
         username: `${automationSelector("leaderboard-row")} td:nth-child(2) a`,
         score: `${automationSelector("leaderboard-row")} td:nth-child(3) a`
     },
+    privateLeagueLeaderboard: {
+        rank: `[aria-labelledby="private-leagues-tab"] ${automationSelector("leaderboard-row")} td:nth-child(1)`,
+        username: `[aria-labelledby="private-leagues-tab"] ${automationSelector("leaderboard-row")} td:nth-child(2) a`,
+        score: `[aria-labelledby="private-leagues-tab"] ${automationSelector("leaderboard-row")} td:nth-child(3) a`
+    },
+    privateLeaguesTab: (tabName) => `[aria-controls="${tabName}-panel"]`,
+    privateLeaguesSelect: '[aria-labelledby="private-leagues-tab"] select',
 
     updateButton: `${automationSelector("update-button")}:nth(0)`,
 
@@ -44,6 +51,26 @@ export const selectors = {
 
     resultsContainer: automationSelector("results-container"),
     firstScoreGoals: `${automationSelector("score-goals")}:nth(0)`,
+
+    myPrivateLeaguesTableRow: automationSelector('my-private-leagues-row'),
+    myPrivateLeaguesTableLeagueName: `${automationSelector('my-private-leagues-row')} td:nth-child(1)`,
+    leagueTab: (tabName) => `[aria-controls="${tabName}-panel"]`,
+    joinPredictionNameSelect: '#join-panel select:nth-child(1)', 
+    joinLeagueNameSelect: '#join-panel select:nth-child(3)',
+    joinLeagueNameSelectOptions: '#join-panel select:nth-child(3) option',
+    createLeagueInput: automationSelector('league-name-input'),
+    quitPredictionNameSelect: '#quit-panel select',
+    submitCTA: (tabName) => `[aria-labelledby="${tabName}-tab"] button`,
+    privateLeagueSuccess: {
+        join: automationSelector('join-league-success'),
+        create: automationSelector('create-league-success'),
+        quit: automationSelector('quit-league-success')
+    },
+    privateLeagueErrors: {
+        join: automationSelector('join-league-error'),
+        create: automationSelector('league-name-taken'),
+        quit: automationSelector('quit-league-error')
+    },
 
     signInTab: '#sign-in-tab',
     signUpTab: '#sign-up-tab',
@@ -71,10 +98,15 @@ export const selectors = {
  
 const elementVisibilityAssertion = (status) => {
     if (status == 'visible') return 'be.visible'
-    if (status == 'hidden') return 'not.to.exist'
+    if (status == 'hidden') return 'not.exist'
 }
 
 export const clickOnCTA = (cta) => cy.get(cta).click()
+
+export const visitViewportPageLanguage = (viewport, page, language) => {
+    cy.viewport(viewport).visit(page)
+    selectLanguage(language)
+}
 
 
 // --------------------------------------------------------------
@@ -138,10 +170,16 @@ export const checkLeaderboardLastParticipant = () => cy.get(selectors.leaderboar
 
 export const selectLastParticipant = () => cy.get(selectors.leaderboardRow.username).last().click()
 
-export const checkUserOnlyPrediction = () => cy.get(selectors.leaderboardRow.username).should('contain', 'ZZ Test Participant')
+export const checkPredictionInLeaderboard = (username) => cy.get(selectors.leaderboardRow.username).should('contain', username)
+
+export const checkPredictionInPrivateLeagueLeaderboard = (username) => cy.get(selectors.privateLeagueLeaderboard.username).should('contain', username)
+export const checkPredictionNotInPrivateLeagueLeaderboard = (username) => cy.get(selectors.privateLeagueLeaderboard.username).should('not.exist')
 
 export const selectUserOnlyPrediction = () => cy.get(selectors.leaderboardRow.username).click()
 
+export const selectPrivateLeaguesTab = (tabName) => cy.get(selectors.privateLeaguesTab(tabName)).click()
+
+export const selectPrivateLeague = (leagueName) => cy.get(selectors.privateLeaguesSelect).select(leagueName)
 
 
 // --------------------------------------------------------------
@@ -284,8 +322,51 @@ export const nicknameTakenTest = () => {
 
 export const checkNoBetsYet = (language) => cy.get(selectors.cardBody).should('contain', myAccountAssertions(language).noBetsYetText)
 
+export const checkMyPrivateLeaguesTableNotRenders = () => cy.get(selectors.myPrivateLeaguesTableRow).should('not.exist')
+export const checkMyPrivateLeaguesTableRenders = () => cy.get(selectors.myPrivateLeaguesTableRow).eq(0).should('contain', 'automatedTest')
 
+export const checkPredictionPrivateLeague = (leagueName) => cy.get(selectors.myPrivateLeaguesTableLeagueName).should('contain', leagueName)
 
+export const selectPrivateLeaguesActionTab = (tabName) => cy.get(selectors.leagueTab(tabName)).click()
+
+export const createNewPrivateLeague = (leagueName) => { 
+    selectPrivateLeaguesActionTab('Create')
+    cy.wait(800)
+        .get(selectors.createLeagueInput).clear().type(leagueName)
+        .wait(800)
+        .get(selectors.submitCTA('create')).click()
+        .get(selectors.privateLeagueSuccess.create).should('be.visible')
+        .wait(2100)
+        .get(selectors.privateLeagueSuccess.create).should('not.exist')
+}
+
+export const joinNewPrivateLeague = (leagueName) => { 
+    selectPrivateLeaguesActionTab('Join')
+    cy.get(selectors.joinPredictionNameSelect).select('automatedTest')
+        .get(selectors.joinLeagueNameSelect).select(leagueName)
+        .get(selectors.submitCTA('join')).click()
+        .get(selectors.privateLeagueSuccess.join).should('be.visible')
+        .wait(2100)
+        .get(selectors.privateLeagueSuccess.join).should('not.exist')
+}
+
+export const quitNewPrivateLeague = (predictionName) => { 
+    selectPrivateLeaguesActionTab('Quit')
+    cy.wait(800)
+        .get(selectors.quitPredictionNameSelect).select('automatedTest')
+        .wait(1000)
+        .get(selectors.submitCTA('quit')).click()
+        .get(selectors.privateLeagueSuccess.quit).should('be.visible')
+        .wait(2100)
+        .get(selectors.privateLeagueSuccess.quit).should('not.exist')
+}
+
+export const verifyChampionshipNameInSelectList = (name) => {
+    selectPrivateLeaguesActionTab('Join')
+    cy.get(selectors.joinLeagueNameSelectOptions).then($options => {
+        expect($options).to.contain(name)
+    })
+}
 // --------------------------------------------------------------
 // Sign In, Sign Up and Forgot Password
 // --------------------------------------------------------------
@@ -310,12 +391,14 @@ export const randomEmail = () => `automated-${randomInt10000()}@test.com`
 
 export const randomPassword = () => `testing${randomInt10000()}`
 
+export const randomChampionship = () => `Automated-Championship-${randomInt10000()}`
+
 export const onlyThisErrorVisible = (error) => {
     Object.keys(selectors.signInPageErrors).forEach($error => {
         if ($error == error) {
             cy.get(selectors.signInPageErrors[$error]).should('be.visible')
         } else {
-            cy.get(selectors.signInPageErrors[$error]).should('not.to.exist')
+            cy.get(selectors.signInPageErrors[$error]).should('not.exist')
         }
     })
 }

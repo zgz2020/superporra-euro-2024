@@ -7,7 +7,7 @@ import { checkNavigationItemLabel,
 } from '../support/page-object'
 import { registeredUser, viewports, languages, navigationAssertions } from '../support/testData'
 
-describe.only('Navigation - Desktop', () => {
+describe('Navigation - Desktop', () => {
 
     viewports.forEach(viewport => {
         languages.forEach(language => {

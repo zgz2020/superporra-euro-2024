@@ -1,10 +1,12 @@
 import React from 'react'
 import { connect } from 'react-redux' 
-import * as mutations from '../../store/mutations' 
-import { ConnectedHeader } from '../Header'
-import { ConnectedPredictionsFormButton } from '../PredictionsFormButton'
-import { ConnectedPredictionsForm } from '../PredictionsForm'
-import { ConnectedParticipantsList } from '../ParticipantsList'
+import * as mutations from '../store/mutations' 
+import { Link } from 'react-router-dom'
+import { ConnectedHeader } from '../components/Header'
+import { ConnectedPredictionsFormButton } from '../components/PredictionsFormButton'
+import { ConnectedPredictionsForm } from '../components/PredictionsForm'
+import { ConnectedParticipantsList } from '../components/ParticipantsList'
+import { ConnectedPrivateLeagues } from '../components/PrivateLeagues'
   
 
 const AccountPage = ({ 
@@ -37,7 +39,7 @@ const AccountPage = ({
                             {Object.keys(myPredictions).length === 0 ?
                                 translations.accountPage.noBets                                 
                                 :
-                                <ConnectedParticipantsList myPredictions={myPredictions} />
+                                <ConnectedParticipantsList filteredPredictions={myPredictions} />
                             }
                         </div>
                     </div>
@@ -49,6 +51,10 @@ const AccountPage = ({
                         : 
                         <ConnectedPredictionsFormButton predictionType="new" clickHandler={showPredictionsFormNew} />
                     }
+
+                    {Object.keys(myPredictions).length !== 0 &&
+                        <ConnectedPrivateLeagues myPredictions={myPredictions}/>}
+                        
                 </div>
                 :
                 <div className="card">
@@ -56,7 +62,10 @@ const AccountPage = ({
                         {translations.accountPage.notSignedIn.title}
                     </div>
                     <div className="card-body">
-                        {translations.accountPage.notSignedIn.description}
+                        {translations.accountPage.notSignedIn.description}{" "}
+                        <Link to={"/sign-in"} data-automation="sign-in-link">
+                            {translations.signInPage.signIn}
+                        </Link>
                     </div>
                 </ div>
             }
