@@ -6,7 +6,7 @@ export function* hideLoginPageErrorMessages() {
         // Receive signal to hide all messages
         yield take(mutations.HIDE_LOGIN_PAGE_ERROR_MESSAGES)
         
-        yield put(mutations.hideNoEmailSignUpMessage())
+        yield put(mutations.hideInvalidEmailSignUpMessage())
         yield put(mutations.hideEmailAlreadyRegisteredMessage())
         yield put(mutations.hideNoPasswordMessage())
         yield put(mutations.hideNoEmailSignInMessage())

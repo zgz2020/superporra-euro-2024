@@ -79,7 +79,7 @@ describe('Sign In, Sign Up & Forgot your Password - Unhappy paths', () => {
                 selectLanguage(language)
                 clickOnCTA(selectors.signUpTab)
                 cy.get(selectors.submitButton).eq(1).click()
-                onlyThisErrorVisible('noEmailSignUp')
+                onlyThisErrorVisible('invalidEmailSignUp')
             })
         
             it(`Sign Up - Email already registered - ${viewport} - ${language}`, () => {

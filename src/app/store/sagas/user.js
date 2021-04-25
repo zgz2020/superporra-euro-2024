@@ -7,6 +7,8 @@ import { history } from '../history'
 import { setLocalStorageUser } from '../../../utils/common'
 import { userExists } from '../../../utils/login'
 
+let validator = require("email-validator")
+
 export function* userCreationSaga() {
     while (true) {
         const { email, passwordHash } = yield take(mutations.REQUEST_USER_CREATION)
@@ -17,8 +19,8 @@ export function* userCreationSaga() {
         yield put(mutations.hideLoginPageErrorMessages())
         yield take(mutations.LOGIN_PAGE_ERROR_MESSAGES_HIDDEN)
 
-        if (userID == '') {
-            yield put(mutations.showNoEmailSignUpMessage())
+        if (!validator.validate(email)) { // if (userID == '') {
+            yield put(mutations.showInvalidEmailSignUpMessage())
         } else if (userExists(allUsers.allIds, userID)) {
             yield put(mutations.showEmailAlreadyRegisteredMessage())
         } else if (passwordHash == 'd41d8cd98f00b204e9800998ecf8427e' ) {

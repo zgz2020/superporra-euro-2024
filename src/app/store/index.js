@@ -5,7 +5,7 @@ import * as sagas from './sagas'
 import { 
     session, 
     noEmailSignInMessage,
-    noEmailSignUpMessage,
+    invalidEmailSignUpMessage,
     noEmailForgotPasswordMessage,
     emailNotRegisteredSignInMessage,
     emailNotRegisteredForgotPasswordMessage,
@@ -50,7 +50,7 @@ export const store = createStore(
     combineReducers({
         session,
         noEmailSignInMessage,
-        noEmailSignUpMessage,
+        invalidEmailSignUpMessage,
         noEmailForgotPasswordMessage,
         emailNotRegisteredSignInMessage,
         emailNotRegisteredForgotPasswordMessage,

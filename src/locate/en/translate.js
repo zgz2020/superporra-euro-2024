@@ -34,7 +34,7 @@ export const englishTranslations = {
         password: "Password",
         passwordPlaceholder: "myPassword",
         signIn: "Sign In",
-        noEmail: "You must enter an email address",
+        noEmail: "You must enter a valid email address",
         emailNotRegistered: "Email address not registered. Please sign up",
         emailAlreadyRegistered: "Email address already registered",
         wrongPassword: "Password incorrect",

@@ -80,7 +80,7 @@ export const selectors = {
     submitButton: '.btn-primary',
     signInPageErrors: {
         noEmailSignIn: automationSelector('no-email-message-signIn'),
-        noEmailSignUp: automationSelector('no-email-message-signUp'),
+        invalidEmailSignUp: automationSelector('invalid-email-message-signUp'),
         noEmailForgotPassword: automationSelector('no-email-message-forgotPassword'),
         emailErrorSignIn: automationSelector('email-error-signIn'),
         emailErrorSignUp: automationSelector('email-error-signUp'),

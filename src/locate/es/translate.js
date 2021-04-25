@@ -34,7 +34,7 @@ export const spanishTranslations = {
         password: "Clave",
         passwordPlaceholder: "miClave",
         signIn: "Iniciar sesión",
-        noEmail: 'Debes inroducir una dirección de correo',
+        noEmail: 'Debes inroducir una dirección de correo válida',
         emailNotRegistered: "Dirección de correo no registrada",
         emailAlreadyRegistered: "Dirección de correo ya está registrada",
         wrongPassword: "Clave incorrecta",
