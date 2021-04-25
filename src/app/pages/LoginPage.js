@@ -34,7 +34,9 @@ const credentialsForm = (type, submitHandler, translations, noEmailMessage, erro
                 {noEmailMessage &&  
                     <p 
                         className="text-danger font-italic mt-2"
-                        data-automation={`no-email-message-${type}`}
+                        data-automation= {type == 'signUp' 
+                            ? 'invalid-email-message-signUp'
+                            : `no-email-message-${type}`}
                     >
                         {translations.signInPage.noEmail}
                     </p>
