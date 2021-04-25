@@ -32,14 +32,14 @@ export const noEmailSignInMessage = (noEmailSignInMessage = false, action) => {
     return noEmailSignInMessage
 }
 
-export const noEmailSignUpMessage = (noEmailSignUpMessage = false, action) => {
+export const invalidEmailSignUpMessage = (invalidEmailSignUpMessage = false, action) => {
     switch(action.type) {
-        case mutations.SHOW_NO_EMAIL_SIGN_UP_MESSAGE:
+        case mutations.SHOW_INVALID_EMAIL_SIGN_UP_MESSAGE:
             return true
-        case mutations.HIDE_NO_EMAIL_SIGN_UP_MESSAGE:
+        case mutations.HIDE_INVALID_EMAIL_SIGN_UP_MESSAGE:
             return false
     }
-    return noEmailSignUpMessage
+    return invalidEmailSignUpMessage
 }
 
 export const noEmailForgotPasswordMessage = (noEmailForgotPasswordMessage = false, action) => {

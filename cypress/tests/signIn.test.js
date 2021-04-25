@@ -79,7 +79,17 @@ describe('Sign In, Sign Up & Forgot your Password - Unhappy paths', () => {
                 selectLanguage(language)
                 clickOnCTA(selectors.signUpTab)
                 cy.get(selectors.submitButton).eq(1).click()
-                onlyThisErrorVisible('noEmailSignUp')
+                onlyThisErrorVisible('invalidEmailSignUp')
+            })
+
+            it(`Sign Up - Invalid email enterd - ${viewport} - ${language}`, () => {
+                cy.viewport(viewport).visit('/sign-in')
+                    .wait(500) // FIXME!!! POST req aborted: /id-token & /mongo/data
+                selectLanguage(language)
+                clickOnCTA(selectors.signUpTab)
+                cy.get(selectors.emailInput).eq(1).clear().type('invalid@email')
+                    .get(selectors.submitButton).eq(1).click()
+                onlyThisErrorVisible('invalidEmailSignUp')
             })
         
             it(`Sign Up - Email already registered - ${viewport} - ${language}`, () => {
