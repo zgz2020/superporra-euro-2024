@@ -59,7 +59,7 @@ const AccountPage = ({
                     }
 
                     {Object.keys(myPredictions).length !== 0 &&
-                        <ConnectedPrivateLeagues predictionID={myBetsId} myPrivateLeagues={myPrivateLeagues} myPredictions={myPredictions} />}
+                        <ConnectedPrivateLeagues predictionID={myBetsId} myPrivateLeagues={myPrivateLeagues} />}
                 </div>
                 :
                 <div className="card">

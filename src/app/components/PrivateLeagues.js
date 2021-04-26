@@ -6,7 +6,6 @@ import { ConnectedMyPrivateLeagues } from './MyPrivateLeagues'
 const PrivateLeagues = ({ 
     translations,
     myPrivateLeagues,
-    myPredictions,
     privateLeagues,
     joinHandler,
     createHandler,
@@ -26,11 +25,11 @@ const PrivateLeagues = ({
         <div className="card-body">
             <div className="container col-sm-7 col-md-7 col-lg-5 col-xl-4 mt-3">
                 <div className="row justify-content-center">
+                    <ConnectedMyPrivateLeagues myPrivateLeagues={myPrivateLeagues} />
+
                     <div className="text-center lead mb-2">
                         {translations.accountPage.privateLeagueIntro}
                     </div>
-
-                    <ConnectedMyPrivateLeagues myPredictions={myPredictions}/>
 
                     <div className="card tab-card my-3">
                         <div className="card-header tab-card-header">
@@ -207,12 +206,11 @@ const mapStateToProps = (state, ownProps) => {
         quitLeagueError,
         quitLeagueSuccess
     } = state
-    let { myPrivateLeagues, myPredictions } = ownProps
+    let { myPrivateLeagues } = ownProps
 
     return { 
         translations,
         myPrivateLeagues,
-        myPredictions,
         privateLeagues,
         joinLeagueError,
         joinLeagueSuccess,

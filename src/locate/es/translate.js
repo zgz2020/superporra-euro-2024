@@ -83,6 +83,7 @@ export const spanishTranslations = {
         },
         myBets: "Mis apuestas",
         noBets: "Aún no tienes ninguna apuesta. Haz click en el botón 'PARTICIPAR' para crear tus apuestas.",
+        noPrivateLeagues: "Aún no te has unido a ningún campeonato privado",
         privateLeagueIntro: "Crea un campeonato privado con tus amigos o compañeros de trabajo. También participarás en la competición global.",
         privateLeague: "Campeonato",
         joinLeague: "Unirse",

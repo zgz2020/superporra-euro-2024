@@ -83,6 +83,7 @@ export const englishTranslations = {
         },
         myBets: "My Bets",
         noBets: "You don't have any bets yet. Click on 'JOIN' button to create a bet and join the competition.",
+        noPrivateLeagues: "You have not joined any private championships yet.",
         privateLeagueIntro: "Create a private championship with your friends or colleagues. You'll also take part in the global competition.",
         privateLeague: "Championship",
         joinLeague: "Join",
