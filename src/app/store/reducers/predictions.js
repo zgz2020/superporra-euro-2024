@@ -34,14 +34,31 @@ export const predictions = (predictions = defaultState.predictions, action) => {
                     [action.predictionID]: action.prediction
                 }
             }
-        case mutations.UPDATE_PREDICTION_PRIVATE_LEAGUE:
+        case mutations.ADD_PREDICTION_PRIVATE_LEAGUE: 
             return {
                 ...predictions,
                 byId: {
                     ...predictions.byId,
                     [action.predictionID]: { 
                         ...predictions.byId[action.predictionID],
-                        privateLeague: action.privateLeague
+                        privateLeague: [
+                            ...predictions.byId[action.predictionID].privateLeague, 
+                            action.privateLeague
+                        ]
+                    }
+                }
+            }
+        case mutations.REMOVE_PREDICTION_PRIVATE_LEAGUE: 
+            return {
+                ...predictions,
+                byId: {
+                    ...predictions.byId,
+                    [action.predictionID]: { 
+                        ...predictions.byId[action.predictionID],
+                        privateLeague: [
+                            ...predictions.byId[action.predictionID].privateLeague.slice(0, action.privateLeagueIndex), 
+                            ...predictions.byId[action.predictionID].privateLeague.slice(action.privateLeagueIndex + 1) 
+                        ]
                     }
                 }
             }

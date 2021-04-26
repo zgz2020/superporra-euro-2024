@@ -5,7 +5,8 @@ export const SHOW_JOIN_LEAGUE_ERROR = 'SHOW_JOIN_LEAGUE_ERROR'
 export const HIDE_JOIN_LEAGUE_ERROR = 'HIDE_JOIN_LEAGUE_ERROR'
 export const SHOW_JOIN_LEAGUE_SUCCESS = 'SHOW_JOIN_LEAGUE_SUCCESS'
 export const HIDE_JOIN_LEAGUE_SUCCESS = 'HIDE_JOIN_LEAGUE_SUCCESS'
-export const UPDATE_PREDICTION_PRIVATE_LEAGUE = 'UPDATE_PREDICTION_PRIVATE_LEAGUE'
+export const ADD_PREDICTION_PRIVATE_LEAGUE = 'ADD_PREDICTION_PRIVATE_LEAGUE'
+export const REMOVE_PREDICTION_PRIVATE_LEAGUE = 'REMOVE_PREDICTION_PRIVATE_LEAGUE'
 
 export const CREATE_PRIVATE_LEAGUE = 'CREATE_PRIVATE_LEAGUE'
 export const LEAGUE_NAME_VALIDATION = 'LEAGUE_NAME_VALIDATION'
@@ -25,10 +26,12 @@ export const showPrivateLeagueRankings = (privateLeague) => ({
 })
 
 
-export const requestUpdatePredictionPrivateLeague = (username, privateLeague) => ({
+export const requestUpdatePredictionPrivateLeague = (action, predictionID, privateLeague, privateLeagueIndex) => ({
     type: REQUEST_UPDATE_PREDICTION_PRIVATE_LEAGUE,
-    username,
-    privateLeague
+    action,
+    predictionID,
+    privateLeague,
+    privateLeagueIndex
 })
 
 export const showJoinLeagueSuccess= () => ({
@@ -47,10 +50,16 @@ export const hideJoinLeagueError = () => ({
     type: HIDE_JOIN_LEAGUE_ERROR
 })
 
-export const updatePredictionPrivateLeague = (predictionID, privateLeague) => ({
-    type: UPDATE_PREDICTION_PRIVATE_LEAGUE,
+export const addPredictionPrivateLeague = (predictionID, privateLeague) => ({
+    type: ADD_PREDICTION_PRIVATE_LEAGUE,
     predictionID,
     privateLeague
+})
+
+export const removePredictionPrivateLeague = (predictionID, privateLeagueIndex) => ({
+    type: REMOVE_PREDICTION_PRIVATE_LEAGUE,
+    predictionID,
+    privateLeagueIndex
 })
 
 export const createPrivateLeague = (leagueName) => ({

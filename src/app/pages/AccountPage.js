@@ -5,8 +5,8 @@ import { Link } from 'react-router-dom'
 import { ConnectedHeader } from '../components/Header'
 import { ConnectedPredictionsFormButton } from '../components/PredictionsFormButton'
 import { ConnectedPredictionsForm } from '../components/PredictionsForm'
-import { ConnectedParticipantsList } from '../components/ParticipantsList'
 import { ConnectedPrivateLeagues } from '../components/PrivateLeagues'
+import { ConnectedMyBetsTable } from '../components/MyBetsTable'
   
 
 const AccountPage = ({ 
@@ -15,7 +15,10 @@ const AccountPage = ({
     showPredictionsFormNew, 
     newPrediction, 
     translations, 
-    predictions 
+    predictions,
+    myBets,
+    myBetsId,
+    myPrivateLeagues
 }) => {
     
     const myPredictions = Object.keys(predictions.byId).filter(prediction => 
@@ -39,7 +42,7 @@ const AccountPage = ({
                             {Object.keys(myPredictions).length === 0 ?
                                 translations.accountPage.noBets                                 
                                 :
-                                <ConnectedParticipantsList filteredPredictions={myPredictions} />
+                                <ConnectedMyBetsTable myBets={myBets} />
                             }
                         </div>
                     </div>
@@ -49,12 +52,14 @@ const AccountPage = ({
                             <ConnectedPredictionsForm predictionType="new" predictionsOrResults={newPrediction} /> 
                         </div>
                         : 
-                        <ConnectedPredictionsFormButton predictionType="new" clickHandler={showPredictionsFormNew} />
+                        myBets == 'NO BETS' ? 
+                            <ConnectedPredictionsFormButton predictionType="new" clickHandler={showPredictionsFormNew} />
+                            :
+                            null                            
                     }
 
                     {Object.keys(myPredictions).length !== 0 &&
-                        <ConnectedPrivateLeagues myPredictions={myPredictions}/>}
-                        
+                        <ConnectedPrivateLeagues predictionID={myBetsId} myPrivateLeagues={myPrivateLeagues} myPredictions={myPredictions} />}
                 </div>
                 :
                 <div className="card">
@@ -74,14 +79,21 @@ const AccountPage = ({
 }
 
 const mapStateToProps = (state, ownProps) => {
-    const { session, newPrediction, predictions, predictionsFormNew, translations } = state
+    let { session, newPrediction, predictions, predictionsFormNew, translations } = state
+
+    let myBetsId = session ? Object.keys(predictions.byId).find(prediction => predictions.byId[prediction].owner == session.id) : null
+    let myBets = myBetsId ? predictions.byId[myBetsId] : 'NO BETS'
+    let myPrivateLeagues = myBetsId ? predictions.byId[myBetsId].privateLeague : 'NO LEAGUES'
 
     return {
         predictionsFormNew,
         newPrediction,
         translations,
         predictions,
-        session
+        session,
+        myBets,
+        myBetsId,
+        myPrivateLeagues
     }
 }
 

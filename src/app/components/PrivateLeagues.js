@@ -5,9 +5,9 @@ import { ConnectedMyPrivateLeagues } from './MyPrivateLeagues'
 
 const PrivateLeagues = ({ 
     translations,
+    myPrivateLeagues,
     myPredictions,
     privateLeagues,
-    myPredictionsNames,
     joinHandler,
     createHandler,
     quitHandler,
@@ -64,19 +64,7 @@ const PrivateLeagues = ({
                                 <form onSubmit={joinHandler} className="mt-2">
                                     <select 
                                         defaultValue="default"
-                                        name="name"
-                                        className="my-3"
-                                        data-automation="prediction-name-select"
-                                    >
-                                        <option key="default" value={translations.accountPage.selectName}>{translations.accountPage.selectName}</option>
-                                        {myPredictionsNames.map(name => (
-                                            <option key={name} value={name}>{name}</option>
-                                        ))}
-                                    </select>  
-                                    <br />
-                                    <select 
-                                        defaultValue="default"
-                                        name="league"
+                                        name="league-join"
                                         className="mb-3"
                                         data-automation="league-name-select"
                                     >
@@ -161,9 +149,9 @@ const PrivateLeagues = ({
                                     {translations.accountPage.quitLeagueIntro}
                                 </p>
                                 <form onSubmit={quitHandler}>
-                                    <select defaultValue="default" name="name-quit" className="mb-3">
-                                        <option key="default" value={translations.accountPage.selectName}>{translations.accountPage.selectName}</option>
-                                        {myPredictionsNames.map(name => (
+                                    <select defaultValue="default" name="league-quit" className="mb-3">
+                                        <option key="default" value={translations.accountPage.selectName}>{translations.accountPage.selectLeague}</option>
+                                        {myPrivateLeagues.map(name => (
                                             <option key={name} value={name}>{name}</option>
                                         ))}
                                     </select>
@@ -219,14 +207,13 @@ const mapStateToProps = (state, ownProps) => {
         quitLeagueError,
         quitLeagueSuccess
     } = state
-    let { myPredictions } = ownProps
-    let myPredictionsNames = Object.keys(myPredictions).map(prediction => myPredictions[prediction].username)
+    let { myPrivateLeagues, myPredictions } = ownProps
 
     return { 
         translations,
+        myPrivateLeagues,
         myPredictions,
         privateLeagues,
-        myPredictionsNames,
         joinLeagueError,
         joinLeagueSuccess,
         createLeagueSuccess,
@@ -236,16 +223,19 @@ const mapStateToProps = (state, ownProps) => {
     }
 }
 
-const mapDispatchToProps = (dispatch) => {
-    let name = (e) => e.target['name'].value
-    let league = (e) => e.target['league'].value
+const mapDispatchToProps = (dispatch, ownProps) => {
+    let { predictionID, myPrivateLeagues } = ownProps
+
+    let leagueJoining = (e) => e.target['league-join'].value
     let leagueName = (e) => e.target['leagueName'].value
-    let nameQuit = (e) => e.target['name-quit'].value
+    let leagueQuiting = (e) => e.target['league-quit'].value
+
+    let privateLeagueIndex = (league) => myPrivateLeagues.indexOf(league)
 
     return {
         joinHandler(e) {
             e.preventDefault()
-            dispatch(mutations.requestUpdatePredictionPrivateLeague(name(e), league(e)))
+            dispatch(mutations.requestUpdatePredictionPrivateLeague('join', predictionID, leagueJoining(e)))
         },
         createHandler(e) {
             e.preventDefault()
@@ -253,7 +243,7 @@ const mapDispatchToProps = (dispatch) => {
         },
         quitHandler(e) {
             e.preventDefault()
-            dispatch(mutations.requestUpdatePredictionPrivateLeague(nameQuit(e), "--"))
+            dispatch(mutations.requestUpdatePredictionPrivateLeague('quit', predictionID, leagueQuiting(e), privateLeagueIndex(leagueQuiting(e))))
         },
         leagueNameValidation(e) {
             dispatch(mutations.leagueNameValidation(e.target.value))
