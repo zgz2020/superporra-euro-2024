@@ -6,6 +6,9 @@ import {
     signIn,
     checkNoBetsYet,
     checkPredictionInLeaderboard,
+    checkMyBetsTable,
+    selectUsersBet,
+    checkUsersBetLinks,
     checkPredictionInPrivateLeagueLeaderboard,
     checkPredictionNotInPrivateLeagueLeaderboard,
     selectUserOnlyPrediction,
@@ -107,10 +110,10 @@ describe('My Account - New User with no predictions', () => {
                 clickOnCTA(selectors.inputForm.submitButton('top'))
         
                 checkElementVisibility(selectors.inputForm.form, 'not.exist') 
-                checkPredictionInLeaderboard('ZZ Test Participant')
+                checkMyBetsTable('ZZ Test Participant')
                 
                 // Check participant's predictions page
-                selectUserOnlyPrediction()
+                selectUsersBet()
                 cy.wait(500)
         
                 checkPageHeader(myAccountAssertions(language).predictionsHeaderWithParticipantName)
@@ -154,13 +157,14 @@ describe('My Account - Existent user with at least one prediction', () => {
                 cy.get(selectors.cardHeader).should('contain', myAccountAssertions(language).myBetsHeader)
         
                 checkElementVisibility(selectors.leaderboard, 'be.visible') 
-                checkFirstRank()
-                checkFirstParticipantLinks(language)
+                checkUsersBetLinks(language)
             })
-        
-            it(`Create new prediction and Update existent one - ${viewport} - ${language}`, () => {
+            
+            // SKIPPING test - Only one prediction per participant now 
+            it.skip(`Create new prediction and Update existent one - ${viewport} - ${language}`, () => {
                 cy.viewport(viewport).visit('/account')
                 selectLanguage(language)
+                selectUsersBet()
                 clickOnCTA(selectors.updateButton) // This is actually the [JOIN] CTA
                 
                 checkInputFormHeader(myAccountAssertions(language).joinInputFormHeader)
@@ -190,12 +194,11 @@ describe('My Account - Existent user with at least one prediction', () => {
                 clickOnCTA(selectors.inputForm.submitButton('top'))
         
                 checkElementVisibility(selectors.inputForm.form, 'not.exist') 
-                //checkElementVisibility(selectors.predictionsSubittedMessage, 'be.visible') 
         
-                checkLeaderboardLastParticipant()
+                checkMyBetsTable('ZZ Test Participant')
                 
                 // Check participant's predictions page
-                selectLastParticipant()
+                selectUsersBet()
                 cy.wait(500)
         
                 checkPageHeader(myAccountAssertions(language).predictionsHeaderWithParticipantName)
@@ -228,7 +231,7 @@ describe('My Account - Private Championships - User with NO predictions', () => 
     })
 })
 
-describe('My Account - Private Championships - User with predictions', () => {
+describe.only('My Account - Private Championships - User with predictions', () => {
 
     beforeEach(() => {
         cy.visit('/sign-in')

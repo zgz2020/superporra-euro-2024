@@ -52,6 +52,10 @@ export const selectors = {
     resultsContainer: automationSelector("results-container"),
     firstScoreGoals: `${automationSelector("score-goals")}:nth(0)`,
 
+    myBetsTable: {
+        username: `${automationSelector("my-bets-row")} td:nth-child(1) a`,
+        score: `${automationSelector("my-bets-row")} td:nth-child(2) a`
+    },
     myPrivateLeaguesTableRow: automationSelector('my-private-leagues-row'),
     myPrivateLeaguesTableLeagueName: `${automationSelector('my-private-leagues-row')} td:nth-child(1)`,
     leagueTab: (tabName) => `[aria-controls="${tabName}-panel"]`,
@@ -321,6 +325,18 @@ export const nicknameTakenTest = () => {
 // --------------------------------------------------------------
 
 export const checkNoBetsYet = (language) => cy.get(selectors.cardBody).should('contain', myAccountAssertions(language).noBetsYetText)
+
+export const checkMyBetsTable = (username) => cy.get(selectors.myBetsTable.username).should('contain', username)
+export const selectUsersBet= () => cy.get(selectors.myBetsTable.username).click()
+export const checkUsersBetLinks = (language) => {
+    cy.get(selectors.myBetsTable.username).click()
+        .wait(500)
+        .get(selectors.pageHeader).should('contain', myAccountAssertions(language).predictionsHeader)
+    cy.go('back')
+    cy.get(selectors.myBetsTable.score).click()
+        .get(selectors.pageHeader).should('contain', myAccountAssertions(language).scoresHeader)
+
+}
 
 export const checkMyPrivateLeaguesTableNotRenders = () => cy.get(selectors.myPrivateLeaguesTableRow).should('not.exist')
 export const checkMyPrivateLeaguesTableRenders = () => cy.get(selectors.myPrivateLeaguesTableRow).eq(0).should('contain', 'automatedTest')
