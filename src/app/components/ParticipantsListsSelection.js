@@ -3,22 +3,10 @@ import { connect } from 'react-redux'
 import * as mutations from '../store/mutations'
 import { ConnectedParticipantsList } from './ParticipantsList'
 
-/*
-+++++++ TO DO ++++++++++
-1. Create database entry: privateLeagues
-    - This will be an array of strings. For example: ['Londoners', 'miEmpresa']
-2. For now, populate manually in MongoAtlas.
-    - TO DO -> Add 'Create Private League' CTA and functionality, maybe in 'My account' and 'Leaderboards'
-3. Create 'privateLeague' variable; array of values extracted from database
-4. Use 'privateLeague' variable to populate SELECT element.
-5. Add 'onChange' attribute to SELECT element; onChange -> Display leaderboard of selected private league 
-    -> Leaderboard will take SELECT value to populate private league leaderboard and leaderboard headeer
-*/
-
 const privateLeaguePredictions = (predictions, privateLeague) => Object.keys(predictions.byId).filter(prediction => 
-    predictions.byId[prediction].privateLeague === privateLeague)
-    .reduce((privateLeaguePredictionsList, privateLeague) => {
-        privateLeaguePredictionsList[privateLeague] = predictions.byId[privateLeague]
+    predictions.byId[prediction].privateLeague.includes(privateLeague))
+    .reduce((privateLeaguePredictionsList, prediction) => {
+        privateLeaguePredictionsList[prediction] = predictions.byId[prediction]
         return privateLeaguePredictionsList
     }, {})
 
@@ -58,8 +46,15 @@ const ParticipantsListsSelection = ({ translations, privateLeagues, privateLeagu
                             ))}
                         </select>  
 
-                        {privateLeagueRankings && privateLeagueRankings != " " && 
-                            <ConnectedParticipantsList filteredPredictions={privateLeaguePredictions(predictions, privateLeagueRankings)} />
+                        {privateLeagueRankings && privateLeagueRankings != "" ?
+                            Object.keys(privateLeaguePredictions(predictions, privateLeagueRankings)).length == 0 ?
+                                <div className="border text-center p-2">
+                                    {translations.participantsPage.noParticipantsYetPrivateLeague}
+                                </div>
+                                :
+                                <ConnectedParticipantsList filteredPredictions={privateLeaguePredictions(predictions, privateLeagueRankings)} />
+                            :
+                            null
                         }    
                     </div>
                 </div>      
@@ -75,6 +70,7 @@ const mapStateToProps = (state) => {
         privateLeagueRankings,
         predictions
     } = state
+
     return { 
         translations,
         privateLeagues,

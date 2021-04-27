@@ -61,7 +61,8 @@ export const spanishTranslations = {
     },
     participantsPage: {
         title: "Paticipantes de la Superporra",
-        noParticipantsYet: "Todavía no hay ningún participante. ¡Se el primero en participar haciendo click en el botón 'PARTICIPAR'!"
+        noParticipantsYet: "Todavía no hay ningún participante. ¡Se el primero en participar haciendo click en el botón 'PARTICIPAR'!",
+        noParticipantsYetPrivateLeague: "Todavía no hay ningún particpante en este campeonato"
     },
     participantPredictionsPage: {
         title: "Predicciones"
