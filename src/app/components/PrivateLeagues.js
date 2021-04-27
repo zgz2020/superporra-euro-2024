@@ -147,40 +147,47 @@ const PrivateLeagues = ({
                                 <p className="lead">
                                     {translations.accountPage.quitLeagueIntro}
                                 </p>
-                                <form onSubmit={quitHandler}>
-                                    <select defaultValue="default" name="league-quit" className="mb-3">
-                                        <option key="default" value={translations.accountPage.selectName}>{translations.accountPage.selectLeague}</option>
-                                        {myPrivateLeagues.map(name => (
-                                            <option key={name} value={name}>{name}</option>
-                                        ))}
-                                    </select>
 
-                                    {quitLeagueSuccess &&  
-                                        <p 
-                                            className="text-success font-italic mt-2"
-                                            data-automation={'quit-league-success'}
+                                {myPrivateLeagues.length == 0 ?
+                                    <div className="border text-center p-2">
+                                        {translations.accountPage.noPrivateLeagues}
+                                    </div>
+                                    :
+                                    <form onSubmit={quitHandler}>
+                                        <select defaultValue="default" name="league-quit" className="mb-3">
+                                            <option key="default" value={translations.accountPage.selectName}>{translations.accountPage.selectLeague}</option>
+                                            {myPrivateLeagues.map(name => (
+                                                <option key={name} value={name}>{name}</option>
+                                            ))}
+                                        </select>
+
+                                        {quitLeagueSuccess &&  
+                                            <p 
+                                                className="text-success font-italic mt-2"
+                                                data-automation={'quit-league-success'}
+                                            >
+                                                {translations.accountPage.success}
+                                            </p>
+                                        }
+
+                                        {quitLeagueError &&  
+                                            <p 
+                                                className="text-danger font-italic mt-2"
+                                                data-automation={'quit-league-error'}
+                                            >
+                                                {translations.accountPage.quitLeagueError}
+                                            </p>
+                                        }
+
+                                        <button 
+                                            type="submit" 
+                                            className="form-control mt-2 btn btn-primary"
+                                            data-automation="quit-submit-cta"
                                         >
-                                            {translations.accountPage.success}
-                                        </p>
-                                    }
-
-                                    {quitLeagueError &&  
-                                        <p 
-                                            className="text-danger font-italic mt-2"
-                                            data-automation={'quit-league-error'}
-                                        >
-                                            {translations.accountPage.quitLeagueError}
-                                        </p>
-                                    }
-
-                                    <button 
-                                        type="submit" 
-                                        className="form-control mt-2 btn btn-primary"
-                                        data-automation="quit-submit-cta"
-                                    >
-                                        {translations.accountPage.submit}
-                                    </ button>
-                                </form>
+                                            {translations.accountPage.submit}
+                                        </ button>
+                                    </form>
+                                }
                             </div>
 
 

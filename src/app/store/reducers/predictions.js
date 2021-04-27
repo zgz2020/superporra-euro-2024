@@ -41,10 +41,15 @@ export const predictions = (predictions = defaultState.predictions, action) => {
                     ...predictions.byId,
                     [action.predictionID]: { 
                         ...predictions.byId[action.predictionID],
-                        privateLeague: [
-                            ...predictions.byId[action.predictionID].privateLeague, 
-                            action.privateLeague
-                        ]
+                        privateLeague: predictions.byId[action.predictionID].privateLeague ?
+                            [
+                                ...predictions.byId[action.predictionID].privateLeague, 
+                                action.privateLeague
+                            ]
+                            :
+                            [
+                                action.privateLeague
+                            ]
                     }
                 }
             }

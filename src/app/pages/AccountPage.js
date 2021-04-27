@@ -15,81 +15,70 @@ const AccountPage = ({
     showPredictionsFormNew, 
     newPrediction, 
     translations, 
-    predictions,
     myBets,
     myBetsId,
     myPrivateLeagues
-}) => {
-    
-    const myPredictions = Object.keys(predictions.byId).filter(prediction => 
-        predictions.byId[prediction].owner === session.id)
-        .reduce((myPredictionsList, owner) => {
-            myPredictionsList[owner] = predictions.byId[owner]
-            return myPredictionsList
-        }, {})
+}) => (
+    <div>
+        <ConnectedHeader title={translations.accountPage.title} />
 
-    return (
-        <div>
-            <ConnectedHeader title={translations.accountPage.title} />
-
-            {session.id ?
-                <div>
-                    <div className="card">
-                        <div className="card-header">
-                            {translations.accountPage.myBets}
-                        </div>
-                        <div className="card-body">
-                            {Object.keys(myPredictions).length === 0 ?
-                                translations.accountPage.noBets                                 
-                                :
-                                <ConnectedMyBetsTable myBets={myBets} />
-                            }
-                        </div>
-                    </div>
-
-                    {predictionsFormNew ? 
-                        <div className="mt-5">
-                            <ConnectedPredictionsForm predictionType="new" predictionsOrResults={newPrediction} /> 
-                        </div>
-                        : 
-                        myBets == 'NO BETS' ? 
-                            <ConnectedPredictionsFormButton predictionType="new" clickHandler={showPredictionsFormNew} />
-                            :
-                            null                            
-                    }
-
-                    {Object.keys(myPredictions).length !== 0 &&
-                        <ConnectedPrivateLeagues predictionID={myBetsId} myPrivateLeagues={myPrivateLeagues} />}
-                </div>
-                :
+        {session.id ?
+            <div>
                 <div className="card">
                     <div className="card-header">
-                        {translations.accountPage.notSignedIn.title}
+                        {translations.accountPage.myBets}
                     </div>
                     <div className="card-body">
-                        {translations.accountPage.notSignedIn.description}{" "}
-                        <Link to={"/sign-in"} data-automation="sign-in-link">
-                            {translations.signInPage.signIn}
-                        </Link>
+                        {myBets == 'NO BETS' ?
+                            translations.accountPage.noBets                                 
+                            :
+                            <ConnectedMyBetsTable myBets={myBets} />
+                        }
                     </div>
-                </ div>
-            }
-        </div>
-    )
-}
+                </div>
 
-const mapStateToProps = (state, ownProps) => {
+                {predictionsFormNew ? 
+                    <div className="mt-5">
+                        <ConnectedPredictionsForm predictionType="new" predictionsOrResults={newPrediction} /> 
+                    </div>
+                    : 
+                    myBets == 'NO BETS' ? 
+                        <ConnectedPredictionsFormButton predictionType="new" clickHandler={showPredictionsFormNew} />
+                        :
+                        null                            
+                }
+
+                {myBets != 'NO BETS' &&
+                    <ConnectedPrivateLeagues predictionID={myBetsId} myPrivateLeagues={myPrivateLeagues} />}
+            </div>
+            :
+            <div className="card">
+                <div className="card-header">
+                    {translations.accountPage.notSignedIn.title}
+                </div>
+                <div className="card-body">
+                    {translations.accountPage.notSignedIn.description}{" "}
+                    <Link to={"/sign-in"} data-automation="sign-in-link">
+                        {translations.signInPage.signIn}
+                    </Link>
+                </div>
+            </ div>
+        }
+    </div>
+)
+
+
+const mapStateToProps = (state) => {
     let { session, newPrediction, predictions, predictionsFormNew, translations } = state
 
     let myBetsId = session ? Object.keys(predictions.byId).find(prediction => predictions.byId[prediction].owner == session.id) : null
     let myBets = myBetsId ? predictions.byId[myBetsId] : 'NO BETS'
-    let myPrivateLeagues = myBetsId ? predictions.byId[myBetsId].privateLeague : 'NO LEAGUES'
+    let myPrivateLeagues = myBetsId && predictions.byId[myBetsId].privateLeague ? predictions.byId[myBetsId].privateLeague : []
 
     return {
         predictionsFormNew,
         newPrediction,
         translations,
-        predictions,
         session,
         myBets,
         myBetsId,
