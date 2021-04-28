@@ -156,17 +156,12 @@ export const updatePrediction = async prediction => {
     if ( finalMatches ) updatePredictionMatches(collection, id, prediction, "finalMatches")
 }
 
-const updatePredictionPrivateLeague = async (username, privateLeague) => {
+const updatePredictionPrivateLeague = async (action, id, privateLeague) => {
     let db = await connectDB()
     let collection = db.collection('predictions')
 
-    await collection.updateOne( { username }, { $set: { privateLeague} })
-
-    let prediction = collection.findOne({ username })
-    if (!prediction) {
-        return res.status(500).send('Prediction not found!')
-    }
-    return prediction
+    if (action == 'join') await collection.updateOne( { id }, { $push: { privateLeague } })
+    if (action == 'quit') await collection.updateOne( { id }, { $pull: { privateLeague } })
 }
 
 export const updateUser = async user => {
@@ -197,12 +192,11 @@ app.post('/prediction/update-dos', async (req, res) => {
 })
 
 app.post('/prediction/update-private-league', async (req, res) => {
-    let { username, privateLeague } = req.body
+    let { action, predictionID, privateLeague } = req.body
 
-    let prediction = await updatePredictionPrivateLeague(username, privateLeague)
-    let predictionId = prediction.id
+    await updatePredictionPrivateLeague(action, predictionID, privateLeague)
 
-    res.send({ predictionId })
+    res.status(200).send()
 })
 
 app.post('/user/update', async (req, res) => {

@@ -5,9 +5,8 @@ import { ConnectedMyPrivateLeagues } from './MyPrivateLeagues'
 
 const PrivateLeagues = ({ 
     translations,
-    myPredictions,
-    privateLeagues,
-    myPredictionsNames,
+    myPrivateLeagues,
+    notJoinedLeagues,
     joinHandler,
     createHandler,
     quitHandler,
@@ -26,11 +25,11 @@ const PrivateLeagues = ({
         <div className="card-body">
             <div className="container col-sm-7 col-md-7 col-lg-5 col-xl-4 mt-3">
                 <div className="row justify-content-center">
+                    <ConnectedMyPrivateLeagues myPrivateLeagues={myPrivateLeagues} />
+
                     <div className="text-center lead mb-2">
                         {translations.accountPage.privateLeagueIntro}
                     </div>
-
-                    <ConnectedMyPrivateLeagues myPredictions={myPredictions}/>
 
                     <div className="card tab-card my-3">
                         <div className="card-header tab-card-header">
@@ -64,24 +63,12 @@ const PrivateLeagues = ({
                                 <form onSubmit={joinHandler} className="mt-2">
                                     <select 
                                         defaultValue="default"
-                                        name="name"
-                                        className="my-3"
-                                        data-automation="prediction-name-select"
-                                    >
-                                        <option key="default" value={translations.accountPage.selectName}>{translations.accountPage.selectName}</option>
-                                        {myPredictionsNames.map(name => (
-                                            <option key={name} value={name}>{name}</option>
-                                        ))}
-                                    </select>  
-                                    <br />
-                                    <select 
-                                        defaultValue="default"
-                                        name="league"
+                                        name="league-join"
                                         className="mb-3"
                                         data-automation="league-name-select"
                                     >
                                         <option key="default" value={translations.accountPage.selectLeague}>{translations.accountPage.selectLeague}</option>
-                                        {privateLeagues.map(league => (
+                                        {notJoinedLeagues.map(league => (
                                             <option key={league} value={league}>{league}</option>
                                         ))}
                                     </select>  
@@ -160,40 +147,47 @@ const PrivateLeagues = ({
                                 <p className="lead">
                                     {translations.accountPage.quitLeagueIntro}
                                 </p>
-                                <form onSubmit={quitHandler}>
-                                    <select defaultValue="default" name="name-quit" className="mb-3">
-                                        <option key="default" value={translations.accountPage.selectName}>{translations.accountPage.selectName}</option>
-                                        {myPredictionsNames.map(name => (
-                                            <option key={name} value={name}>{name}</option>
-                                        ))}
-                                    </select>
 
-                                    {quitLeagueSuccess &&  
-                                        <p 
-                                            className="text-success font-italic mt-2"
-                                            data-automation={'quit-league-success'}
+                                {myPrivateLeagues.length == 0 ?
+                                    <div className="border text-center p-2">
+                                        {translations.accountPage.noPrivateLeagues}
+                                    </div>
+                                    :
+                                    <form onSubmit={quitHandler}>
+                                        <select defaultValue="default" name="league-quit" className="mb-3">
+                                            <option key="default" value={translations.accountPage.selectLeague}>{translations.accountPage.selectLeague}</option>
+                                            {myPrivateLeagues.map(name => (
+                                                <option key={name} value={name}>{name}</option>
+                                            ))}
+                                        </select>
+
+                                        {quitLeagueSuccess &&  
+                                            <p 
+                                                className="text-success font-italic mt-2"
+                                                data-automation={'quit-league-success'}
+                                            >
+                                                {translations.accountPage.success}
+                                            </p>
+                                        }
+
+                                        {quitLeagueError &&  
+                                            <p 
+                                                className="text-danger font-italic mt-2"
+                                                data-automation={'quit-league-error'}
+                                            >
+                                                {translations.accountPage.quitLeagueError}
+                                            </p>
+                                        }
+
+                                        <button 
+                                            type="submit" 
+                                            className="form-control mt-2 btn btn-primary"
+                                            data-automation="quit-submit-cta"
                                         >
-                                            {translations.accountPage.success}
-                                        </p>
-                                    }
-
-                                    {quitLeagueError &&  
-                                        <p 
-                                            className="text-danger font-italic mt-2"
-                                            data-automation={'quit-league-error'}
-                                        >
-                                            {translations.accountPage.quitLeagueError}
-                                        </p>
-                                    }
-
-                                    <button 
-                                        type="submit" 
-                                        className="form-control mt-2 btn btn-primary"
-                                        data-automation="quit-submit-cta"
-                                    >
-                                        {translations.accountPage.submit}
-                                    </ button>
-                                </form>
+                                            {translations.accountPage.submit}
+                                        </ button>
+                                    </form>
+                                }
                             </div>
 
 
@@ -219,14 +213,13 @@ const mapStateToProps = (state, ownProps) => {
         quitLeagueError,
         quitLeagueSuccess
     } = state
-    let { myPredictions } = ownProps
-    let myPredictionsNames = Object.keys(myPredictions).map(prediction => myPredictions[prediction].username)
+    let { myPrivateLeagues } = ownProps
+    let notJoinedLeagues = privateLeagues && myPrivateLeagues ? privateLeagues.filter(league => !myPrivateLeagues.includes(league)) : []
 
     return { 
         translations,
-        myPredictions,
-        privateLeagues,
-        myPredictionsNames,
+        myPrivateLeagues,
+        notJoinedLeagues,
         joinLeagueError,
         joinLeagueSuccess,
         createLeagueSuccess,
@@ -236,16 +229,19 @@ const mapStateToProps = (state, ownProps) => {
     }
 }
 
-const mapDispatchToProps = (dispatch) => {
-    let name = (e) => e.target['name'].value
-    let league = (e) => e.target['league'].value
+const mapDispatchToProps = (dispatch, ownProps) => {
+    let { predictionID, myPrivateLeagues } = ownProps
+
+    let leagueJoining = (e) => e.target['league-join'].value
     let leagueName = (e) => e.target['leagueName'].value
-    let nameQuit = (e) => e.target['name-quit'].value
+    let leagueQuiting = (e) => e.target['league-quit'].value
+
+    let privateLeagueIndex = (league) => myPrivateLeagues.indexOf(league)
 
     return {
         joinHandler(e) {
             e.preventDefault()
-            dispatch(mutations.requestUpdatePredictionPrivateLeague(name(e), league(e)))
+            dispatch(mutations.requestUpdatePredictionPrivateLeague('join', predictionID, leagueJoining(e)))
         },
         createHandler(e) {
             e.preventDefault()
@@ -253,7 +249,7 @@ const mapDispatchToProps = (dispatch) => {
         },
         quitHandler(e) {
             e.preventDefault()
-            dispatch(mutations.requestUpdatePredictionPrivateLeague(nameQuit(e), "--"))
+            dispatch(mutations.requestUpdatePredictionPrivateLeague('quit', predictionID, leagueQuiting(e), privateLeagueIndex(leagueQuiting(e))))
         },
         leagueNameValidation(e) {
             dispatch(mutations.leagueNameValidation(e.target.value))

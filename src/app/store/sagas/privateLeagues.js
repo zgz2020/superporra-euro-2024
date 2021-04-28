@@ -6,23 +6,22 @@ import { url } from './url'
 
 export function* updatePredictionPrivateLeagueSaga() {
     while (true) {
-        let { username, privateLeague } = yield take(mutations.REQUEST_UPDATE_PREDICTION_PRIVATE_LEAGUE)
+        let { action, predictionID, privateLeague, privateLeagueIndex } = yield take(mutations.REQUEST_UPDATE_PREDICTION_PRIVATE_LEAGUE)
         let translations = yield select(selectors.getTranslations)
 
-        if (username == translations.accountPage.selectName || 
-            privateLeague == translations.accountPage.selectLeague
-        ) {
-            if (privateLeague == '--') {
+        if (privateLeague == translations.accountPage.selectLeague) {
+            if (action == 'quit') {
                 yield put(mutations.showQuitLeagueError())
             } else {
                 yield put(mutations.showJoinLeagueError())
             }
         } else {
-            let { data } = yield axios.post(url + '/prediction/update-private-league', { username, privateLeague })
+            yield axios.post(url + '/prediction/update-private-league', { action, predictionID, privateLeague })
 
-            let predictionID = data.predictionId
-            yield put(mutations.updatePredictionPrivateLeague(predictionID, privateLeague))
-            if (privateLeague == '--') {
+            if (action == 'join') yield put(mutations.addPredictionPrivateLeague(predictionID, privateLeague))
+            if (action == 'quit') yield put(mutations.removePredictionPrivateLeague(predictionID, privateLeagueIndex))
+
+            if (action == 'quit') {
                 yield put(mutations.hideQuitLeagueError())
                 yield put(mutations.showQuitLeagueSuccess())
                 yield delay(2000)

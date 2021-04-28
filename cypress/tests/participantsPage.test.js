@@ -9,7 +9,7 @@ import {
 } from '../support/page-object'
 import { registeredUser, viewports, languages } from '../support/testData'
 
-
+// Tests for Private Leagues Leaderboards in 'myAccount.test.js'
 
 describe('Participants page', () => {
     viewports.forEach(viewport => {

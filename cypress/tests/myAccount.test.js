@@ -6,8 +6,12 @@ import {
     signIn,
     checkNoBetsYet,
     checkPredictionInLeaderboard,
+    checkMyBetsTable,
+    selectUsersBet,
+    checkUsersBetLinks,
     checkPredictionInPrivateLeagueLeaderboard,
     checkPredictionNotInPrivateLeagueLeaderboard,
+    verifyNoParticipantsInPrivateLeague,
     selectUserOnlyPrediction,
     checkElementVisibility,
     checkFirstRank,
@@ -26,14 +30,17 @@ import {
     selectLanguage,
     visitViewportPageLanguage,
     checkMyPrivateLeaguesTableNotRenders,
+    checkNoPrivateLeaguesJoinedBlockRenders,
     checkMyPrivateLeaguesTableRenders,
     checkPredictionPrivateLeague,
     createNewPrivateLeague,
     joinNewPrivateLeague,
     quitNewPrivateLeague,
+    verifyQuitSuccessMessage,
     selectPrivateLeaguesTab,
     selectPrivateLeague,
     verifyChampionshipNameInSelectList,
+    verifyChampionshipNameNotInSelectList,
     selectPrivateLeaguesActionTab
 } from '../support/page-object'
 import {
@@ -107,10 +114,10 @@ describe('My Account - New User with no predictions', () => {
                 clickOnCTA(selectors.inputForm.submitButton('top'))
         
                 checkElementVisibility(selectors.inputForm.form, 'not.exist') 
-                checkPredictionInLeaderboard('ZZ Test Participant')
+                checkMyBetsTable('ZZ Test Participant')
                 
                 // Check participant's predictions page
-                selectUserOnlyPrediction()
+                selectUsersBet()
                 cy.wait(500)
         
                 checkPageHeader(myAccountAssertions(language).predictionsHeaderWithParticipantName)
@@ -154,13 +161,14 @@ describe('My Account - Existent user with at least one prediction', () => {
                 cy.get(selectors.cardHeader).should('contain', myAccountAssertions(language).myBetsHeader)
         
                 checkElementVisibility(selectors.leaderboard, 'be.visible') 
-                checkFirstRank()
-                checkFirstParticipantLinks(language)
+                checkUsersBetLinks(language)
             })
-        
-            it(`Create new prediction and Update existent one - ${viewport} - ${language}`, () => {
+            
+            // SKIPPING test - Only one prediction per participant now 
+            it.skip(`Create new prediction and Update existent one - ${viewport} - ${language}`, () => {
                 cy.viewport(viewport).visit('/account')
                 selectLanguage(language)
+                selectUsersBet()
                 clickOnCTA(selectors.updateButton) // This is actually the [JOIN] CTA
                 
                 checkInputFormHeader(myAccountAssertions(language).joinInputFormHeader)
@@ -190,12 +198,11 @@ describe('My Account - Existent user with at least one prediction', () => {
                 clickOnCTA(selectors.inputForm.submitButton('top'))
         
                 checkElementVisibility(selectors.inputForm.form, 'not.exist') 
-                //checkElementVisibility(selectors.predictionsSubittedMessage, 'be.visible') 
         
-                checkLeaderboardLastParticipant()
+                checkMyBetsTable('ZZ Test Participant')
                 
                 // Check participant's predictions page
-                selectLastParticipant()
+                selectUsersBet()
                 cy.wait(500)
         
                 checkPageHeader(myAccountAssertions(language).predictionsHeaderWithParticipantName)
@@ -249,10 +256,10 @@ describe('My Account - Private Championships - User with predictions', () => {
 
     viewports.forEach(viewport => {
         languages.forEach(language => {
-            it(`Private Championship component renders as expected - ${viewport} - ${language}`, () => {
+            it(`No Championships joined > Private Championship component does not render - ${viewport} - ${language}`, () => {
                 visitViewportPageLanguage(viewport, '/account', language)
-                checkMyPrivateLeaguesTableRenders()
-                checkPredictionPrivateLeague('--')
+                checkNoPrivateLeaguesJoinedBlockRenders()
+                checkMyPrivateLeaguesTableNotRenders()
             })
 
             it(`Create a new Championship - ${viewport} - ${language}`, () => {
@@ -268,7 +275,9 @@ describe('My Account - Private Championships - User with predictions', () => {
 
                 // Join a private league
                 joinNewPrivateLeague('AutoTest Championship')
+                joinNewPrivateLeague('AutoTest-Championship-2')
                 checkPredictionPrivateLeague('AutoTest Championship')
+                verifyChampionshipNameNotInSelectList('AutoTest Championship')
                 
                 // Check Participants page > 'AutoTest Championship' > 'automatedTest' listed
                 cy.visit('/participants')
@@ -278,10 +287,15 @@ describe('My Account - Private Championships - User with predictions', () => {
                 cy.wait(1000)
                 checkPredictionInPrivateLeagueLeaderboard('automatedTest')
 
-                // Quit private league
+                // Quit private leagues
                 cy.visit('/account')
-                quitNewPrivateLeague('automatedTest')
-                checkPredictionPrivateLeague('--')
+                quitNewPrivateLeague('AutoTest Championship')
+                verifyQuitSuccessMessage()
+                quitNewPrivateLeague('AutoTest-Championship-2')
+                checkNoPrivateLeaguesJoinedBlockRenders()
+                checkMyPrivateLeaguesTableNotRenders()
+                selectPrivateLeaguesActionTab('Join')
+                verifyChampionshipNameInSelectList('AutoTest Championship')
 
                 // Check Participants page > 'AutoTest Championship' > 'automatedTest' NOT listed
                 cy.visit('/participants')
@@ -289,33 +303,35 @@ describe('My Account - Private Championships - User with predictions', () => {
                 cy.wait(1000)
                 selectPrivateLeague('AutoTest Championship')
                 cy.wait(1000)
-                checkPredictionNotInPrivateLeagueLeaderboard('automatedTest')
-                cy.wait(3000)
+                verifyNoParticipantsInPrivateLeague()
+                cy.wait(1000)
             })
 
             it(`Negative paths - Join, Create and Quit - ${viewport} - ${language}`, () => {
                 visitViewportPageLanguage(viewport, '/account', language)
 
-                // JOIN - Do not select neither a league or a username
+                // JOIN - Do not select a league
                 cy.get(selectors.submitCTA('join')).click()
                     .get(selectors.privateLeagueErrors.join).should('be.visible')
                 
-                cy.wait(500)
+                cy.wait(1500)
 
-                // JOIN - Select a username but not a league
-                cy.get(selectors.joinPredictionNameSelect).select('automatedTest')
-                    .get(selectors.submitCTA('join')).click()
-                    .get(selectors.privateLeagueErrors.join).should('be.visible')
+                // --- Join functionality updated -> This test is not valid any more
+                // // JOIN - Select a username but not a league
+                // cy.get(selectors.joinPredictionNameSelect).select('automatedTest')
+                //     .get(selectors.submitCTA('join')).click()
+                //     .get(selectors.privateLeagueErrors.join).should('be.visible')
 
-                cy.wait(500)
+                // cy.wait(500)
 
-                // JOIN - Select a league but not a username
-                cy.get(selectors.joinPredictionNameSelect).select(selectName(language))
-                    .get(selectors.joinLeagueNameSelect).select(selectLeague(language))
-                    .get(selectors.submitCTA('join')).click()
-                    .get(selectors.privateLeagueErrors.join).should('be.visible')
+                // --- Join functionality updated -> This test is not valid any more
+                // // JOIN - Select a league but not a username
+                // cy.get(selectors.joinPredictionNameSelect).select(selectName(language))
+                //     .get(selectors.joinLeagueNameSelect).select(selectLeague(language))
+                //     .get(selectors.submitCTA('join')).click()
+                //     .get(selectors.privateLeagueErrors.join).should('be.visible')
                 
-                cy.wait(500)
+                // cy.wait(500)
 
                 // CREATE - Enter a taken league name
                 selectPrivateLeaguesActionTab('Create')
@@ -328,12 +344,20 @@ describe('My Account - Private Championships - User with predictions', () => {
                 cy.wait(500)
 
                 // QUIT - Do not select a league
+                // -- QUIT Test set-up
+                selectPrivateLeaguesActionTab('Join')
+                cy.wait(1000)
+                joinNewPrivateLeague('AutoTest-Championship-2')
+                cy.wait(1000)
+
                 selectPrivateLeaguesActionTab('Quit')
                 cy.wait(1000)
                     .get(selectors.submitCTA('quit')).click()
                     .get(selectors.privateLeagueErrors.quit).should('be.visible')
                 
                 cy.wait(500)
+                // -- QUIT Test clean-up
+                quitNewPrivateLeague('AutoTest-Championship-2')
             })
         })
     })
