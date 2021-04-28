@@ -6,7 +6,7 @@ import { ConnectedMyPrivateLeagues } from './MyPrivateLeagues'
 const PrivateLeagues = ({ 
     translations,
     myPrivateLeagues,
-    privateLeagues,
+    notJoinedLeagues,
     joinHandler,
     createHandler,
     quitHandler,
@@ -68,7 +68,7 @@ const PrivateLeagues = ({
                                         data-automation="league-name-select"
                                     >
                                         <option key="default" value={translations.accountPage.selectLeague}>{translations.accountPage.selectLeague}</option>
-                                        {privateLeagues.map(league => (
+                                        {notJoinedLeagues.map(league => (
                                             <option key={league} value={league}>{league}</option>
                                         ))}
                                     </select>  
@@ -155,7 +155,7 @@ const PrivateLeagues = ({
                                     :
                                     <form onSubmit={quitHandler}>
                                         <select defaultValue="default" name="league-quit" className="mb-3">
-                                            <option key="default" value={translations.accountPage.selectName}>{translations.accountPage.selectLeague}</option>
+                                            <option key="default" value={translations.accountPage.selectLeague}>{translations.accountPage.selectLeague}</option>
                                             {myPrivateLeagues.map(name => (
                                                 <option key={name} value={name}>{name}</option>
                                             ))}
@@ -214,11 +214,12 @@ const mapStateToProps = (state, ownProps) => {
         quitLeagueSuccess
     } = state
     let { myPrivateLeagues } = ownProps
+    let notJoinedLeagues = privateLeagues && myPrivateLeagues ? privateLeagues.filter(league => !myPrivateLeagues.includes(league)) : []
 
     return { 
         translations,
         myPrivateLeagues,
-        privateLeagues,
+        notJoinedLeagues,
         joinLeagueError,
         joinLeagueSuccess,
         createLeagueSuccess,

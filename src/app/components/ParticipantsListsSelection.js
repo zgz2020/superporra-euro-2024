@@ -48,7 +48,7 @@ const ParticipantsListsSelection = ({ translations, privateLeagues, privateLeagu
 
                         {privateLeagueRankings && privateLeagueRankings != "" ?
                             Object.keys(privateLeaguePredictions(predictions, privateLeagueRankings)).length == 0 ?
-                                <div className="border text-center p-2">
+                                <div className="border text-center p-2" data-automation="no-participants-private-league">
                                     {translations.participantsPage.noParticipantsYetPrivateLeague}
                                 </div>
                                 :

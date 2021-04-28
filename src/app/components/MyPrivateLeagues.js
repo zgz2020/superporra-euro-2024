@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 
 const MyPrivateLeagues = ({ translations, myPrivateLeagues }) => (
     myPrivateLeagues.length == 0 ?
-        <div className="border p-3 mb-3 text-center">
+        <div className="border p-3 mb-3 text-center" data-automation="no-private-leagues">
             {translations.accountPage.noPrivateLeagues}
         </div>
         :

@@ -27,6 +27,7 @@ export const selectors = {
     },
     privateLeaguesTab: (tabName) => `[aria-controls="${tabName}-panel"]`,
     privateLeaguesSelect: '[aria-labelledby="private-leagues-tab"] select',
+    privateLeagueNoParticipants: automationSelector("no-participants-private-league"),
 
     updateButton: `${automationSelector("update-button")}:nth(0)`,
 
@@ -56,14 +57,15 @@ export const selectors = {
         username: `${automationSelector("my-bets-row")} td:nth-child(1) a`,
         score: `${automationSelector("my-bets-row")} td:nth-child(2) a`
     },
+    noPrivateLeaguesJoinedBlock: automationSelector('no-private-leagues'),
     myPrivateLeaguesTableRow: automationSelector('my-private-leagues-row'),
     myPrivateLeaguesTableLeagueName: `${automationSelector('my-private-leagues-row')} td:nth-child(1)`,
     leagueTab: (tabName) => `[aria-controls="${tabName}-panel"]`,
     joinPredictionNameSelect: '#join-panel select:nth-child(1)', 
-    joinLeagueNameSelect: '#join-panel select:nth-child(3)',
-    joinLeagueNameSelectOptions: '#join-panel select:nth-child(3) option',
+    joinLeagueNameSelect: '#join-panel select',
+    joinLeagueNameSelectOptions: '#join-panel select option',
     createLeagueInput: automationSelector('league-name-input'),
-    quitPredictionNameSelect: '#quit-panel select',
+    quitPrivateLeagueNameSelect: '#quit-panel select',
     submitCTA: (tabName) => `[aria-labelledby="${tabName}-tab"] button`,
     privateLeagueSuccess: {
         join: automationSelector('join-league-success'),
@@ -178,6 +180,7 @@ export const checkPredictionInLeaderboard = (username) => cy.get(selectors.leade
 
 export const checkPredictionInPrivateLeagueLeaderboard = (username) => cy.get(selectors.privateLeagueLeaderboard.username).should('contain', username)
 export const checkPredictionNotInPrivateLeagueLeaderboard = (username) => cy.get(selectors.privateLeagueLeaderboard.username).should('not.exist')
+export const verifyNoParticipantsInPrivateLeague = () => cy.get(selectors.privateLeagueNoParticipants).should('be.visible')
 
 export const selectUserOnlyPrediction = () => cy.get(selectors.leaderboardRow.username).click()
 
@@ -338,8 +341,9 @@ export const checkUsersBetLinks = (language) => {
 
 }
 
+export const checkNoPrivateLeaguesJoinedBlockRenders = () => cy.get(selectors.noPrivateLeaguesJoinedBlock).should('be.visible')
 export const checkMyPrivateLeaguesTableNotRenders = () => cy.get(selectors.myPrivateLeaguesTableRow).should('not.exist')
-export const checkMyPrivateLeaguesTableRenders = () => cy.get(selectors.myPrivateLeaguesTableRow).eq(0).should('contain', 'automatedTest')
+export const checkMyPrivateLeaguesTableRenders = () => cy.get(selectors.myPrivateLeaguesTableRow).should('contain', 'automatedTest')
 
 export const checkPredictionPrivateLeague = (leagueName) => cy.get(selectors.myPrivateLeaguesTableLeagueName).should('contain', leagueName)
 
@@ -358,23 +362,31 @@ export const createNewPrivateLeague = (leagueName) => {
 
 export const joinNewPrivateLeague = (leagueName) => { 
     selectPrivateLeaguesActionTab('Join')
-    cy.get(selectors.joinPredictionNameSelect).select('automatedTest')
-        .get(selectors.joinLeagueNameSelect).select(leagueName)
+    cy.get(selectors.joinLeagueNameSelect).select(leagueName)
         .get(selectors.submitCTA('join')).click()
         .get(selectors.privateLeagueSuccess.join).should('be.visible')
         .wait(2100)
         .get(selectors.privateLeagueSuccess.join).should('not.exist')
 }
 
-export const quitNewPrivateLeague = (predictionName) => { 
+export const quitNewPrivateLeague = (leagueName) => { 
     selectPrivateLeaguesActionTab('Quit')
     cy.wait(800)
-        .get(selectors.quitPredictionNameSelect).select('automatedTest')
+        .get(selectors.quitPrivateLeagueNameSelect).select(leagueName)
         .wait(1000)
         .get(selectors.submitCTA('quit')).click()
-        .get(selectors.privateLeagueSuccess.quit).should('be.visible')
+}
+export const verifyQuitSuccessMessage = () => {
+    cy.get(selectors.privateLeagueSuccess.quit).should('be.visible')
         .wait(2100)
         .get(selectors.privateLeagueSuccess.quit).should('not.exist')
+}
+
+export const verifyChampionshipNameNotInSelectList = (name) => {
+    selectPrivateLeaguesActionTab('Join')
+    cy.get(selectors.joinLeagueNameSelectOptions).then($options => {
+        expect($options).not.to.contain(name)
+    })
 }
 
 export const verifyChampionshipNameInSelectList = (name) => {
@@ -383,6 +395,8 @@ export const verifyChampionshipNameInSelectList = (name) => {
         expect($options).to.contain(name)
     })
 }
+
+
 // --------------------------------------------------------------
 // Sign In, Sign Up and Forgot Password
 // --------------------------------------------------------------
