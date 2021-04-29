@@ -23,7 +23,7 @@ const joinStep = (stepNumber, translations) => (
 )
 
 const HomepageJoin = ({ translatedHomepageJoin }) => (
-    <div className="card my-5">
+    <div className="card my-5" id="homepage-join">
         <div className="card-header bg-info text-white text-center">
             <h5 className="pt-2">
                 {translatedHomepageJoin.title}
