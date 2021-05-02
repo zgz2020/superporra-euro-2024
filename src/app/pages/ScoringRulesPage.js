@@ -2,10 +2,12 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { ConnectedHeader } from '../components/Header'
 import { ConnectedScoringRuleCategory } from '../components/ScoringRuleCategory'
+import { ConnectedHomepageSponsor } from '../components/HomepageSponsor'
 
 const ScoringRulesPage = ({ translations }) => (
     <div>
         <ConnectedHeader title={translations.scoringRulesPage.title} />
+        <ConnectedHomepageSponsor />
         <ConnectedScoringRuleCategory ruleCategory="teamRules" />
         <ConnectedScoringRuleCategory ruleCategory="individualsRules" />
     </div>

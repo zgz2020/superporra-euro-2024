@@ -10,6 +10,7 @@ export const englishTranslations = {
     },
     homepage: {
         title: "Superporra Euro 2021",
+        sponsoredBy: "Sponsored By:",
         joinBanner: {
             title: "Join the Superporra in less than a minute!",
             body: {
@@ -24,6 +25,16 @@ export const englishTranslations = {
             body: {
                 first: "The Superporra Euro 2021 is a quiz or betting competition where participants will compete by trying to guess the final scores of all the Euro 2021 matches, the countries that will qualify for the knockout stages (Round of 16, Quarter final, etc.) and the Euro champion.",
                 second: "Have fun with the Superporra Euro 2021, contribute to a good cause with your donation and get the chance to win a prize!"
+            }
+        },
+        privateLeagues: {
+            title: "Private championships",
+            intro: "Create a private championship with your friends or colleagues. You'll also take part in the global competition.",
+            body: {
+                step: "STEP",
+                "1": "Sign up and submit your predictions",
+                "2": "'My Championships' will now be available in Account page",
+                "3": "Join one of the existent championships or crete a new one!"
             }
         }
     },
