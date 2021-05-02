@@ -5,11 +5,14 @@ import { ConnectedResults } from '../components/Results'
 import { ConnectedHeader } from '../components/Header'
 import { ConnectedPredictionsForm } from '../components/PredictionsForm'
 import { ConnectedPredictionsFormButton } from '../components/PredictionsFormButton'
+import { ConnectedHomepageSponsor } from '../components/HomepageSponsor'
  
 const ResultsPage = ({ role, predictionsFormResults, showPredictionsFormResults, translations, results }) => (
     <div>
         <ConnectedHeader title={translations.resultsPage.title}/>
 
+        <ConnectedHomepageSponsor />
+        
         {!predictionsFormResults ?
             <div>
                 {role === 'admin' ? 

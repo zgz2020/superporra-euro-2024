@@ -5,6 +5,7 @@ import { ConnectedHeader } from '../components/Header'
 import { ConnectedParticipantsListsSelection } from '../components/ParticipantsListsSelection'
 import { ConnectedPredictionsFormButton } from '../components/PredictionsFormButton'
 import { ConnectedPredictionsForm } from '../components/PredictionsForm'
+import { ConnectedHomepageSponsor } from '../components/HomepageSponsor'
 
 const noParticipantsBlock = (translations) => (
     <div className="card">
@@ -26,6 +27,10 @@ const ParticipantsPage = ({
 }) => (
     <div>
         <ConnectedHeader title={translations.participantsPage.title} />
+
+        <ConnectedHomepageSponsor />
+
+        <div className="my-3"></div>
 
         {predictionsFormNew ? 
             <ConnectedPredictionsForm predictionType="new" userID="" /> 
