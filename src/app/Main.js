@@ -14,6 +14,7 @@ import { ConnectedScoringRulesPage } from './pages/ScoringRulesPage'
 import { ConnectedAccountPage } from './pages/AccountPage'
 import { ConnectedLoginPage } from './pages/LoginPage'
 import { ConnectedPasswordResetPage } from './pages/PasswordResetPage'
+import { ConnectedFooter } from './components/Footer'
 
 export const Main = () => (
     <Router history={history}>
@@ -30,6 +31,7 @@ export const Main = () => (
                 <Route exact path="/participants/score/:id" render={({ match }) => (<ConnectedParticipantScoreDetailedPage match={match} />)} />
                 <Route path="/scoring-rules" render={() => (<ConnectedScoringRulesPage />)} />
                 <Route path="/account" render={() => (<ConnectedAccountPage />)} />
+                <ConnectedFooter />
             </div>
         </Provider>
     </Router>

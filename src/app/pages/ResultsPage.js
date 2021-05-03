@@ -8,7 +8,7 @@ import { ConnectedPredictionsFormButton } from '../components/PredictionsFormBut
 import { ConnectedHomepageSponsor } from '../components/HomepageSponsor'
  
 const ResultsPage = ({ role, predictionsFormResults, showPredictionsFormResults, translations, results }) => (
-    <div>
+    <div className="mb-5">
         <ConnectedHeader title={translations.resultsPage.title}/>
 
         <ConnectedHomepageSponsor />
