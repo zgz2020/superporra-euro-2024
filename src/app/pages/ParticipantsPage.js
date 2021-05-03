@@ -30,7 +30,7 @@ const ParticipantsPage = ({
 
         <ConnectedHomepageSponsor />
 
-        <div className="my-3"></div>
+        <div className="my-5"></div>
 
         {predictionsFormNew ? 
             <ConnectedPredictionsForm predictionType="new" userID="" /> 
