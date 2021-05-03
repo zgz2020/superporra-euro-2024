@@ -12,6 +12,8 @@ const ResultsPage = ({ role, predictionsFormResults, showPredictionsFormResults,
         <ConnectedHeader title={translations.resultsPage.title}/>
 
         <ConnectedHomepageSponsor />
+
+        <div className="my-5"></div>
         
         {!predictionsFormResults ?
             <div>
