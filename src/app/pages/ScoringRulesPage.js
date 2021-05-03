@@ -5,7 +5,7 @@ import { ConnectedScoringRuleCategory } from '../components/ScoringRuleCategory'
 import { ConnectedHomepageSponsor } from '../components/HomepageSponsor'
 
 const ScoringRulesPage = ({ translations }) => (
-    <div>
+    <div className="mb-5">
         <ConnectedHeader title={translations.scoringRulesPage.title} />
         <ConnectedHomepageSponsor />
         <div className="my-5"></div>

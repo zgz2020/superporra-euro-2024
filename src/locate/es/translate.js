@@ -8,6 +8,9 @@ export const spanishTranslations = {
         login: "Mi cuenta",
         logout: "Cerrar"
     },
+    footer: {
+        contactUs: "Contacto:"
+    },
     homepage: {
         title: "Superporra Eurocopa 2021",
         sponsoredBy: "Patrocinado por:",

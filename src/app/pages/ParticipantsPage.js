@@ -25,7 +25,7 @@ const ParticipantsPage = ({
     noParticipants,
     authenticated
 }) => (
-    <div>
+    <div className="mb-5">
         <ConnectedHeader title={translations.participantsPage.title} />
 
         <ConnectedHomepageSponsor />

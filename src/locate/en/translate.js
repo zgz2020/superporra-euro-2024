@@ -8,6 +8,9 @@ export const englishTranslations = {
         login: "Sign In",
         logout: "Sign Out"
     },
+    footer: {
+        contactUs: "Contact Us:"
+    },
     homepage: {
         title: "Superporra Euro 2021",
         sponsoredBy: "Sponsored By:",
