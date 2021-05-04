@@ -10,6 +10,7 @@ import { ConnectedResultsPage } from './pages/ResultsPage'
 import { ConnectedParticipantsPage } from './pages/ParticipantsPage'
 import { ConnectedParticipantPredictionsPage } from './pages/ParticipantPredictionsPage'
 import { ConnectedParticipantScoreDetailedPage } from './pages/ParticipantScoreDetailedPage'
+import { ConnectedPrizesPage } from './pages/PrizesPage'
 import { ConnectedScoringRulesPage } from './pages/ScoringRulesPage'
 import { ConnectedAccountPage } from './pages/AccountPage'
 import { ConnectedLoginPage } from './pages/LoginPage'
@@ -29,6 +30,7 @@ export const Main = () => (
                 <Route exact path="/participants" render={() => (<ConnectedParticipantsPage />)} />
                 <Route exact path="/participants/:id" render={({ match }) => (<ConnectedParticipantPredictionsPage match={match} />)} />
                 <Route exact path="/participants/score/:id" render={({ match }) => (<ConnectedParticipantScoreDetailedPage match={match} />)} />
+                <Route path="/prizes" render={() => (<ConnectedPrizesPage />)} />
                 <Route path="/scoring-rules" render={() => (<ConnectedScoringRulesPage />)} />
                 <Route path="/account" render={() => (<ConnectedAccountPage />)} />
                 <ConnectedFooter />

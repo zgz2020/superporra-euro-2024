@@ -3,6 +3,7 @@ export const spanishTranslations = {
         home: "Inicio",
         participants: "Participantes",
         results: "Resultados",
+        prizes: "Premios",
         scoringRules: "Normas puntuación",
         account: "Cuenta",
         login: "Mi cuenta",
@@ -89,6 +90,17 @@ export const spanishTranslations = {
     },
     resultsPage: {
         title: "Resultados Oficiales"
+    },
+    prizesPage: {
+        title: "Premios",
+        winner: {
+            title: "Ganador",
+            reward: "Vale de 30 £ para gastar en productos de Jelen Landon Designs en www.redbubble.com"
+        },
+        consolation: {
+            title: "Consolación - 20º clasificado",
+            reward: "Vale de 15 £ para gastar en productos de Jelen Landon Designs en www.redbubble.com"
+        }
     },
     accountPage: {
         title: "Mi cuenta",
