@@ -68,6 +68,7 @@
     "jest": "^23.6.0",
     "nodemon": "^1.18.4",
     "style-loader": "^0.23.0",
+    "webdriverio": "^7.5.3",
     "webpack-cli": "^3.1.2",
     "webpack-dev-server": "^3.1.7"
   }
