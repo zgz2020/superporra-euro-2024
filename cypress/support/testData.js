@@ -51,20 +51,22 @@ export const navigationAssertions = language => language == 'english' ?
         navItem1: 'Home',
         navItem2: 'Participants',
         navItem3: 'Results',
-        navItem4: 'Scoring Rules',
-        navItem5A: 'Sign In',
-        navItem5B: 'Account',
-        navItem6: 'Sign Out'
+        navItem4: 'Prizes',
+        navItem5: 'Scoring Rules',
+        navItem6A: 'Sign In',
+        navItem6B: 'Account',
+        navItem7: 'Sign Out'
     }
     :
     {
         navItem1: 'Inicio',
         navItem2: 'Participantes',
         navItem3: 'Resultados',
-        navItem4: 'Normas puntuación',
-        navItem5A: 'Mi cuenta',
-        navItem5B: 'Cuenta',
-        navItem6: 'Cerrar'
+        navItem4: 'Premios',
+        navItem5: 'Normas puntuación',
+        navItem6A: 'Mi cuenta',
+        navItem6B: 'Cuenta',
+        navItem7: 'Cerrar'
     }
 
 export const passwordResetAssertions = language => language == 'english' ? 
