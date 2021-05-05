@@ -12,3 +12,6 @@ export const getLocalStorageUser = () => {
 export const setLocalStorageUser = (idToken) => {
     localStorage.setItem("id_token", idToken)
 }
+
+export const http = domain => domain == 'localhost' ? 'http' : 'https'
+export const localhostPort = domain => domain == 'localhost' ? ':8080' : ''

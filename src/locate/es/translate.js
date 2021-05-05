@@ -63,7 +63,7 @@ export const spanishTranslations = {
         forgotPasswordEmailSubject: "Superporra - Crea una contraseña nueva",
         forgotPasswordEmailBody: (token, domain) => 'Has recibido este correo electrónico porque tú (u otra persona) ha solicitado crear una contraseña nueva para tu cuenta.\n\n'
             + 'Haz clic en el siguiente enlace, o copia y pega en tu navegador, para completar el proceso en la próxima hora:\n\n'
-            + `https://${domain}/password-reset/${token}\n\n\n`
+            + `${http(domain)}://${domain}${localhostPort(domain)}/password-reset/${token}\n\n\n` 
             + 'Si no habías mandado esta solicitud, por favor ignora este correo electrónico y no se cambiará tu contraseña.\n'
     },
     passwordResetPage: {
