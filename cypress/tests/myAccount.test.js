@@ -101,7 +101,7 @@ describe('My Account - New User with no predictions', () => {
                     clickOnCTA(selectors.mobileNavToggleButton)
                 }
                 clickOnCTA(selectors.navItem(1)) // Navigate away from My Account page
-                clickOnCTA(selectors.navItem(5)) // Navigate back to My Account page
+                clickOnCTA(selectors.navItem(6)) // Navigate back to My Account page
                 checkFormIsFilledIn()
         
                 clickOnCTA(selectors.inputForm.cancelButton)
@@ -185,7 +185,7 @@ describe('My Account - Existent user with at least one prediction', () => {
                     clickOnCTA(selectors.mobileNavToggleButton)
                 }
                 clickOnCTA(selectors.navItem(1)) // Navigate away from My Account page
-                clickOnCTA(selectors.navItem(5)) // Navigate back to My Account page
+                clickOnCTA(selectors.navItem(6)) // Navigate back to My Account page
                 checkFormIsFilledIn()
         
                 clickOnCTA(selectors.inputForm.cancelButton)

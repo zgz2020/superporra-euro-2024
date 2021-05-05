@@ -3,6 +3,7 @@ export const englishTranslations = {
         home: "Home",
         participants: "Participants",
         results: "Results",
+        prizes: "Prizes",
         scoringRules: "Scoring Rules",
         account: "Account",
         login: "Sign In",
@@ -62,7 +63,7 @@ export const englishTranslations = {
         forgotPasswordEmailSubject: "Superporra - Reset your password",
         forgotPasswordEmailBody: (token) => 'You are receiving this email because you (or someone else) have requested the reset of the password for your account.\n\n'
             + 'Please click on the following link, or paste this into your browser, to complete the process within one hour of receiving it:\n\n'
-            + `https://superporra2021.herokuapp.com/password-reset/${token}\n\n\n`
+            + `https://superporra2021.herokuapp.com/password-reset/${token}\n\n\n` 
             + 'If you did not request this, please ignore this email and your password will emain unchanged.\n'
     },
     passwordResetPage: {
@@ -89,6 +90,17 @@ export const englishTranslations = {
     },
     resultsPage: {
         title: "Official Results"
+    },
+    prizesPage: {
+        title: "Prizes",
+        winner: {
+            title: "Winner",
+            reward: "£30 voucher to spend on Jelen Landon Designs products at www.redbubble.com"
+        },
+        consolation: {
+            title: "Consolation - 20th place",
+            reward: "£15 voucher to spend on Jelen Landon Designs products at www.redbubble.com"
+        }
     },
     accountPage: {
         title: "My Account",
