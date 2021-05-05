@@ -1,5 +1,3 @@
-import { http, localhostPort } from '../../utils/common'
-
 export const englishTranslations = {
     navigation: {
         home: "Home",
@@ -63,9 +61,9 @@ export const englishTranslations = {
         resetPasswordEmailSent: "Password reset email sent",
         resetPasswordEmailError: "There was an error. Please try again.",
         forgotPasswordEmailSubject: "Superporra - Reset your password",
-        forgotPasswordEmailBody: (token, domain) => 'You are receiving this email because you (or someone else) have requested the reset of the password for your account.\n\n'
+        forgotPasswordEmailBody: (token) => 'You are receiving this email because you (or someone else) have requested the reset of the password for your account.\n\n'
             + 'Please click on the following link, or paste this into your browser, to complete the process within one hour of receiving it:\n\n'
-            + `${http(domain)}://${domain}${localhostPort(domain)}/password-reset/${token}\n\n\n` 
+            + `https://superporra2021.herokuapp.com/password-reset/${token}\n\n\n` 
             + 'If you did not request this, please ignore this email and your password will emain unchanged.\n'
     },
     passwordResetPage: {

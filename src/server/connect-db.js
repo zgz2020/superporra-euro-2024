@@ -11,7 +11,7 @@ import { MongoClient } from 'mongodb'
 // }
 
 
-const url = 'mongodb+srv://practiceUser:practicePassword@cluster0.tkptx.mongodb.net/production?retryWrites=true&w=majority'
+const url = 'mongodb+srv://practiceUser:practicePassword@cluster0.tkptx.mongodb.net/test?retryWrites=true&w=majority'
 let db = null
 
 export async function connectDB(){

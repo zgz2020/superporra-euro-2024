@@ -13,7 +13,6 @@ export function* requestForgotPasswordEmailSaga (){
 
         let allUsers = yield select(selectors.getUsers)
         let language = yield select(selectors.getLanguage)
-        let domain = window.location.hostname
 
         yield put(mutations.hideLoginPageErrorMessages())
         yield take(mutations.LOGIN_PAGE_ERROR_MESSAGES_HIDDEN)
@@ -24,7 +23,7 @@ export function* requestForgotPasswordEmailSaga (){
             yield put(mutations.showEmailNotRegisteredForgotPasswordMessage())
         } else {
             try {
-                const { data } = yield axios.post(url + '/forgot-password-email', { email, language, domain })
+                const { data } = yield axios.post(url + '/forgot-password-email', { email, language })
                 yield put(mutations.showResetPasswordEmailSentMessage())
             } catch (e) {
                 yield put(mutations.showResetPasswordEmailErrorMessage())
