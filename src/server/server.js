@@ -289,13 +289,12 @@ app.post('/user/new', async (req, res) => {
 })
 
 app.post('/forgot-password-email', async(req, res) => {
-    let userId = req.body.email
-    let language = req.body.language
+    let { email, language, domain } = req.body
 
     let db = await connectDB()
     let usersCollection = db.collection('users')
 
-    let user = await usersCollection.findOne({ id: userId })
+    let user = await usersCollection.findOne({ id: email })
 
     if (!user) {
         return res.status(500).send('Username not registered')
@@ -306,7 +305,7 @@ app.post('/forgot-password-email', async(req, res) => {
     let resetPasswordToken = { 
         token, 
         tokenExpires: Date.now() + 3600000,
-        userID: userId
+        userID: email
     }
     await resetPasswordtokensCollection.insertOne(resetPasswordToken)
 
@@ -323,13 +322,13 @@ app.post('/forgot-password-email', async(req, res) => {
         if (language == 'spanish') return spanishTranslations.signInPage.forgotPasswordEmailSubject
     }
     const emailText = () => {
-        if (language == 'english') return englishTranslations.signInPage.forgotPasswordEmailBody(token, window.location.hostname)
-        if (language == 'spanish') return spanishTranslations.signInPage.forgotPasswordEmailBody(token, window.location.hostname)
+        if (language == 'english') return englishTranslations.signInPage.forgotPasswordEmailBody(token, domain)
+        if (language == 'spanish') return spanishTranslations.signInPage.forgotPasswordEmailBody(token, domain)
     }
 
     const mailOptions = {
         from: 'superporra.reset@gmail.com',
-        to: userId,
+        to: email,
         subject: emailSubject(),
         text: emailText()
     }
