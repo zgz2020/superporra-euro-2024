@@ -23,6 +23,9 @@ const HomePage = ({ translations }) => (
 const mapStateToProps = (state) => {
     let { translations } = state
 
+    console.log('++++ URL: ', window.location.hostname)
+
+
     return { translations }
 }
 

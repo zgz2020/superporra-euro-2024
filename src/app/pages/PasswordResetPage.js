@@ -107,7 +107,7 @@ const PasswordResetPage = ({
     resetPasswordSuccessMessage,
     resetPasswordErrorMessage 
 }) => (
-    <div>
+    <div className="mb-5">
         <ConnectedHeader title={translations.passwordResetPage.title} />
 
         {passwordResetTokenExpired ?
