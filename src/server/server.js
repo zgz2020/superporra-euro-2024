@@ -323,8 +323,8 @@ app.post('/forgot-password-email', async(req, res) => {
         if (language == 'spanish') return spanishTranslations.signInPage.forgotPasswordEmailSubject
     }
     const emailText = () => {
-        if (language == 'english') return englishTranslations.signInPage.forgotPasswordEmailBody(token)
-        if (language == 'spanish') return spanishTranslations.signInPage.forgotPasswordEmailBody(token)
+        if (language == 'english') return englishTranslations.signInPage.forgotPasswordEmailBody(token, window.location.hostname)
+        if (language == 'spanish') return spanishTranslations.signInPage.forgotPasswordEmailBody(token, window.location.hostname)
     }
 
     const mailOptions = {
