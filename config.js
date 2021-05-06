@@ -1,1 +1,1 @@
-export const DATABASE_URL = process.env.BATABASE_URL || 'mongodb+srv://practiceUser:practicePassword@cluster0.tkptx.mongodb.net/test?retryWrites=true&w=majority' 
+export const DATABASE_URL = process.env.DATABASE_URL || 'mongodb+srv://practiceUser:practicePassword@cluster0.tkptx.mongodb.net/test?retryWrites=true&w=majority' 
