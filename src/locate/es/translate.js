@@ -49,6 +49,7 @@ export const spanishTranslations = {
         email: "Correo electrónico",
         emailPlaceholder: "mi@cuenta.com",
         password: "Clave",
+        passwordNew: "Clave nueva",
         passwordPlaceholder: "miClave",
         signIn: "Iniciar sesión",
         noEmail: 'Debes inroducir una dirección de correo válida',

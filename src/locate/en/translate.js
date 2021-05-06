@@ -49,6 +49,7 @@ export const englishTranslations = {
         email: "Email address",
         emailPlaceholder: "my@account.com",
         password: "Password",
+        passwordNew: "New Password",
         passwordPlaceholder: "myPassword",
         signIn: "Sign In",
         noEmail: "You must enter a valid email address",
