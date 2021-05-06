@@ -238,6 +238,14 @@ describe('My Account - Private Championships - User with NO predictions', () => 
 describe('My Account - Private Championships - User with predictions', () => {
 
     beforeEach(() => {
+        // Remove all test predictions crated by these tests
+        cy.request('POST', `${url}/remove-test-user-private-leagues`).then(resp => {
+            if (resp.status == 200) {
+                cy.log('Test prediction was removed successfully :D')
+            } else {
+                cy.log('Failed to remove test prediction :(')
+            }
+        })
         cy.visit('/sign-in')
         clickOnCTA(selectors.signInTab)
         signIn(registeredUser.email, registeredUser.password)
