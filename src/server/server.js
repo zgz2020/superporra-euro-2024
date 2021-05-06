@@ -389,6 +389,15 @@ app.post('/remove-test-predictions', async (req, res) => {
     res.status(200).send()
 })
 
+app.post('/remove-test-user-private-leagues', async (req, res) => {
+    let db = await connectDB()
+    let predictionsCollection = db.collection('predictions')
+
+    await predictionsCollection.updateOne( { owner: 'automated@test.com' }, { $set: { privateLeague: [] } })
+
+    res.status(200).send()
+})
+
 app.post('/private-league/league-name-validation', async (req, res) => {
     let leagueName = req.body.leagueName
 
