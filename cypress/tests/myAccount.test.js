@@ -264,6 +264,17 @@ describe('My Account - Private Championships - User with predictions', () => {
 
     viewports.forEach(viewport => {
         languages.forEach(language => {
+            it(`Create Championship - Enter a taken league name - ${viewport} - ${language}`, { retries: 10 }, () => {
+                selectPrivateLeaguesActionTab('Create')
+                cy.wait(1500)
+                    .get(selectors.createLeagueInput).clear().type('AutoTest Championship').get(selectors.createLeagueInput).blur()
+                    .wait(1000)
+                    .get(selectors.privateLeagueErrors.create).should('be.visible')
+                    .get(selectors.submitCTA('create')).should('be.disabled')
+                
+                cy.wait(500)
+            })
+
             it(`No Championships joined > Private Championship component does not render - ${viewport} - ${language}`, () => {
                 visitViewportPageLanguage(viewport, '/account', language)
                 checkNoPrivateLeaguesJoinedBlockRenders()
@@ -340,16 +351,6 @@ describe('My Account - Private Championships - User with predictions', () => {
                 //     .get(selectors.privateLeagueErrors.join).should('be.visible')
                 
                 // cy.wait(500)
-
-                // CREATE - Enter a taken league name
-                selectPrivateLeaguesActionTab('Create')
-                cy.wait(1500)
-                    .get(selectors.createLeagueInput).clear().type('AutoTest Championship')
-                    .wait(1000)
-                    .get(selectors.privateLeagueErrors.create).should('be.visible')
-                    .get(selectors.submitCTA('create')).should('be.disabled')
-                
-                cy.wait(500)
 
                 // QUIT - Do not select a league
                 // -- QUIT Test set-up
