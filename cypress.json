@@ -1,5 +1,5 @@
 {
-    "baseUrl": "https://superporra2021.herokuapp.com",
+    "baseUrl": "https://superporra-dev.herokuapp.com",
     "integrationFolder": "./cypress/tests",
     "chromeWebSecurity": false,
     "video": false,
