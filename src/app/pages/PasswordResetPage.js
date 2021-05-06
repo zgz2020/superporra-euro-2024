@@ -36,7 +36,7 @@ const passwordResetForm = (
         <div className="card-body">
 
             <form onSubmit={submitHandler}>
-                {`${translations.signInPage.password}:`}
+                {`${translations.signInPage.passwordNew}:`}
                 <input 
                     type="password" 
                     placeholder={translations.signInPage.passwordPlaceholder}
@@ -87,12 +87,6 @@ const passwordResetForm = (
                         {translations.passwordResetPage.resetButton}
                     </ button>
                 }
-                {/* <button 
-                    type="submit" 
-                    className="form-control mt-2 btn btn-primary"
-                >
-                    {translations.passwordResetPage.resetButton}
-                </ button> */}
             </form>
 
         </div>

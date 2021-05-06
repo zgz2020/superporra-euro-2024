@@ -289,7 +289,7 @@ app.post('/user/new', async (req, res) => {
 })
 
 app.post('/forgot-password-email', async(req, res) => {
-    let { email, language } = req.body
+    let { email, language, domain } = req.body
 
     let db = await connectDB()
     let usersCollection = db.collection('users')
@@ -322,8 +322,8 @@ app.post('/forgot-password-email', async(req, res) => {
         if (language == 'spanish') return spanishTranslations.signInPage.forgotPasswordEmailSubject
     }
     const emailText = () => {
-        if (language == 'english') return englishTranslations.signInPage.forgotPasswordEmailBody(token)
-        if (language == 'spanish') return spanishTranslations.signInPage.forgotPasswordEmailBody(token)
+        if (language == 'english') return englishTranslations.signInPage.forgotPasswordEmailBody(token, domain)
+        if (language == 'spanish') return spanishTranslations.signInPage.forgotPasswordEmailBody(token, domain)
     }
 
     const mailOptions = {
@@ -385,6 +385,15 @@ app.post('/remove-test-predictions', async (req, res) => {
     let predictionsCollection = db.collection('predictions')
 
     await predictionsCollection.deleteMany({ username: /Test Participant/})
+
+    res.status(200).send()
+})
+
+app.post('/remove-test-user-private-leagues', async (req, res) => {
+    let db = await connectDB()
+    let predictionsCollection = db.collection('predictions')
+
+    await predictionsCollection.updateOne( { owner: 'automated@test.com' }, { $set: { privateLeague: [] } })
 
     res.status(200).send()
 })

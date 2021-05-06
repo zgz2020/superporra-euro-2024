@@ -317,7 +317,7 @@ const verifySubmitButtonDisabled = (location) => {
 
 export const nicknameTakenTest = () => {
     verifyNicknameTakenError('hidden')
-    typeNickname('juanjo')
+    typeNickname('juanjo dev')
     verifyNicknameTakenError('visible')
     verifySubmitButtonDisabled('top')
     verifySubmitButtonDisabled('bottom')

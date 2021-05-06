@@ -4,7 +4,7 @@ import * as mutations from '../store/mutations'
 import { ConnectedParticipantsList } from './ParticipantsList'
 
 const privateLeaguePredictions = (predictions, privateLeague) => Object.keys(predictions.byId).filter(prediction => 
-    predictions.byId[prediction].privateLeague.includes(privateLeague))
+    predictions.byId[prediction].privateLeague && predictions.byId[prediction].privateLeague.includes(privateLeague))
     .reduce((privateLeaguePredictionsList, prediction) => {
         privateLeaguePredictionsList[prediction] = predictions.byId[prediction]
         return privateLeaguePredictionsList
@@ -46,7 +46,7 @@ const ParticipantsListsSelection = ({ translations, privateLeagues, privateLeagu
                             ))}
                         </select>  
 
-                        {privateLeagueRankings && privateLeagueRankings != "" ?
+                        {privateLeagueRankings && (privateLeagueRankings != "") ?
                             Object.keys(privateLeaguePredictions(predictions, privateLeagueRankings)).length == 0 ?
                                 <div className="border text-center p-2" data-automation="no-participants-private-league">
                                     {translations.participantsPage.noParticipantsYetPrivateLeague}
