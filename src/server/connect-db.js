@@ -1,4 +1,5 @@
 import { MongoClient } from 'mongodb'
+import { BATABASE_URL } from '../../config'
 
 // const url = process.env.MONGODB_URI || `mongodb://localhost:27017/superporrajuly`
 // let db = null
@@ -11,7 +12,7 @@ import { MongoClient } from 'mongodb'
 // }
 
 
-const url = 'mongodb+srv://practiceUser:practicePassword@cluster0.tkptx.mongodb.net/test?retryWrites=true&w=majority'
+const url = BATABASE_URL // 'mongodb+srv://practiceUser:practicePassword@cluster0.tkptx.mongodb.net/test?retryWrites=true&w=majority'
 let db = null
 
 export async function connectDB(){
