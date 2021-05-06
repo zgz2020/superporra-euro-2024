@@ -13,7 +13,7 @@ export const registeredUserNoPredictions = {
 }
 
 export const adminUser = {
-    email: "admin",
+    email: "admin@test.com",
     password: "admin"
 }
 
