@@ -532,3 +532,14 @@ export const leastConcededCountriesNamesList = (prediction) => {
 // g) number of away wins
 // h) lower disciplinary points total (3 points for red card including for second booking, 1 point for single yellow card for a player in a match)
 // i) position in overall UEFA Nations League rankings
+
+
+
+export const verifyAllMatchesFilled = prediction => 
+    allMatchStages.every(stage => 
+        Object.keys(prediction[stage]).every(match => 
+            prediction[stage][match].homeGoals != " "
+            &&
+            prediction[stage][match].awayGoals != " "
+        )
+    )

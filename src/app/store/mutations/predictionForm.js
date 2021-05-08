@@ -14,6 +14,15 @@ export const USERNAME_VALIDATION = 'USERNAME_VALIDATION'
 export const SHOW_NICKNAME_TAKEN = 'SHOW_NICKNAME_TAKEN'
 export const HIDE_NICKNAME_TAKEN = 'HIDE_NICKNAME_TAKEN'
 
+export const SHOW_NO_NICKNAME = 'SHOW_NO_NICKNAME'
+export const HIDE_NO_NICKNAME = 'HIDE_NO_NICKNAME'
+
+export const SHOW_PREDICTIONS_INCOMPLETE = 'SHOW_PREDICTIONS_INCOMPLETE'
+export const HIDE_PREDICTIONS_INCOMPLETE = 'HIDE_PREDICTIONS_INCOMPLETE'
+
+export const SHOW_JOINING_COMPETITION_SUCCESS = 'SHOW_JOINING_COMPETITION_SUCCESS'
+export const HIDE_JOINING_COMPETITION_SUCCESS = 'HIDE_JOINING_COMPETITION_SUCCESS'
+
 
 export const showPredictionsFormNew = () => ({
     type: SHOW_PREDICTIONS_FORM_NEW
@@ -52,7 +61,27 @@ export const usernameValidation = (username) => ({
 export const showNicknameTaken = () => ({
     type: SHOW_NICKNAME_TAKEN
 })
-
 export const hideNicknameTaken = () => ({
     type: HIDE_NICKNAME_TAKEN
+})
+
+export const showNoNickname = () => ({
+    type: SHOW_NO_NICKNAME
+})
+export const hideNoNickname = () => ({
+    type: HIDE_NO_NICKNAME
+})
+
+export const showPredictionsIncomplete = () => ({
+    type: SHOW_PREDICTIONS_INCOMPLETE
+})
+export const hidePredictionsIncomplete = () => ({
+    type: HIDE_PREDICTIONS_INCOMPLETE
+})
+
+export const showjoiningCompetitionSuccess = () => ({
+    type: SHOW_JOINING_COMPETITION_SUCCESS
+})
+export const hidejoiningCompetitionSuccess = () => ({
+    type: HIDE_JOINING_COMPETITION_SUCCESS
 })

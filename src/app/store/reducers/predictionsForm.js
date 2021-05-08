@@ -69,3 +69,43 @@ export const nicknameTaken = (nicknameTaken = false, action) => {
     }
     return nicknameTaken
 }
+
+export const noNickname = (noNickname = false, action) => {
+    switch (action.type) {
+        case mutations.SHOW_NO_NICKNAME:
+            return true
+        case mutations.HIDE_NO_NICKNAME:
+            return false
+    }
+    return noNickname
+}
+
+export const randomPredictionsGenerated = (randomPredictionsGenerated = false, action) => {
+    switch (action.type) {
+        case mutations.SHOW_RANDOM_PREDICTIONS_GENERATED:
+            return true
+        case mutations.HIDE_RANDOM_PREDICTIONS_GENERATED:
+            return false
+    }
+    return randomPredictionsGenerated
+}
+
+export const predictionsIncomplete = (predictionsIncomplete = false, action) => {
+    switch (action.type) {
+        case mutations.SHOW_PREDICTIONS_INCOMPLETE:
+            return true
+        case mutations.HIDE_PREDICTIONS_INCOMPLETE:
+            return false
+    }
+    return predictionsIncomplete
+}
+
+export const joiningCompetitionSuccess = (joiningCompetitionSuccess = false, action) => {
+    switch (action.type) {
+        case mutations.SHOW_JOINING_COMPETITION_SUCCESS:
+            return true
+        case mutations.HIDE_JOINING_COMPETITION_SUCCESS:
+            return false 
+    }
+    return joiningCompetitionSuccess
+}

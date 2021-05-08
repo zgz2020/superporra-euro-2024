@@ -1,23 +1,29 @@
 import React from 'react'
+import md5 from 'md5'
 import { connect } from 'react-redux'
 import * as mutations from '../store/mutations' 
 import { ConnectedEuroStage } from './EuroStage'
 import { ConnectedGeneralPrediction } from './GeneralPrediction'
-
 
 const PredictionsForm = ( { 
     newPredictionUsername,
     generatingRandomPredictions,
     predictionsOrResults,
     nicknameTaken,
+    noNickname,
+    randomPredictionsGenerated,
     predictionType,
     userID,
     predictionID,
     setUsernameHandler,
     generateRandomPredictionsRequest,
     submitFormHandler,
-    cancelPredictionForm,
-    translations
+    // cancelPredictionForm,
+    translations,
+    invalidEmailSignUpMessage,
+    emailAlreadyRegisteredMessage,
+    noPasswordMessage,
+    predictionsIncomplete
 } ) => { 
 
     const username = predictionType === 'new' ?
@@ -52,7 +58,7 @@ const PredictionsForm = ( {
         <div className="text-center py-4">
             <button 
                 type="submit" 
-                className="btn btn-primary" 
+                className="btn btn-primary btn-lg" 
                 disabled={nicknameTaken}
                 data-automation="submit-button"
             >
@@ -83,24 +89,61 @@ const PredictionsForm = ( {
                 )
             } >
 
-                {submitButton(predictionType, nicknameTaken)}
-
-                <div className="text-center pb-4">
-                    <button 
-                        type="button" 
-                        onClick={e => cancelPredictionForm(predictionType, e)} 
-                        className="btn btn-danger" 
-                        data-automation="cancel-button"
-                    >
-                        {translations.common.cancel}
-                    </button>
-                </div> 
-
-                <div> </div>
-                
                 {predictionType !== 'results' ?
                     <div>
                         <div className="form-group pt-3 px-2 col-md-6 offset-md-3">
+                            
+                            {predictionType == 'new' &&
+                                <div>
+                                    {`${translations.signInPage.email}:`}
+                                    <input 
+                                        type="text" 
+                                        placeholder={translations.signInPage.emailPlaceholder}
+                                        name="emailAddress"
+                                        className="form-control" 
+                                        data-automation="email-address-input"
+                                    />
+
+                                    {invalidEmailSignUpMessage &&  
+                                        <p 
+                                            className="text-danger font-italic mt-2"
+                                            data-automation="invalid-email-message-signUp"
+                                        >
+                                            {translations.signInPage.noEmail}
+                                        </p>
+                                    }
+
+                                    {emailAlreadyRegisteredMessage &&  
+                                        <p 
+                                            className="text-danger font-italic mt-2"
+                                            data-automation="email-error-signUp"
+                                        >
+                                            {translations.signInPage.emailAlreadyRegistered}
+                                        </p>
+                                    }
+
+
+                                    {`${translations.signInPage.password}:`}
+                                    <input 
+                                        type="password" 
+                                        placeholder={translations.signInPage.passwordPlaceholder}
+                                        name="password"
+                                        className="form-control" 
+                                        data-automation="password-input"
+                                    />
+
+                                    {noPasswordMessage &&  
+                                        <p 
+                                            className="text-danger font-italic mt-2"
+                                            data-automation="password-error-signUp"
+                                        >
+                                            {translations.signInPage.noPassword}
+                                        </p>
+                                    }
+                                </div>
+                            }
+
+
                             {`${translations.predictionsForm.username}: `}
                             <input 
                                 type="text" 
@@ -117,9 +160,18 @@ const PredictionsForm = ( {
                             {nicknameTaken && 
                                 <p
                                     className="text-danger font-italic mt-2"
-                                    data-automation={`username-taken`}
+                                    data-automation={"username-taken"}
                                 >
                                     {translations.predictionsForm.usernameTakenError}
+                                </p>
+                            }
+
+                            {noNickname && 
+                                <p
+                                    className="text-danger font-italic mt-2"
+                                    data-automation={"no-username"}
+                                >
+                                    {translations.predictionsForm.noUsernameAlert}
                                 </p>
                             }
                         </div>
@@ -138,6 +190,15 @@ const PredictionsForm = ( {
                                 >
                                     {translations.common.generateRandomPredictions}
                                 </button>
+
+                                {randomPredictionsGenerated && 
+                                    <p
+                                        className="text-success font-italic mt-2"
+                                        data-automation={"random-predictions-generated"}
+                                    >
+                                        {translations.predictionsForm.randomPredictionsGenerated}
+                                    </p>
+                                }
                             </div>  
                             :
                             <div className="text-center py-3">
@@ -150,8 +211,22 @@ const PredictionsForm = ( {
                                     {`  ${translations.placeholders.loading}...`}
                                 </button>
                             </div>
-                        }       
+                        }
+
                         
+                        {predictionsIncomplete && 
+                            <div className="text-center pb-4">
+                                <div
+                                    className="text-danger font-italic mt-2"
+                                    data-automation={"predictions-incomplete"}
+                                >
+                                    {translations.predictionsForm.predictionsIncomplete}
+                                </div>
+                            </div>
+                        }
+                        
+                        {submitButton(predictionType, nicknameTaken)}
+
                         <h4 className="pt-2 pl-2">{translations.predictionsForm.predictions}</h4>
                     </div>
                     :
@@ -234,13 +309,20 @@ const PredictionsForm = ( {
 }
 
 const mapStateToProps = (state, ownProps) => {
+
     const { 
         newPredictionUsername,
         generatingRandomPredictions,
         predictions,
         nicknameTaken,
+        noNickname,
+        randomPredictionsGenerated,
         translations,
-        session
+        session,
+        invalidEmailSignUpMessage,
+        emailAlreadyRegisteredMessage,
+        noPasswordMessage,
+        predictionsIncomplete
     } = state
     const { predictionType, predictionID, predictionsOrResults } = ownProps
 
@@ -252,16 +334,26 @@ const mapStateToProps = (state, ownProps) => {
         predictionsOrResults,
         predictions, 
         nicknameTaken,
+        noNickname,
+        randomPredictionsGenerated,
         predictionType,
         userID,
         predictionID,
-        translations
+        translations,
+        invalidEmailSignUpMessage,
+        emailAlreadyRegisteredMessage,
+        noPasswordMessage,
+        predictionsIncomplete
     }
 }
 
 const mapDispatchToProps = (dispatch) => {    
+    let emailAddress = (e) => e.target['emailAddress'].value
+    let passwordHash = (e) => md5(e.target['password'].value)
+
     return {
         setUsernameHandler(predictionType, predictionID, event){
+            dispatch(mutations.hideNoNickname())
             dispatch(mutations.usernameValidation(event.target.value))
             if (predictionType === 'new') 
                 return dispatch(mutations.setUsernameNewPrediction(event.target.value))
@@ -273,11 +365,12 @@ const mapDispatchToProps = (dispatch) => {
         },
         submitFormHandler(predictionType, userID, predictionID, username, prediction, translations, event) {
             event.preventDefault()
+            dispatch(mutations.hideNoNickname())
             if(!username && predictionType !== 'results')
-                return alert(translations.predictionsForm.noUsernameAlert)
+                return dispatch(mutations.showNoNickname())
             else {
                 if (predictionType === 'new') {
-                    dispatch(mutations.requestPredictionCreation(userID, username, prediction))
+                    dispatch(mutations.requestUserCreation(emailAddress(event), passwordHash(event), username, prediction))
                 } 
                 if (predictionType === 'existent') {
                     dispatch(mutations.hidePredictionsFormExistent())
@@ -289,20 +382,6 @@ const mapDispatchToProps = (dispatch) => {
                 }               
             }
         },
-        cancelPredictionForm(predictionType, event) {
-            if(predictionType === "new") {
-                dispatch(mutations.hidePredictionsFormNew())
-                dispatch(mutations.resetPredictionCreationForm())
-            }
-            if(predictionType === "existent") {
-                dispatch(mutations.getMongoData())
-                dispatch(mutations.hidePredictionsFormExistent())
-            }
-            if(predictionType === "results") {
-                dispatch(mutations.getMongoData())
-                dispatch(mutations.hidePredictionsFormResults())
-            }
-        }
     }
 }
 

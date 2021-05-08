@@ -1,6 +1,7 @@
 import React from 'react'
-import { connect } from 'react-redux'
 import md5 from 'md5'
+import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
 import * as mutations from '../store/mutations'
 import { ConnectedHeader } from '../components/Header'
 
@@ -131,19 +132,19 @@ const LoginPage = ({
             <div className="card-header tab-card-header">
                 <ul className="nav nav-tabs card-header-tabs" id="myTab" role="tablist">
                     <li className="nav-item">
-                        <a className="nav-link" id="sign-in-tab" data-toggle="tab" href="#sign-in-panel" role="tab" aria-controls="Sign-in-panel" aria-selected="false">
+                        <a className="nav-link active" id="sign-in-tab" data-toggle="tab" href="#sign-in-panel" role="tab" aria-controls="Sign-in-panel" aria-selected="true">
                             {translations.signInPage.signIn}
                         </a>
                     </li>
                     <li className="nav-item">
-                        <a className="nav-link active" id="sign-up-tab" data-toggle="tab" href="#sign-up-panel" role="tab" aria-controls="Sign-up-panel" aria-selected="true">
-                            {translations.signInPage.signUp}
+                        <a className="nav-link" id="sign-up-tab" data-toggle="tab" href="#sign-up-panel" role="tab" aria-controls="Sign-up-panel" aria-selected="false">
+                            {translations.navigation.join}
                         </a>
                     </li>
                 </ul>
             </div>
             <div className="tab-content" id="myTabContent">
-                <div className="tab-pane fade p-3" id="sign-in-panel" role="tabpanel" aria-labelledby="sign-in-tab">
+                <div className="tab-pane fade show active p-3" id="sign-in-panel" role="tabpanel" aria-labelledby="sign-in-tab">
                     {credentialsForm(
                         'signIn', 
                         requestAuthenticateUser, 
@@ -157,19 +158,20 @@ const LoginPage = ({
                         incorrectPasswordMessage
                     )}           
                 </div>
-                <div className="tab-pane fade show active p-3" id="sign-up-panel" role="tabpanel" aria-labelledby="sign-up-tab">
-                    {credentialsForm(
-                        'signUp', 
-                        requestCreateUser, 
-                        translations, 
-                        invalidEmailSignUpMessage, 
-                        emailAlreadyRegisteredMessage, 
-                        null, 
-                        null, 
-                        translations.signInPage.signUp, 
-                        null, 
-                        noPasswordMessage
-                    )}            
+                <div className="tab-pane fade p-3" id="sign-up-panel" role="tabpanel" aria-labelledby="sign-up-tab">
+                    <div className="card">
+                        <div className="card-body">
+                            {translations.signInPage.joinDescription1}
+                            <Link 
+                                to={"/join"}
+                                data-automation="join-link"
+                            >
+                                {translations.navigation.join}
+                            </Link>
+                            {translations.signInPage.joinDescription2}
+                        </div>
+
+                    </div>
                 </div>
             </div>
 

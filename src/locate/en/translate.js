@@ -3,10 +3,11 @@ import { http, localhostPort } from '../../utils/common'
 export const englishTranslations = {
     navigation: {
         home: "Home",
+        join: "Join",
         participants: "Participants",
         results: "Results",
         prizes: "Prizes",
-        scoringRules: "Scoring Rules",
+        scoringRules: "Rules",
         account: "Account",
         login: "Sign In",
         logout: "Sign Out"
@@ -21,8 +22,9 @@ export const englishTranslations = {
             title: "Join the Superporra in less than a minute!",
             body: {
                 step: "STEP",
-                "1": "Sign up",
-                "2": "Create username and Generate Random predictions (you will be able to edit your predictions afterwards if you wish)",
+                "1.1": "Go to ",
+                "1.2": "Join",
+                "2": "Enter an email address, password and username, and Generate Random predictions (you will be able to edit your predictions afterwards if you wish)",
                 "3": "Submit!"
             }
         },
@@ -44,6 +46,14 @@ export const englishTranslations = {
             }
         }
     },
+    joinPage: {
+        alreadyJoined: {
+            title: "You have already joined the competition",
+            description1: "Go to ",
+            description2: " page to review or edit your username or predictions.",
+            description3: "You can also join or create a private Championship in "
+        }
+    },
     signInPage: {
         title: "Sign In",
         email: "Email address",
@@ -58,6 +68,8 @@ export const englishTranslations = {
         wrongPassword: "Password incorrect",
         noPassword: "You must enter a password",
         signUpHeader: "Don't have an account yet? Sign Up here!",
+        joinDescription1: "Go to ",
+        joinDescription2: " page, fill in the form and submit!",
         signUp: "Sign Up",
         forgotPasswordHeader: "Forgot your password? Reset it here",
         sendPasswordResetEmail: "Send password reset email",
@@ -79,7 +91,7 @@ export const englishTranslations = {
     },
     participantsPage: {
         title: "Superporra Participants",
-        noParticipantsYet: "There are no particpants yet. Be the first one joining the competition by clicking on the 'JOIN' button!",
+        noParticipantsYet: "There are no particpants yet. Be the first one joining the competition by clicking on the 'Join' button!",
         noParticipantsYetPrivateLeague: "No participants have joined this Championship yet"
     },
     participantPredictionsPage: {
@@ -107,6 +119,7 @@ export const englishTranslations = {
     },
     accountPage: {
         title: "My Account",
+        joinedCompetitionSuccessfully: "You have succesfully joined the competition!",
         notSignedIn: {
             title: "Not Signed In",
             description: "You need to sign in to access to the Account page."
@@ -165,7 +178,9 @@ export const englishTranslations = {
         topScorer: "Top Scorer Team(s)",
         leastConceded: "Least Goals Conceded Team(s)",
         goal: "goal",
-        goals: "goals"
+        goals: "goals",
+        randomPredictionsGenerated: "Random predictions generated!",
+        predictionsIncomplete: "You must provide predictions for all the matches to be able to submit them!"
     },
     participantScores: {
         result: "Result",

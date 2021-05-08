@@ -3,10 +3,11 @@ import { http, localhostPort } from '../../utils/common'
 export const spanishTranslations = {
     navigation: {
         home: "Inicio",
+        join: "Participa",
         participants: "Participantes",
         results: "Resultados",
         prizes: "Premios",
-        scoringRules: "Normas puntuación",
+        scoringRules: "Normas",
         account: "Cuenta",
         login: "Mi cuenta",
         logout: "Cerrar"
@@ -21,8 +22,9 @@ export const spanishTranslations = {
             title: "¡Únete a la competición en menos de un minuto!",
             body: {
                 step: "PASO",
-                "1": "Crea una cuenta",
-                "2": "Crea un nombe de usuario y genera predicciones aleatorias (podrás cambiar tus predicciones más tarde si lo deseas)",
+                "1.1": "Ve a la página ",
+                "1.2": "Participa",
+                "2": "Proporciona un correo electrónico, clave y nombre de usuario, y genera predicciones aleatorias (podrás cambiar tus predicciones más tarde si lo deseas)",
                 "3": "¡Manda tus predicciones!"
             }
         },
@@ -44,6 +46,14 @@ export const spanishTranslations = {
             }
         }
     },
+    joinPage: {
+        alreadyJoined: {
+            title: "Ya te has unido a la competición",
+            description1: "Ve a la página ",
+            description2: " para revisar o cambiar tu nombre de usuario y/o predicciones.",
+            description3: "También puedes unirte a un campeonato privado, o crear uno nuevo, en "
+        }
+    },
     signInPage: {
         title: "Iniciar sesión",
         email: "Correo electrónico",
@@ -58,6 +68,8 @@ export const spanishTranslations = {
         wrongPassword: "Clave incorrecta",
         noPassword: "Debes introducir una clave",
         signUpHeader: "¿Aún no tienes una cuenta? ¡Crea una aquí mismo!",
+        joinDescription1: "Ve a la página ",
+        joinDescription2: " , rellena el formulario y manda las predicciones.",
         signUp: "Crear cuenta",
         forgotPasswordHeader: "¿Olvidaste tu contraseña? Crea una nueva aquí",
         sendPasswordResetEmail: "Crear contraseña nueva",
@@ -79,7 +91,7 @@ export const spanishTranslations = {
     },
     participantsPage: {
         title: "Paticipantes de la Superporra",
-        noParticipantsYet: "Todavía no hay ningún participante. ¡Se el primero en participar haciendo click en el botón 'PARTICIPAR'!",
+        noParticipantsYet: "Todavía no hay ningún participante. ¡Se el primero en participar haciendo click en el botón 'Participa'!",
         noParticipantsYetPrivateLeague: "Todavía no hay ningún particpante en este campeonato"
     },
     participantPredictionsPage: {
@@ -107,6 +119,7 @@ export const spanishTranslations = {
     },
     accountPage: {
         title: "Mi cuenta",
+        joinedCompetitionSuccessfully: "¡Ya formas parte de la competición!",
         notSignedIn: {
             title: "Sesión no iniciada",
             description: "Tienes que iniciar sesión para acceder a tu cuenta."
@@ -165,7 +178,9 @@ export const spanishTranslations = {
         topScorer: "Máximo goleador",
         leastConceded: "Menos goleado",
         goal: "gol",
-        goals: "goles"
+        goals: "goles",
+        randomPredictionsGenerated: "¡Predicciones aleatorias generadas!",
+        predictionsIncomplete: "¡Rellena todos los partidos para poder mandar tus predicciones!"
     },
     participantScores: {
         result: "Res",

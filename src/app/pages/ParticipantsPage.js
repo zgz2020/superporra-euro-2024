@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux' 
 import { history } from '../store/history'
+import { Link } from 'react-router-dom'
 import { ConnectedHeader } from '../components/Header'
 import { ConnectedParticipantsListsSelection } from '../components/ParticipantsListsSelection'
 import { ConnectedPredictionsFormButton } from '../components/PredictionsFormButton'
@@ -44,7 +45,16 @@ const ParticipantsPage = ({
                     </div>
                 }
 
-                <ConnectedPredictionsFormButton predictionType="new" clickHandler={authenticated ? redirectToAccountPage : redirectToSignInPage} />
+                <div className="text-center py-3">
+                    <Link 
+                        to={"/join"}
+                        data-automation="join-link"
+                    >
+                        <button className="btn btn-primary btn-lg">
+                            {translations.navigation.join}
+                        </button>
+                    </Link>
+                </div>  
             </div>
         }
     </div>
