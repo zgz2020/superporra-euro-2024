@@ -9,7 +9,7 @@ describe('Homepage', () => {
                 selectLanguage(language)
                 clickOnSignUpLink()
                 cy.wait(500)
-                    .url().should('contain', 'sign-in')
+                    .url().should('contain', 'join')
             })
         })
     })

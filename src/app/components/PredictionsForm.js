@@ -302,7 +302,56 @@ const PredictionsForm = ( {
                     predictionsOrResults={predictionsOrResults}
                 />
 
-                {submitButton(predictionType, nicknameTaken)}               
+                {submitButton(predictionType, nicknameTaken)}  
+
+                <div className="text-center">
+                    {invalidEmailSignUpMessage &&  
+                        <p 
+                            className="text-danger font-italic mt-2"
+                            data-automation="invalid-email-message-signUp"
+                        >
+                            {translations.signInPage.noEmail}
+                        </p>
+                    }
+
+                    {emailAlreadyRegisteredMessage &&  
+                        <p 
+                            className="text-danger font-italic mt-2"
+                            data-automation="email-error-signUp"
+                        >
+                            {translations.signInPage.emailAlreadyRegistered}
+                        </p>
+                    }
+
+                    {noPasswordMessage &&  
+                        <p 
+                            className="text-danger font-italic mt-2"
+                            data-automation="password-error-signUp"
+                        >
+                            {translations.signInPage.noPassword}
+                        </p>
+                    }
+
+                    {noNickname && 
+                        <p
+                            className="text-danger font-italic mt-2"
+                            data-automation={"no-username"}
+                        >
+                            {translations.predictionsForm.noUsernameAlert}
+                        </p>
+                    }
+
+                    {predictionsIncomplete && 
+                        <p
+                            className="text-danger font-italic mt-2"
+                            data-automation={"predictions-incomplete"}
+                        >
+                            {translations.predictionsForm.predictionsIncomplete}
+                        </p>
+                    }
+                </div>
+                
+
             </form>
         </div>
     )
