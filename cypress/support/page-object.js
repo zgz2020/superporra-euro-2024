@@ -14,6 +14,8 @@ export const selectors = {
 
     homepageSignUpLink: automationSelector("sign-up-link"),
 
+    accountLink: automationSelector('account-link'),
+    
     leaderboard: automationSelector("leaderboard"),
     leaderboardRow: {
         rank: `${automationSelector("leaderboard-row")} td:nth-child(1)`,
@@ -28,6 +30,8 @@ export const selectors = {
     privateLeaguesTab: (tabName) => `[aria-controls="${tabName}-panel"]`,
     privateLeaguesSelect: '[aria-labelledby="private-leagues-tab"] select',
     privateLeagueNoParticipants: automationSelector("no-participants-private-league"),
+
+    joinLink: automationSelector('join-link'),
 
     updateButton: `${automationSelector("update-button")}:nth(0)`,
 
