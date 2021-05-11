@@ -14,6 +14,8 @@ export const selectors = {
 
     homepageSignUpLink: automationSelector("sign-up-link"),
 
+    accountLink: automationSelector('account-link'),
+
     leaderboard: automationSelector("leaderboard"),
     leaderboardRow: {
         rank: `${automationSelector("leaderboard-row")} td:nth-child(1)`,
@@ -28,6 +30,8 @@ export const selectors = {
     privateLeaguesTab: (tabName) => `[aria-controls="${tabName}-panel"]`,
     privateLeaguesSelect: '[aria-labelledby="private-leagues-tab"] select',
     privateLeagueNoParticipants: automationSelector("no-participants-private-league"),
+
+    joinLink: automationSelector('join-link'),
 
     updateButton: `${automationSelector("update-button")}:nth(0)`,
 
@@ -46,6 +50,14 @@ export const selectors = {
         finalStage: `${automationSelector("euro-stage")}:nth(4)`,
         finalStageTeams: `${automationSelector("euro-stage")}:nth(4) ${automationSelector("score-team")}`,
         generalPredictions: automationSelector("general-prediction")
+    },
+
+    joinPageErrors: {
+        noUsername: automationSelector('no-username'),
+        invalidEmailSignUp: automationSelector('invalid-email-message-signUp'),
+        emailErrorSignUp: automationSelector('email-error-signUp'),
+        passwordErrorSignUp: automationSelector('password-error-signUp'),
+        predictionsIncomplete: automationSelector('predictions-incomplete')
     },
 
     predictionsSubittedMessage: automationSelector("prediction-submitted-success"),
@@ -79,20 +91,17 @@ export const selectors = {
     },
 
     signInTab: '#sign-in-tab',
-    signUpTab: '#sign-up-tab',
+    joinTab: '#sign-up-tab',
     forgotPasswordLink: '[aria-controls="forgot-password-form"]',
     emailInput: automationSelector("email-address-input"),
     passwordInput: automationSelector("password-input"),
     submitButton: '.btn-primary',
     signInPageErrors: {
         noEmailSignIn: automationSelector('no-email-message-signIn'),
-        invalidEmailSignUp: automationSelector('invalid-email-message-signUp'),
         noEmailForgotPassword: automationSelector('no-email-message-forgotPassword'),
         emailErrorSignIn: automationSelector('email-error-signIn'),
-        emailErrorSignUp: automationSelector('email-error-signUp'),
         emailErrorForgotPassword: automationSelector('email-error-forgotPassword'),
         passwordErrorSignIn: automationSelector('password-error-signIn'),
-        passwordErrorSignUp: automationSelector('password-error-signUp'),
     },
     emailSent: automationSelector('password-reset-email-sent'),
     passwordResetTokenExpiredBlock: automationSelector('password-reset-token-expired-block'),
@@ -199,13 +208,35 @@ export const checkElementVisibility = (selector, visible) => cy.get(selector).sh
 export const checkInputFormHeader = (header) => 
     cy.get(selectors.inputForm.form).should('contain', header)
 
-export const submitPredictionsNoUsername = (ctaLocation, language) => { 
-    // Check that Alert is triggered (note that cypress closes alerts automatically)
-    const stub = cy.stub()
-    cy.on('window:alert', stub)
+export const submitPredictionsNoUsername = (ctaLocation) => { 
+    clickOnCTA(selectors.inputForm.submitButton(ctaLocation)).wait(500)
+    joinPageOnlyThisErrorVisible('noUsername')
+}
 
-    clickOnCTA(selectors.inputForm.submitButton(ctaLocation)).then(() => {
-        expect(stub).to.be.calledWith(myAccountAssertions(language).noUsernameAlert)
+export const submitPredictionsInvalidEmail = (ctaLocation, error) => { 
+    clickOnCTA(selectors.inputForm.submitButton(ctaLocation)).wait(500)
+    joinPageOnlyThisErrorVisible(error)
+}
+
+export const submitPredictionsNoPassword = (ctaLocation) => { 
+    clickOnCTA(selectors.inputForm.submitButton(ctaLocation)).wait(500)
+    joinPageOnlyThisErrorVisible('passwordErrorSignUp')
+}
+
+export const submitPredictionsIncompletePredictions = (ctaLocation) => { 
+    clickOnCTA(selectors.inputForm.submitButton(ctaLocation)).wait(500)
+    joinPageOnlyThisErrorVisible('predictionsIncomplete')
+}
+
+export const joinPageOnlyThisErrorVisible = (error) => {
+    Object.keys(selectors.joinPageErrors).forEach($error => {
+        if ($error == error) {
+            cy.get(selectors.joinPageErrors[$error])
+                .should('be.visible')
+                .its('length').should('eq', 2)
+        } else {
+            cy.get(selectors.joinPageErrors[$error]).should('not.exist')
+        }
     })
 }
 
@@ -243,9 +274,11 @@ export const checkFormIsEmpty = () => {
 }
 
 export const fillInInputForm = () => {
+    cy.get(selectors.emailInput).clear().type(randomEmail())
+    cy.get(selectors.passwordInput).clear().type('test1234')
     typeNickname(`ZZ Test Participant - ${randomInt10000()}`)
     clickOnCTA(selectors.inputForm.randomPredictionsButton)
-    cy.wait(1000)
+    cy.wait(1500)
 }
 
 export const checkFormIsFilledIn = () => {
@@ -273,7 +306,7 @@ const checkFinalMatchTeam = (team, predictionData) => // 'team' values: 0 / 1
 
 export const updateInputForm = () => {
     // Update username
-    typeNickname(`ZZ Test Participant - UPDATED - ${randomInt10000()}`)
+    typeNickname(`ZZ Test User - UPDATED - ${randomInt10000()}`)
     // Update predictions
     clickOnCTA(selectors.inputForm.randomPredictionsButton)
 
@@ -289,7 +322,7 @@ export const updateInputForm = () => {
         clickOnCTA(selectors.inputForm.submitButton('bottom'))
 
         // Check that username has been update in Participant's predictions page
-        checkPageHeader('ZZ Test Participant - UPDATED')
+        checkPageHeader('ZZ Test User - UPDATED')
         // Check Final match teams have been update in Participant's predictions page
         checkFinalMatchTeam(0, predictionsFinalMatchData)
         checkFinalMatchTeam(1, predictionsFinalMatchData)
@@ -309,7 +342,7 @@ const verifyNicknameTakenError = (status) => {
     cy.get(selectors.inputForm.nicknameTakenError).should(elementVisibilityAssertion(status))
 }
 
-const typeNickname = (nickname) => cy.get(selectors.inputForm.usernameInput).clear().type(nickname)
+export const typeNickname = (nickname) => cy.get(selectors.inputForm.usernameInput).clear().type(nickname)
 
 const verifySubmitButtonDisabled = (location) => {
     cy.get(selectors.inputForm.submitButton(location)).should('have.attr', 'disabled')
@@ -343,7 +376,7 @@ export const checkUsersBetLinks = (language) => {
 
 export const checkNoPrivateLeaguesJoinedBlockRenders = () => cy.get(selectors.noPrivateLeaguesJoinedBlock).should('be.visible')
 export const checkMyPrivateLeaguesTableNotRenders = () => cy.get(selectors.myPrivateLeaguesTableRow).should('not.exist')
-export const checkMyPrivateLeaguesTableRenders = () => cy.get(selectors.myPrivateLeaguesTableRow).should('contain', 'automatedTest')
+export const checkMyPrivateLeaguesTableRenders = () => cy.get(selectors.myPrivateLeaguesTableRow).should('contain', 'ZZ Test User - UPDATED')
 
 export const checkPredictionPrivateLeague = (leagueName) => cy.get(selectors.myPrivateLeaguesTableLeagueName).should('contain', leagueName)
 
@@ -415,7 +448,7 @@ export const signUp = (email, password) => {
         .wait(1000)
 }
 
-const randomInt10000 = () => Math.floor(Math.random() * 1000)
+export const randomInt10000 = () => Math.floor(Math.random() * 1000)
 
 export const randomEmail = () => `automated-${randomInt10000()}@test.com`
 

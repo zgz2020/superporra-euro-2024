@@ -17,13 +17,24 @@ const AccountPage = ({
     translations, 
     myBets,
     myBetsId,
-    myPrivateLeagues
+    myPrivateLeagues,
+    joiningCompetitionSuccess
 }) => (
     <div>
         <ConnectedHeader title={translations.accountPage.title} />
 
         {session.id ?
-            <div>
+            <div className="mb-5">
+                {joiningCompetitionSuccess &&
+                    <div className="text-center">
+                        <p
+                            className="text-success font-italic mt-2"
+                            data-automation={"competition-joined"}
+                        >
+                            {translations.accountPage.joinedCompetitionSuccessfully}
+                        </p>
+                    </div>}
+
                 <div className="card">
                     <div className="card-header">
                         {translations.accountPage.myBets}
@@ -52,7 +63,7 @@ const AccountPage = ({
                     <ConnectedPrivateLeagues predictionID={myBetsId} myPrivateLeagues={myPrivateLeagues} />}
             </div>
             :
-            <div className="card">
+            <div className="card mb-5">
                 <div className="card-header">
                     {translations.accountPage.notSignedIn.title}
                 </div>
@@ -69,7 +80,13 @@ const AccountPage = ({
 
 
 const mapStateToProps = (state) => {
-    let { session, newPrediction, predictions, predictionsFormNew, translations } = state
+    let { session,
+        newPrediction,
+        predictions,
+        predictionsFormNew,
+        translations,
+        joiningCompetitionSuccess
+    } = state
 
     let myBetsId = session ? Object.keys(predictions.byId).find(prediction => predictions.byId[prediction].owner == session.id) : null
     let myBets = myBetsId ? predictions.byId[myBetsId] : 'NO BETS'
@@ -82,7 +99,8 @@ const mapStateToProps = (state) => {
         session,
         myBets,
         myBetsId,
-        myPrivateLeagues
+        myPrivateLeagues,
+        joiningCompetitionSuccess
     }
 }
 

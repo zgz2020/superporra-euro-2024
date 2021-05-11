@@ -49,24 +49,26 @@ export const myAccountAssertions = (language) => language == 'english' ?
 export const navigationAssertions = language => language == 'english' ?
     { 
         navItem1: 'Home',
-        navItem2: 'Participants',
-        navItem3: 'Results',
-        navItem4: 'Prizes',
-        navItem5: 'Scoring Rules',
-        navItem6A: 'Sign In',
-        navItem6B: 'Account',
-        navItem7: 'Sign Out'
+        navItem2: 'Join',
+        navItem3: 'Participants',
+        navItem4: 'Results',
+        navItem5: 'Prizes',
+        navItem6: 'Rules',
+        navItem7A: 'Sign In',
+        navItem7B: 'Account',
+        navItem8: 'Sign Out'
     }
     :
     {
         navItem1: 'Inicio',
-        navItem2: 'Participantes',
-        navItem3: 'Resultados',
-        navItem4: 'Premios',
-        navItem5: 'Normas puntuación',
-        navItem6A: 'Mi cuenta',
-        navItem6B: 'Cuenta',
-        navItem7: 'Cerrar'
+        navItem2: 'Participa',
+        navItem3: 'Participantes',
+        navItem4: 'Resultados',
+        navItem5: 'Premios',
+        navItem6: 'Normas',
+        navItem7A: 'Mi cuenta',
+        navItem7B: 'Cuenta',
+        navItem8: 'Cerrar'
     }
 
 export const passwordResetAssertions = language => language == 'english' ? 
@@ -91,9 +93,9 @@ export const resultsAssertions = language => language == 'english' ?
 
 export const signInAssertions = language => language == 'english' ? 
     {
-        signUp: 'Sign Up'
+        signIn: 'Sign In'
     }
     :
     {
-        signUp: 'Crear cuenta'
+        signIn: 'Iniciar sesión'
     }

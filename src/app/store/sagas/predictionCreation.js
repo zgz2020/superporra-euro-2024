@@ -1,4 +1,4 @@
-import { take, put, select } from 'redux-saga/effects'
+import { take, put, select, delay } from 'redux-saga/effects'
 import axios from 'axios'
 import uuid from 'uuid'
 import * as mutations from '../mutations'
@@ -48,5 +48,9 @@ export function* predictionCreationSaga() {
         yield put(mutations.hidePredictionsFormNew())
         yield put(mutations.showPredictionsSubmitted())
         yield put(mutations.resetPredictionCreationForm())
+
+        yield put(mutations.showjoiningCompetitionSuccess())
+        yield delay(2000)
+        yield put(mutations.hidejoiningCompetitionSuccess())
     }
 }

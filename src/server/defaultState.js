@@ -33,17 +33,9 @@ export const defaultStateDOS = {
     users: [
         {
             id: "jjlanga@hotmail.com",
-            passwordHash: md5("Admin"),
+            password: md5("test1234"),
             role: "admin"
-        },
-        {
-            id: "paco@porras.com",
-            passwordHash: md5("paco")
         }
-        // {
-        //     id: "U2",
-        //     username: "pollo",
-        // }
     ],
     // predictions: [
     //     {
