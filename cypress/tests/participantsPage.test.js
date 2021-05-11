@@ -29,15 +29,17 @@ describe('Participants page', () => {
                 // Signed out status - [JOIN] should redirect to /sign-in
                 cy.viewport(viewport).visit('/participants')
                 selectLanguage(language)
-                clickOnCTA(selectors.updateButton)
-                cy.url().should('contain', '/sign-in')
+                clickOnCTA(selectors.joinLink)
+                cy.url().should('contain', '/join')
         
                 // Signed in status - [JOIN] should redirect to /account
-                clickOnCTA(selectors.signInTab)
+                cy.visit('/sign-in')
                 signIn(registeredUser.email, registeredUser.password)
+
                 cy.visit('/participants')
-                clickOnCTA(selectors.updateButton)
-                cy.url().should('contain', '/account')
+                clickOnCTA(selectors.joinLink)
+                cy.url().should('contain', '/join')
+                    .get(selectors.accountLink).its('length').should('eq', 2)
             })  
         })
     })
