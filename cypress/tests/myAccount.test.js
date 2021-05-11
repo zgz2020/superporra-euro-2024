@@ -56,11 +56,10 @@ let url = Cypress.config().baseUrl
 let selectName = (language) => language == 'english' ? 'Select Username' : 'Elige usuario'
 let selectLeague = (language) => language == 'english' ? 'Select Championship' : 'Elige campeonato'
 
-describe('My Account - My Bets', () => {
+describe.only('My Account - My Bets', () => {
 
     beforeEach(() => {
         cy.visit('/sign-in')
-        clickOnCTA(selectors.signInTab)
         signIn(registeredUser.email, registeredUser.password)
     })
 
@@ -105,7 +104,6 @@ describe('My Account - Private Championships', () => {
             }
         })
         cy.visit('/sign-in')
-        clickOnCTA(selectors.signInTab)
         signIn(registeredUser.email, registeredUser.password)
     })
 

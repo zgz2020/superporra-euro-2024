@@ -15,9 +15,7 @@ import {
     clickOnCTA,
     randomEmail,
     checkMyBetsTable,
-    selectUsersBet,
-    checkPageHeader,
-    checkElementVisibility
+    signIn
 } from '../support/page-object'
 import {
     viewports,
@@ -28,7 +26,7 @@ import {
 
 let url = Cypress.config().baseUrl
 
-describe('Join page - Elements renders and negative paths', () => {
+describe('Join page - Signed Out status - Elements render and negative paths', () => {
     viewports.forEach(viewport => {
         languages.forEach(language => {
             it(`Elements render and Form empty - ${viewport} - ${language}`, () => {
@@ -98,7 +96,7 @@ describe('Join page - Elements renders and negative paths', () => {
     })
 })
 
-describe('Join page - New User with no predictions', () => {
+describe('Join page - Signed Out status - New User with no predictions', () => {
 
     after(() => {
         // Remove all test users created by these tests
@@ -152,6 +150,25 @@ describe('Join page - New User with no predictions', () => {
                 cy.visit('/participants')
                 cy.get(selectors.leaderboard).should('contain', 'ZZ Test Participant')
             })
+        })
+    })
+})
+
+describe('Join Page - Signed In status', () => {
+    viewports.forEach(viewport => {
+        languages.forEach(language => {
+            it(`Elements render - ${viewport} - ${language}`, () => {
+                cy.viewport(viewport).visit('/sign-in')
+                selectLanguage(language)
+                signIn(registeredUser.email, registeredUser.password)
+
+                cy.visit('/join')
+                cy.get(selectors.accountLink).its('length').should('eq', 2)
+                cy.get(selectors.accountLink).eq(0).click()
+                    .wait(500)
+                cy.url().should('contain', '/account')
+            })
+            
         })
     })
 })
