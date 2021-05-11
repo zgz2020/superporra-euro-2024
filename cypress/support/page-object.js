@@ -48,6 +48,14 @@ export const selectors = {
         generalPredictions: automationSelector("general-prediction")
     },
 
+    joinPageErrors: {
+        noUsername: automationSelector('no-username'),
+        invalidEmailSignUp: automationSelector('invalid-email-message-signUp'),
+        emailErrorSignUp: automationSelector('email-error-signUp'),
+        passwordErrorSignUp: automationSelector('password-error-signUp'),
+        predictionsIncomplete: automationSelector('predictions-incomplete')
+    },
+
     predictionsSubittedMessage: automationSelector("prediction-submitted-success"),
 
     resultsContainer: automationSelector("results-container"),
@@ -86,13 +94,10 @@ export const selectors = {
     submitButton: '.btn-primary',
     signInPageErrors: {
         noEmailSignIn: automationSelector('no-email-message-signIn'),
-        invalidEmailSignUp: automationSelector('invalid-email-message-signUp'),
         noEmailForgotPassword: automationSelector('no-email-message-forgotPassword'),
         emailErrorSignIn: automationSelector('email-error-signIn'),
-        emailErrorSignUp: automationSelector('email-error-signUp'),
         emailErrorForgotPassword: automationSelector('email-error-forgotPassword'),
         passwordErrorSignIn: automationSelector('password-error-signIn'),
-        passwordErrorSignUp: automationSelector('password-error-signUp'),
     },
     emailSent: automationSelector('password-reset-email-sent'),
     passwordResetTokenExpiredBlock: automationSelector('password-reset-token-expired-block'),
@@ -199,13 +204,35 @@ export const checkElementVisibility = (selector, visible) => cy.get(selector).sh
 export const checkInputFormHeader = (header) => 
     cy.get(selectors.inputForm.form).should('contain', header)
 
-export const submitPredictionsNoUsername = (ctaLocation, language) => { 
-    // Check that Alert is triggered (note that cypress closes alerts automatically)
-    const stub = cy.stub()
-    cy.on('window:alert', stub)
+export const submitPredictionsNoUsername = (ctaLocation) => { 
+    clickOnCTA(selectors.inputForm.submitButton(ctaLocation)).wait(500)
+    joinPageOnlyThisErrorVisible('noUsername')
+}
 
-    clickOnCTA(selectors.inputForm.submitButton(ctaLocation)).then(() => {
-        expect(stub).to.be.calledWith(myAccountAssertions(language).noUsernameAlert)
+export const submitPredictionsInvalidEmail = (ctaLocation, error) => { 
+    clickOnCTA(selectors.inputForm.submitButton(ctaLocation)).wait(500)
+    joinPageOnlyThisErrorVisible(error)
+}
+
+export const submitPredictionsNoPassword = (ctaLocation) => { 
+    clickOnCTA(selectors.inputForm.submitButton(ctaLocation)).wait(500)
+    joinPageOnlyThisErrorVisible('passwordErrorSignUp')
+}
+
+export const submitPredictionsIncompletePredictions = (ctaLocation) => { 
+    clickOnCTA(selectors.inputForm.submitButton(ctaLocation)).wait(500)
+    joinPageOnlyThisErrorVisible('predictionsIncomplete')
+}
+
+export const joinPageOnlyThisErrorVisible = (error) => {
+    Object.keys(selectors.joinPageErrors).forEach($error => {
+        if ($error == error) {
+            cy.get(selectors.joinPageErrors[$error])
+                .should('be.visible')
+                .its('length').should('eq', 2)
+        } else {
+            cy.get(selectors.joinPageErrors[$error]).should('not.exist')
+        }
     })
 }
 
@@ -243,9 +270,11 @@ export const checkFormIsEmpty = () => {
 }
 
 export const fillInInputForm = () => {
+    cy.get(selectors.emailInput).clear().type(randomEmail())
+    cy.get(selectors.passwordInput).clear().type('test1234')
     typeNickname(`ZZ Test Participant - ${randomInt10000()}`)
     clickOnCTA(selectors.inputForm.randomPredictionsButton)
-    cy.wait(1000)
+    cy.wait(1500)
 }
 
 export const checkFormIsFilledIn = () => {
@@ -309,7 +338,7 @@ const verifyNicknameTakenError = (status) => {
     cy.get(selectors.inputForm.nicknameTakenError).should(elementVisibilityAssertion(status))
 }
 
-const typeNickname = (nickname) => cy.get(selectors.inputForm.usernameInput).clear().type(nickname)
+export const typeNickname = (nickname) => cy.get(selectors.inputForm.usernameInput).clear().type(nickname)
 
 const verifySubmitButtonDisabled = (location) => {
     cy.get(selectors.inputForm.submitButton(location)).should('have.attr', 'disabled')
@@ -415,7 +444,7 @@ export const signUp = (email, password) => {
         .wait(1000)
 }
 
-const randomInt10000 = () => Math.floor(Math.random() * 1000)
+export const randomInt10000 = () => Math.floor(Math.random() * 1000)
 
 export const randomEmail = () => `automated-${randomInt10000()}@test.com`
 
