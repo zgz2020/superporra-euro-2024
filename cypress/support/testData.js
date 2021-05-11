@@ -93,9 +93,9 @@ export const resultsAssertions = language => language == 'english' ?
 
 export const signInAssertions = language => language == 'english' ? 
     {
-        signUp: 'Sign Up'
+        signIn: 'Sign In'
     }
     :
     {
-        signUp: 'Crear cuenta'
+        signIn: 'Iniciar sesión'
     }

@@ -1,7 +1,6 @@
 import { 
     selectors,
     onlyThisErrorVisible,
-    randomEmail,
     clickOnCTA,
     selectLanguage
 } from '../support/page-object'
@@ -16,11 +15,6 @@ Sign in happy path included in:
     myAccount > 
         > My Account - Existent user with at least one prediction > 
             > beforeEach()
-
-Sign up happy path included in:
-    myAccount > 
-        > My Account - New User with no predictions > 
-            > Elements rendered, create new prediction and update existent one
 */
 
 
@@ -36,7 +30,7 @@ describe('On page load', () => {
     })
 })
 
-describe('Sign In, Sign Up & Forgot your Password - Unhappy paths', () => {
+describe('Sign In & Forgot your Password - Unhappy paths', () => {
     viewports.forEach(viewport => {    
         languages.forEach(language => {
             it(`Sign In - No email enterd - ${viewport} - ${language}`, () => {
@@ -73,51 +67,12 @@ describe('Sign In, Sign Up & Forgot your Password - Unhappy paths', () => {
                 onlyThisErrorVisible('passwordErrorSignIn')
             })
         
-            it(`Sign Up - No email enterd - ${viewport} - ${language}`, () => {
-                cy.viewport(viewport).visit('/sign-in')
-                    .wait(500) // FIXME!!! POST req aborted: /id-token & /mongo/data
-                selectLanguage(language)
-                clickOnCTA(selectors.signUpTab)
-                cy.get(selectors.submitButton).eq(1).click()
-                onlyThisErrorVisible('invalidEmailSignUp')
-            })
-
-            it(`Sign Up - Invalid email enterd - ${viewport} - ${language}`, () => {
-                cy.viewport(viewport).visit('/sign-in')
-                    .wait(500) // FIXME!!! POST req aborted: /id-token & /mongo/data
-                selectLanguage(language)
-                clickOnCTA(selectors.signUpTab)
-                cy.get(selectors.emailInput).eq(1).clear().type('invalid@email')
-                    .get(selectors.submitButton).eq(1).click()
-                onlyThisErrorVisible('invalidEmailSignUp')
-            })
-        
-            it(`Sign Up - Email already registered - ${viewport} - ${language}`, () => {
-                cy.viewport(viewport).visit('/sign-in')
-                    .wait(500) // FIXME!!! POST req aborted: /id-token & /mongo/data
-                selectLanguage(language)
-                clickOnCTA(selectors.signUpTab)
-                cy.get(selectors.emailInput).eq(1).clear().type(registeredUser.email)
-                    .get(selectors.submitButton).eq(1).click()
-                onlyThisErrorVisible('emailErrorSignUp')
-            })
-        
-            it(`Sign Up - No password entered - ${viewport} - ${language}`, () => {
-                cy.viewport(viewport).visit('/sign-in')
-                    .wait(500) // FIXME!!! POST req aborted: /id-token & /mongo/data
-                selectLanguage(language)
-                clickOnCTA(selectors.signUpTab)
-                cy.get(selectors.emailInput).eq(1).clear().type(randomEmail())
-                    .get(selectors.submitButton).eq(1).click()
-                onlyThisErrorVisible('passwordErrorSignUp')
-            })
-        
             it(`Forgot your password - No email enterd - ${viewport} - ${language}`, () => {
                 cy.viewport(viewport).visit('/sign-in')
                     .wait(500) // FIXME!!! POST req aborted: /id-token & /mongo/data
                 selectLanguage(language)
                 clickOnCTA(selectors.forgotPasswordLink)
-                cy.get(selectors.submitButton).eq(2).click()
+                cy.get(selectors.submitButton).eq(1).click()
                 onlyThisErrorVisible('noEmailForgotPassword')
             })
         
@@ -126,22 +81,37 @@ describe('Sign In, Sign Up & Forgot your Password - Unhappy paths', () => {
                     .wait(500) // FIXME!!! POST req aborted: /id-token & /mongo/data
                 selectLanguage(language)
                 clickOnCTA(selectors.forgotPasswordLink)
-                cy.get(selectors.emailInput).eq(2).clear().type('not-registered@test.com')
-                    .get(selectors.submitButton).eq(2).click()
+                cy.get(selectors.emailInput).eq(1).clear().type('not-registered@test.com')
+                    .get(selectors.submitButton).eq(1).click()
                 onlyThisErrorVisible('emailErrorForgotPassword')
             })
         })
     })
 })
 
+describe('Join Panel', () => {
+    viewports.forEach(viewport => {
+        languages.forEach(language => {
+            it('Elements render and link', () => {
+                cy.viewport(viewport).visit('/sign-in')
+                selectLanguage(language)
+
+                clickOnCTA(selectors.joinTab)
+                cy.get(selectors.joinLink).click()
+                    .wait(500)
+                    .url().should('contain', '/join')
+            })
+        })
+    })
+})
 
 describe('Forgot password - Happy path', () => {
     viewports.forEach(viewport => {
         languages.forEach(language => {
-            it(`Sign Up selected by default - ${viewport} - ${language}`, () => {
+            it(`Sign In selected by default - ${viewport} - ${language}`, () => {
                 cy.viewport(viewport).visit('/sign-in')
                 selectLanguage(language)
-                cy.get(selectors.submitButton).should('contain', signInAssertions(language).signUp)
+                cy.get(selectors.submitButton).should('contain', signInAssertions(language).signIn)
             })
         
             it(`Forgot your password - Email registered - ${viewport} - ${language}`, () => {
@@ -154,8 +124,8 @@ describe('Forgot password - Happy path', () => {
                 cy.viewport(viewport).visit('/sign-in')
                 selectLanguage(language)
                 clickOnCTA(selectors.forgotPasswordLink)
-                cy.get(selectors.emailInput).eq(2).clear().type(registeredUser.email)
-                    .get(selectors.submitButton).eq(2).click()
+                cy.get(selectors.emailInput).eq(1).clear().type(registeredUser.email)
+                    .get(selectors.submitButton).eq(1).click()
                     // Check success message visible
                     .get(selectors.emailSent).should('be.visible')
                 // Check no error messages displayed

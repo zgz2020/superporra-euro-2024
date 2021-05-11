@@ -1,37 +1,19 @@
 import { 
     selectors,
-    signUp,
-    randomEmail,
     randomChampionship,
     signIn,
-    checkNoBetsYet,
-    checkPredictionInLeaderboard,
-    checkMyBetsTable,
     selectUsersBet,
     checkUsersBetLinks,
     checkPredictionInPrivateLeagueLeaderboard,
-    checkPredictionNotInPrivateLeagueLeaderboard,
     verifyNoParticipantsInPrivateLeague,
-    selectUserOnlyPrediction,
     checkElementVisibility,
-    checkFirstRank,
-    checkFirstParticipantLinks,
     clickOnCTA,
     checkInputFormHeader,
-    checkFormIsEmpty,
-    submitPredictionsNoUsername,
-    fillInInputForm,
-    checkFormIsFilledIn,
-    checkLeaderboardLastParticipant,
-    selectLastParticipant,
-    checkPageHeader,
     updateInputForm,
-    nicknameTakenTest,
     selectLanguage,
     visitViewportPageLanguage,
     checkMyPrivateLeaguesTableNotRenders,
     checkNoPrivateLeaguesJoinedBlockRenders,
-    checkMyPrivateLeaguesTableRenders,
     checkPredictionPrivateLeague,
     createNewPrivateLeague,
     joinNewPrivateLeague,
@@ -45,7 +27,6 @@ import {
 } from '../support/page-object'
 import {
     registeredUser,
-    registeredUserNoPredictions,
     viewports,
     languages,
     myAccountAssertions
@@ -53,10 +34,7 @@ import {
 
 let url = Cypress.config().baseUrl
 
-let selectName = (language) => language == 'english' ? 'Select Username' : 'Elige usuario'
-let selectLeague = (language) => language == 'english' ? 'Select Championship' : 'Elige campeonato'
-
-describe.only('My Account - My Bets', () => {
+describe('My Account - My Bets', () => {
 
     beforeEach(() => {
         cy.visit('/sign-in')
@@ -154,13 +132,13 @@ describe('My Account - Private Championships', () => {
                 checkPredictionPrivateLeague('AutoTest Championship')
                 verifyChampionshipNameNotInSelectList('AutoTest Championship')
                 
-                // Check Participants page > 'AutoTest Championship' > 'automatedTest' listed
+                // Check Participants page > 'AutoTest Championship' > 'ZZ Test User - UPDATED' listed
                 cy.visit('/participants')
                 selectPrivateLeaguesTab('Private-leagues')
                 cy.wait(1000)
                 selectPrivateLeague('AutoTest Championship')
                 cy.wait(1000)
-                checkPredictionInPrivateLeagueLeaderboard('automatedTest')
+                checkPredictionInPrivateLeagueLeaderboard('ZZ Test User - UPDATED')
 
                 // Quit private leagues
                 cy.visit('/account')
@@ -172,7 +150,7 @@ describe('My Account - Private Championships', () => {
                 selectPrivateLeaguesActionTab('Join')
                 verifyChampionshipNameInSelectList('AutoTest Championship')
 
-                // Check Participants page > 'AutoTest Championship' > 'automatedTest' NOT listed
+                // Check Participants page > 'AutoTest Championship' > 'ZZ Test User - UPDATED' NOT listed
                 cy.visit('/participants')
                 selectPrivateLeaguesTab('Private-leagues')
                 cy.wait(1000)

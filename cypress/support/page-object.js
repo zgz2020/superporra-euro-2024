@@ -15,7 +15,7 @@ export const selectors = {
     homepageSignUpLink: automationSelector("sign-up-link"),
 
     accountLink: automationSelector('account-link'),
-    
+
     leaderboard: automationSelector("leaderboard"),
     leaderboardRow: {
         rank: `${automationSelector("leaderboard-row")} td:nth-child(1)`,
@@ -91,7 +91,7 @@ export const selectors = {
     },
 
     signInTab: '#sign-in-tab',
-    signUpTab: '#sign-up-tab',
+    joinTab: '#sign-up-tab',
     forgotPasswordLink: '[aria-controls="forgot-password-form"]',
     emailInput: automationSelector("email-address-input"),
     passwordInput: automationSelector("password-input"),
@@ -306,7 +306,7 @@ const checkFinalMatchTeam = (team, predictionData) => // 'team' values: 0 / 1
 
 export const updateInputForm = () => {
     // Update username
-    typeNickname(`ZZ Test Participant - UPDATED - ${randomInt10000()}`)
+    typeNickname(`ZZ Test User - UPDATED - ${randomInt10000()}`)
     // Update predictions
     clickOnCTA(selectors.inputForm.randomPredictionsButton)
 
@@ -322,7 +322,7 @@ export const updateInputForm = () => {
         clickOnCTA(selectors.inputForm.submitButton('bottom'))
 
         // Check that username has been update in Participant's predictions page
-        checkPageHeader('ZZ Test Participant - UPDATED')
+        checkPageHeader('ZZ Test User - UPDATED')
         // Check Final match teams have been update in Participant's predictions page
         checkFinalMatchTeam(0, predictionsFinalMatchData)
         checkFinalMatchTeam(1, predictionsFinalMatchData)
@@ -376,7 +376,7 @@ export const checkUsersBetLinks = (language) => {
 
 export const checkNoPrivateLeaguesJoinedBlockRenders = () => cy.get(selectors.noPrivateLeaguesJoinedBlock).should('be.visible')
 export const checkMyPrivateLeaguesTableNotRenders = () => cy.get(selectors.myPrivateLeaguesTableRow).should('not.exist')
-export const checkMyPrivateLeaguesTableRenders = () => cy.get(selectors.myPrivateLeaguesTableRow).should('contain', 'automatedTest')
+export const checkMyPrivateLeaguesTableRenders = () => cy.get(selectors.myPrivateLeaguesTableRow).should('contain', 'ZZ Test User - UPDATED')
 
 export const checkPredictionPrivateLeague = (leagueName) => cy.get(selectors.myPrivateLeaguesTableLeagueName).should('contain', leagueName)
 
