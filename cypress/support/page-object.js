@@ -148,7 +148,10 @@ export const checkNavigationItemLabel = (position, label) =>
     cy.get(selectors.navItem(position)).should('contain', label)
 
 export const checkNavigationItemLink = (viewport, position, slug) => {
-    if (viewport === "iphone-6") clickOnCTA(selectors.mobileNavToggleButton)
+    if (viewport === "iphone-6") {
+        clickOnCTA(selectors.mobileNavToggleButton)
+        cy.wait(500)
+    }
 
     clickOnCTA(selectors.navItem(position))
     cy.wait(500)
