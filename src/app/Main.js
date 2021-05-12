@@ -17,11 +17,13 @@ import { ConnectedLoginPage } from './pages/LoginPage'
 import { ConnectedPasswordResetPage } from './pages/PasswordResetPage'
 import { ConnectedFooter } from './components/Footer'
 import { ConnectedJoinPage } from './pages/JoinPage'
+import ScrollToTop from './scrollToTop'
 
 export const Main = () => (
     <Router history={history}>
         <Provider store={store}>
             <div>
+                <ScrollToTop />
                 <ConnectedNavigation />
                 <Route exact path="/" render={() => (<ConnectedHomePage />)} />
                 <Route path="/sign-in" render={() => (<ConnectedLoginPage />)} />
@@ -36,7 +38,7 @@ export const Main = () => (
                 <Route path="/account" render={() => (<ConnectedAccountPage />)} />
                 <Route path="/join" render={() => (<ConnectedJoinPage />)} />
                 <ConnectedFooter />
-            </div>
+            </div> 
         </Provider>
     </Router>
 )
