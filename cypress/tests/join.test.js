@@ -145,6 +145,9 @@ describe('Join page - Signed Out status - New User with no predictions', () => {
                 cy.wait(500)
 
                 cy.url().should('contain', '/account')
+                cy.get(selectors.competitionJoined).should('be.visible')
+                    .wait(2000)
+                    .get(selectors.competitionJoined).should('not.exist')
                 checkMyBetsTable('ZZ Test Participant')
 
                 cy.visit('/participants')

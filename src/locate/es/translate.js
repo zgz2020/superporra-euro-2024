@@ -119,7 +119,7 @@ export const spanishTranslations = {
     },
     accountPage: {
         title: "Mi cuenta",
-        joinedCompetitionSuccessfully: "¡Ya formas parte de la competición!",
+        joinedCompetitionSuccessfully: "¡Ya formas parte de la Superporra!",
         notSignedIn: {
             title: "Sesión no iniciada",
             description: "Tienes que iniciar sesión para acceder a tu cuenta."

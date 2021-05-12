@@ -119,7 +119,7 @@ export const englishTranslations = {
     },
     accountPage: {
         title: "My Account",
-        joinedCompetitionSuccessfully: "You have succesfully joined the competition!",
+        joinedCompetitionSuccessfully: "You have succesfully joined the Superporra!",
         notSignedIn: {
             title: "Not Signed In",
             description: "You need to sign in to access to the Account page."

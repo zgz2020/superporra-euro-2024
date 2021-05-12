@@ -108,7 +108,9 @@ export const selectors = {
     requestNewTokenLink: automationSelector('request-new-token'),
     passwordResetPasswordError: automationSelector('password-error'),
     passwordResetSuccessMessage: automationSelector('password-reset-success'),
-    signInButton: automationSelector('sign-in')
+    signInButton: automationSelector('sign-in'),
+
+    competitionJoined: automationSelector('competition-joined')
 }
  
 const elementVisibilityAssertion = (status) => {
