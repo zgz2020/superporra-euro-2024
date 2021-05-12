@@ -411,57 +411,57 @@ export const emptyPrediction = {
             id: "1",
             homeGoals: " ",
             awayGoals: " ",
-            homeTeam: "2o Grupo A",
-            awayTeam: "2o Grupo B"
+            homeTeam: "2nd in Group A",
+            awayTeam: "2nd in Group B"
         },
         "2": {
             id: "2",
             homeGoals: " ",
             awayGoals: " ",
-            homeTeam: "1o Grupo A",
-            awayTeam: "2o Grupo C"
+            homeTeam: "1st in Group A",
+            awayTeam: "2nd in Group C"
         },
         "3": {
             id: "3",
             homeGoals: " ",
             awayGoals: " ",
-            homeTeam: "1o Grupo C",
-            awayTeam: "3o D, E o F"
+            homeTeam: "1st in Group C",
+            awayTeam: "3rd in D/E or F"
         },
         "4": {
             id: "4",
             homeGoals: " ",
             awayGoals: " ",
-            homeTeam: "1o Grupo B",
-            awayTeam: "3o A, D, E o F"
+            homeTeam: "1st in Group B",
+            awayTeam: "3rd in A/D/E or F"
         },
         "5": {
             id: "5",
             homeGoals: " ",
             awayGoals: " ",
-            homeTeam: "2o Grupo D",
-            awayTeam: "2o Grupo E"
+            homeTeam: "2nd in Group D",
+            awayTeam: "2nd in Group E"
         },
         "6": {
             id: "6",
             homeGoals: " ",
             awayGoals: " ",
-            homeTeam: "1o Grupo F",
-            awayTeam: "3o A, B o C"
+            homeTeam: "1st in Group F",
+            awayTeam: "3rd in A/B or C"
         },
         "7": {
             id: "7",
             homeGoals: " ",
             awayGoals: " ",
-            homeTeam: "1o Grupo D",
-            awayTeam: "2o Grupo F"
+            homeTeam: "1st in Group D",
+            awayTeam: "2nd in Group F"
         },
         "8": {
             id: "8",
             homeGoals: " ",
             awayGoals: " ",
-            homeTeam: "1o Grupo E",
-            awayTeam: "3o A, B, C o D"
+            homeTeam: "1st in Group E",
+            awayTeam: "3rd in A/B/C or D"
         }
     },
     quarterFinalMatches: {
