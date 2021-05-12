@@ -186,3 +186,7 @@ export const participantTotalPoints = (prediction, results) =>
     + getEuroWinnerPoints(prediction, results)
     + getTeamGlobalGoalsPoints(prediction, results, "topScorer")
     + getTeamGlobalGoalsPoints(prediction, results, "leastConceded")
+
+// Rankings: List of participants sorted by score
+export const rankings = (predictionsList, results) => predictionsList && 
+    Object.values(predictionsList).sort((a, b) => participantTotalPoints(b, results) - participantTotalPoints(a, results))

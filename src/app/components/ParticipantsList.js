@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { participantTotalPoints } from '../../utils/leaderboard'
+import { participantTotalPoints, rankings } from '../../utils/leaderboard'
 
 const ParticipantsList = ( { 
     mongoDataLoading, 
@@ -30,17 +30,17 @@ const ParticipantsList = ( {
                             </tr>
                         </thead>
                         <tbody>
-                            {Object.keys(predictionsList).map((key, index) => (
+                            {rankings(predictionsList, results).map((prediction, index) => (
                                 <tr key={index+1} data-automation="leaderboard-row">
                                     <td>{index+1}</td>
                                     <td>
-                                        <Link to={`/participants/${key}`}>
-                                            {predictionsList[key].username}
+                                        <Link to={`/participants/${prediction.id}`}>
+                                            {prediction.username}
                                         </Link>
                                     </td>
                                     <td className="text-center">
-                                        <Link to={`/participants/score/${key}`}>
-                                            {participantTotalPoints(predictionsList[key], results)}
+                                        <Link to={`/participants/score/${prediction.id}`}>
+                                            {participantTotalPoints(prediction, results)}
                                         </ Link>
                                     </td>
                                 </tr>
