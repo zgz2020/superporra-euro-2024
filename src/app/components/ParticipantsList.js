@@ -1,7 +1,11 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { participantTotalPoints, rankings } from '../../utils/leaderboard'
+import { 
+    participantTotalPoints,
+    rankings,
+    deadlockCoefficient
+} from '../../utils/leaderboard'
 
 const ParticipantsList = ( { 
     mongoDataLoading, 
@@ -27,6 +31,7 @@ const ParticipantsList = ( {
                                 <th>#</th>
                                 <th>{translations.leaderboard.name}</th>
                                 <th>{translations.leaderboard.score}</th>
+                                <th>DL Coef.</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -43,6 +48,9 @@ const ParticipantsList = ( {
                                             {participantTotalPoints(prediction, results)}
                                         </ Link>
                                     </td>
+                                    <td>
+                                        {deadlockCoefficient(prediction, results)}
+                                    </td>
                                 </tr>
                             ))}
                         </tbody>
@@ -56,7 +64,7 @@ const ParticipantsList = ( {
 const mapStateToProps = (state, ownProps) => {
     let { mongoDataLoading, predictions, results, translations } = state
     let { filteredPredictions } = ownProps
-
+    
     return {
         mongoDataLoading,
         predictions,
