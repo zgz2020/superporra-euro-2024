@@ -234,7 +234,7 @@ export const englishTranslations = {
         }
     },
     individualsRules: {
-        title: "SCORING RULES - INDIVIDUALS",
+        title: "SCORING RULES",
         rules: {
             a: {
                 title: "Goals Home",

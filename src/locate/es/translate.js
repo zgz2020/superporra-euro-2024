@@ -234,7 +234,7 @@ export const spanishTranslations = {
         }
     },
     individualsRules: {
-        title: "PUNTUACIÓN - INDIVIDUALES",
+        title: "PUNTUACIÓN",
         rules: {
             a: {
                 title: "Goles Anfitrión",

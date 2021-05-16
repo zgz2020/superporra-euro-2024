@@ -9,7 +9,6 @@ const ScoringRulesPage = ({ translations }) => (
         <ConnectedHeader title={translations.scoringRulesPage.title} />
         <ConnectedHomepageSponsor />
         <div className="my-5"></div>
-        <ConnectedScoringRuleCategory ruleCategory="teamRules" />
         <ConnectedScoringRuleCategory ruleCategory="individualsRules" />
     </div>
 )
