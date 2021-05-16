@@ -186,6 +186,8 @@ export const participantTotalPoints = (prediction, results) =>
     + getEuroWinnerPoints(prediction, results)
     + getTeamGlobalGoalsPoints(prediction, results, "topScorer")
     + getTeamGlobalGoalsPoints(prediction, results, "leastConceded")
+ 
+const finalMatchTeams = results => [results.finalMatches["1"].homeTeam, results.finalMatches["1"].awayTeam] 
 
 const euroRunnerup = prediction => 
     prediction.finalMatches[1].homeTeam == prediction.winner ?
@@ -194,14 +196,14 @@ const euroRunnerup = prediction =>
 
 // Deadlock Coefficient
 export const deadlockCoefficient = (prediction, results) => 
-    prediction.winner == results.winner ? 2160 : 0
-    + prediction.finalMatches[1].homeTeam == results.finalMatches[1].homeTeam ? 720 : 0
-    + prediction.finalMatches[1].awayTeam == results.finalMatches[1].awayTeam ? 720 : 0
-    + euroRunnerup(prediction) == euroRunnerup(results) ? 360 : 0
-    + (prediction.finalMatches[1].homeGoals == results.finalMatches[1].homeGoals) &&
-        (prediction.finalMatches[1].awayGoals == results.finalMatches[1].awayGoals) ? 180 : 0
-    + getTeamGlobalGoalsPoints(prediction, results, "topScorer") == 25 ? 90 : 0
-    + getTeamGlobalGoalsPoints(prediction, results, "leastConceded") == 25 ? 45 : 0
+    (prediction.winner == results.winner ? 2160 : 0)
+    + (finalMatchTeams(results).includes(prediction.finalMatches[1].homeTeam) ? 720 : 0)
+    + (finalMatchTeams(results).includes(prediction.finalMatches[1].awayTeam) ? 720 : 0)
+    + (euroRunnerup(prediction) == euroRunnerup(results) ? 360 : 0)
+    + ((prediction.finalMatches[1].homeGoals == results.finalMatches[1].homeGoals) &&
+        (prediction.finalMatches[1].awayGoals == results.finalMatches[1].awayGoals) ? 180 : 0)
+    + (getTeamGlobalGoalsPoints(prediction, results, "topScorer") == 25 ? 90 : 0)
+    + (getTeamGlobalGoalsPoints(prediction, results, "leastConceded") == 25 ? 45 : 0)
     + (stageQualifiedTeamsPoints(prediction, 'semiFinalMatches', results) / 20) * 9
     + (stageQualifiedTeamsPoints(prediction, 'quarterFinalMatches', results) / 15)
 
