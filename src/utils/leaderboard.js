@@ -23,12 +23,12 @@ const compareMatchGoals = (stage, match, team, results) =>
 export const getMatchTeamGoalsPoints = (stage, match, team, results) => 
     !matchNotPlayedYet(stage, match, results) 
         && compareMatchGoals(stage, match, team, results) 
-            ? 5 : 0  
+            ? 10 : 0  
 
 // SCORING RULE - d. Goals Bonus (knock-out stages only) - 5 points
 export const getMatchGoalsBonusPoints = (stage, match, results) =>
-    getMatchTeamGoalsPoints(stage, match, "home", results) === 5
-        && getMatchTeamGoalsPoints(stage, match, "away", results) === 5 
+    getMatchTeamGoalsPoints(stage, match, "home", results) === 10
+        && getMatchTeamGoalsPoints(stage, match, "away", results) === 10 
             ? 5 : 0
 
 
