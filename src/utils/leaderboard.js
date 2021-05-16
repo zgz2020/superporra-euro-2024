@@ -148,8 +148,8 @@ export const getR16BonusQualifiedTeams = (prediction, results) =>
     
 
 export const getStageQualifiedTeams = (prediction, stage, results) => 
-    Object.keys(prediction[stage]).reduce(function(r16BonusQualifiedTeams, match){
-        return r16BonusQualifiedTeams.concat(getMatchQualifiedTeams(stage, prediction.r16Matches[match], "qualifiedTeam", results))
+    Object.keys(prediction[stage]).reduce(function(stageQualifiedTeams, match){
+        return stageQualifiedTeams.concat(getMatchQualifiedTeams(stage, prediction[stage][match], "qualifiedTeam", results))
     }, [])
 
 export const qualifiedTeamsShortNames = (teams) => 
