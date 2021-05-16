@@ -234,25 +234,25 @@ export const englishTranslations = {
         }
     },
     individualsRules: {
-        title: "SCORING RULES - INDIVIDUALS",
+        title: "SCORING RULES",
         rules: {
             a: {
                 title: "Goals Home",
-                description: "5 points awarded for getting right the number of goals scored by the ‘Home’ team in a match. The ‘Home’ team will be the team that appears on the left side of the results table.",
+                description: "10 points awarded for getting right the number of goals scored by the ‘Home’ team in a match. The ‘Home’ team will be the team that appears on the left side of the results table.",
                 notes: {
                     1: "Even if you do not get the correct teams that play the Round of 16, Quarter-finals, etc. you will get points if you get the correct ‘Goals Home’ for those matches.",
                     2: "For the knock-out stages (Round of 16, Q/F, SF and Final), the ‘Goals Home’ will be the number of goals scored by the ‘Home’ team either after the official 90 minutes (if extra time is not needed) or after the 120 minutes (when extra time is needed). If penalties are needed after the extra time, they won’t count for the ‘Goals Home’ bet."
                 },
-                points: 5
+                points: 10
             },
             b: {
                 title: "Goals Away",
-                description: "5 points awarded for getting right the number of goals scored by the ‘Away’ team in a match. The ‘Away’ team will be the team that appears on the right side of the results table.",
+                description: "10 points awarded for getting right the number of goals scored by the ‘Away’ team in a match. The ‘Away’ team will be the team that appears on the right side of the results table.",
                 notes: {
                     1: "Even if you do not get the correct teams that play the Round of 16, Quarter-finals, etc. you will get points if you get the correct ‘Goals Away’ for those matches.",
                     2: "For the knock-out stages (Round of 16, Q/F, SF and Final), the ‘Goals Away’ will be the number of goals scored by the ‘Away’ team either after the official 90 minutes (if extra time is not needed) or after the 120 minutes (when extra time is needed). If penalties are needed after the extra time, they won’t count for the ‘Goals Away’ bet."
                 },
-                points: 5
+                points: 10
             },
             c: {
                 title: "Match Winner/Draw",

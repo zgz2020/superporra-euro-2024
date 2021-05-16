@@ -234,25 +234,25 @@ export const spanishTranslations = {
         }
     },
     individualsRules: {
-        title: "PUNTUACIÓN - INDIVIDUALES",
+        title: "PUNTUACIÓN",
         rules: {
             a: {
                 title: "Goles Anfitrión",
-                description: "Aquellos participantes que acierten el número de goles que el equipo anfitrión marca en un partido se llevarán 5 puntos. El equipo anfitrión será el que aparezca a la izquierda en la tabla de resultados.",
+                description: "Aquellos participantes que acierten el número de goles que el equipo anfitrión marca en un partido se llevarán 10 puntos. El equipo anfitrión será el que aparezca a la izquierda en la tabla de resultados.",
                 notes: {
                     1: "No es necesario acertar los equipos que llegarán a las fases eliminatorias (octavos de final, cuartos de final, semifinales y final) para poder obtener puntos por acertar los goles marcados por el equipo anfitrión en dichos partidos.",
                     2: "Durante las fases eliminatorias (octavos de final, cuartos de final, semifinal y final), los 'Goles Anfitrión' se basarán en el número de goles marcados por el equipo anfitrión, ya sea después de los 90 minutos oficiales (cuando no se necesite prórroga) o después de los 120 minutos oficiales (cuando sí se necesite prórroga). En el caso de que un partido acabe en penaltis, estos no contarán en la apuesta 'Goles Anfitrión'."
                 },
-                points: 5
+                points: 10
             },
             b: {
                 title: "Goles Visitante",
-                description: "Aquellos participantes que acierten el número de goles que el equipo visitante marca en un partido se llevarán 5 puntos. El equipo visitante será el que aparezca a la derecha en la tabla de resultados.",
+                description: "Aquellos participantes que acierten el número de goles que el equipo visitante marca en un partido se llevarán 10 puntos. El equipo visitante será el que aparezca a la derecha en la tabla de resultados.",
                 notes: {
                     1: "No es necesario acertar los equipos que llegarán a las fases eliminatorias (octavos de final, cuartos de final, semifinales y final) para poder obtener puntos por acertar los goles marcados por el equipo visitante en dichos partidos.",
                     2: "Durante las fases eliminatorias (octavos de final, cuartos de final, semifinal y final), los 'Goles Visitante' se basarán en el número de goles marcados por el equipo visitante, ya sea después de los 90 minutos oficiales (cuando no se necesite prórroga) o después de los 120 minutos oficiales (cuando sí se necesite prórroga). En el caso de que un partido acabe en penaltis, estos no contarán en la apuesta 'Goles Visitante'."
                 },
-                points: 5
+                points: 10
             },
             c: {
                 title: "1X2",

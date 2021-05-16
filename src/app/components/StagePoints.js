@@ -24,7 +24,7 @@ const stageQualifiedTeams = (translations, results, userPredictions, stage) => (
         </strong>
 
         <div>
-            {stage === "r16Matches" ? `${translations.participantScores.withBonus}: ` : null}
+            {stage === "r16Matches" ? `${translations.participantScores.noBonus}: ` : null}
             {getStageQualifiedTeams(userPredictions, stage, results).length < 1 && stage !== "r16Matches" ? 
                 <div className="pb-3"></div>
                 :
@@ -34,7 +34,7 @@ const stageQualifiedTeams = (translations, results, userPredictions, stage) => (
 
         {stage === "r16Matches" ?
             <div>
-                {`${translations.participantScores.noBonus}: `}
+                {`${translations.participantScores.withBonus}: `}
                 {qualifiedTeamsShortNames(getR16BonusQualifiedTeams(userPredictions, results)).join(', ')}
             </div>
             :
