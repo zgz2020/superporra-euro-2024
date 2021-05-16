@@ -186,7 +186,33 @@ export const participantTotalPoints = (prediction, results) =>
     + getEuroWinnerPoints(prediction, results)
     + getTeamGlobalGoalsPoints(prediction, results, "topScorer")
     + getTeamGlobalGoalsPoints(prediction, results, "leastConceded")
+ 
+const finalMatchTeams = results => [results.finalMatches["1"].homeTeam, results.finalMatches["1"].awayTeam] 
+
+const euroRunnerup = prediction => 
+    prediction.finalMatches[1].homeTeam == prediction.winner ?
+        prediction.finalMatches[1].awayTeam
+        : prediction.finalMatches[1].homeTeam
+
+// Deadlock Coefficient
+export const deadlockCoefficient = (prediction, results) => 
+    (prediction.winner == results.winner ? 2160 : 0)
+    + (finalMatchTeams(results).includes(prediction.finalMatches[1].homeTeam) ? 720 : 0)
+    + (finalMatchTeams(results).includes(prediction.finalMatches[1].awayTeam) ? 720 : 0)
+    + (euroRunnerup(prediction) == euroRunnerup(results) ? 360 : 0)
+    + ((prediction.finalMatches[1].homeGoals == results.finalMatches[1].homeGoals) &&
+        (prediction.finalMatches[1].awayGoals == results.finalMatches[1].awayGoals) ? 180 : 0)
+    + (getTeamGlobalGoalsPoints(prediction, results, "topScorer") == 25 ? 90 : 0)
+    + (getTeamGlobalGoalsPoints(prediction, results, "leastConceded") == 25 ? 45 : 0)
+    + (stageQualifiedTeamsPoints(prediction, 'semiFinalMatches', results) / 20) * 9
+    + (stageQualifiedTeamsPoints(prediction, 'quarterFinalMatches', results) / 15)
 
 // Rankings: List of participants sorted by score
 export const rankings = (predictionsList, results) => predictionsList && 
-    Object.values(predictionsList).sort((a, b) => participantTotalPoints(b, results) - participantTotalPoints(a, results))
+    Object.values(predictionsList).sort((a, b) => 
+        participantTotalPoints(b, results) != participantTotalPoints(a, results)
+            ? participantTotalPoints(b, results) - participantTotalPoints(a, results)
+            : deadlockCoefficient(b, results) != deadlockCoefficient(a, results) 
+                ? deadlockCoefficient(b, results) - deadlockCoefficient(a, results)
+                : a.username.localeCompare(b.username) 
+    )
