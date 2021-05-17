@@ -36,7 +36,7 @@ const ParticipantPredictionsPage = ({
                         }
                     </div>
                     :
-                    <ConnectedPredictionsForm predictionType="existent" predictionsOrResults={prediction}/> 
+                    <ConnectedPredictionsForm predictionType="existent" predictionID={predictionID} predictionsOrResults={prediction}/> 
                 }
             </div>
             :
