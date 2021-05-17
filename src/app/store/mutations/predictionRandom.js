@@ -1,5 +1,6 @@
 export const GENERATE_RANDOM_PREDICTIONS_REQUEST = 'GENERATE_RANDOM_PREDICTIONS_REQUEST'
-export const SET_RANDOM_PREDICTION = 'SET_RANDOM_PREDICTION'
+export const SET_RANDOM_PREDICTION_NEW = 'SET_RANDOM_PREDICTION_NEW'
+export const SET_RANDOM_PREDICTION_EXISTENT = 'SET_RANDOM_PREDICTION_EXISTENT'
 export const RANDOM_PREDICTIONS_LOADING = 'RANDOM_PREDICTIONS_LOADING'
 export const RANDOM_PREDICTIONS_LOADED = 'RANDOM_PREDICTIONS_LOADED'
 
@@ -13,7 +14,12 @@ export const generateRandomPredictionsRequest = (predictionType, predictionID) =
 })
 
 export const setRandomPredictionNew = (randomPrediction) => ({
-    type: SET_RANDOM_PREDICTION,
+    type: SET_RANDOM_PREDICTION_NEW,
+    randomPrediction
+})
+export const setRandomPredictionExistent = (predictionID, randomPrediction) => ({
+    type: SET_RANDOM_PREDICTION_EXISTENT,
+    predictionID,
     randomPrediction
 })
 

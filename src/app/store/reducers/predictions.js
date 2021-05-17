@@ -70,6 +70,25 @@ export const predictions = (predictions = defaultState.predictions, action) => {
         case mutations.SET_USERNAME_EXISTENT_PREDICTION:
             return { ...predictions, byId: { ...predictions.byId, [action.predictionID]: { ...predictions.byId[action.predictionID], username: action.username } } }
 
+        case mutations.SET_RANDOM_PREDICTION_EXISTENT:
+            return {
+                ...predictions,
+                byId: {
+                    ...predictions.byId,
+                    [action.predictionID]: {
+                        ...predictions.byId[action.predictionID],
+                        leagueMatches: action.randomPrediction.leagueMatches,
+                        r16Matches: action.randomPrediction.r16Matches,
+                        quarterFinalMatches: action.randomPrediction.quarterFinalMatches,
+                        semiFinalMatches: action.randomPrediction.semiFinalMatches,
+                        finalMatches: action.randomPrediction.finalMatches,
+                        winner: action.randomPrediction.winner,
+                        topScorer: action.randomPrediction.topScorer,
+                        leastConceded: action.randomPrediction.leastConceded
+                    }
+                }
+            }
+
         // ------- NEW COMMON REDUCER -----------
         case mutations.SET_GOALS_EXISTENT_PREDICTION:
             return {

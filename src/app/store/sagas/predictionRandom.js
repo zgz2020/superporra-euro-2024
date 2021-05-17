@@ -16,7 +16,7 @@ export function* generateRandomPredictionsSaga() {
         const randomPrediction = yield generateRandomPredictions()
         
         if(predictionType === "new") yield put(mutations.setRandomPredictionNew(randomPrediction))
-        if(predictionType === "existent") yield put(mutations.updatePrediction(predictionID, randomPrediction))
+        if(predictionType === "existent") yield put(mutations.setRandomPredictionExistent(predictionID, randomPrediction))
     
         // Wait for half a second to make sure all random results have been generated and form updated
         // and then enable 'Generate random predictions' CTA

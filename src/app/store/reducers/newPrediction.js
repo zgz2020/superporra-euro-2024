@@ -4,7 +4,7 @@ import { emptyPrediction } from '../../../utils/config'
 
 export const newPrediction = (newPrediction = emptyPrediction, action) => {
     switch(action.type) {
-        case mutations.SET_RANDOM_PREDICTION:
+        case mutations.SET_RANDOM_PREDICTION_NEW:
             return {
                 ...newPrediction,
                 leagueMatches: action.randomPrediction.leagueMatches,
