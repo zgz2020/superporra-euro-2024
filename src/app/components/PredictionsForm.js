@@ -18,7 +18,7 @@ const PredictionsForm = ( {
     setUsernameHandler,
     generateRandomPredictionsRequest,
     submitFormHandler,
-    // cancelPredictionForm,
+    cancelPredictionForm,
     translations,
     invalidEmailSignUpMessage,
     emailAlreadyRegisteredMessage,
@@ -226,6 +226,22 @@ const PredictionsForm = ( {
                         }
                         
                         {submitButton(predictionType, nicknameTaken)}
+                        
+                        {predictionType == 'existent' ? 
+                            <div className="text-center pb-4">
+                                <button 
+                                    type="button" 
+                                    onClick={e => cancelPredictionForm(e)} 
+                                    className="btn btn-danger" 
+                                    data-automation="cancel-button"
+                                >
+                                    {translations.common.cancel}
+                                </button>
+                            </div>
+                            :
+                            null
+                        }
+                        
 
                         <h4 className="pt-2 pl-2">{translations.predictionsForm.predictions}</h4>
                     </div>
@@ -350,6 +366,21 @@ const PredictionsForm = ( {
                         </p>
                     }
                 </div>
+
+                {predictionType == 'existent' ? 
+                    <div className="text-center pb-4">
+                        <button 
+                            type="button" 
+                            onClick={e => cancelPredictionForm(e)} 
+                            className="btn btn-danger" 
+                            data-automation="cancel-button"
+                        >
+                            {translations.common.cancel}
+                        </button>
+                    </div>
+                    :
+                    null
+                }
                 
 
             </form>
@@ -431,6 +462,10 @@ const mapDispatchToProps = (dispatch) => {
                 }               
             }
         },
+        cancelPredictionForm() {
+            dispatch(mutations.getMongoData())
+            dispatch(mutations.hidePredictionsFormExistent())
+        }
     }
 }
 
