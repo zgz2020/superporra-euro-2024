@@ -108,13 +108,14 @@ export const englishTranslations = {
     },
     prizesPage: {
         title: "Prizes",
+        reward: (reward) => `${reward} voucher to spend on `,
         winner: {
-            title: "Winner",
-            reward: "£30 voucher to spend on Jelen Landon Designs products at www.redbubble.com"
+            title: (reward) => `Winner - ${reward} voucher`,
+            reward: "£30"
         },
         consolation: {
-            title: "Consolation - 20th place",
-            reward: "£15 voucher to spend on Jelen Landon Designs products at www.redbubble.com"
+            title: (reward) => `Consolation (20th place) - ${reward} voucher`,
+            reward: "£15"
         }
     },
     accountPage: {

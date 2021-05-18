@@ -108,13 +108,14 @@ export const spanishTranslations = {
     },
     prizesPage: {
         title: "Premios",
+        reward: (reward, sponsor, eccommerceSite) => `Vale de ${reward} para gastar en productos de `,
         winner: {
-            title: "Ganador",
-            reward: "Vale de 30 £ para gastar en productos de Jelen Landon Designs en www.redbubble.com"
+            title: (reward) => `Ganador - Vale de ${reward}`,
+            reward: "30 £"
         },
         consolation: {
-            title: "Consolación - 20º clasificado",
-            reward: "Vale de 15 £ para gastar en productos de Jelen Landon Designs en www.redbubble.com"
+            title: (reward) => `Consolación (20º clasificado) - Vale de ${reward}`,
+            reward: "15 £"
         }
     },
     accountPage: {
