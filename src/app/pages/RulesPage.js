@@ -1,15 +1,16 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { ConnectedHeader } from '../components/Header'
-import { ConnectedScoringRuleCategory } from '../components/ScoringRuleCategory'
 import { ConnectedHomepageSponsor } from '../components/HomepageSponsor'
+import { ConnectedRulesAll } from '../components/RulesAll'
 
-const ScoringRulesPage = ({ translations }) => (
+const RulesPage = ({ translations }) => (
     <div className="mb-5">
         <ConnectedHeader title={translations.scoringRulesPage.title} />
         <ConnectedHomepageSponsor />
         <div className="my-5"></div>
-        <ConnectedScoringRuleCategory ruleCategory="individualsRules" />
+
+        <ConnectedRulesAll />
     </div>
 )
 
@@ -21,4 +22,4 @@ const mapStateToProps = (state) => {
     }
 }
 
-export const ConnectedScoringRulesPage = connect(mapStateToProps)(ScoringRulesPage)
+export const ConnectedRulesPage = connect(mapStateToProps)(RulesPage)

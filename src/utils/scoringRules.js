@@ -8,7 +8,7 @@ export const teamRules = {
     }
 }
 
-export const individualsRules = {
+export const scoringRules = {
     title: "SCORING RULES - INDIVIDUALS",
     rules: {
         a: {

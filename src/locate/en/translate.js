@@ -234,8 +234,26 @@ export const englishTranslations = {
             }
         }
     },
-    individualsRules: {
-        title: "SCORING RULES",
+    generalRules: {
+        title: "General Rules",
+        rules: {
+            1: {
+                title: "Free",
+                description: "You can participate in the Superporra 2021 for free. If you feel generous, please donate to any charity of your choice, or support our sponsor by buying any of their products: "
+            },
+            2: {
+                title: "Deadlines",
+                description: "The deadline to both join the Superporra 2021 and editing your predictions is Thursday the 10th of June 2021 (10th of June inclusive). No bets will be accepted after the 8th of June 2016."
+            },
+            3: {
+                title: "Prizes",
+                description: "Check the Prizes page to see the prizes donated by our sponsor: "
+            }
+        }
+    },
+    scoringRules: {
+        title: "Scoring Rules",
+        points: "pts",
         rules: {
             a: {
                 title: "Goals Home",
@@ -273,7 +291,7 @@ export const englishTranslations = {
                 points: 5
             },
             e: {
-                title: "Round of 16 - Qualified Teams",
+                title: "Round of 16 - Teams",
                 description: "Points awarded for getting right which teams qualify for the Round of 16; Points awarded for each team right.",
                 notes: {
                     1: "10 points awarded for each qualified team which final position in the Groups stage matches with the actual results",
@@ -282,7 +300,7 @@ export const englishTranslations = {
                 points: [10, 5]
             },
             f: {
-                title: "Quarter-finals - Qualified Teams",
+                title: "Quarter-finals - Teams",
                 description: "Points awarded for getting right which teams qualify for the Quarter-finals; Points awarded for each team right.",
                 notes: {
                     1: "15 points awarded for each qualified team."
@@ -290,7 +308,7 @@ export const englishTranslations = {
                 points: 15
             },
             g: {
-                title: "Semi-finals - Qualified Teams",
+                title: "Semi-finals - Teams",
                 description: "Points awarded for getting right which teams qualify for the Semi-finals; Points awarded for each team right.",
                 notes: {
                     1: "20 points awarded for each qualified team."
@@ -298,7 +316,7 @@ export const englishTranslations = {
                 points: 20
             },
             h: {
-                title: "Final - Qualified Teams",
+                title: "Final - Teams",
                 description: "Points awarded for getting right which teams qualify for the Final; Points awarded for each team right.",
                 notes: {
                     1: "25 points awarded for each qualified team."

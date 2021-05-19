@@ -44,7 +44,7 @@ const Navigation = ({ translations, session, signOutRequest }) => (
                 {navigationOption('/participants', hideNavBarResponsive, translations.navigation.participants)}
                 {navigationOption('/results', hideNavBarResponsive, translations.navigation.results)}
                 {navigationOption('/prizes', hideNavBarResponsive, translations.navigation.prizes)}
-                {navigationOption('/scoring-rules', hideNavBarResponsive, translations.navigation.scoringRules)}
+                {navigationOption('/rules', hideNavBarResponsive, translations.navigation.scoringRules)}
                 {!session.id && 
                     navigationOption('/sign-in', hideNavBarResponsive, translations.navigation.login, true)
                 }
