@@ -234,8 +234,26 @@ export const spanishTranslations = {
             }
         }
     },
-    individualsRules: {
-        title: "PUNTUACIÓN",
+    generalRules: {
+        title: "Reglas generales",
+        rules: {
+            1: {
+                title: "Gratis",
+                description: "Participar en la Superporra 2021 es gratuito. Si te sientes generoso, haz una donación a una ONG de tu elección, o apoya a nuestro sponsor comprando alguno de sus productos: "
+            },
+            2: {
+                title: "Fecha límite",
+                description: "La fecha límite, tanto para participar en la Superporra 2021 como para editar las predicciones, es el jueves 10 de junio del 2021. No se aceptarán más participaciones después de esa fecha."
+            },
+            3: {
+                title: "Premios",
+                description: "Ve a la página 'Premios' para comprobar los premios donados por nuestro sponsor: "
+            }
+        }
+    },
+    scoringRules: {
+        title: "Puntuación",
+        points: "pts.",
         rules: {
             a: {
                 title: "Goles Anfitrión",
@@ -273,7 +291,7 @@ export const spanishTranslations = {
                 points: 5
             },
             e: {
-                title: "Octavos - Equipos clasificados",
+                title: "Octavos - Equipos",
                 description: "Aquellos participantes que acierten los equipos que pasan a los octavos se llevarán puntos por cada equipo acertado.",
                 notes: {
                     1: "10 puntos por cada equipo acertado para el que también se acierte su posición final en la fase de grupos.",
@@ -282,7 +300,7 @@ export const spanishTranslations = {
                 points: [10, 5]
             },
             f: {
-                title: "Cuartos de final - Equipos clasificados",
+                title: "Cuartos - Equipos",
                 description: "Aquellos participantes que acierten los equipos que pasan a los cuartos de final se llevarán puntos por equipo acertado.",
                 notes: {
                     1: "15 puntos por cada equipo acertado."
@@ -290,7 +308,7 @@ export const spanishTranslations = {
                 points: 15
             },
             g: {
-                title: "Semifinales - Equipos clasificados",
+                title: "Semifinales - Equipos",
                 description: "Aquellos participantes que acierten los equipos que pasan a las semifinales se llevarán puntos por equipo acertado.",
                 notes: {
                     1: "20 puntos por cada equipo acertado."
@@ -298,7 +316,7 @@ export const spanishTranslations = {
                 points: 20
             },
             h: {
-                title: "Final - Equipos clasificados",
+                title: "Final - Equipos",
                 description: "Aquellos participantes que acierten los equipos que pasan a la final se llevarán puntos por equipo acertado.",
                 notes: {
                     1: "25 puntos por cada equipo acertado."
@@ -306,7 +324,7 @@ export const spanishTranslations = {
                 points: 25
             },
             i: {
-                title: "Ganador de la Eurocopa",
+                title: "Campeón",
                 description: "Aquellos participantes que acierten el equipo ganador de la Eurocopa se llevarán 40 puntos.",
                 points: 40
             },
