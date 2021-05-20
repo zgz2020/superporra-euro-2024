@@ -24,7 +24,9 @@ export function* requestForgotPasswordEmailSaga (){
             yield put(mutations.showEmailNotRegisteredForgotPasswordMessage())
         } else {
             try {
+                yield put(mutations.requestPasswordResetProcessing())
                 const { data } = yield axios.post(url + '/forgot-password-email', { email, language, domain })
+                yield put(mutations.requestPasswordResetProcessed())
                 yield put(mutations.showResetPasswordEmailSentMessage())
             } catch (e) {
                 yield put(mutations.showResetPasswordEmailErrorMessage())
