@@ -151,3 +151,13 @@ export const resetPasswordErrorMessage = (resetPasswordErrorMessage = false, act
     }
     return resetPasswordErrorMessage
 }
+
+export const processingPasswordResetRequest = (processingPasswordResetRequest = false, action) => {
+    switch (action.type) {
+        case mutations.REQUEST_PASSWORD_RESET_PROCESSING:
+            return true
+        case mutations.REQUEST_PASSWORD_RESET_PROCESSED:
+            return false
+    }
+    return processingPasswordResetRequest
+}

@@ -14,6 +14,10 @@ export const HIDE_RESET_PASSWORD_EMAIL_ERROR_MESSAGE = 'HIDE_RESET_PASSWORD_EMAI
 
 export const REQUEST_PASSWORD_RESET = 'REQUEST_PASSWORD_RESET'
 
+export const REQUEST_PASSWORD_RESET_PROCESSING = 'REQUEST_PASSWORD_RESET_PROCESSING'
+export const REQUEST_PASSWORD_RESET_PROCESSED = 'REQUEST_PASSWORD_RESET_PROCESSED'
+
+
 export const requestForgotPasswordEmail = (email) => ({
     type: REQUEST_FORGOT_PASSWORD_EMAIL,
     email
@@ -51,4 +55,11 @@ export const requestPasswordReset = (token, newPassword) => ({
     type: REQUEST_PASSWORD_RESET,
     token,
     newPassword
+})
+
+export const requestPasswordResetProcessing = () => ({
+    type: REQUEST_PASSWORD_RESET_PROCESSING
+})
+export const requestPasswordResetProcessed = () => ({
+    type: REQUEST_PASSWORD_RESET_PROCESSED
 })

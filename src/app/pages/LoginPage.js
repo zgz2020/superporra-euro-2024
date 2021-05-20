@@ -17,7 +17,7 @@ const passwordErrorText = (type, translations) => {
     if (type == 'signUp') return translations.signInPage.noPassword
 }
 
-const credentialsForm = (type, submitHandler, translations, noEmailMessage, errorMessageEmail, resetPasswordEmailSentMessage, resetPasswordEmailErrorMessage, buttonLabel, authenticated, errorMessagePassword) => (
+const credentialsForm = (type, submitHandler, translations, processingPasswordResetRequest, noEmailMessage, errorMessageEmail, resetPasswordEmailSentMessage, resetPasswordEmailErrorMessage, buttonLabel, authenticated, errorMessagePassword) => (
     <div className="card">
         <div className="card-body">
 
@@ -52,15 +52,6 @@ const credentialsForm = (type, submitHandler, translations, noEmailMessage, erro
                     </p>
                 }
 
-                {resetPasswordEmailSentMessage &&  
-                    <p 
-                        className="text-success font-italic mt-2"
-                        data-automation={'password-reset-email-sent'}
-                    >
-                        {translations.signInPage.resetPasswordEmailSent}
-                    </p>
-                }
-
                 {resetPasswordEmailErrorMessage &&  
                     <p 
                         className="text-danger font-italic mt-2"
@@ -92,13 +83,37 @@ const credentialsForm = (type, submitHandler, translations, noEmailMessage, erro
                     </div>
                 }
 
-                <button 
-                    type="submit" 
-                    disabled={authenticated === `PROCESSING`} 
-                    className="form-control mt-2 btn btn-primary"
-                >
-                    {buttonLabel}
-                </ button>
+                {!processingPasswordResetRequest || type != 'forgotPassword' ? 
+                    <div>
+                        <button 
+                            type="submit" 
+                            disabled={authenticated === `PROCESSING`} 
+                            className="form-control mt-2 btn btn-primary"
+                        >
+                            {buttonLabel}
+                        </ button>
+
+                        {resetPasswordEmailSentMessage &&  
+                            <p 
+                                className="text-success font-italic mt-2"
+                                data-automation={'password-reset-email-sent'}
+                            >
+                                {translations.signInPage.resetPasswordEmailSent}
+                            </p>
+                        }
+                    </div>
+                    :
+                    <div className="text-center py-3">
+                        <button className="btn btn-primary" type="button" disabled>
+                            <span 
+                                className="spinner-border spinner-border-sm" 
+                                role="status" 
+                                aria-hidden="true"
+                            ></span>
+                            {`  ${translations.placeholders.loading}...`}
+                        </button>
+                    </div>
+                }
 
             </ form>
 
@@ -113,6 +128,7 @@ const LoginPage = ({
     requestCreateUser,
     authenticated,
     translations,
+    processingPasswordResetRequest,
     noEmailSignInMessage,
     invalidEmailSignUpMessage,
     noEmailForgotPasswordMessage,
@@ -149,6 +165,7 @@ const LoginPage = ({
                         'signIn', 
                         requestAuthenticateUser, 
                         translations, 
+                        processingPasswordResetRequest,
                         noEmailSignInMessage, 
                         emailNotRegisteredSignInMessage, 
                         null, 
@@ -183,6 +200,7 @@ const LoginPage = ({
                     'forgotPassword', 
                     requestForgotPasswordEmail, 
                     translations, 
+                    processingPasswordResetRequest,
                     noEmailForgotPasswordMessage, 
                     emailNotRegisteredForgotPasswordMessage, 
                     resetPasswordEmailSentMessage, 
@@ -199,6 +217,7 @@ const mapStateToProps = (state) => {
     let { 
         session,
         translations,
+        processingPasswordResetRequest,
         noEmailSignInMessage,
         invalidEmailSignUpMessage,
         noEmailForgotPasswordMessage,
@@ -215,6 +234,7 @@ const mapStateToProps = (state) => {
     return {
         authenticated,
         translations,
+        processingPasswordResetRequest,
         noEmailSignInMessage,
         invalidEmailSignUpMessage,
         noEmailForgotPasswordMessage,
