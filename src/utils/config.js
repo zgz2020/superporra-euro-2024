@@ -84,15 +84,15 @@ export const teamsList = () => {
 
 export const teamsOdds = {
     [leagueGroups["A"][0]]: 11, 
-    [leagueGroups["A"][1]]: 80, 
-    [leagueGroups["A"][2]]: 100, 
-    [leagueGroups["A"][3]]: 100, 
-    [leagueGroups["B"][0]]: 5, 
-    [leagueGroups["B"][1]]: 80, 
-    [leagueGroups["B"][2]]: 250, 
-    [leagueGroups["B"][3]]: 100, 
-    [leagueGroups["C"][0]]: 100, 
-    [leagueGroups["C"][1]]: 7, 
+    [leagueGroups["A"][1]]: 70, 
+    [leagueGroups["A"][2]]: 50, 
+    [leagueGroups["A"][3]]: 125, 
+    [leagueGroups["B"][0]]: 6, 
+    [leagueGroups["B"][1]]: 28, 
+    [leagueGroups["B"][2]]: 300, 
+    [leagueGroups["B"][3]]: 80, 
+    [leagueGroups["C"][0]]: 80, 
+    [leagueGroups["C"][1]]: 11, 
     [leagueGroups["C"][2]]: 66, 
     [leagueGroups["C"][3]]: 500, 
     [leagueGroups["D"][0]]: 25, 
@@ -219,7 +219,7 @@ export const emptyPrediction = {
             awayGoals: " ",
             group: "C",
             homeTeam: leagueGroups["C"][0],
-            awayTeam: leagueGroups["C"][3]
+            awayTeam: leagueGroups["C"][2]
         },
         "14": {
             id: "14",
@@ -227,15 +227,15 @@ export const emptyPrediction = {
             awayGoals: " ",
             group: "C",
             homeTeam: leagueGroups["C"][1],
-            awayTeam: leagueGroups["C"][2]
+            awayTeam: leagueGroups["C"][3]
         },
         "15": {
             id: "15",
             homeGoals: " ",
             awayGoals: " ",
             group: "C",
-            homeTeam: leagueGroups["C"][2],
-            awayTeam: leagueGroups["C"][3]
+            homeTeam: leagueGroups["C"][3],
+            awayTeam: leagueGroups["C"][2]
         },
         "16": {
             id: "16",
@@ -250,7 +250,7 @@ export const emptyPrediction = {
             homeGoals: " ",
             awayGoals: " ",
             group: "C",
-            homeTeam: leagueGroups["C"][2],
+            homeTeam: leagueGroups["C"][3],
             awayTeam: leagueGroups["C"][0]
         },
         "18": {
@@ -258,7 +258,7 @@ export const emptyPrediction = {
             homeGoals: " ",
             awayGoals: " ",
             group: "C",
-            homeTeam: leagueGroups["C"][3],
+            homeTeam: leagueGroups["C"][2],
             awayTeam: leagueGroups["C"][1]
         },
         "19": {
@@ -315,30 +315,30 @@ export const emptyPrediction = {
             awayGoals: " ",
             group: "E",
             homeTeam: leagueGroups["E"][0],
-            awayTeam: leagueGroups["E"][3]
+            awayTeam: leagueGroups["E"][1]
         },
         "26": {
             id: "26",
             homeGoals: " ",
             awayGoals: " ",
             group: "E",
-            homeTeam: leagueGroups["E"][1],
-            awayTeam: leagueGroups["E"][2]
+            homeTeam: leagueGroups["E"][2],
+            awayTeam: leagueGroups["E"][3]
         },
         "27": {
             id: "27",
             homeGoals: " ",
             awayGoals: " ",
             group: "E",
-            homeTeam: leagueGroups["E"][2],
-            awayTeam: leagueGroups["E"][3]
+            homeTeam: leagueGroups["E"][3],
+            awayTeam: leagueGroups["E"][1]
         },
         "28": {
             id: "28",
             homeGoals: " ",
             awayGoals: " ",
             group: "E",
-            homeTeam: leagueGroups["E"][1],
+            homeTeam: leagueGroups["E"][2],
             awayTeam: leagueGroups["E"][0]
         },
         "29": {
@@ -346,7 +346,7 @@ export const emptyPrediction = {
             homeGoals: " ",
             awayGoals: " ",
             group: "E",
-            homeTeam: leagueGroups["E"][2],
+            homeTeam: leagueGroups["E"][3],
             awayTeam: leagueGroups["E"][0]
         },
         "30": {
@@ -354,16 +354,16 @@ export const emptyPrediction = {
             homeGoals: " ",
             awayGoals: " ",
             group: "E",
-            homeTeam: leagueGroups["E"][3],
-            awayTeam: leagueGroups["E"][1]
+            homeTeam: leagueGroups["E"][1],
+            awayTeam: leagueGroups["E"][2]
         },
         "31": {
             id: "31",
             homeGoals: " ",
             awayGoals: " ",
             group: "F",
-            homeTeam: leagueGroups["F"][3],
-            awayTeam: leagueGroups["F"][2]
+            homeTeam: leagueGroups["F"][2],
+            awayTeam: leagueGroups["F"][3]
         },
         "32": {
             id: "32",
@@ -378,7 +378,7 @@ export const emptyPrediction = {
             homeGoals: " ",
             awayGoals: " ",
             group: "F",
-            homeTeam: leagueGroups["F"][3],
+            homeTeam: leagueGroups["F"][2],
             awayTeam: leagueGroups["F"][0]
         },
         "34": {
@@ -386,7 +386,7 @@ export const emptyPrediction = {
             homeGoals: " ",
             awayGoals: " ",
             group: "F",
-            homeTeam: leagueGroups["F"][2],
+            homeTeam: leagueGroups["F"][3],
             awayTeam: leagueGroups["F"][1]
         },
         "35": {
@@ -395,14 +395,14 @@ export const emptyPrediction = {
             awayGoals: " ",
             group: "F",
             homeTeam: leagueGroups["F"][1],
-            awayTeam: leagueGroups["F"][3]
+            awayTeam: leagueGroups["F"][2]
         },
         "36": {
             id: "36",
             homeGoals: " ",
             awayGoals: " ",
             group: "F",
-            homeTeam: leagueGroups["F"][2],
+            homeTeam: leagueGroups["F"][3],
             awayTeam: leagueGroups["F"][0]
         }
     },
