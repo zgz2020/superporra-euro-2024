@@ -93,20 +93,20 @@ export const teamsOdds = {
     [leagueGroups["B"][3]]: 80, 
     [leagueGroups["C"][0]]: 80, 
     [leagueGroups["C"][1]]: 11, 
-    [leagueGroups["C"][2]]: 66, 
-    [leagueGroups["C"][3]]: 500, 
-    [leagueGroups["D"][0]]: 25, 
-    [leagueGroups["D"][1]]: 150, 
+    [leagueGroups["C"][2]]: 500, 
+    [leagueGroups["C"][3]]: 75, 
+    [leagueGroups["D"][0]]: 33, 
+    [leagueGroups["D"][1]]: 100, 
     [leagueGroups["D"][2]]: 5, 
-    [leagueGroups["D"][3]]: 125, 
-    [leagueGroups["E"][0]]: 100, 
-    [leagueGroups["E"][1]]: 8, 
-    [leagueGroups["E"][2]]: 125, 
-    [leagueGroups["E"][3]]: 200,
-    [leagueGroups["F"][0]]: 5.5, 
+    [leagueGroups["D"][3]]: 200, 
+    [leagueGroups["E"][0]]: 80, 
+    [leagueGroups["E"][1]]: 250, 
+    [leagueGroups["E"][2]]: 7, 
+    [leagueGroups["E"][3]]: 80,
+    [leagueGroups["F"][0]]: 5, 
     [leagueGroups["F"][1]]: 7, 
-    [leagueGroups["F"][2]]:16, 
-    [leagueGroups["F"][3]]: 150
+    [leagueGroups["F"][2]]:300, 
+    [leagueGroups["F"][3]]: 8
 }
 
 export const emptyPrediction = {
