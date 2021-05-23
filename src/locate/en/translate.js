@@ -44,6 +44,11 @@ export const englishTranslations = {
                 "2": "'My Championships' will now be available in Account page",
                 "3": "Join one of the existent championships or crete a new one!"
             }
+        },
+        myAccount: {
+            title: "My Account",
+            description1: "Go to ",
+            description2: " page to view and/or edit your predictions and private championships"
         }
     },
     joinPage: {

@@ -5,25 +5,32 @@ import { ConnectedHomepageIntro } from '../components/HomepageIntro'
 import { ConnectedHomepageJoin } from '../components/HomepageJoin'
 import { ConnectedHomepagePrivateLeagues } from '../components/HomepagePrivateLeagues'
 import { ConnectedHomepageSponsor } from '../components/HomepageSponsor'
+import { ConnectedHomepageMyAccount } from '../components/HomepageMyAccount'
 
-const HomePage = ({ translations }) => (
+const HomePage = ({ session, translations }) => (
     <div>
         <ConnectedHeader title={translations.homepage.title} />
 
         <ConnectedHomepageSponsor />
 
-        <ConnectedHomepageJoin />
-
-        <ConnectedHomepagePrivateLeagues />
-
-        {/* <ConnectedHomepageIntro /> */}
+        {session.id ?
+            <ConnectedHomepageMyAccount />
+            :
+            <div>
+                <ConnectedHomepageJoin />
+                <ConnectedHomepagePrivateLeagues />
+            </div>
+        }
     </div>
 )
 
 const mapStateToProps = (state) => {
-    let { translations } = state
+    let { session, translations } = state
 
-    return { translations }
+    return { 
+        session,
+        translations
+    }
 }
 
 export const ConnectedHomePage = connect(mapStateToProps)(HomePage)

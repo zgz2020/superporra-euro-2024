@@ -44,6 +44,11 @@ export const spanishTranslations = {
                 "2": "La sección 'Mis campeonatos' estará ahora disponible en la página Cuenta",
                 "3": "¡Únete a un campeonato existente o crea uno nuevo!"
             }
+        },
+        myAccount: {
+            title: "Mi Cuenta",
+            description1: "Ve a la página ",
+            description2: " para ver y/o editar tus predicciones y campeonatos privados."
         }
     },
     joinPage: {
