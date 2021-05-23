@@ -109,11 +109,11 @@ describe('My Account - Private Championships', () => {
                 cy.wait(500)
             })
 
-            it(`No Championships joined > Private Championship component does not render - ${viewport} - ${language}`, () => {
-                visitViewportPageLanguage(viewport, '/account', language)
-                checkNoPrivateLeaguesJoinedBlockRenders()
-                checkMyPrivateLeaguesTableNotRenders()
-            })
+            // it(`No Championships joined > Private Championship component does not render - ${viewport} - ${language}`, () => {
+            //     visitViewportPageLanguage(viewport, '/account', language)
+            //     checkNoPrivateLeaguesJoinedBlockRenders()
+            //     checkMyPrivateLeaguesTableNotRenders()
+            // })
 
             it(`Create a new Championship - ${viewport} - ${language}`, () => {
                 const randomName = randomChampionship()
