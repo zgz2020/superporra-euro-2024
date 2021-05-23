@@ -78,6 +78,7 @@ export const selectors = {
     joinLeagueNameSelectOptions: '#join-panel select option',
     createLeagueInput: automationSelector('league-name-input'),
     quitPrivateLeagueNameSelect: '#quit-panel select',
+    quitNoPrivateLeagues: automationSelector('quit-no-leagues'),
     submitCTA: (tabName) => `[aria-labelledby="${tabName}-tab"] button`,
     privateLeagueSuccess: {
         join: automationSelector('join-league-success'),
@@ -380,6 +381,8 @@ export const checkUsersBetLinks = (language) => {
 }
 
 export const checkNoPrivateLeaguesJoinedBlockRenders = () => cy.get(selectors.noPrivateLeaguesJoinedBlock).should('be.visible')
+export const checkQuitTabNoPrivateLeaguesJoinedBlockRenders = () => cy.get(selectors.quitNoPrivateLeagues).should('be.visible')
+
 export const checkMyPrivateLeaguesTableNotRenders = () => cy.get(selectors.myPrivateLeaguesTableRow).should('not.exist')
 export const checkMyPrivateLeaguesTableRenders = () => cy.get(selectors.myPrivateLeaguesTableRow).should('contain', 'ZZ Test User - UPDATED')
 

@@ -14,6 +14,7 @@ import {
     visitViewportPageLanguage,
     checkMyPrivateLeaguesTableNotRenders,
     checkNoPrivateLeaguesJoinedBlockRenders,
+    checkQuitTabNoPrivateLeaguesJoinedBlockRenders,
     checkPredictionPrivateLeague,
     createNewPrivateLeague,
     joinNewPrivateLeague,
@@ -145,8 +146,9 @@ describe('My Account - Private Championships', () => {
                 quitNewPrivateLeague('AutoTest Championship')
                 verifyQuitSuccessMessage()
                 quitNewPrivateLeague('AutoTest-Championship-2')
-                checkNoPrivateLeaguesJoinedBlockRenders()
-                checkMyPrivateLeaguesTableNotRenders()
+                checkQuitTabNoPrivateLeaguesJoinedBlockRenders()
+                // checkNoPrivateLeaguesJoinedBlockRenders()
+                // checkMyPrivateLeaguesTableNotRenders()
                 selectPrivateLeaguesActionTab('Join')
                 verifyChampionshipNameInSelectList('AutoTest Championship')
 
