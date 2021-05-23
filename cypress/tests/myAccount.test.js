@@ -14,6 +14,7 @@ import {
     visitViewportPageLanguage,
     checkMyPrivateLeaguesTableNotRenders,
     checkNoPrivateLeaguesJoinedBlockRenders,
+    checkQuitTabNoPrivateLeaguesJoinedBlockRenders,
     checkPredictionPrivateLeague,
     createNewPrivateLeague,
     joinNewPrivateLeague,
@@ -109,11 +110,11 @@ describe('My Account - Private Championships', () => {
                 cy.wait(500)
             })
 
-            it(`No Championships joined > Private Championship component does not render - ${viewport} - ${language}`, () => {
-                visitViewportPageLanguage(viewport, '/account', language)
-                checkNoPrivateLeaguesJoinedBlockRenders()
-                checkMyPrivateLeaguesTableNotRenders()
-            })
+            // it(`No Championships joined > Private Championship component does not render - ${viewport} - ${language}`, () => {
+            //     visitViewportPageLanguage(viewport, '/account', language)
+            //     checkNoPrivateLeaguesJoinedBlockRenders()
+            //     checkMyPrivateLeaguesTableNotRenders()
+            // })
 
             it(`Create a new Championship - ${viewport} - ${language}`, () => {
                 const randomName = randomChampionship()
@@ -145,8 +146,9 @@ describe('My Account - Private Championships', () => {
                 quitNewPrivateLeague('AutoTest Championship')
                 verifyQuitSuccessMessage()
                 quitNewPrivateLeague('AutoTest-Championship-2')
-                checkNoPrivateLeaguesJoinedBlockRenders()
-                checkMyPrivateLeaguesTableNotRenders()
+                checkQuitTabNoPrivateLeaguesJoinedBlockRenders()
+                // checkNoPrivateLeaguesJoinedBlockRenders()
+                // checkMyPrivateLeaguesTableNotRenders()
                 selectPrivateLeaguesActionTab('Join')
                 verifyChampionshipNameInSelectList('AutoTest Championship')
 

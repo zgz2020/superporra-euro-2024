@@ -149,7 +149,7 @@ const PrivateLeagues = ({
                                 </p>
 
                                 {myPrivateLeagues.length == 0 ?
-                                    <div className="border text-center p-2">
+                                    <div className="border text-center p-2" data-automation="quit-no-leagues">
                                         {translations.accountPage.noPrivateLeagues}
                                     </div>
                                     :
