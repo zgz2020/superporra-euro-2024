@@ -484,7 +484,7 @@ export const getTopScorer = (prediction) => {
 
     const topScorerTeams = teamsGoalsScored.filter(team => team.goals === maxGoals)
 
-    return prediction.winner === "???" ? "???" : topScorerTeams  // It won't update until Final match is played
+    return prediction.finalMatches["1"].awayTeam === "SF-2" ? "???" : topScorerTeams  // It won't update until both finalist teams are known
 }
 
 export const getLeastConceded = (prediction) => {
@@ -501,7 +501,7 @@ export const getLeastConceded = (prediction) => {
 
     const leastConcededTeams = teamsGoalsConceded.filter(team => team.goals === minGoals)
 
-    return prediction.winner === "???" ? "???" : leastConcededTeams // It won't update until Final match is played
+    return prediction.finalMatches["1"].awayTeam === "SF-2" ? "???" : leastConcededTeams // It won't update until both finalist teams are known
 }
 
 export const topScorerCountriesNamesList = (prediction) => {
