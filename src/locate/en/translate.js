@@ -59,6 +59,13 @@ export const englishTranslations = {
             description3: "You can also join or create a private Championship in "
         }
     },
+    comments: {
+        title: "Comments",
+        placeholderUsername: "type your username",
+        placeholderText: "type your comment here",
+        success: "Your comment has been posted succesfully!",
+        error: "You must enter a username (if logged out) and a comment"
+    },
     signInPage: {
         title: "Sign In",
         email: "Email address",

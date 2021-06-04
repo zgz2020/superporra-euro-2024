@@ -35,8 +35,9 @@ app.post('/mongo/data', async (req, res) => {
     let predictions = await db.collection('predictions').find().toArray()
     let results = await db.collection('results').find().toArray()
     let privateLeagues = await db.collection('privateLeagues').find().toArray()
+    let comments = await db.collection('comments').find().toArray()
 
-    let mongoState = { users, predictions, results, privateLeagues }
+    let mongoState = { users, predictions, results, privateLeagues, comments }
 
     res.send({ mongoState })
 })
@@ -431,6 +432,21 @@ app.post('/private-league/remove', async (req, res) => {
     let privateLeaguesCollection = db.collection('privateLeagues')
 
     await privateLeaguesCollection.deleteMany({ name: /Automated-Championship/ })
+
+    res.status(200).send()
+})
+
+app.post('/comments/create', async (req, res) => {
+    let comment = {
+        username: req.body.username,
+        date: req.body.date,
+        text: req.body.text
+    }
+
+    let db = await connectDB()
+    let commentsCollection = db.collection('comments')
+
+    await commentsCollection.insertOne(comment)
 
     res.status(200).send()
 })

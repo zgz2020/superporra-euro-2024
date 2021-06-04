@@ -1,3 +1,4 @@
+export * from './comments'
 export * from './forgotPassword'
 export * from './goalsSet'
 export * from './hideErrorMessages'

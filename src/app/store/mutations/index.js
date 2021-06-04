@@ -1,3 +1,4 @@
+export * from './comments'
 export * from './forgotPassword'
 export * from './goalsUpdate'
 export * from './language'
