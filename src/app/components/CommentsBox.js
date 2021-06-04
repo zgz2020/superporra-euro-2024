@@ -62,7 +62,7 @@ const CommentsBox = ({ comments, submitHandler, username, postCommentSuccess, po
                 : null
             }
 
-            {comments.reverse().map((comment, index) => (
+            {comments.map((comment, index) => (
                 <div key={index} className="card-body">
                     <div className="font-italic">
                         {comment.username} - {comment.date}
@@ -89,13 +89,13 @@ const mapStateToProps = (state) => {
         postCommentError
     } = state
 
-    const usernameKey = session.id 
+    let usernameKey = session.id 
         ? predictions.allIds.length > 0 
             ? Object.keys(predictions.byId).filter(prediction => predictions.byId[prediction].owner == session.id) 
             : false
         : false
     
-    const username = !usernameKey ? false : predictions.byId[usernameKey].username
+    let username = !usernameKey ? false : predictions.byId[usernameKey].username
 
     return { 
         translations,

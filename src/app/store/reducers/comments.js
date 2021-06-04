@@ -6,12 +6,12 @@ export const comments = (comments = [], action) => {
             return action.state.comments
         case mutations.CREATE_COMMENT:
             return [
-                ...comments,
                 {
                     username: action.username,
                     date: action.date,
                     text: action.text
-                }
+                },
+                ...comments
             ]
     }
     return comments

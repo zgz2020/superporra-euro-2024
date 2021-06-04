@@ -14,7 +14,7 @@ export function* getMongoDataSaga() {
             const { data } = yield axios.post(url + '/mongo/data', { getData })
 
             let privateLeagues = data.mongoState.privateLeagues.map(element => element.name)
-            let comments = data.mongoState.comments
+            let comments = data.mongoState.comments.reverse()
             
             let state = { ...normalizeDefaultStateMongo(data.mongoState), privateLeagues, comments, session: defaultState.session}
 
