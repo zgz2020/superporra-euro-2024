@@ -6,6 +6,7 @@ import { ConnectedHomepageJoin } from '../components/HomepageJoin'
 import { ConnectedHomepagePrivateLeagues } from '../components/HomepagePrivateLeagues'
 import { ConnectedHomepageSponsor } from '../components/HomepageSponsor'
 import { ConnectedHomepageMyAccount } from '../components/HomepageMyAccount'
+import { ConnectedCommentsBox } from '../components/CommentsBox'
 
 const HomePage = ({ session, translations }) => (
     <div>
@@ -21,6 +22,9 @@ const HomePage = ({ session, translations }) => (
                 <ConnectedHomepagePrivateLeagues />
             </div>
         }
+
+        <ConnectedCommentsBox />
+        
     </div>
 )
 

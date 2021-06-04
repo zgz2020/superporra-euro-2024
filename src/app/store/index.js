@@ -48,6 +48,7 @@ import {
     quitLeagueError,
     quitLeagueSuccess
 } from './reducers/privateLeagues'
+import { comments, postCommentSuccess, postCommentError } from './reducers/comments'
 
 const sagaMiddleware = createSagaMiddleware()
  
@@ -94,7 +95,10 @@ export const store = createStore(
         leagueNameTaken,
         createLeagueSuccess,
         quitLeagueError,
-        quitLeagueSuccess
+        quitLeagueSuccess,
+        comments,
+        postCommentSuccess,
+        postCommentError
     }),
     applyMiddleware(createLogger(), sagaMiddleware)
 )

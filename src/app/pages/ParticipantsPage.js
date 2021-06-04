@@ -7,6 +7,7 @@ import { ConnectedParticipantsListsSelection } from '../components/ParticipantsL
 import { ConnectedPredictionsFormButton } from '../components/PredictionsFormButton'
 import { ConnectedPredictionsForm } from '../components/PredictionsForm'
 import { ConnectedHomepageSponsor } from '../components/HomepageSponsor'
+import { ConnectedCommentsBox } from '../components/CommentsBox'
 
 const noParticipantsBlock = (translations) => (
     <div className="card">
@@ -57,6 +58,10 @@ const ParticipantsPage = ({
                 </div>  
             </div>
         }
+
+        <div className="my-5"></div>
+        
+        <ConnectedCommentsBox />
     </div>
 )
 

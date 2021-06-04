@@ -59,6 +59,13 @@ export const spanishTranslations = {
             description3: "También puedes unirte a un campeonato privado, o crear uno nuevo, en "
         }
     },
+    comments: {
+        title: "Comentarios",
+        placeholderUsername: "escribe nombre de usuario",
+        placeholderText: "escribe comentario",
+        success: "¡Tu comentario se ha mandado corréctamente!",
+        error: "Debes introducir un nombre de usuario (si no has iniciado sesión) y un comentario"
+    },
     signInPage: {
         title: "Iniciar sesión",
         email: "Correo electrónico",
