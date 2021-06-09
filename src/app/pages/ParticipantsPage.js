@@ -46,7 +46,7 @@ const ParticipantsPage = ({
                     </div>
                 }
 
-                <div className="text-center py-3">
+                {/* <div className="text-center py-3">
                     <Link 
                         to={"/join"}
                         data-automation="join-link"
@@ -55,7 +55,7 @@ const ParticipantsPage = ({
                             {translations.navigation.join}
                         </button>
                     </Link>
-                </div>  
+                </div>   */}
             </div>
         }
 

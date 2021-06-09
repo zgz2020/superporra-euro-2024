@@ -21,19 +21,19 @@ const ParticipantPredictionsPage = ({
 
                 {!predictionsFormExistent ?
                     <div>
-                        {predictionOwner ? 
+                        {/* {predictionOwner ? 
                             <ConnectedPredictionsFormButton predictionType="existent" clickHandler={showPredictionsFormExistent} />
                             :
                             null
-                        }
+                        } */}
 
                         <ConnectedResults predictionType="existent" predictionID={predictionID} />
 
-                        {predictionOwner ? 
+                        {/* {predictionOwner ? 
                             <ConnectedPredictionsFormButton predictionType="existent" clickHandler={showPredictionsFormExistent} />
                             :
                             null
-                        }
+                        } */}
                     </div>
                     :
                     <ConnectedPredictionsForm predictionType="existent" predictionID={predictionID} predictionsOrResults={prediction}/> 
