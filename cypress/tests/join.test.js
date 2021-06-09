@@ -26,7 +26,8 @@ import {
 
 let url = Cypress.config().baseUrl
 
-describe('Join page - Signed Out status - Elements render and negative paths', () => {
+// Sign Up links and /join page removed - Skipping test
+describe.skip('Join page - Signed Out status - Elements render and negative paths', () => {
     viewports.forEach(viewport => {
         languages.forEach(language => {
             it(`Elements render and Form empty - ${viewport} - ${language}`, () => {
@@ -96,7 +97,8 @@ describe('Join page - Signed Out status - Elements render and negative paths', (
     })
 })
 
-describe('Join page - Signed Out status - New User with no predictions', () => {
+// Sign Up links and /join page removed - Skipping test
+describe.skip('Join page - Signed Out status - New User with no predictions', () => {
 
     after(() => {
         // Remove all test users created by these tests
@@ -157,7 +159,8 @@ describe('Join page - Signed Out status - New User with no predictions', () => {
     })
 })
 
-describe('Join Page - Signed In status', () => {
+// Sign Up links and /join page removed - Skipping test
+describe.skip('Join Page - Signed In status', () => {
     viewports.forEach(viewport => {
         languages.forEach(language => {
             it(`Elements render - ${viewport} - ${language}`, () => {

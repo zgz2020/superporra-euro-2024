@@ -89,7 +89,8 @@ describe('Sign In & Forgot your Password - Unhappy paths', () => {
     })
 })
 
-describe('Join Panel', () => {
+// Sign Up links and /join page removed - Skipping test
+describe.skip('Join Panel', () => {
     viewports.forEach(viewport => {
         languages.forEach(language => {
             it('Elements render and link', () => {
