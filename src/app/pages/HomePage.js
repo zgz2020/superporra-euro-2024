@@ -16,6 +16,8 @@ const HomePage = ({ session, translations }) => (
         <ConnectedHomepageSponsor />
 
         <ConnectedHomepageCompetitionClosed />
+
+        <ConnectedCommentsBox />
         
         {/* {session.id ?
             <ConnectedHomepageMyAccount />

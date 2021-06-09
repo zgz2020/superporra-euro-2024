@@ -4,7 +4,7 @@ export const spanishTranslations = {
     navigation: {
         home: "Inicio",
         join: "Participa",
-        participants: "Participantes",
+        participants: "Clasificaciones",
         results: "Resultados",
         prizes: "Premios",
         scoringRules: "Normas",
@@ -49,6 +49,10 @@ export const spanishTranslations = {
             title: "Mi Cuenta",
             description1: "Ve a la página ",
             description2: " para ver y/o editar tus predicciones y campeonatos privados."
+        },
+        competitionClosed: {
+            title: "Competición cerrada",
+            description2: " para ver las clasificaciones."
         }
     },
     joinPage: {
@@ -102,9 +106,9 @@ export const spanishTranslations = {
         resetPasswordError: "Ha habido un error. Inténtalo de nuevo."
     },
     participantsPage: {
-        title: "Paticipantes de la Superporra",
-        noParticipantsYet: "Todavía no hay ningún participante. ¡Se el primero en participar haciendo click en el botón 'Participa'!",
-        noParticipantsYetPrivateLeague: "Todavía no hay ningún particpante en este campeonato"
+        title: "Clasificaciones",
+        noParticipantsYet: "Parece que ha habido un error extrayendo los datos. Recarga la página por favor.",
+        noParticipantsYetPrivateLeague: "Parece que ha habido un error extrayendo los datos. Recarga la página por favor."
     },
     participantPredictionsPage: {
         title: "Predicciones"
