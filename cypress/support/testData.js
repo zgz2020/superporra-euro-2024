@@ -50,7 +50,7 @@ export const navigationAssertions = language => language == 'english' ?
     { 
         navItem1: 'Home',
         navItem2: 'Join',
-        navItem3: 'Participants',
+        navItem3: 'Rankings',
         navItem4: 'Results',
         navItem5: 'Prizes',
         navItem6: 'Rules',
@@ -62,7 +62,7 @@ export const navigationAssertions = language => language == 'english' ?
     {
         navItem1: 'Inicio',
         navItem2: 'Participa',
-        navItem3: 'Participantes',
+        navItem3: 'Clasificaciones',
         navItem4: 'Resultados',
         navItem5: 'Premios',
         navItem6: 'Normas',
