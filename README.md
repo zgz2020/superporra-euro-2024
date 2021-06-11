@@ -1,3 +1,5 @@
+This branch contains the code before the participation deadline has been met
+
 # Full Stack React Express Application
 
 ## Introduction
