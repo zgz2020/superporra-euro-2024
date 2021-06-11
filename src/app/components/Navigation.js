@@ -40,7 +40,7 @@ const Navigation = ({ translations, session, signOutRequest }) => (
         <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div className="navbar-nav">        
                 {navigationOption('/', hideNavBarResponsive, translations.navigation.home)}
-                {navigationOption('/join', hideNavBarResponsive, translations.navigation.join)}
+                {/* {navigationOption('/join', hideNavBarResponsive, translations.navigation.join)} */}
                 {navigationOption('/participants', hideNavBarResponsive, translations.navigation.participants)}
                 {navigationOption('/results', hideNavBarResponsive, translations.navigation.results)}
                 {navigationOption('/prizes', hideNavBarResponsive, translations.navigation.prizes)}

@@ -53,7 +53,8 @@ describe('My Account - My Bets', () => {
                 checkUsersBetLinks(language)
             })
             
-            it(`Update existent prediction - ${viewport} - ${language}`, () => {
+            // Update CTA removed - Skipping test
+            it.skip(`Update existent prediction - ${viewport} - ${language}`, () => {
                 cy.viewport(viewport).visit('/account')
                 selectLanguage(language)
 

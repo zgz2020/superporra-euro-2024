@@ -152,11 +152,11 @@ const LoginPage = ({
                             {translations.signInPage.signIn}
                         </a>
                     </li>
-                    <li className="nav-item">
+                    {/* <li className="nav-item">
                         <a className="nav-link" id="sign-up-tab" data-toggle="tab" href="#sign-up-panel" role="tab" aria-controls="Sign-up-panel" aria-selected="false">
                             {translations.navigation.join}
                         </a>
-                    </li>
+                    </li> */}
                 </ul>
             </div>
             <div className="tab-content" id="myTabContent">
@@ -175,7 +175,7 @@ const LoginPage = ({
                         incorrectPasswordMessage
                     )}           
                 </div>
-                <div className="tab-pane fade p-3" id="sign-up-panel" role="tabpanel" aria-labelledby="sign-up-tab">
+                {/* <div className="tab-pane fade p-3" id="sign-up-panel" role="tabpanel" aria-labelledby="sign-up-tab">
                     <div className="card">
                         <div className="card-body">
                             {translations.signInPage.joinDescription1}
@@ -189,7 +189,7 @@ const LoginPage = ({
                         </div>
 
                     </div>
-                </div>
+                </div> */}
             </div>
 
             <div className="card-footer">

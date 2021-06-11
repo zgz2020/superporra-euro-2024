@@ -4,7 +4,7 @@ export const englishTranslations = {
     navigation: {
         home: "Home",
         join: "Join",
-        participants: "Participants",
+        participants: "Rankings",
         results: "Results",
         prizes: "Prizes",
         scoringRules: "Rules",
@@ -49,6 +49,10 @@ export const englishTranslations = {
             title: "My Account",
             description1: "Go to ",
             description2: " page to view and/or edit your predictions and private championships"
+        },
+        competitionClosed: {
+            title: "The competition is now closed",
+            description2: " page to view the rankings."
         }
     },
     joinPage: {
@@ -102,9 +106,9 @@ export const englishTranslations = {
         resetPasswordError: "There was an error. Please try again."
     },
     participantsPage: {
-        title: "Superporra Participants",
-        noParticipantsYet: "There are no particpants yet. Be the first one joining the competition by clicking on the 'Join' button!",
-        noParticipantsYetPrivateLeague: "No participants have joined this Championship yet"
+        title: "Rankings",
+        noParticipantsYet: "It looks like there was an error loading the data. Please, refresh the page.",
+        noParticipantsYetPrivateLeague: "It looks like there was an error loading the data. Please, refresh the page."
     },
     participantPredictionsPage: {
         title: "Predictions"

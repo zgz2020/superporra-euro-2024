@@ -25,7 +25,8 @@ describe('Participants page', () => {
                 checkFirstParticipantLinks(language)
             })
         
-            it(`Join CTA - ${viewport} - ${language}`, () => {
+            // Sign Up links and /join page removed - Skipping test
+            it.skip(`Join CTA - ${viewport} - ${language}`, () => {
                 // Signed out status - [JOIN] should redirect to /sign-in
                 cy.viewport(viewport).visit('/participants')
                 selectLanguage(language)

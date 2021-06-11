@@ -7,6 +7,7 @@ import { ConnectedHomepagePrivateLeagues } from '../components/HomepagePrivateLe
 import { ConnectedHomepageSponsor } from '../components/HomepageSponsor'
 import { ConnectedHomepageMyAccount } from '../components/HomepageMyAccount'
 import { ConnectedCommentsBox } from '../components/CommentsBox'
+import { ConnectedHomepageCompetitionClosed } from '../components/HomepageCompetitionClosed'
 
 const HomePage = ({ session, translations }) => (
     <div>
@@ -14,7 +15,11 @@ const HomePage = ({ session, translations }) => (
 
         <ConnectedHomepageSponsor />
 
-        {session.id ?
+        <ConnectedHomepageCompetitionClosed />
+
+        <ConnectedCommentsBox />
+        
+        {/* {session.id ?
             <ConnectedHomepageMyAccount />
             :
             <div>
@@ -25,6 +30,7 @@ const HomePage = ({ session, translations }) => (
 
         <ConnectedCommentsBox />
         
+        } */}
     </div>
 )
 

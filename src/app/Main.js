@@ -36,7 +36,7 @@ export const Main = () => (
                 <Route path="/prizes" render={() => (<ConnectedPrizesPage />)} />
                 <Route path="/rules" render={() => (<ConnectedRulesPage />)} />
                 <Route path="/account" render={() => (<ConnectedAccountPage />)} />
-                <Route path="/join" render={() => (<ConnectedJoinPage />)} />
+                {/* <Route path="/join" render={() => (<ConnectedJoinPage />)} /> */}
                 <ConnectedFooter />
             </div> 
         </Provider>
