@@ -144,7 +144,7 @@ const bestThirdTeams = (prediction) => {
 
 const groupGamesPlayed = (prediction, group) => {
     if (group) { // Checks if at least one game has been played for a given group
-        if (getLeagueGroupTable(prediction, group)[2].gamesPlayed !== 0) return true  
+        if (getLeagueGroupTable(prediction, group)[2].gamesPlayed == 3) return true  
     } 
     else if ( // Checks if at least one game has been played for each group
         getLeagueGroupTable(prediction, "A")[3].gamesPlayed !== 0
