@@ -325,7 +325,7 @@ export const getR16Teams = (prediction) => ({
         homeTeam: groupGamesPlayed(prediction, "C") ? 
             getLeagueGroupTable(prediction, "C")[0].name 
             : emptyPrediction.r16Matches["3"].homeTeam,
-        awayTeam: groupGamesPlayed(prediction) ?
+        awayTeam: groupGamesPlayed(prediction, "F") ?
             thirdTeamsR16Matches(prediction).oponentFirstC
             : emptyPrediction.r16Matches["3"].awayTeam
     },
@@ -334,7 +334,7 @@ export const getR16Teams = (prediction) => ({
         homeTeam: groupGamesPlayed(prediction, "B") ? 
             getLeagueGroupTable(prediction, "B")[0].name 
             : emptyPrediction.r16Matches["4"].homeTeam,
-        awayTeam: groupGamesPlayed(prediction) ?
+        awayTeam: groupGamesPlayed(prediction, "F") ?
             thirdTeamsR16Matches(prediction).oponentFirstB
             : emptyPrediction.r16Matches["4"].awayTeam
     },
@@ -352,7 +352,7 @@ export const getR16Teams = (prediction) => ({
         homeTeam: groupGamesPlayed(prediction, "F") ? 
             getLeagueGroupTable(prediction, "F")[0].name 
             : emptyPrediction.r16Matches["6"].homeTeam,
-        awayTeam: groupGamesPlayed(prediction) ?
+        awayTeam: groupGamesPlayed(prediction, "F") ?
             thirdTeamsR16Matches(prediction).oponentFirstF
             : emptyPrediction.r16Matches["6"].awayTeam
     },
@@ -370,7 +370,7 @@ export const getR16Teams = (prediction) => ({
         homeTeam: groupGamesPlayed(prediction, "E") ? 
             getLeagueGroupTable(prediction, "E")[0].name 
             : emptyPrediction.r16Matches["8"].homeTeam,
-        awayTeam: groupGamesPlayed(prediction) ?
+        awayTeam: groupGamesPlayed(prediction, "F") ?
             thirdTeamsR16Matches(prediction).oponentFirstE
             : emptyPrediction.r16Matches["8"].awayTeam
     }
