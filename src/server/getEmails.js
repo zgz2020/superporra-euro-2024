@@ -1,6 +1,7 @@
 import { MongoClient } from 'mongodb'
+import { DATABASE_URL } from '../../config'
 
-const url = "mongodb+srv://juanjoAdmin:Lidon2020@cluster0.tkptx.mongodb.net/production?retryWrites=true&w=majority"
+const url = DATABASE_URL // "mongodb+srv://juanjoAdmin:Lidon2020@cluster0.tkptx.mongodb.net/production?retryWrites=true&w=majority"
 let db = null
 
 async function connectDB(){
