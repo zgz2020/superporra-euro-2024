@@ -16,7 +16,7 @@ export const englishTranslations = {
         contactUs: "Contact Us:"
     },
     homepage: {
-        title: "Superporra Euro 2021",
+        title: "Superporra Euro 2022",
         sponsoredBy: "Sponsored By:",
         joinBanner: {
             title: "Join the Superporra in less than a minute!",
@@ -29,10 +29,10 @@ export const englishTranslations = {
             }
         },
         intro: {
-            title: "Have fun with the Superporra Euro 2021",
+            title: "Have fun with the Superporra Euro 2022",
             body: {
-                first: "The Superporra Euro 2021 is a quiz or betting competition where participants will compete by trying to guess the final scores of all the Euro 2021 matches, the countries that will qualify for the knockout stages (Round of 16, Quarter final, etc.) and the Euro champion.",
-                second: "Have fun with the Superporra Euro 2021, contribute to a good cause with your donation and get the chance to win a prize!"
+                first: "The Superporra Euro 2022 is a quiz or betting competition where participants will compete by trying to guess the final scores of all the Euro 2022 matches, the countries that will qualify for the knockout stages (Round of 16, Quarter final, etc.) and the Euro champion.",
+                second: "Have fun with the Superporra Euro 2022, contribute to a good cause with your donation and get the chance to win a prize!"
             }
         },
         privateLeagues: {
@@ -251,11 +251,11 @@ export const englishTranslations = {
         rules: {
             1: {
                 title: "Free",
-                description: "You can participate in the Superporra 2021 for free. If you feel generous, please donate to any charity of your choice, or support our sponsor by buying any of their products: "
+                description: "You can participate in the Superporra 2022 for free. If you feel generous, please donate to any charity of your choice, or support our sponsor by buying any of their products: "
             },
             2: {
                 title: "Deadlines",
-                description: "The deadline to both join the Superporra 2021 and editing your predictions is Thursday the 10th of June 2021 (10th of June inclusive). No bets will be accepted after the 8th of June 2016."
+                description: "The deadline to both join the Superporra 2022 and editing your predictions is Thursday the 10th of June 2022 (10th of June inclusive). No bets will be accepted after the 8th of June 2016."
             },
             3: {
                 title: "Prizes",

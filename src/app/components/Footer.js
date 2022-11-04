@@ -10,7 +10,7 @@ const Footer = ({ translations }) => (
             <a href="mailto:superporra.euro.2021@gmail.com">superporra.euro.2021@gmail.com</a>
         </div>
         <div className="footer-copyright text-center py-4">
-            {"© 2021 Copyright:  Superporra Euro 2021"}
+            {"© 2022 Copyright:  Superporra Euro 2022"}
         </div>
     </footer>
 )

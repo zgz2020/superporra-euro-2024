@@ -16,7 +16,7 @@ export const spanishTranslations = {
         contactUs: "Contacto:"
     },
     homepage: {
-        title: "Superporra Eurocopa 2021",
+        title: "Superporra Eurocopa 2022",
         sponsoredBy: "Patrocinado por:",
         joinBanner: {
             title: "¡Únete a la competición en menos de un minuto!",
@@ -29,10 +29,10 @@ export const spanishTranslations = {
             }
         },
         intro: {
-            title: "Diviértete con la Superporra Euro 2021",
+            title: "Diviértete con la Superporra Euro 2022",
             body: {
-                first: "La Superporra Eurocopa 2021 es un concurso a modo de porra en el que los participantes compiten intentando acertar los resultados finales de los partidos de la erucopa de fútbol del 2021, los países que pasen a las fases eliminatorias (octavos de final, cuartos de final, etc.) y el equipo ganador de la eurocopa.",
-                second: "No solo pasarás un buen rato con la superporra Euro 2021, sino que también contribuirás a una buena causa con tu donación y tendrás la oportunidad de ganar premios."
+                first: "La Superporra Eurocopa 2022 es un concurso a modo de porra en el que los participantes compiten intentando acertar los resultados finales de los partidos de la erucopa de fútbol del 2022, los países que pasen a las fases eliminatorias (octavos de final, cuartos de final, etc.) y el equipo ganador de la eurocopa.",
+                second: "No solo pasarás un buen rato con la superporra Euro 2022, sino que también contribuirás a una buena causa con tu donación y tendrás la oportunidad de ganar premios."
             }
         },
         privateLeagues: {
@@ -251,11 +251,11 @@ export const spanishTranslations = {
         rules: {
             1: {
                 title: "Gratis",
-                description: "Participar en la Superporra 2021 es gratuito. Si te sientes generoso, haz una donación a una ONG de tu elección, o apoya a nuestro sponsor comprando alguno de sus productos: "
+                description: "Participar en la Superporra 2022 es gratuito. Si te sientes generoso, haz una donación a una ONG de tu elección, o apoya a nuestro sponsor comprando alguno de sus productos: "
             },
             2: {
                 title: "Fecha límite",
-                description: "La fecha límite, tanto para participar en la Superporra 2021 como para editar las predicciones, es el jueves 10 de junio del 2021. No se aceptarán más participaciones después de esa fecha."
+                description: "La fecha límite, tanto para participar en la Superporra 2022 como para editar las predicciones, es el jueves 10 de junio del 2022. No se aceptarán más participaciones después de esa fecha."
             },
             3: {
                 title: "Premios",
