@@ -1,5 +1,6 @@
 import md5 from 'md5'
 import { emptyPrediction } from '../utils/config'
+import { DATABASE_URL } from '../../config'
 
 export const defaultState = {
     session: {
@@ -24,7 +25,7 @@ export const defaultState = {
         quarterFinalMatches: emptyPrediction.quarterFinalMatches,
         semiFinalMatches: emptyPrediction.semiFinalMatches,
         finalMatches: emptyPrediction.finalMatches
-    }
+    },
 }
 
 // - - - - - - - - - - - - - - - - - - - -

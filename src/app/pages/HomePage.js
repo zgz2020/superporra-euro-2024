@@ -12,7 +12,7 @@ const HomePage = ({ session, translations }) => (
     <div>
         <ConnectedHeader title={translations.homepage.title} />
 
-        <ConnectedHomepageSponsor />
+        {!window.location.hostname.includes('loka-porra') && <ConnectedHomepageSponsor />}
 
         {session.id ?
             <ConnectedHomepageMyAccount />
