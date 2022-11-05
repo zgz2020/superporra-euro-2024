@@ -1,40 +1,50 @@
 export const leagueGroups = {
-    "A": ["Italy", "Switzerland", "Turkey", "Wales"], 
-    "B": ["Belgium", "Denmark", "Finland", "Russia"], 
-    "C": ["Austria", "Netherlands", "N. Macedonia", "Ukraine"], 
-    "D": ["Croatia", "Czechia", "England", "Scotland"], 
-    "E": ["Poland", "Slovakia", "Spain", "Sweden"],
-    "F": ["France", "Germany", "Hungary", "Portugal"]
+    "A": ["Ecuador", "Netherlands", "Qatar", "Senegal"], 
+    "B": ["England", "Iran", "USA", "Wales"], 
+    "C": ["Argentina", "Mexico", "Poland", "Saudi Arabia"], 
+    "D": ["Australia", "Denmark", "France", "Tunisia"], 
+    "E": ["Costa Rica", "Germany", "Japan", "Spain"],
+    "F": ["Belgium", "Canada", "Croatia", "Morocco"],
+    "G": ["Brazil", "Cameroon", "Serbia", "Switzerland"],
+    "H": ["Ghana", "Portugal", "South Korea", "Uruguay"],
 } 
 
 export const groupsList = Object.keys(leagueGroups)
 
 // https://en.wikipedia.org/wiki/List_of_FIFA_country_codes
 export const countryShortNames = {
-    [leagueGroups["A"][0]]: "ITA", 
-    [leagueGroups["A"][1]]: "SUI", 
-    [leagueGroups["A"][2]]: "TUR", 
-    [leagueGroups["A"][3]]: "WAL", 
-    [leagueGroups["B"][0]]: "BEL", 
-    [leagueGroups["B"][1]]: "DEN", 
-    [leagueGroups["B"][2]]: "FIN", 
-    [leagueGroups["B"][3]]: "RUS", 
-    [leagueGroups["C"][0]]: "AUT", 
-    [leagueGroups["C"][1]]: "NED", 
-    [leagueGroups["C"][2]]: "MKD", 
-    [leagueGroups["C"][3]]: "UKR", 
-    [leagueGroups["D"][0]]: "CRO", 
-    [leagueGroups["D"][1]]: "CZE", 
-    [leagueGroups["D"][2]]: "ENG", 
-    [leagueGroups["D"][3]]: "SCO", 
-    [leagueGroups["E"][0]]: "POL", 
-    [leagueGroups["E"][1]]: "SVK", 
-    [leagueGroups["E"][2]]: "ESP", 
-    [leagueGroups["E"][3]]: "SWE",
-    [leagueGroups["F"][0]]: "FRA", 
-    [leagueGroups["F"][1]]: "GER", 
-    [leagueGroups["F"][2]]: "HUN", 
-    [leagueGroups["F"][3]]: "POR"
+    [leagueGroups["A"][0]]: "ECU", 
+    [leagueGroups["A"][1]]: "NED", 
+    [leagueGroups["A"][2]]: "QAT", 
+    [leagueGroups["A"][3]]: "SEN", 
+    [leagueGroups["B"][0]]: "ENG", 
+    [leagueGroups["B"][1]]: "IRN", 
+    [leagueGroups["B"][2]]: "USA", 
+    [leagueGroups["B"][3]]: "WAL", 
+    [leagueGroups["C"][0]]: "ARG", 
+    [leagueGroups["C"][1]]: "MEX", 
+    [leagueGroups["C"][2]]: "POL", 
+    [leagueGroups["C"][3]]: "KSA", 
+    [leagueGroups["D"][0]]: "AUS", 
+    [leagueGroups["D"][1]]: "DEN", 
+    [leagueGroups["D"][2]]: "FRA", 
+    [leagueGroups["D"][3]]: "TUN", 
+    [leagueGroups["E"][0]]: "CRC", 
+    [leagueGroups["E"][1]]: "GER", 
+    [leagueGroups["E"][2]]: "JPN", 
+    [leagueGroups["E"][3]]: "ESP",
+    [leagueGroups["F"][0]]: "BEL", 
+    [leagueGroups["F"][1]]: "CAN", 
+    [leagueGroups["F"][2]]: "CRO", 
+    [leagueGroups["F"][3]]: "MAR",
+    [leagueGroups["G"][0]]: "BRA", 
+    [leagueGroups["G"][1]]: "CMR", 
+    [leagueGroups["G"][2]]: "SRB", 
+    [leagueGroups["G"][3]]: "SUI",
+    [leagueGroups["H"][0]]: "GHA", 
+    [leagueGroups["H"][1]]: "POR", 
+    [leagueGroups["H"][2]]: "KOR", 
+    [leagueGroups["H"][3]]: "URU"
 }
 
 const leagueGroupFirstAndLastMatches = {
@@ -61,6 +71,14 @@ const leagueGroupFirstAndLastMatches = {
     "F": {
         firstMatch: 31,
         lastMatch: 36
+    },
+    "G": {
+        firstMatch: 37,
+        lastMatch: 42
+    },
+    "H": {
+        firstMatch: 43,
+        lastMatch: 48
     }
 }
 
@@ -106,7 +124,15 @@ export const teamsOdds = {
     [leagueGroups["F"][0]]: 5, 
     [leagueGroups["F"][1]]: 7, 
     [leagueGroups["F"][2]]:300, 
-    [leagueGroups["F"][3]]: 8
+    [leagueGroups["F"][3]]: 8,
+    [leagueGroups["G"][0]]: 80, 
+    [leagueGroups["G"][1]]: 250, 
+    [leagueGroups["G"][2]]: 7, 
+    [leagueGroups["G"][3]]: 80,
+    [leagueGroups["H"][0]]: 5, 
+    [leagueGroups["H"][1]]: 7, 
+    [leagueGroups["H"][2]]:300, 
+    [leagueGroups["H"][3]]: 8
 }
 
 export const emptyPrediction = {
@@ -146,8 +172,8 @@ export const emptyPrediction = {
             homeGoals: " ",
             awayGoals: " ",
             group: "A",
-            homeTeam: leagueGroups["A"][0],
-            awayTeam: leagueGroups["A"][1]
+            homeTeam: leagueGroups["A"][1],
+            awayTeam: leagueGroups["A"][0]
         },
         "5": {
             id: "5",
@@ -170,15 +196,15 @@ export const emptyPrediction = {
             homeGoals: " ",
             awayGoals: " ",
             group: "B",
-            homeTeam: leagueGroups["B"][1],
-            awayTeam: leagueGroups["B"][2]
+            homeTeam: leagueGroups["B"][0],
+            awayTeam: leagueGroups["B"][1]
         },
         "8": {
             id: "8",
             homeGoals: " ",
             awayGoals: " ",
             group: "B",
-            homeTeam: leagueGroups["B"][0],
+            homeTeam: leagueGroups["B"][2],
             awayTeam: leagueGroups["B"][3]
         },
         "9": {
@@ -186,24 +212,24 @@ export const emptyPrediction = {
             homeGoals: " ",
             awayGoals: " ",
             group: "B",
-            homeTeam: leagueGroups["B"][2],
-            awayTeam: leagueGroups["B"][3]
+            homeTeam: leagueGroups["B"][3],
+            awayTeam: leagueGroups["B"][1]
         },
         "10": {
             id: "10",
             homeGoals: " ",
             awayGoals: " ",
             group: "B",
-            homeTeam: leagueGroups["B"][1],
-            awayTeam: leagueGroups["B"][0]
+            homeTeam: leagueGroups["B"][0],
+            awayTeam: leagueGroups["B"][2]
         },
         "11": {
             id: "11",
             homeGoals: " ",
             awayGoals: " ",
             group: "B",
-            homeTeam: leagueGroups["B"][2],
-            awayTeam: leagueGroups["B"][0]
+            homeTeam: leagueGroups["B"][1],
+            awayTeam: leagueGroups["B"][2]
         },
         "12": {
             id: "12",
@@ -211,7 +237,7 @@ export const emptyPrediction = {
             awayGoals: " ",
             group: "B",
             homeTeam: leagueGroups["B"][3],
-            awayTeam: leagueGroups["B"][1]
+            awayTeam: leagueGroups["B"][0]
         },
         "13": {
             id: "13",
@@ -219,7 +245,7 @@ export const emptyPrediction = {
             awayGoals: " ",
             group: "C",
             homeTeam: leagueGroups["C"][0],
-            awayTeam: leagueGroups["C"][2]
+            awayTeam: leagueGroups["C"][3]
         },
         "14": {
             id: "14",
@@ -227,30 +253,30 @@ export const emptyPrediction = {
             awayGoals: " ",
             group: "C",
             homeTeam: leagueGroups["C"][1],
-            awayTeam: leagueGroups["C"][3]
+            awayTeam: leagueGroups["C"][2]
         },
         "15": {
             id: "15",
             homeGoals: " ",
             awayGoals: " ",
             group: "C",
-            homeTeam: leagueGroups["C"][3],
-            awayTeam: leagueGroups["C"][2]
+            homeTeam: leagueGroups["C"][2],
+            awayTeam: leagueGroups["C"][3]
         },
         "16": {
             id: "16",
             homeGoals: " ",
             awayGoals: " ",
             group: "C",
-            homeTeam: leagueGroups["C"][1],
-            awayTeam: leagueGroups["C"][0]
+            homeTeam: leagueGroups["C"][0],
+            awayTeam: leagueGroups["C"][1]
         },
         "17": {
             id: "17",
             homeGoals: " ",
             awayGoals: " ",
             group: "C",
-            homeTeam: leagueGroups["C"][3],
+            homeTeam: leagueGroups["C"][2],
             awayTeam: leagueGroups["C"][0]
         },
         "18": {
@@ -258,7 +284,7 @@ export const emptyPrediction = {
             homeGoals: " ",
             awayGoals: " ",
             group: "C",
-            homeTeam: leagueGroups["C"][2],
+            homeTeam: leagueGroups["C"][3],
             awayTeam: leagueGroups["C"][1]
         },
         "19": {
@@ -266,24 +292,24 @@ export const emptyPrediction = {
             homeGoals: " ",
             awayGoals: " ",
             group: "D",
-            homeTeam: leagueGroups["D"][2],
-            awayTeam: leagueGroups["D"][0]
+            homeTeam: leagueGroups["D"][1],
+            awayTeam: leagueGroups["D"][3]
         },
         "20": {
             id: "20",
             homeGoals: " ",
             awayGoals: " ",
             group: "D",
-            homeTeam: leagueGroups["D"][3],
-            awayTeam: leagueGroups["D"][1]
+            homeTeam: leagueGroups["D"][2],
+            awayTeam: leagueGroups["D"][0]
         },
         "21": {
             id: "21",
             homeGoals: " ",
             awayGoals: " ",
             group: "D",
-            homeTeam: leagueGroups["D"][0],
-            awayTeam: leagueGroups["D"][1]
+            homeTeam: leagueGroups["D"][3],
+            awayTeam: leagueGroups["D"][0]
         },
         "22": {
             id: "22",
@@ -291,79 +317,79 @@ export const emptyPrediction = {
             awayGoals: " ",
             group: "D",
             homeTeam: leagueGroups["D"][2],
-            awayTeam: leagueGroups["D"][3]
+            awayTeam: leagueGroups["D"][1]
         },
         "23": {
             id: "23",
             homeGoals: " ",
             awayGoals: " ",
             group: "D",
-            homeTeam: leagueGroups["D"][1],
-            awayTeam: leagueGroups["D"][2]
+            homeTeam: leagueGroups["D"][0],
+            awayTeam: leagueGroups["D"][1]
         },
         "24": {
             id: "24",
             homeGoals: " ",
             awayGoals: " ",
             group: "D",
-            homeTeam: leagueGroups["D"][0],
-            awayTeam: leagueGroups["D"][3]
+            homeTeam: leagueGroups["D"][3],
+            awayTeam: leagueGroups["D"][2]
         },
         "25": {
             id: "25",
             homeGoals: " ",
             awayGoals: " ",
             group: "E",
-            homeTeam: leagueGroups["E"][0],
-            awayTeam: leagueGroups["E"][1]
+            homeTeam: leagueGroups["E"][1],
+            awayTeam: leagueGroups["E"][2]
         },
         "26": {
             id: "26",
             homeGoals: " ",
             awayGoals: " ",
             group: "E",
-            homeTeam: leagueGroups["E"][2],
-            awayTeam: leagueGroups["E"][3]
+            homeTeam: leagueGroups["E"][3],
+            awayTeam: leagueGroups["E"][0]
         },
         "27": {
             id: "27",
             homeGoals: " ",
             awayGoals: " ",
             group: "E",
-            homeTeam: leagueGroups["E"][3],
-            awayTeam: leagueGroups["E"][1]
+            homeTeam: leagueGroups["E"][2],
+            awayTeam: leagueGroups["E"][0]
         },
         "28": {
             id: "28",
             homeGoals: " ",
             awayGoals: " ",
             group: "E",
-            homeTeam: leagueGroups["E"][2],
-            awayTeam: leagueGroups["E"][0]
+            homeTeam: leagueGroups["E"][3],
+            awayTeam: leagueGroups["E"][1]
         },
         "29": {
             id: "29",
             homeGoals: " ",
             awayGoals: " ",
             group: "E",
-            homeTeam: leagueGroups["E"][3],
-            awayTeam: leagueGroups["E"][0]
+            homeTeam: leagueGroups["E"][0],
+            awayTeam: leagueGroups["E"][1]
         },
         "30": {
             id: "30",
             homeGoals: " ",
             awayGoals: " ",
             group: "E",
-            homeTeam: leagueGroups["E"][1],
-            awayTeam: leagueGroups["E"][2]
+            homeTeam: leagueGroups["E"][2],
+            awayTeam: leagueGroups["E"][3]
         },
         "31": {
             id: "31",
             homeGoals: " ",
             awayGoals: " ",
             group: "F",
-            homeTeam: leagueGroups["F"][2],
-            awayTeam: leagueGroups["F"][3]
+            homeTeam: leagueGroups["F"][3],
+            awayTeam: leagueGroups["F"][2]
         },
         "32": {
             id: "32",
@@ -378,15 +404,15 @@ export const emptyPrediction = {
             homeGoals: " ",
             awayGoals: " ",
             group: "F",
-            homeTeam: leagueGroups["F"][2],
-            awayTeam: leagueGroups["F"][0]
+            homeTeam: leagueGroups["F"][0],
+            awayTeam: leagueGroups["F"][3]
         },
         "34": {
             id: "34",
             homeGoals: " ",
             awayGoals: " ",
             group: "F",
-            homeTeam: leagueGroups["F"][3],
+            homeTeam: leagueGroups["F"][2],
             awayTeam: leagueGroups["F"][1]
         },
         "35": {
@@ -395,15 +421,111 @@ export const emptyPrediction = {
             awayGoals: " ",
             group: "F",
             homeTeam: leagueGroups["F"][1],
-            awayTeam: leagueGroups["F"][2]
+            awayTeam: leagueGroups["F"][3]
         },
         "36": {
             id: "36",
             homeGoals: " ",
             awayGoals: " ",
             group: "F",
-            homeTeam: leagueGroups["F"][3],
+            homeTeam: leagueGroups["F"][2],
             awayTeam: leagueGroups["F"][0]
+        },
+        "37": {
+            id: "37",
+            homeGoals: " ",
+            awayGoals: " ",
+            group: "G",
+            homeTeam: leagueGroups["A"][3],
+            awayTeam: leagueGroups["A"][1]
+        },
+        "38": {
+            id: "38",
+            homeGoals: " ",
+            awayGoals: " ",
+            group: "G",
+            homeTeam: leagueGroups["A"][0],
+            awayTeam: leagueGroups["A"][2]
+        },
+        "39": {
+            id: "39",
+            homeGoals: " ",
+            awayGoals: " ",
+            group: "G",
+            homeTeam: leagueGroups["A"][1],
+            awayTeam: leagueGroups["A"][2]
+        },
+        "40": {
+            id: "40",
+            homeGoals: " ",
+            awayGoals: " ",
+            group: "G",
+            homeTeam: leagueGroups["A"][0],
+            awayTeam: leagueGroups["A"][3]
+        },
+        "41": {
+            id: "41",
+            homeGoals: " ",
+            awayGoals: " ",
+            group: "G",
+            homeTeam: leagueGroups["A"][1],
+            awayTeam: leagueGroups["A"][0]
+        },
+        "42": {
+            id: "42",
+            homeGoals: " ",
+            awayGoals: " ",
+            group: "G",
+            homeTeam: leagueGroups["A"][2],
+            awayTeam: leagueGroups["A"][3]
+        },
+        "43": {
+            id: "43",
+            homeGoals: " ",
+            awayGoals: " ",
+            group: "H",
+            homeTeam: leagueGroups["B"][3],
+            awayTeam: leagueGroups["B"][2]
+        },
+        "44": {
+            id: "44",
+            homeGoals: " ",
+            awayGoals: " ",
+            group: "H",
+            homeTeam: leagueGroups["B"][1],
+            awayTeam: leagueGroups["B"][0]
+        },
+        "45": {
+            id: "45",
+            homeGoals: " ",
+            awayGoals: " ",
+            group: "H",
+            homeTeam: leagueGroups["B"][2],
+            awayTeam: leagueGroups["B"][0]
+        },
+        "46": {
+            id: "46",
+            homeGoals: " ",
+            awayGoals: " ",
+            group: "H",
+            homeTeam: leagueGroups["B"][1],
+            awayTeam: leagueGroups["B"][3]
+        },
+        "47": {
+            id: "47",
+            homeGoals: " ",
+            awayGoals: " ",
+            group: "H",
+            homeTeam: leagueGroups["B"][0],
+            awayTeam: leagueGroups["B"][3]
+        },
+        "48": {
+            id: "48",
+            homeGoals: " ",
+            awayGoals: " ",
+            group: "H",
+            homeTeam: leagueGroups["B"][2],
+            awayTeam: leagueGroups["B"][1]
         }
     },
     r16Matches: {
@@ -411,57 +533,57 @@ export const emptyPrediction = {
             id: "1",
             homeGoals: " ",
             awayGoals: " ",
-            homeTeam: "2nd in Group A",
+            homeTeam: "1st in Group A",
             awayTeam: "2nd in Group B"
         },
         "2": {
             id: "2",
             homeGoals: " ",
             awayGoals: " ",
-            homeTeam: "1st in Group A",
-            awayTeam: "2nd in Group C"
+            homeTeam: "1st in Group C",
+            awayTeam: "2nd in Group D"
         },
         "3": {
             id: "3",
             homeGoals: " ",
             awayGoals: " ",
-            homeTeam: "1st in Group C",
-            awayTeam: "3rd in D/E or F"
+            homeTeam: "1st in Group D",
+            awayTeam: "2nd in Group C"
         },
         "4": {
             id: "4",
             homeGoals: " ",
             awayGoals: " ",
             homeTeam: "1st in Group B",
-            awayTeam: "3rd in A/D/E or F"
+            awayTeam: "2nd in Group A"
         },
         "5": {
             id: "5",
             homeGoals: " ",
             awayGoals: " ",
-            homeTeam: "2nd in Group D",
-            awayTeam: "2nd in Group E"
+            homeTeam: "1st in Group E",
+            awayTeam: "2nd in Group F"
         },
         "6": {
             id: "6",
             homeGoals: " ",
             awayGoals: " ",
-            homeTeam: "1st in Group F",
-            awayTeam: "3rd in A/B or C"
+            homeTeam: "1st in Group G",
+            awayTeam: "2nd in Group H"
         },
         "7": {
             id: "7",
             homeGoals: " ",
             awayGoals: " ",
-            homeTeam: "1st in Group D",
-            awayTeam: "2nd in Group F"
+            homeTeam: "1st in Group F",
+            awayTeam: "2nd in Group E"
         },
         "8": {
             id: "8",
             homeGoals: " ",
             awayGoals: " ",
-            homeTeam: "1st in Group E",
-            awayTeam: "3rd in A/B/C or D"
+            homeTeam: "1st in Group H",
+            awayTeam: "2nd in Group G"
         }
     },
     quarterFinalMatches: {
@@ -469,29 +591,29 @@ export const emptyPrediction = {
             id: "1",
             homeGoals: " ",
             awayGoals: " ",
-            homeTeam: "R16-6",
-            awayTeam: "R16-5"
+            homeTeam: "R16-5",
+            awayTeam: "R16-6"
         },
         "2": {
             id: "2",
             homeGoals: " ",
             awayGoals: " ",
-            homeTeam: "R16-4",
+            homeTeam: "R16-1",
             awayTeam: "R16-2"
         },
         "3": {
             id: "3",
             homeGoals: " ",
             awayGoals: " ",
-            homeTeam: "R16-3",
-            awayTeam: "R16-1"
+            homeTeam: "R16-7",
+            awayTeam: "R16-8"
         },
         "4": {
             id: "4",
             homeGoals: " ",
             awayGoals: " ",
-            homeTeam: "R16-8",
-            awayTeam: "R16-7"
+            homeTeam: "R16-4",
+            awayTeam: "R16-3"
         }
     },
     semiFinalMatches: {
