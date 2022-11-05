@@ -4,7 +4,7 @@ export const updatePredictionMatches = async (collection, id, prediction, matchT
     let matchesLength = (matchType) => {
         switch (matchType) {
             case "leagueMatches":
-                return 37
+                return 49
             case "r16Matches":
                 return 9
             case "quarterFinalMatches":
