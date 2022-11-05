@@ -16,7 +16,7 @@ export const spanishTranslations = {
         contactUs: "Contacto:"
     },
     homepage: {
-        title: "Superporra Eurocopa 2022",
+        title: "Superporra Mundial 2022",
         sponsoredBy: "Patrocinado por:",
         joinBanner: {
             title: "¡Únete a la competición en menos de un minuto!",
@@ -29,10 +29,10 @@ export const spanishTranslations = {
             }
         },
         intro: {
-            title: "Diviértete con la Superporra Euro 2022",
+            title: "Diviértete con la Superporra Mundial 2022",
             body: {
-                first: "La Superporra Eurocopa 2022 es un concurso a modo de porra en el que los participantes compiten intentando acertar los resultados finales de los partidos de la erucopa de fútbol del 2022, los países que pasen a las fases eliminatorias (octavos de final, cuartos de final, etc.) y el equipo ganador de la eurocopa.",
-                second: "No solo pasarás un buen rato con la superporra Euro 2022, sino que también contribuirás a una buena causa con tu donación y tendrás la oportunidad de ganar premios."
+                first: "La Superporra Mundial 2022 es un concurso a modo de porra en el que los participantes compiten intentando acertar los resultados finales de los partidos del mundial de fútbol del 2022, los países que pasen a las fases eliminatorias (octavos de final, cuartos de final, etc.) y el equipo ganador de la eurocopa.",
+                second: "No solo pasarás un buen rato con la Superporra Mundial 2022, sino que también contribuirás a una buena causa con tu donación y tendrás la oportunidad de ganar premios."
             }
         },
         privateLeagues: {

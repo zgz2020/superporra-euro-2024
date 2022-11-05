@@ -16,7 +16,7 @@ export const englishTranslations = {
         contactUs: "Contact Us:"
     },
     homepage: {
-        title: "Superporra Euro 2022",
+        title: "Superporra World Cup 2022",
         sponsoredBy: "Sponsored By:",
         joinBanner: {
             title: "Join the Superporra in less than a minute!",
@@ -29,10 +29,10 @@ export const englishTranslations = {
             }
         },
         intro: {
-            title: "Have fun with the Superporra Euro 2022",
+            title: "Have fun with the Superporra World Cup 2022",
             body: {
-                first: "The Superporra Euro 2022 is a quiz or betting competition where participants will compete by trying to guess the final scores of all the Euro 2022 matches, the countries that will qualify for the knockout stages (Round of 16, Quarter final, etc.) and the Euro champion.",
-                second: "Have fun with the Superporra Euro 2022, contribute to a good cause with your donation and get the chance to win a prize!"
+                first: "The Superporra World Cup 2022 is a quiz or betting competition where participants will compete by trying to guess the final scores of all the World Cup 2022 matches, the countries that will qualify for the knockout stages (Round of 16, Quarter final, etc.) and the Euro champion.",
+                second: "Have fun with the Superporra World Cup 2022, contribute to a good cause with your donation and get the chance to win a prize!"
             }
         },
         privateLeagues: {
