@@ -6,8 +6,8 @@ import {
     checkFirstParticipantLinks,
     signIn,
     selectLanguage
-} from '../support/page-object'
-import { registeredUser, viewports, languages } from '../support/testData'
+} from '../../src/page-object'
+import { registeredUser, viewports, languages } from '../../src/testData'
 
 // Tests for Private Leagues Leaderboards in 'myAccount.test.js'
 

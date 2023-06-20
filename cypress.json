@@ -1,9 +1,0 @@
-{
-    "baseUrl": "https://superporra-dev.herokuapp.com",
-    "integrationFolder": "./cypress/tests",
-    "chromeWebSecurity": false,
-    "video": false,
-    "trashAssetsBeforeRuns": false,
-    "retries": 2,
-    "blockHosts": "www.googletagmanager.com"
-}

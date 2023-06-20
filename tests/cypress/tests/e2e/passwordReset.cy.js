@@ -6,7 +6,7 @@ import {
     validToken,
     passwordResetUser,
     myAccountAssertions
-} from '../support/testData'
+} from '../../src/testData'
 import { 
     selectors,
     clickOnCTA,
@@ -15,7 +15,7 @@ import {
     randomPassword,
     signIn,
     selectLanguage
-} from '../support/page-object'
+} from '../../src/page-object'
 
 describe('Password Reset - Unhappy paths', () => {
 

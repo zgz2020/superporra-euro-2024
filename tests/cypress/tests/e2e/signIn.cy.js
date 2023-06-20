@@ -3,12 +3,12 @@ import {
     onlyThisErrorVisible,
     clickOnCTA,
     selectLanguage
-} from '../support/page-object'
+} from '../../src/page-object'
 import { registeredUser,
     viewports,
     languages,
     signInAssertions
-} from '../support/testData'
+} from '../../src/testData'
 
 /*
 Sign in happy path included in:
