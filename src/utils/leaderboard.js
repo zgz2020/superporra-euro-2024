@@ -166,7 +166,7 @@ const knockOutQualifiedTeamsPoints = (prediction, results) =>
     }, 0)
 
 
-// SCORING RULES - i. World Cup Winner - 40 points
+// SCORING RULES - i. Euro Cup Winner - 40 points
 export const getEuroWinnerPoints = (prediction, results) =>
     results.winner !== "???" && prediction.winner === results.winner ? 40 : 0
 

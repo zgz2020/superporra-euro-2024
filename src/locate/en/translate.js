@@ -16,7 +16,7 @@ export const englishTranslations = {
         contactUs: "Contact Us:"
     },
     homepage: {
-        title: "Superporra World Cup 2022",
+        title: "Superporra Euro Cup 2024",
         sponsoredBy: "Sponsored By:",
         joinBanner: {
             title: "Join the Superporra in less than a minute!",
@@ -29,10 +29,10 @@ export const englishTranslations = {
             }
         },
         intro: {
-            title: "Have fun with the Superporra World Cup 2022",
+            title: "Have fun with the Superporra Euro Cup 2024",
             body: {
-                first: "The Superporra World Cup 2022 is a quiz or betting competition where participants will compete by trying to guess the final scores of all the World Cup 2022 matches, the countries that will qualify for the knockout stages (Round of 16, Quarter final, etc.) and the Euro champion.",
-                second: "Have fun with the Superporra World Cup 2022, contribute to a good cause with your donation and get the chance to win a prize!"
+                first: "The Superporra Euro Cup 2024 is a quiz or betting competition where participants will compete by trying to guess the final scores of all the Euro Cup 2024 matches, the countries that will qualify for the knockout stages (Round of 16, Quarter final, etc.) and the Euro champion.",
+                second: "Have fun with the Superporra Euro Cup 2024, contribute to a good cause with your donation and get the chance to win a prize!"
             }
         },
         privateLeagues: {
@@ -251,11 +251,11 @@ export const englishTranslations = {
         rules: {
             1: {
                 title: "Free",
-                description: "You can participate in the Superporra 2022 for free. If you feel generous, please donate to any charity of your choice, or support our sponsor by buying any of their products: "
+                description: "You can participate in the Superporra 2024 for free. If you feel generous, please donate to any charity of your choice, or support our sponsor by buying any of their products: "
             },
             2: {
                 title: "Deadlines",
-                description: "The deadline to both join the Superporra 2022 and editing your predictions is Thursday the 10th of June 2022 (10th of June inclusive). No bets will be accepted after the 8th of June 2016."
+                description: "The deadline to both join the Superporra 2024 and editing your predictions is Thursday the 10th of June 2024 (10th of June inclusive). No bets will be accepted after the 8th of June 2016."
             },
             3: {
                 title: "Prizes",
@@ -362,9 +362,9 @@ export const englishTranslations = {
                 title: "DL Coef",
                 description: "A 'deadlock coefficient' will be applied in case two or more players get the same number of points at the end of the competition. This deadlock coefficient will be calculated according to the following criteria:",
                 notes: {
-                    1: "World Cup Winner: If two or more participants have got the same amount of points at the end of the competition, that one who got right the World Cup Winner will be on top.",
+                    1: "Euro Cup Winner: If two or more participants have got the same amount of points at the end of the competition, that one who got right the Euro Cup Winner will be on top.",
                     2: "Teams playing the final (highest number of teams guessed): If the draw still persists after point 1, the participant who got right the teams that qualified for the final (highest number of teams right) will be on top.",
-                    3: "World Cup runner-up: If the draw still persists after points 1 and 2, the participant who got right the World Cup runner-up will be on top.",
+                    3: "Euro Cup runner-up: If the draw still persists after points 1 and 2, the participant who got right the Euro Cup runner-up will be on top.",
                     4: "Final match score (before penalty shoot-out): If the draw still persists after points 1, 2 and 3, the participant who got right the Final match score (exact number of goals scored by both teams before penalty shoot-out) will be on top.",
                     5: "Top scorer team: If the draw still persists after points 1, 2, 3 and 4, the participant who got right one of the Top Scorer teams will be on top.",
                     6: "Least Goals conceded team: If the draw still persists after points 1, 2, 3, 4 and 5, the participant who got right one of the teams that conceded the lowest amount of goals will be on top.",

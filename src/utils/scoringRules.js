@@ -105,9 +105,9 @@ export const scoringRules = {
             title: "DL Coef",
             description: "A 'deadlock coefficient' will be applied in case two or more players get the same number of points at the end of the competition. This deadlock coefficient will be calculated according to the following criteria:",
             notes: {
-                1: "World Cup Winner: If two or more participants have got the same amount of points at the end of the competition, that one who got right the World Cup Winner will be on top.",
+                1: "Euro Cup Winner: If two or more participants have got the same amount of points at the end of the competition, that one who got right the Euro Cup Winner will be on top.",
                 2: "Teams playing the final (highest number of teams guessed): If the draw still persists after point 1, the participant who got right the teams that qualified for the final (highest number of teams right) will be on top.",
-                3: "World Cup runner-up: If the draw still persists after points 1 and 2, the participant who got right the World Cup runner-up will be on top.",
+                3: "Euro Cup runner-up: If the draw still persists after points 1 and 2, the participant who got right the Euro Cup runner-up will be on top.",
                 4: "Final match score (before penalty shoot-out): If the draw still persists after points 1, 2 and 3, the participant who got right the Final match score (exact number of goals scored by both teams before penalty shoot-out) will be on top.",
                 5: "Top scorer team: If the draw still persists after points 1, 2, 3 and 4, the participant who got right one of the Top Scorer teams will be on top.",
                 6: "Least Goals conceded team: If the draw still persists after points 1, 2, 3, 4 and 5, the participant who got right one of the teams that conceded the lowest amount of goals will be on top.",
