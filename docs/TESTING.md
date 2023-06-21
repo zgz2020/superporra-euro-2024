@@ -9,7 +9,7 @@ Cypress.io is used for integration testing.
     - User 1:
         - email: `automated@test.com`
         - password: `testing`
-        - username: `juanjo dev`
+        - username: <any username>
     - User 2:
         - email: `automated-no-predictions@test.com`
         - password: `test1234`
@@ -17,7 +17,7 @@ Cypress.io is used for integration testing.
     - User 3:
         - email: `admin@test.com`
         - password: `admin`
-        - username: <any username>
+        - username: `juanjo dev`
         - NOTE: This user must be set with `admin` role in the database.
     - Championship 1:
         - Name: `AutoTest Championship`
