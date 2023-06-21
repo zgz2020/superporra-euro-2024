@@ -4,6 +4,28 @@
 
 Cypress.io is used for integration testing.
 
+### NOTES
+- Some test data needs to be added to the database manually so that some tests don't fail:
+    - User 1:
+        - email: `automated@test.com`
+        - password: `testing`
+        - username: `juanjo dev`
+    - User 2:
+        - email: `automated-no-predictions@test.com`
+        - password: `test1234`
+        - username: <any username>
+    - User 3:
+        - email: `admin@test.com`
+        - password: `admin`
+        - username: <any username>
+        - NOTE: This user must be set with `admin` role in the database.
+    - Championship 1:
+        - Name: `AutoTest Championship`
+    - Championship 2:
+        - Name: `AutoTest-Championship-2`
+- The following test data might need to be updated in `./tests/cypress/src/testData.js`:
+    - validToken
+
 
 ### Running tests
 
