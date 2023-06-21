@@ -25,13 +25,13 @@ import {
     verifyChampionshipNameInSelectList,
     verifyChampionshipNameNotInSelectList,
     selectPrivateLeaguesActionTab
-} from '../support/page-object'
+} from '../../src/page-object'
 import {
     registeredUser,
     viewports,
     languages,
     myAccountAssertions
-} from '../support/testData'
+} from '../../src/testData'
 
 let url = Cypress.config().baseUrl
 

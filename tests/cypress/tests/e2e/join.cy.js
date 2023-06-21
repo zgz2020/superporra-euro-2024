@@ -16,13 +16,13 @@ import {
     randomEmail,
     checkMyBetsTable,
     signIn
-} from '../support/page-object'
+} from '../../src/page-object'
 import {
     viewports,
     languages,
     myAccountAssertions,
     registeredUser
-} from '../support/testData'
+} from '../../src/testData'
 
 let url = Cypress.config().baseUrl
 

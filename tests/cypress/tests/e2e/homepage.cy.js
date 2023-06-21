@@ -1,5 +1,5 @@
-import { clickOnSignUpLink, selectLanguage } from '../support/page-object'
-import { viewports, languages } from '../support/testData'
+import { clickOnSignUpLink, selectLanguage } from '../../src/page-object'
+import { viewports, languages } from '../../src/testData'
 
 describe('Homepage', () => {
     viewports.forEach(viewport => {

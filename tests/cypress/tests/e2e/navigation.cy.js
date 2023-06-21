@@ -4,8 +4,8 @@ import { checkNavigationItemLabel,
     selectLanguage,
     selectors,
     signIn
-} from '../support/page-object'
-import { registeredUser, viewports, languages, navigationAssertions } from '../support/testData'
+} from '../../src/page-object'
+import { registeredUser, viewports, languages, navigationAssertions } from '../../src/testData'
 
 describe('Navigation - Desktop', () => {
 

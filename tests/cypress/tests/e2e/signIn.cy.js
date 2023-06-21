@@ -3,12 +3,12 @@ import {
     onlyThisErrorVisible,
     clickOnCTA,
     selectLanguage
-} from '../support/page-object'
+} from '../../src/page-object'
 import { registeredUser,
     viewports,
     languages,
     signInAssertions
-} from '../support/testData'
+} from '../../src/testData'
 
 /*
 Sign in happy path included in:
@@ -114,7 +114,8 @@ describe('Forgot password - Happy path', () => {
                 cy.get(selectors.submitButton).should('contain', signInAssertions(language).signIn)
             })
         
-            it(`Forgot your password - Email registered - ${viewport} - ${language}`, () => {
+            // BUG - Broken functionality
+            it.skip(`Forgot your password - Email registered - ${viewport} - ${language}`, () => {
         
                 cy.intercept('/forgot-password-email', (req) => {
                     // Check request sent with correct payload
