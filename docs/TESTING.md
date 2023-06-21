@@ -9,11 +9,11 @@ Cypress.io is used for integration testing.
     - User 1:
         - email: `automated@test.com`
         - password: `testing`
-        - username: <any username>
+        - username: [any username]
     - User 2:
         - email: `automated-no-predictions@test.com`
         - password: `test1234`
-        - username: <any username>
+        - username: [any username]
     - User 3:
         - email: `admin@test.com`
         - password: `admin`
