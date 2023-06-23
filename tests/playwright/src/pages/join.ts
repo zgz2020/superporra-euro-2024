@@ -35,4 +35,23 @@ export class Join {
 			expect(innerText).toContain('???');
 		}
 	}
+
+	async submitPredictions(button: 'top button' | 'bottom button') {
+		await this.page
+			.getByTestId('submit-button')
+			.nth(button === 'top button' ? 0 : 1)
+			.click();
+	}
+
+	async shouldHaveUsernameError(button: 'top button' | 'bottom button') {
+		await expect(
+			this.page.getByTestId('no-username').nth(button === 'top button' ? 0 : 1)
+		).toBeVisible();
+	}
+
+	async shouldNotHaveUsernameError(button: 'top button' | 'bottom button') {
+		await expect(
+			this.page.getByTestId('no-username').nth(button === 'top button' ? 0 : 1)
+		).not.toBeVisible();
+	}
 }
