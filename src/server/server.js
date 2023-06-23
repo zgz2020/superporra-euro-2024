@@ -10,8 +10,6 @@ import { connectDB } from './connect-db'
 import { updatePredictionMatches } from './serverUtils'
 
 import uuid from 'uuid';
-import md5 from 'md5'
-import { AUTHENTICATING } from '../app/store/mutations'
 
 import { englishTranslations } from '../locate/en/translate'
 import { spanishTranslations } from '../locate/es/translate'
@@ -447,6 +445,16 @@ app.post('/comments/create', async (req, res) => {
     let commentsCollection = db.collection('comments')
 
     await commentsCollection.insertOne(comment)
+
+    res.status(200).send()
+})
+
+app.post('/test-user/new', async (req, res) => {
+    let user = req.body.user
+
+    let db = await connectDB()
+    let usersCollection = db.collection('users')
+    await usersCollection.insertOne(user)
 
     res.status(200).send()
 })
