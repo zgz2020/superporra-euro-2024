@@ -13,4 +13,8 @@ export class App {
 		this.homepage = new Homepage(page);
 		this.join = new Join(page);
 	}
+
+	async pause() {
+		await this.page.pause();
+	}
 }
