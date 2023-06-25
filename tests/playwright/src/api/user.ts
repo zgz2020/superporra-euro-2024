@@ -13,4 +13,8 @@ export class User {
 			data: { user: { ...user, id: user.email, password: md5(user.password) } },
 		});
 	}
+
+	async removeTestUsers() {
+		return await this.request.post('/remove-test-users');
+	}
 }
