@@ -1,10 +1,47 @@
 # Superporra App - Testing
 
+
+## Playwright
+
+Playwright is used for api and e2e testing.
+> <span style="color:red">This framework and test suite is being built at the moment.</span>
+
+### Environment variables: .env file
+- Create a local .env file from `.env.example` file.
+    - For example, run: `cp .env.example .env`
+
+### Running tests
+1. In terminal, go to `./tests/playwright`
+
+2. Set `BASE_URL` in `.env` file. For example,  `BASE_UR='https://superporra2024-8745684a5b0f.herokuapp.com/'`
+
+3. Run tests:
+
+    1. API tests: `npm run test:api`
+    2. E2E tests: `npm run test:e2e`
+    3. Both API and E2E tests: `npm run test`
+
+4. Open html report after running the tests: `npm run test:report`
+
+### Tests location
+
+- The tests can be found in `./tests/playwright/tests`
+- Page object model, APIs and other utils can be found in `./tests/playwright/src`
+- Configuration values can be found in `./tests/playwright/playwright.config.ts`
+
+*****
+
 ## Cypress.io
 
-Cypress.io is used for integration testing.
+> <span style="color:red">Old framework and test suite - TO BE UPDATED</span>
 
-### NOTES
+
+
+Cypress.io is used for e2e testing.
+
+
+### **NOTES**
+> <span style="color:red">To be updated with API requests in beforeEach/All and afterEach/All hooks</span>
 - Some test data needs to be added to the database manually so that some tests don't fail:
     - User 1:
         - email: `automated@test.com`

@@ -2,14 +2,14 @@ import { faker } from '@faker-js/faker';
 import { test } from '../../src/fixtures';
 
 test.describe('Join - Signed Out status', async () => {
-	test('should redirect to Join page', async ({ app }) => {
+	test('should have form empty', async ({ app }) => {
 		await app.join.open();
 		await app.join.shouldHaveMatchScoresEmpty();
 		await app.join.shouldHaveGeneralPredictionsEmpty();
 	});
 
 	test.describe('Negative paths', async () => {
-		test('No username', async ({ app }) => {
+		test('should display "No username" error', async ({ app }) => {
 			await app.join.open();
 			await app.join.submitPredictions('top button');
 			await app.join.shouldHaveNoUsernameError('top button');
@@ -35,7 +35,7 @@ test.describe('Join - Signed Out status', async () => {
 				await api.predictions.removeTestPredictions();
 			});
 
-			test('Username taken', async ({ app }) => {
+			test('should display "Username taken" error', async ({ app }) => {
 				await app.join.open();
 				await app.join.shouldNotHaveUsernameTakenError();
 
@@ -45,7 +45,7 @@ test.describe('Join - Signed Out status', async () => {
 			});
 		});
 
-		test('No email', async ({ app }) => {
+		test('should display "Invalid email" error when no email is entered', async ({ app }) => {
 			await app.join.open();
 			await app.join.fillUsername('any username');
 
@@ -65,7 +65,7 @@ test.describe('Join - Signed Out status', async () => {
 		});
 
 		['invalid', 'invalid@email', 'invalid@email.'].forEach((email) => {
-			test(`Invalid email - ${email}`, async ({ app }) => {
+			test(`Should display "Invalid email" error - ${email}`, async ({ app }) => {
 				await app.join.open();
 				await app.join.fillUsername('any username');
 				await app.join.fillEmail(email);
@@ -98,7 +98,7 @@ test.describe('Join - Signed Out status', async () => {
 				await api.user.removeTestUsers();
 			});
 
-			test('Already registered email', async ({ app }) => {
+			test('should display "Already registered email" error', async ({ app }) => {
 				await app.join.open();
 				await app.join.fillUsername('any username');
 				await app.join.fillEmail(randomEmail);

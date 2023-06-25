@@ -8,9 +8,24 @@ export class User {
 		this.request = request;
 	}
 
-	async create(user: { email: string; password: string; role?: 'admin' }) {
+	async create({ email, password, role }: { email: string; password: string; role?: 'admin' }) {
+		const data = role
+			? {
+					user: {
+						id: email,
+						password: md5(password),
+						role: role ?? null,
+					},
+			  }
+			: {
+					user: {
+						id: email,
+						password: md5(password),
+					},
+			  };
+
 		return await this.request.post('/user/new', {
-			data: { user: { ...user, id: user.email, password: md5(user.password) } },
+			data,
 		});
 	}
 
