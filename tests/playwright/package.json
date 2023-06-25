@@ -6,7 +6,8 @@
   "scripts": {
     "test": "npx playwright test",
     "test:api": "npx playwright test api",
-    "test:e2e": "npx playwright test e2e"
+    "test:e2e": "npx playwright test e2e",
+    "test:report": "npx playwright show-report"
   },
   "author": "",
   "license": "ISC",
