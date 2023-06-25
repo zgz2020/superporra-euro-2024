@@ -11,20 +11,35 @@ test.describe('Join - Signed Out status', async () => {
 		test('No username', async ({ app }) => {
 			await app.join.open();
 			await app.join.submitPredictions('top button');
-			await app.join.shouldHaveUsernameError('top button');
-			await app.join.shouldHaveUsernameError('bottom button');
+			await app.join.shouldHaveNoUsernameError('top button');
+			await app.join.shouldHaveNoUsernameError('bottom button');
 
 			await app.page.reload();
-			await app.join.shouldNotHaveUsernameError('top button');
-			await app.join.shouldNotHaveUsernameError('bottom button');
+			await app.join.shouldNotHaveNoUsernameError('top button');
+			await app.join.shouldNotHaveNoUsernameError('bottom button');
 
 			await app.join.submitPredictions('bottom button');
-			await app.join.shouldHaveUsernameError('top button');
-			await app.join.shouldHaveUsernameError('bottom button');
+			await app.join.shouldHaveNoUsernameError('top button');
+			await app.join.shouldHaveNoUsernameError('bottom button');
 		});
 
-		test('Username taken', async ({ app }) => {
-			// TODO
+		test.describe('', async () => {
+			test.beforeEach(async ({ api }) => {
+				await api.predictions.create({ username: 'Test Participant username' });
+			});
+
+			test.afterEach(async ({ api }) => {
+				await api.predictions.removeTestPredictions();
+			});
+
+			test('Username taken', async ({ app }) => {
+				await app.join.open();
+				await app.join.shouldNotHaveUsernameTakenError();
+
+				await app.join.fillUsername('Test Participant username');
+				await app.join.shouldHaveUsernameTakenError();
+				await app.join.shouldHaveSubmitButtonsDisabled();
+			});
 		});
 	});
 });

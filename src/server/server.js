@@ -448,13 +448,3 @@ app.post('/comments/create', async (req, res) => {
 
     res.status(200).send()
 })
-
-app.post('/test-user/new', async (req, res) => {
-    let user = req.body.user
-
-    let db = await connectDB()
-    let usersCollection = db.collection('users')
-    await usersCollection.insertOne(user)
-
-    res.status(200).send()
-})

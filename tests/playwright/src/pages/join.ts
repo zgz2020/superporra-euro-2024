@@ -36,6 +36,10 @@ export class Join {
 		}
 	}
 
+	async fillUsername(username: string) {
+		await this.page.getByTestId('username-input').fill(username);
+	}
+
 	async submitPredictions(button: 'top button' | 'bottom button') {
 		await this.page
 			.getByTestId('submit-button')
@@ -43,15 +47,28 @@ export class Join {
 			.click();
 	}
 
-	async shouldHaveUsernameError(button: 'top button' | 'bottom button') {
+	async shouldHaveNoUsernameError(button: 'top button' | 'bottom button') {
 		await expect(
 			this.page.getByTestId('no-username').nth(button === 'top button' ? 0 : 1)
 		).toBeVisible();
 	}
 
-	async shouldNotHaveUsernameError(button: 'top button' | 'bottom button') {
+	async shouldNotHaveNoUsernameError(button: 'top button' | 'bottom button') {
 		await expect(
 			this.page.getByTestId('no-username').nth(button === 'top button' ? 0 : 1)
 		).not.toBeVisible();
+	}
+
+	async shouldHaveUsernameTakenError() {
+		await expect(this.page.getByTestId('username-taken')).toBeVisible();
+	}
+
+	async shouldNotHaveUsernameTakenError() {
+		await expect(this.page.getByTestId('username-taken')).not.toBeVisible();
+	}
+
+	async shouldHaveSubmitButtonsDisabled() {
+		expect(this.page.getByTestId('submit-button').nth(0)).toBeDisabled();
+		expect(this.page.getByTestId('submit-button').nth(1)).toBeDisabled();
 	}
 }
