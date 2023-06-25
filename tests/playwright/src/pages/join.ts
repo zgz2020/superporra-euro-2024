@@ -36,6 +36,10 @@ export class Join {
 		}
 	}
 
+	async fillEmail(username: string) {
+		await this.page.getByTestId('email-address-input').fill(username);
+	}
+
 	async fillUsername(username: string) {
 		await this.page.getByTestId('username-input').fill(username);
 	}
@@ -45,6 +49,30 @@ export class Join {
 			.getByTestId('submit-button')
 			.nth(button === 'top button' ? 0 : 1)
 			.click();
+	}
+
+	async shouldHaveInvalidEmailError(element: 'top' | 'bottom') {
+		await expect(
+			this.page.getByTestId('invalid-email-message-signUp').nth(element === 'top' ? 0 : 1)
+		).toBeVisible();
+	}
+
+	async shouldNotHaveInvalidEmailError(element: 'top' | 'bottom') {
+		await expect(
+			this.page.getByTestId('invalid-email-message-signUp').nth(element === 'top' ? 0 : 1)
+		).not.toBeVisible();
+	}
+
+	async shouldHaveEmailTakenError(element: 'top' | 'bottom') {
+		await expect(
+			this.page.getByTestId('email-error-signUp').nth(element === 'top' ? 0 : 1)
+		).toBeVisible();
+	}
+
+	async shouldNotHaveEmailTakenError(element: 'top' | 'bottom') {
+		await expect(
+			this.page.getByTestId('email-error-signUp').nth(element === 'top' ? 0 : 1)
+		).not.toBeVisible();
 	}
 
 	async shouldHaveNoUsernameError(button: 'top button' | 'bottom button') {
