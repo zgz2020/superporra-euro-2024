@@ -1,9 +1,4 @@
 {
-  "browserslist": [
-    ">0.2%",
-    "not dead",
-    "not op_mini all"
-  ],
   "name": "superporra-euro-2012",
   "version": "1.0.0",
   "description": "A full stack application with React and MongoDB",
