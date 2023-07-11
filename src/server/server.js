@@ -292,16 +292,16 @@ app.post('/user/new', async (req, res) => {
 	if (!user.id) {
 		return res.status(404).send({ error: { message: 'Email address is mandatory!' } });
 	}
-	if (!String(user.id).match("w+([-+.']w+)*@w+([-.]w+)*.w+([-.]w+)*")) {
-		return res.status(404).send({ error: { message: 'Email format is not valid!' } });
-	}
+	// if (!String(user.id).match("w+([-+.']w+)*@w+([-.]w+)*.w+([-.]w+)*")) {
+	// 	return res.status(404).send({ error: { message: 'Email format is not valid!' } });
+	// }
 	if (!user.password) {
 		return res.status(404).send({ error: { message: 'Password is mandatory!' } });
 	}
 
 	// ++++++++++++++++++++++++++++++++++++
 	// ++++++++++++++++++++++++++++++++++++
-	const emailFormat = "w+([-+.']w+)*@w+([-.]w+)*.w+([-.]w+)*";
+	// const emailFormat = "w+([-+.']w+)*@w+([-.]w+)*.w+([-.]w+)*";
 
 	// ++++++++++++++++++++++++++++++++++++
 	// ++++++++++++++++++++++++++++++++++++
