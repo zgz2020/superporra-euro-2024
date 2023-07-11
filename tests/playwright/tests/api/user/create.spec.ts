@@ -59,13 +59,31 @@ test.describe('API - user: Create', async () => {
 		expect(response.status()).toEqual(400);
 	});
 
-	test.skip('should not create a user with no email', async ({ api }) => {
+	test('should not create a user with no email', async ({ api }) => {
 		const response = await api.user.create({
 			email: '',
 			password: 'test1234',
 		});
 
-		// BUG - Functionality to be fixed - User is being created with no email, but it should not
-		expect(response.status()).toEqual(400);
+		expect(response.status()).toEqual(404);
+		expect(await response.json()).toMatchObject({
+			error: {
+				message: 'Email address is mandatory!',
+			},
+		});
+	});
+
+	test('should not create a user with no password', async ({ api }) => {
+		const response = await api.user.create({
+			email: 'email@email.com',
+			password: '',
+		});
+
+		expect(response.status()).toEqual(404);
+		expect(await response.json()).toMatchObject({
+			error: {
+				message: 'Password is mandatory!',
+			},
+		});
 	});
 });
