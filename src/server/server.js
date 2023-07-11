@@ -285,10 +285,12 @@ app.post('/user/new', async (req, res) => {
 	let user = req.body.user;
 
 	if (!user) {
-		return res.status(404).send('Email address and password are mandatory!');
+		return res
+			.status(404)
+			.send({ error: { message: 'Email address and password are mandatory!' } });
 	}
 	if (!user.id) {
-		return res.status(404).send('Email address is mandatory!');
+		return res.status(404).send({ error: { message: 'Email address is mandatory!' } });
 	}
 
 	let db = await connectDB();
