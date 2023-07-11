@@ -292,6 +292,9 @@ app.post('/user/new', async (req, res) => {
 	if (!user.id) {
 		return res.status(404).send({ error: { message: 'Email address is mandatory!' } });
 	}
+	if (!user.password) {
+		return res.status(404).send({ error: { message: 'Password is mandatory!' } });
+	}
 
 	let db = await connectDB();
 	let collection = db.collection('users');
