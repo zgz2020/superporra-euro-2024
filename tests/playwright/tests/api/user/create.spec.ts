@@ -49,15 +49,24 @@ test.describe('API - user: Create', async () => {
 		});
 	});
 
-	test.skip('should not create a user with invalid email', async ({ api }) => {
-		const response = await api.user.create({
-			email: 'invalidEmail',
-			password: 'test1234',
-		});
+	[
+		'invalidEmail',
+		'invalidEmail@',
+		'invalidEmail@invalid',
+		'invalidEmail@invalid.',
+		'@invalid.com',
+		'invalidEmailinvalid.com',
+		'invalidEmail@.com',
+	].forEach((email) =>
+		test(`should not create a user with invalid email - ${email}`, async ({ api }) => {
+			const response = await api.user.create({
+				email: 'invalidEmail',
+				password: 'test1234',
+			});
 
-		// BUG - Functionality to be fixed - User is being created with invalid email, but it should not
-		expect(response.status()).toEqual(400);
-	});
+			expect(response.status()).toEqual(400);
+		})
+	);
 
 	test('should not create a user with no email', async ({ api }) => {
 		const response = await api.user.create({

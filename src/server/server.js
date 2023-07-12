@@ -292,41 +292,12 @@ app.post('/user/new', async (req, res) => {
 	if (!user.id) {
 		return res.status(404).send({ error: { message: 'Email address is mandatory!' } });
 	}
-	// if (!String(user.id).match("w+([-+.']w+)*@w+([-.]w+)*.w+([-.]w+)*")) {
-	// 	return res.status(404).send({ error: { message: 'Email format is not valid!' } });
-	// }
+	if (!String(user.id).match(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/)) {
+		return res.status(404).send({ error: { message: 'Email format is not valid!' } });
+	}
 	if (!user.password) {
 		return res.status(404).send({ error: { message: 'Password is mandatory!' } });
 	}
-
-	// ++++++++++++++++++++++++++++++++++++
-	// ++++++++++++++++++++++++++++++++++++
-	// const emailFormat = "w+([-+.']w+)*@w+([-.]w+)*.w+([-.]w+)*";
-
-	// ++++++++++++++++++++++++++++++++++++
-	// ++++++++++++++++++++++++++++++++++++
-
-	// ++++++++++++++++++++++++++++++++++++
-	// ++++++++++++++++++++++++++++++++++++
-
-	// string expression = @"^[a-z][a-z|0-9|]*([_][a-z|0-9]+)*([.][a-z|" +@"0-9]+([_][a-z|0-9]+)*)?@[a-z][a-z|0-9|]*\.([a-z]" +@"[a-z|0-9]*(\.[a-z][a-z|0-9]*)?)$";
-
-	// Match match = Regex.Match(mail, expression, RegexOptions.IgnoreCase);
-	// if (match.Success)
-	//     Response.Write("VALID EMAIL");
-	//     else
-	//      Response.Write("INVALID EMAIL");
-	// return;
-
-	// ++++++++++++++++++++++++++++++++++++
-	// ++++++++++++++++++++++++++++++++++++
-
-	// ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*"
-	//     var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-	//   if (inputText.value.match(mailformat)) {
-
-	// ++++++++++++++++++++++++++++++++++++
-	// ++++++++++++++++++++++++++++++++++++
 
 	let db = await connectDB();
 	let collection = db.collection('users');
