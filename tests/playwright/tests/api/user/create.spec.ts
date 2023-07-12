@@ -49,23 +49,50 @@ test.describe('API - user: Create', async () => {
 		});
 	});
 
-	test.skip('should not create a user with invalid email', async ({ api }) => {
-		const response = await api.user.create({
-			email: 'invalidEmail',
-			password: 'test1234',
-		});
+	[
+		'invalidEmail',
+		'invalidEmail@',
+		'invalidEmail@invalid',
+		'invalidEmail@invalid.',
+		'@invalid.com',
+		'invalidEmailinvalid.com',
+		'invalidEmail@.com',
+	].forEach((email) =>
+		test(`should not create a user with invalid email - ${email}`, async ({ api }) => {
+			const response = await api.user.create({
+				email: 'invalidEmail',
+				password: 'test1234',
+			});
 
-		// BUG - Functionality to be fixed - User is being created with invalid email, but it should not
-		expect(response.status()).toEqual(400);
-	});
+			expect(response.status()).toEqual(404);
+		})
+	);
 
-	test.skip('should not create a user with no email', async ({ api }) => {
+	test('should not create a user with no email', async ({ api }) => {
 		const response = await api.user.create({
 			email: '',
 			password: 'test1234',
 		});
 
-		// BUG - Functionality to be fixed - User is being created with no email, but it should not
-		expect(response.status()).toEqual(400);
+		expect(response.status()).toEqual(404);
+		expect(await response.json()).toMatchObject({
+			error: {
+				message: 'Email address is mandatory!',
+			},
+		});
+	});
+
+	test('should not create a user with no password', async ({ api }) => {
+		const response = await api.user.create({
+			email: 'email@email.com',
+			password: '',
+		});
+
+		expect(response.status()).toEqual(404);
+		expect(await response.json()).toMatchObject({
+			error: {
+				message: 'Password is mandatory!',
+			},
+		});
 	});
 });

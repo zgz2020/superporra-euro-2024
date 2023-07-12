@@ -9,18 +9,19 @@ export class User {
 	}
 
 	async create({ email, password, role }: { email: string; password: string; role?: 'admin' }) {
+		const pwd = password ? md5(password) : null;
 		const data = role
 			? {
 					user: {
 						id: email,
-						password: md5(password),
-						role: role ?? null,
+						password: pwd,
+						role,
 					},
 			  }
 			: {
 					user: {
 						id: email,
-						password: md5(password),
+						password: pwd,
 					},
 			  };
 
