@@ -64,7 +64,7 @@ test.describe('API - user: Create', async () => {
 				password: 'test1234',
 			});
 
-			expect(response.status()).toEqual(400);
+			expect(response.status()).toEqual(404);
 		})
 	);
 
