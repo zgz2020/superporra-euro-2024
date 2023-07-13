@@ -3,6 +3,7 @@ import { defineConfig, devices } from '@playwright/test';
 
 export default defineConfig({
 	testDir: './tests',
+	timeout: process.env.TIMEOUT ? parseInt(process.env.TIMEOUT) : 30_000,
 	fullyParallel: true,
 	retries: process.env.RETRIES ? parseInt(process.env.RETRIES) : 0,
 	workers: process.env.WORKERS ? parseInt(process.env.WORKERS) : 10,

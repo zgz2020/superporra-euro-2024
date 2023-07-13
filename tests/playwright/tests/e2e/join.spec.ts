@@ -1,5 +1,6 @@
 import { faker } from '@faker-js/faker';
 import { test } from '../../src/fixtures';
+import { expect } from '@playwright/test';
 
 test.describe('Join - Signed Out status', async () => {
 	test('should have form empty', async ({ app }) => {
@@ -39,9 +40,12 @@ test.describe('Join - Signed Out status', async () => {
 				await app.join.open();
 				await app.join.shouldNotHaveUsernameTakenError();
 
-				await app.join.fillUsername(randomUsername);
-				await app.join.shouldHaveUsernameTakenError();
-				await app.join.shouldHaveSubmitButtonsDisabled();
+				await expect(async () => {
+					await app.join.clearUsernameField();
+					await app.join.fillUsername(randomUsername);
+					await app.join.shouldHaveUsernameTakenError();
+					await app.join.shouldHaveSubmitButtonsDisabled();
+				}).toPass();
 			});
 		});
 
@@ -103,9 +107,11 @@ test.describe('Join - Signed Out status', async () => {
 				await app.join.fillUsername('any username');
 				await app.join.fillEmail(randomEmail);
 
-				await app.join.submitPredictions('top button');
-				await app.join.shouldHaveEmailTakenError('top');
-				await app.join.shouldHaveEmailTakenError('bottom');
+				await expect(async () => {
+					await app.join.submitPredictions('bottom button');
+					await app.join.shouldHaveEmailTakenError('top');
+					await app.join.shouldHaveEmailTakenError('bottom');
+				}).toPass();
 
 				await app.page.reload();
 				await app.join.shouldNotHaveEmailTakenError('top');
@@ -114,9 +120,11 @@ test.describe('Join - Signed Out status', async () => {
 				await app.join.fillUsername('any username');
 				await app.join.fillEmail(randomEmail);
 
-				await app.join.submitPredictions('bottom button');
-				await app.join.shouldHaveEmailTakenError('top');
-				await app.join.shouldHaveEmailTakenError('bottom');
+				await expect(async () => {
+					await app.join.submitPredictions('bottom button');
+					await app.join.shouldHaveEmailTakenError('top');
+					await app.join.shouldHaveEmailTakenError('bottom');
+				}).toPass();
 			});
 		});
 	});

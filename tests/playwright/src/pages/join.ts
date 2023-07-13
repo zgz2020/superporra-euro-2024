@@ -40,6 +40,10 @@ export class Join {
 		await this.page.getByTestId('email-address-input').fill(username);
 	}
 
+	async clearUsernameField() {
+		this.page.getByTestId('username-input').clear();
+	}
+
 	async fillUsername(username: string) {
 		await this.page.getByTestId('username-input').fill(username);
 	}
