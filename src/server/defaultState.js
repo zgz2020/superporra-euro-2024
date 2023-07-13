@@ -1,3 +1,4 @@
+import 'dotenv/config';
 import md5 from 'md5';
 import { emptyPrediction } from '../utils/config';
 
