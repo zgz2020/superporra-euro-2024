@@ -413,6 +413,15 @@ app.post('/remove-test-users', async (req, res) => {
 	res.status(200).send();
 });
 
+app.post('/remove-test-tokens', async (req, res) => {
+	let db = await connectDB();
+	let tokensCollection = db.collection('idTokens');
+
+	await tokensCollection.deleteMany({ userID: /automated-/ });
+
+	res.status(200).send();
+});
+
 app.post('/remove-test-predictions', async (req, res) => {
 	let db = await connectDB();
 	let predictionsCollection = db.collection('predictions');

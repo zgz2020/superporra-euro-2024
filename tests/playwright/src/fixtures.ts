@@ -13,6 +13,10 @@ export const test = base.extend<MyFixtures>({
 		const api = new Api(apiContext);
 
 		await use(api);
+
+		await api.user.removeTestUsers();
+		await api.tokens.removeTestTokens();
+		await api.predictions.removeTestPredictions();
 	},
 	app: async ({ page }, use) => {
 		const app = new App(page);

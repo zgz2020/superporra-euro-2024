@@ -39,6 +39,17 @@ npm run start-dev
 
 The application should open automatically. 
 
+## Environment variables
+The following environment variables are needed.
+
+
+| Variable | Description |
+| --- | --- |
+| DATABASE_URL | This is the URI from MongoDB |
+| ADMIN_USER_EMAIL | Email address for admin user that will be created when running the app for the forst time (or whenever the DB is deleted)|
+| ADMIN_USER_PASSWORD | Password for admin user that will be created when running the app for the forst time (or whenever the DB is deleted). Note that failing to add this ENV variable might trigger an error when runninf the app -> `/opt/render/project/src/node_modules/md5/md5.js:152 -- Error: Illegal argument undefined`| 
+
+
 ## Troubleshooting
 Problem: The application won't start!
 
