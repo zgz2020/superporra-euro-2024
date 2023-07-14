@@ -32,10 +32,6 @@ test.describe('Join - Signed Out status', async () => {
 				await api.predictions.create({ username: randomUsername });
 			});
 
-			test.afterEach(async ({ api }) => {
-				await api.predictions.removeTestPredictions();
-			});
-
 			test('should display "Username taken" error', async ({ app }) => {
 				await app.join.open();
 				await app.join.shouldNotHaveUsernameTakenError();
@@ -96,10 +92,6 @@ test.describe('Join - Signed Out status', async () => {
 
 			test.beforeEach(async ({ api }) => {
 				await api.user.create({ email: randomEmail, password: 'test1234' });
-			});
-
-			test.afterEach(async ({ api }) => {
-				await api.user.removeTestUsers();
 			});
 
 			test('should display "Already registered email" error', async ({ app }) => {
