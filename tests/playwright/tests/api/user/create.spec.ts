@@ -5,6 +5,7 @@ import { faker } from '@faker-js/faker';
 test.describe('API - user: Create', async () => {
 	test.afterAll(async ({ api }) => {
 		await api.user.removeTestUsers();
+		await api.tokens.removeTestTokens();
 	});
 
 	test('should create a user with valid email and password', async ({ api }) => {
