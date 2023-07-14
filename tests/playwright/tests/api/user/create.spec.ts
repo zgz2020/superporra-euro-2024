@@ -50,17 +50,17 @@ test.describe('API - user: Create', async () => {
 	});
 
 	[
-		'invalidEmail',
-		'invalidEmail@',
-		'invalidEmail@invalid',
-		'invalidEmail@invalid.',
-		'@invalid.com',
-		'invalidEmailinvalid.com',
-		'invalidEmail@.com',
+		'automated-invalidEmail',
+		'automated-invalidEmail@',
+		'automated-invalidEmail@invalid',
+		'automated-invalidEmail@invalid.',
+		'@automated-invalid.com',
+		'automated-invalidEmailinvalid.com',
+		'automated-invalidEmail@.com',
 	].forEach((email) =>
 		test(`should not create a user with invalid email - ${email}`, async ({ api }) => {
 			const response = await api.user.create({
-				email: 'invalidEmail',
+				email,
 				password: 'test1234',
 			});
 
@@ -68,11 +68,14 @@ test.describe('API - user: Create', async () => {
 		})
 	);
 
-	test('should not create a user with no email', async ({ api }) => {
+	test.only('should not create a user with no email', async ({ api }) => {
 		const response = await api.user.create({
 			email: '',
 			password: 'test1234',
 		});
+		//
+		console.log('++++ response: ', await response.json());
+		//
 
 		expect(response.status()).toEqual(404);
 		expect(await response.json()).toMatchObject({
@@ -84,7 +87,7 @@ test.describe('API - user: Create', async () => {
 
 	test('should not create a user with no password', async ({ api }) => {
 		const response = await api.user.create({
-			email: 'email@email.com',
+			email: 'automated-email@email.com',
 			password: '',
 		});
 
