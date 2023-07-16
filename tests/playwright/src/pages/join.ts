@@ -79,15 +79,25 @@ export class Join {
 		).not.toBeVisible();
 	}
 
-	async shouldHaveNoUsernameError(button: 'top button' | 'bottom button') {
+	async shouldHaveNoPasswordError(button: 'top' | 'bottom') {
 		await expect(
-			this.page.getByTestId('no-username').nth(button === 'top button' ? 0 : 1)
+			this.page.getByTestId('password-error-signUp').nth(button === 'top' ? 0 : 1)
 		).toBeVisible();
 	}
 
-	async shouldNotHaveNoUsernameError(button: 'top button' | 'bottom button') {
+	async shouldNotHaveNoPasswordError(button: 'top' | 'bottom') {
 		await expect(
-			this.page.getByTestId('no-username').nth(button === 'top button' ? 0 : 1)
+			this.page.getByTestId('password-error-signUp').nth(button === 'top' ? 0 : 1)
+		).not.toBeVisible();
+	}
+
+	async shouldHaveNoUsernameError(button: 'top' | 'bottom') {
+		await expect(this.page.getByTestId('no-username').nth(button === 'top' ? 0 : 1)).toBeVisible();
+	}
+
+	async shouldNotHaveNoUsernameError(button: 'top' | 'bottom') {
+		await expect(
+			this.page.getByTestId('no-username').nth(button === 'top' ? 0 : 1)
 		).not.toBeVisible();
 	}
 

@@ -13,16 +13,16 @@ test.describe('Join - Signed Out status', async () => {
 		test('should display "No username" error', async ({ app }) => {
 			await app.join.open();
 			await app.join.submitPredictions('top button');
-			await app.join.shouldHaveNoUsernameError('top button');
-			await app.join.shouldHaveNoUsernameError('bottom button');
+			await app.join.shouldHaveNoUsernameError('top');
+			await app.join.shouldHaveNoUsernameError('bottom');
 
 			await app.page.reload();
-			await app.join.shouldNotHaveNoUsernameError('top button');
-			await app.join.shouldNotHaveNoUsernameError('bottom button');
+			await app.join.shouldNotHaveNoUsernameError('top');
+			await app.join.shouldNotHaveNoUsernameError('bottom');
 
 			await app.join.submitPredictions('bottom button');
-			await app.join.shouldHaveNoUsernameError('top button');
-			await app.join.shouldHaveNoUsernameError('bottom button');
+			await app.join.shouldHaveNoUsernameError('top');
+			await app.join.shouldHaveNoUsernameError('bottom');
 		});
 
 		test.describe('', async () => {
@@ -118,6 +118,29 @@ test.describe('Join - Signed Out status', async () => {
 					await app.join.shouldHaveEmailTakenError('bottom');
 				}).toPass();
 			});
+		});
+
+		test('should display "You must enter a password" error when no password is entered', async ({
+			app,
+		}) => {
+			await app.join.open();
+			await app.join.fillUsername('any username');
+			await app.join.fillEmail('automated-any@email.com');
+
+			await app.join.submitPredictions('top button');
+			await app.join.shouldHaveNoPasswordError('top');
+			await app.join.shouldHaveNoPasswordError('bottom');
+
+			await app.page.reload();
+			await app.join.shouldNotHaveNoPasswordError('top');
+			await app.join.shouldNotHaveNoPasswordError('bottom');
+
+			await app.join.fillUsername('any username');
+			await app.join.fillEmail('automated-any@email.com');
+
+			await app.join.submitPredictions('bottom button');
+			await app.join.shouldHaveNoPasswordError('top');
+			await app.join.shouldHaveNoPasswordError('bottom');
 		});
 	});
 });
