@@ -4,7 +4,6 @@ import { defineConfig, devices } from '@playwright/test';
 export default defineConfig({
 	testDir: './tests',
 	timeout: process.env.TIMEOUT ? parseInt(process.env.TIMEOUT) : 30_000,
-	fullyParallel: true,
 	retries: process.env.RETRIES ? parseInt(process.env.RETRIES) : 0,
 	workers: process.env.WORKERS ? parseInt(process.env.WORKERS) : 10,
 	reporter: [['html', { open: 'never' }]],
@@ -20,8 +19,20 @@ export default defineConfig({
 	/* Configure projects for major browsers */
 	projects: [
 		{
-			name: 'chromium',
-			use: { ...devices['Desktop Chrome'] },
+			name: 'e2e - chromium',
+			use: {
+				...devices['Desktop Chrome'],
+			},
+			testDir: './tests/e2e',
+			fullyParallel: true,
+		},
+		{
+			name: 'api - chromium',
+			use: {
+				...devices['Desktop Chrome'],
+			},
+			testDir: './tests/api',
+			fullyParallel: false,
 		},
 
 		// {
